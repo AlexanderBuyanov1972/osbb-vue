@@ -1,0 +1,26 @@
+import PageOwner from "@/pages/PageOwner.vue";
+import PageOwnership from "@/pages/PageOwnership.vue";
+import PageOwners from "@/pages/PageOwners.vue";
+import PageOwnerships from "@/pages/PageOwnerships.vue";
+import PageMain from "@/pages/PageMain.vue";
+import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
+import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
+import { createRouter, createWebHistory } from "vue-router";
+
+const routes = [
+  { path: "/", component: PageMain },
+  { path: "/owner/:id", component: PageOwner },
+  { path: "/ownership/:id", component: PageOwnership },
+  { path: "/owners", component: PageOwners },
+  { path: "/ownerships", component: PageOwnerships },
+  { path: "/registry/owners", component: PageRegistryOwners },
+  { path: "/registry/ownerships", component: PageRegistryOwnerships },
+
+];
+
+const router = createRouter({
+  routes,
+  history: createWebHistory(process.env.BASE_URL),
+});
+
+export default router;

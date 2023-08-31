@@ -1,30 +1,46 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <vue-header></vue-header>
+  <router-view></router-view>
 </template>
+<script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import VueHeader from "./components/VueHeader.vue";
+export default {
+  components:{
+    VueHeader
+  },
+  methods: {
+    ...mapActions({
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+    }),
+  },
+  mounted() {
 
-nav {
-  padding: 30px;
-}
+  },
+};
+</script>
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<style scoped></style>
 
-nav a.router-link-exact-active {
-  color: #42b983;
+<!-- <template>
+  <div class="main"></div>
+</template>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {},
+};
+</script>
+
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-</style>
+.main{
+
+}
+</style> -->
