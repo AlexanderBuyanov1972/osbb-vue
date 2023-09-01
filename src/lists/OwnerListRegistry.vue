@@ -3,8 +3,8 @@
     <div
       class="list"
       v-for="one in list"
-      :key="one.fullNameOwner.ownerId"
-      @click="() => getToPageOwnerById(one)"
+      :key="one.id"
+      @click="() => this.$router.push('/owner/' + one.fullNameOwner.ownerId)"
     >
       <p>{{ one.fullNameOwner.fullNameOwner }}</p>
       <ownership-list :ownerships="one.listOwnership" />
@@ -22,11 +22,6 @@ export default {
     list: {
       type: Array,
       default: () => [],
-    },
-  },
-  methods: {
-    getToPageOwnerById(one) {
-      this.$router.push("/owner/" + one.fullNameOwner.ownerId);
     },
   },
 };

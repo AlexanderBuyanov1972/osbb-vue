@@ -4,7 +4,7 @@
     <span>Кол-во метров : {{ ownership.areaRoomThatIsInProperty }} м2</span>
     <span>Кол-во комнат : {{ ownership.numberRooms }}</span>
     <span>Балкон : {{ haveLoggia(ownership) }}</span>
-    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -18,12 +18,13 @@ export default {
   },
   methods: {
     haveRoom(obj) {
-      return obj.typeRoom === "APARTMENT" ? "Квартира № " + obj.address.apartment : "Нежилое помещение";
+      return obj.typeRoom === "APARTMENT"
+        ? "Квартира № " + obj.address.apartment
+        : "Нежилое помещение";
     },
-    haveLoggia(obj){
+    haveLoggia(obj) {
       return obj.loggia ? "есть" : "нет";
-    }
-
+    },
   },
 };
 </script>

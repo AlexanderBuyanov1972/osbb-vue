@@ -1,14 +1,19 @@
 <template>
   <div class="main">
+    <div class="list" v-for="one in getOwners" :key="one.id">
+      <div class="item" @click="() => this.$router.push('/owner/' + one.id)">
+        <owner-item :owner="one" />
+      </div>
+    </div>
     <owner-list :owners="getOwners"></owner-list>
   </div>
 </template>
 <script>
-import OwnerList from "@/lists/OwnerList.vue";
+import OwnerItem from "@/items/OwnerItem.vue";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   components: {
-    OwnerList,
+    OwnerItem,
   },
   data() {
     return {};
@@ -16,7 +21,7 @@ export default {
   methods: {
     ...mapActions({
       fetchAllOwner: "owner/getAllOwner",
-    })
+    }),
   },
   computed: {
     ...mapGetters({

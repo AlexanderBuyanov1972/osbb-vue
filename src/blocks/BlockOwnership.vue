@@ -3,8 +3,13 @@
     <h3>Объект недвижимости</h3>
     <p><span>Тип : </span>{{ haveRoom(ownership.typeRoom) }}</p>
     <p><span>Кол-во комнат : </span>{{ ownership.numberRooms }}</p>
-    <p><span>Общая площадь : </span>{{ ownership.areaRoomThatIsInProperty }} м2</p>
-    <p><span>Основание собственности : </span>{{ ownership.documentConfirmsRightOwn }}</p>
+    <p>
+      <span>Общая площадь : </span>{{ ownership.areaRoomThatIsInProperty }} м2
+    </p>
+    <p>
+      <span>Основание собственности : </span
+      >{{ ownership.documentConfirmsRightOwn }}
+    </p>
     <p><span>Наличие балкона : </span>{{ haveLoggia(ownership.loggia) }}</p>
     <block-address :address="ownership.address" />
     <p></p>
@@ -45,10 +50,11 @@ export default {
   color: teal;
   font-size: 1.2em;
 }
-p, h3  {
+p,
+h3 {
   margin: 0 30px;
 }
-span{
+span {
   color: blueviolet;
 }
 </style>

@@ -1,15 +1,17 @@
 <template>
   <div class="main">
     <button-simple class="btn" @click="back">Назад</button-simple>
+
     <block-owner :owner="createOwner()" :password="getOwner.password" />
-    <div class="list" v-for="one in getOwner.ownerships">
+    <div class="list" v-for="one in getOwner.ownerships" :key="one.id">
       <block-ownership :ownership="one" />
     </div>
+
     <button-simple class="btn" @click="back">Назад</button-simple>
   </div>
 </template>
 <script>
-import { mapGetters, mapMutations, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import BlockOwner from "@/blocks/BlockOwner.vue";
 import BlockOwnership from "@/blocks/BlockOwnership.vue";
 export default {
@@ -55,7 +57,7 @@ export default {
 }
 .main {
 }
-.btn{
+.btn {
   margin: 20px 0px 10px 5px;
 }
 </style>

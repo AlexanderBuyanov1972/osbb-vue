@@ -9,6 +9,7 @@ import {
   COUNT_ROOMS,
   COUNT_APARTMENT,
   COUNT_NON_RESIDENTIAL_ROOM,
+  ONE_OWNERSHIP_LIST_OWNER,
 } from "@/http/apiHttp";
 
 // ------------- one --------------------
@@ -92,6 +93,15 @@ export const countApartment = async () => {
 export const countNonResidentialRoom = async () => {
   const response = await axios.get(
     API_BASE + OWNERSHIP + COUNT_NON_RESIDENTIAL_ROOM
+  );
+  return response.data;
+};
+// ------------------- Специфические методы ----------------------------
+
+// Одна собственность и лист собственников
+export const getOneOwnershipAndListOwner = async (id) => {
+  const response = await axios.get(
+    API_BASE + OWNERSHIP + ONE_OWNERSHIP_LIST_OWNER + "/" + id
   );
   return response.data;
 };

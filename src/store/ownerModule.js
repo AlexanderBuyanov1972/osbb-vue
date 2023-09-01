@@ -4,7 +4,6 @@ import {
   getOwner,
   deleteOwner,
   getAllOwner,
-  getListOwnerByListId,
 } from "@/http/owner";
 
 export default {
@@ -28,8 +27,6 @@ export default {
       ownerships: [],
     },
     owners: [],
-    listOwnerByListId: [],
-    listIds: [],
     messages: [],
     isLoading: false,
   }),
@@ -44,14 +41,8 @@ export default {
     setOwners(state, object) {
       state.owners = object;
     },
-    setListOwnerByListId(state, object) {
-      state.listOwnerByListId = object;
-    },
     setMessages(state, messages) {
       state.messages = messages;
-    },
-    setListIds(state, list) {
-      state.listIds = list;
     },
   },
 
@@ -65,14 +56,8 @@ export default {
     getOwners(state) {
       return state.owners;
     },
-    getListOwnerById(state) {
-      return state.listOwnerByListId;
-    },
     getMessages(state) {
       return state.messages;
-    },
-    getListIds(state) {
-      return state.listIds;
     },
   },
 
@@ -149,23 +134,6 @@ export default {
         }
       } catch (error) {
         alert("Error !!! OwnerModule --> getAllOwner");
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async fetchListOwnerByListId({ commit }, listId) {
-      commit("setListIds", listId);
-      try {
-        commit("setIsLoading", true);
-        const data = await getListOwnerByListId(listId);
-        if (Array.isArray(data)) {
-          commit("setListOwnerByListId", data);
-          commit("setMessages", ["OK"]);
-        } else {
-          commit("setMessages", data.messages);
-        }
-      } catch (error) {
-        alert("Error !!! OwnerModule --> fetchListOwnerByListId");
       } finally {
         commit("setIsLoading", false);
       }

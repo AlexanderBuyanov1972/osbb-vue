@@ -1,14 +1,21 @@
 <template>
   <div class="main">
-    <ownership-list :ownerships="getOwnerships"></ownership-list>
+    <div class="list" v-for="one in getOwnerships" :key="one.id">
+      <div
+        class="item"
+        @click="() => this.$router.push('/ownership/' + one.id)"
+      >
+        <ownership-item :ownership="one" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import OwnershipList from "@/lists/OwnershipList.vue";
+import { mapActions, mapGetters } from "vuex";
+import OwnershipItem from "@/items/OwnershipItem.vue";
 export default {
   components: {
-    OwnershipList,
+    OwnershipItem,
   },
   data() {
     return {};
@@ -35,6 +42,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
+.list {
+  margin: 30px;
 }
 </style>

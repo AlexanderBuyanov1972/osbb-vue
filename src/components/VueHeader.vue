@@ -18,8 +18,10 @@
       </button-simple>
     </div>
     <div class="">
-      <h4>Сообщения с сервера : </h4>
-      <p v-for="(one, index ) in createMessage()">{{index + 1}}. {{ one }}</p>
+      <h4>Сообщения с сервера :</h4>
+      <p v-for="(one, index) in createMessage()" :key="one.id">
+        {{ index + 1 }}. {{ one }}
+      </p>
     </div>
   </div>
 </template>
@@ -72,8 +74,9 @@ export default {
 .btn {
   margin-right: 5px;
 }
-p, h4{
+p,
+h4 {
   color: red;
-  font-size: 1em;
+  font-size: 1.4em;
 }
 </style>

@@ -1,14 +1,9 @@
 <template>
   <div class="main">
     <div class="list" v-if="owners.length > 0">
-      <owner-item
-        v-for="one in owners"
-        :owner="one"
-        :key="one.id"
-        @click="() => getToPageOwnerById(one.id)"
-      />
+      <owner-item v-for="one in owners" :owner="one" :key="one.id" />
     </div>
-    <div class="empty" v-else>Список собственников пуст</div>
+    <div class="empty" v-else>Список собственников пуст.</div>
   </div>
 </template>
 
@@ -23,13 +18,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    
   },
-  methods: {
-      getToPageOwnerById(id) {
-        this.$router.push("/owner/" + id);
-      },
-    },
 };
 </script>
 
@@ -51,3 +40,5 @@ export default {
   padding: 15px;
 }
 </style>
+
+<!-- @click="() => this.$router.push('/owner/' + one.id)" -->

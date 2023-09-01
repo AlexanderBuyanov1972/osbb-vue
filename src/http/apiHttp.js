@@ -7,28 +7,25 @@ export const OWNER = "/owner";
 export const OWNERSHIP = "/ownership";
 export const ADDRESS = "/address";
 export const PASSWORD = "/password";
-
-// ------------ summa -------------------
+// ---------------- summa -------------------
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
 export const SUMMA_AREA_APARTMENT = "/summa_area_apartment";
 export const SUMMA_AREA_NON_RESIDENTIAL_ROOM =
   "/summa_area_non_residential_room";
-
-// ----------- count ---------------
+// ----------- count ------------------------
 export const COUNT_ROOMS = "/count_rooms";
 export const COUNT_APARTMENT = "/count_apartment";
 export const COUNT_NON_RESIDENTIAL_ROOM = "/count_non_residential_room";
-
+// -------------- specific ------------------
+export const ONE_OWNERSHIP_LIST_OWNER = "/one_ownership_list_owner";
 // --------- registry -----------
 export const REGISTRY = "/registry";
-
 // ----- auth -----------
 export const REGISTRATION = "/registration";
 export const LOGIN = "/login";
 export const LOGOUT = "/logout";
 
 export const ALL = "/all";
-export const BYIDS = "/byids";
 export const ID = "/{id}";
 export const STREET = "/{street}";
 export const HOUSE = "/{house}";

@@ -4,6 +4,7 @@ import {
   getOwnership,
   deleteOwnership,
   getAllOwnership,
+  getOneOwnershipAndListOwner,
 } from "@/http/ownership";
 
 export default {
@@ -30,6 +31,7 @@ export default {
     ownerships: [],
     messages: [],
     isLoading: false,
+    oneOwnershipAndListOwner: [],
   }),
 
   mutations: {
@@ -45,6 +47,9 @@ export default {
     setMessages(state, messages) {
       state.messages = messages;
     },
+    setOneOwnershipAndListOwner(state, object) {
+      state.oneOwnershipAndListOwner = object;
+    },
   },
 
   getters: {
@@ -59,6 +64,9 @@ export default {
     },
     getMessages(state) {
       return state.messages;
+    },
+    getOneOwnershipAndListOwner(state) {
+      return state.oneOwnershipAndListOwner;
     },
   },
 
@@ -136,6 +144,22 @@ export default {
         }
       } catch (error) {
         alert("Error !!! OwnershipModule --> getAllOwnership");
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchOneOwnershipAndListOwner({ commit }, id) {
+      try {
+        commit("setIsLoading", true);
+        const data = await getOneOwnershipAndListOwner(id);
+        if (Array.isArray(data)) {
+          commit("setOneOwnershipAndListOwner", data[0]);
+          commit("setMessages", ["OK"]);
+        } else {
+          commit("setMessages", data.messages);
+        }
+      } catch (error) {
+        alert("Error !!! OwnershipModule --> fetchOneOwnershipAndListOwner");
       } finally {
         commit("setIsLoading", false);
       }

@@ -1,9 +1,13 @@
 <template>
-   <div class="main">
+  <div class="main">
     <div class="list" v-if="ownerships.length > 0">
-      <ownership-item v-for="one in ownerships" :ownership="one" :key="one.id"  @click="()=> getToPageOwnership(one.id)" />
+      <ownership-item
+        v-for="one in ownerships"
+        :ownership="one"
+        :key="one.id"
+      />
     </div>
-    <div class="empty" v-else>List ownerships is empty</div>
+    <div class="empty" v-else>Лист собственности пуст.</div>
   </div>
 </template>
 <script>
@@ -17,13 +21,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    
   },
-  methods: {
-      getToPageOwnership(id){
-        this.$router.push("/ownership/" + id);
-      }
-    },
 };
 </script>
 
@@ -40,3 +38,5 @@ export default {
 .empty {
 }
 </style>
+
+<!-- @click="() => this.$router.push('/ownership/' + one.id)" -->

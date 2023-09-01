@@ -1,6 +1,5 @@
 import axios from "axios";
-import { API_BASE, OWNER, ALL, BYIDS } from "@/http/apiHttp";
-
+import { API_BASE, OWNER, ALL } from "@/http/apiHttp";
 
 // ------------- one --------------------
 
@@ -14,16 +13,15 @@ export const updateOwner = async (one) => {
   return response.data;
 };
 
-
 export const getOwner = async (id) => {
   const response = await axios.get(API_BASE + OWNER + "/" + id);
   return response.data;
 };
 
 export const deleteOwner = async (id) => {
-    const response = await axios.delete(API_BASE + OWNER + "/" + id);
-    return response.data;
-  };
+  const response = await axios.delete(API_BASE + OWNER + "/" + id);
+  return response.data;
+};
 
 // -------------- all ------------------
 
@@ -42,10 +40,5 @@ export const getAllOwner = async () => {
 };
 export const deleteAllOwner = async () => {
   const response = await axios.delete(API_BASE + OWNER + ALL);
-  return response.data;
-};
-// ------------- help ------------
-export const getListOwnerByListId = async (list) => {
-  const response = await axios.post(API_BASE + OWNER +  BYIDS, list);
   return response.data;
 };

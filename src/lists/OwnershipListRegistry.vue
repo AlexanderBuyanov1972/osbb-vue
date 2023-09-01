@@ -1,8 +1,15 @@
 <template>
   <div class="main">
-    <div class="list" v-for="one in list"  @click="()=> getToPageOwnership(one.ownership.id)">
+    <div
+      class="list"
+      v-for="one in list"
+      @click="() => this.$router.push('/ownership/' + one.ownership.id)"
+      :key="one.id"
+    >
       <ownership-item :ownership="one.ownership" />
-      <p v-for="two in one.listFullNameOwner" :key="two.ownerId">{{ two.fullNameOwner }}</p>
+      <p v-for="two in one.listFullNameOwner" :key="two.ownerId">
+        {{ two.fullNameOwner }}
+      </p>
     </div>
   </div>
 </template>
@@ -17,13 +24,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    
   },
-  methods: {
-      getToPageOwnership(id){
-        this.$router.push("/ownership/" + id);
-      }
-    },
 };
 </script>
 
@@ -42,7 +43,7 @@ export default {
   margin: 25px 5px;
 }
 
-p{
+p {
   color: brown;
   font-size: 1.2em;
   margin: 10px 5px;
