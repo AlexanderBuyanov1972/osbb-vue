@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import OwnerItem from "@/items/OwnerItem.vue";
+import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 export default {
   components: {
     OwnerItem,

@@ -11,7 +11,7 @@
       >{{ ownership.documentConfirmsRightOwn }}
     </p>
     <p><span>Наличие балкона : </span>{{ haveLoggia(ownership.loggia) }}</p>
-    <block-address :address="ownership.address" />
+    <block-address :address="ownership.address || {}" />
     <p></p>
   </div>
 </template>

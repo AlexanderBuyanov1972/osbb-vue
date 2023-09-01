@@ -1,22 +1,24 @@
 <template>
-  <vue-header></vue-header>
+  <header-first></header-first>
+  <header-messages></header-messages>
+  <header-second></header-second>
   <router-view></router-view>
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import VueHeader from "./components/VueHeader.vue";
+import HeaderFirst from "@/components/HeaderFirst.vue";
+import HeaderSecond from "@/components/HeaderSecond.vue";
+import HeaderMessages from "@/components/HeaderMessages.vue";
 export default {
-  components:{
-    VueHeader
+  components: {
+    HeaderFirst,
+    HeaderSecond,
+    HeaderMessages,
   },
   methods: {
-    ...mapActions({
-
-    }),
+    ...mapActions({}),
   },
-  mounted() {
-
-  },
+  mounted() {},
 };
 </script>
 

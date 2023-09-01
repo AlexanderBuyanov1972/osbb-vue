@@ -1,17 +1,29 @@
 <template>
   <div class="main">
-    <button-simple class="btn" @click="back">Назад</button-simple>
-
-    <block-ownership :ownership="getOneOwnershipAndListOwner.ownership" />
+    <!-- buttons -->
+    <button-simple class="btn" @click="backToRegister"
+      >К регистру собственности.</button-simple
+    >
+    <button-simple class="btn" @click="backToList"
+      >К списку собственности.</button-simple
+    >
+    <!-- one ownership -->
+    <block-ownership :ownership="getOneOwnershipAndListOwner.ownership || {}" />
+    <!-- list owners -->
     <div
       class="list"
       v-for="one in getOneOwnershipAndListOwner.owners"
       :key="one.id"
     >
-      <block-owner :owner="one" :password="one.password" />
+      <block-owner :owner="one" />
     </div>
-
-    <button-simple class="btn" @click="back">Назад</button-simple>
+    <!-- buttons -->
+    <button-simple class="btn" @click="backToRegister"
+      >К регистру собственников.</button-simple
+    >
+    <button-simple class="btn" @click="backToList"
+      >К списку собственников.</button-simple
+    >
   </div>
 </template>
 <script>
@@ -27,8 +39,11 @@ export default {
     ...mapActions({
       fetchOneOwnershipAndListOwner: "ownership/fetchOneOwnershipAndListOwner",
     }),
-    back() {
+    backToRegister() {
       this.$router.push("/registry/ownerships");
+    },
+    backToList() {
+      this.$router.push("/ownerships");
     },
   },
 

@@ -5,6 +5,8 @@ import PageOwnerships from "@/pages/PageOwnerships.vue";
 import PageMain from "@/pages/PageMain.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
+import PageCreateOwner from "@/pages/PageCreateOwner.vue";
+import PageCreateOwnership from "@/pages/PageCreateOwnership.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -15,7 +17,8 @@ const routes = [
   { path: "/ownerships", component: PageOwnerships },
   { path: "/registry/owners", component: PageRegistryOwners },
   { path: "/registry/ownerships", component: PageRegistryOwnerships },
-
+  { path: "/create/owner", component: PageCreateOwner },
+  { path: "/create/ownership", component: PageCreateOwnership },
 ];
 
 const router = createRouter({

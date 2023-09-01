@@ -1,13 +1,23 @@
 <template>
   <div class="main">
-    <button-simple class="btn" @click="back">Назад</button-simple>
+    <button-simple class="btn" @click="backToRegister"
+      >К регистру собственников.</button-simple
+    >
+    <button-simple class="btn" @click="backToList"
+      >К списку собственников.</button-simple
+    >
 
-    <block-owner :owner="createOwner()" :password="getOwner.password" />
+    <block-owner :owner="getOwner" />
     <div class="list" v-for="one in getOwner.ownerships" :key="one.id">
       <block-ownership :ownership="one" />
     </div>
 
-    <button-simple class="btn" @click="back">Назад</button-simple>
+    <button-simple class="btn" @click="backToRegister"
+      >К регистру собственников.</button-simple
+    >
+    <button-simple class="btn" @click="backToList"
+      >К списку собственников.</button-simple
+    >
   </div>
 </template>
 <script>
@@ -23,19 +33,11 @@ export default {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
     }),
-    createOwner() {
-      return {
-        id: this.getOwner.id,
-        firstName: this.getOwner.firstName,
-        secondName: this.getOwner.secondName,
-        lastName: this.getOwner.lastName,
-        gender: this.getOwner.gender,
-        phoneNumber: this.getOwner.phoneNumber,
-        email: this.getOwner.email,
-      };
-    },
-    back() {
+    backToRegister() {
       this.$router.push("/registry/owners");
+    },
+    backToList() {
+      this.$router.push("/owners");
     },
   },
   mounted() {

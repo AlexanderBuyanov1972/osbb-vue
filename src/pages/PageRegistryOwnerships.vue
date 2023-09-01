@@ -7,7 +7,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import BlockInformationAboutHouse from "@/blocks/BlockInformationAboutHouse.vue";
-import OwnershipListRegistry from "@/lists/OwnershipListRegistry.vue";
+import OwnershipListRegistry from "@/itemsAndLists/OwnershipListRegistry.vue";
 export default {
   components: {
     BlockInformationAboutHouse,

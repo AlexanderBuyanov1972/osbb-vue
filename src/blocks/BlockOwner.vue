@@ -7,7 +7,7 @@
     <p><span>Пол : </span>{{ getGender(owner.gender) }}</p>
     <p><span>Номер телефона : </span>{{ owner.phoneNumber }}</p>
     <p><span>Электронная почта : </span>{{ owner.email }}</p>
-    <block-password :password="password" />
+    <block-password :password="owner.password" />
   </div>
 </template>
 <script>
@@ -19,9 +19,6 @@ export default {
   },
   props: {
     owner: {
-      Type: Object,
-    },
-    password: {
       Type: Object,
     },
   },
@@ -46,7 +43,8 @@ export default {
   color: teal;
   font-size: 1.2em;
 }
-p, h3  {
+p,
+h3 {
   margin: 0 30px;
 }
 span {

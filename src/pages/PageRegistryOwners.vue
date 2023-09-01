@@ -1,18 +1,18 @@
 <template>
   <div class="main">
-    <block-information-about-house :info="getBuildingCharacteristics"/>
-    <owner-list-registry :list="getRegistryOwners"/>
+    <block-information-about-house :info="getBuildingCharacteristics" />
+    <owner-list-registry :list="getRegistryOwners" />
   </div>
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import BlockInformationAboutHouse from "@/blocks/BlockInformationAboutHouse.vue";
-import OwnerListRegistry from "@/lists/OwnerListRegistry.vue";
+import OwnerListRegistry from "@/itemsAndLists/OwnerListRegistry.vue";
 
 export default {
-  components:{
+  components: {
     BlockInformationAboutHouse,
-    OwnerListRegistry
+    OwnerListRegistry,
   },
   methods: {
     ...mapActions({

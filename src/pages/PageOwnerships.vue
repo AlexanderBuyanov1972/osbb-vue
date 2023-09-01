@@ -12,13 +12,10 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import OwnershipItem from "@/items/OwnershipItem.vue";
+import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 export default {
   components: {
     OwnershipItem,
-  },
-  data() {
-    return {};
   },
   computed: {
     ...mapGetters({
