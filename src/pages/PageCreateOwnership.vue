@@ -57,7 +57,15 @@
       <input-simple v-focus v-model="owner.lastName" placeholder="Фамилия" />
       <input-simple v-model="owner.firstName" placeholder="Имя" />
       <input-simple v-model="owner.secondName" placeholder="Отчество" />
-      <input-simple v-model="owner.gender" placeholder="Пол" />
+      <select-simple
+        :array="[
+          { id: 1, name: 'Пол', value: 'Gender' },
+          { id: 2, name: 'Мужской', value: 'MALE' },
+          { id: 3, name: 'Женский', value: 'FEMALE' },
+        ]"
+        @select="(value) => (owner.gender = value)"
+        placeholder="Пол"
+      />
       <input-simple v-model="owner.email" placeholder="E-mail" />
       <input-simple v-model="owner.phoneNumber" placeholder="Телефон" />
     </div>
