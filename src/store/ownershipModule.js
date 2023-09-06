@@ -4,17 +4,18 @@ import {
   getOwnership,
   deleteOwnership,
   getAllOwnership,
-  getOneOwnershipAndListOwner,
+  countRooms,
 } from "@/http/ownership";
 
 export default {
   state: () => ({
     ownership: {
       id: 0,
-      typeRoom: null,
-      areaRoomThatIsInProperty: 0,
-      documentConfirmsRightOwn: null,
-      numberRooms: 0,
+      typeRoom: "",
+      totalArea: "",
+      livingArea: "",
+      documentConfirmsRightOwn: "",
+      numberRooms: "",
       loggia: false,
       address: {
         id: 0,
@@ -31,7 +32,7 @@ export default {
     ownerships: [],
     messages: [],
     isLoading: false,
-    oneOwnershipAndListOwner: [],
+    countOwnerships: 0,
   }),
 
   mutations: {
@@ -47,8 +48,8 @@ export default {
     setMessages(state, messages) {
       state.messages = messages;
     },
-    setOneOwnershipAndListOwner(state, object) {
-      state.oneOwnershipAndListOwner = object;
+    setCountOwnerships(state, number) {
+      state.countOwnerships = number;
     },
   },
 
@@ -65,8 +66,8 @@ export default {
     getMessages(state) {
       return state.messages;
     },
-    getOneOwnershipAndListOwner(state) {
-      return state.oneOwnershipAndListOwner;
+    getCountOwnerships(state) {
+      return state.countOwnerships;
     },
   },
 
@@ -82,7 +83,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnershipModule --> createOwnership");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -99,7 +100,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnershipModule --> updateOwnership");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -115,7 +116,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnershipModule --> getOwnership");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -127,7 +128,7 @@ export default {
         commit("setMessages", data.messages);
         commit("setOwnership", {});
       } catch (error) {
-        alert("Error !!! OwnershipModule --> deleteOwnership");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -143,23 +144,19 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnershipModule --> getAllOwnership");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    async fetchOneOwnershipAndListOwner({ commit }, id) {
+    async fetchCountRooms({ commit }) {
       try {
         commit("setIsLoading", true);
-        const data = await getOneOwnershipAndListOwner(id);
-        if (Array.isArray(data)) {
-          commit("setOneOwnershipAndListOwner", data[0]);
-          commit("setMessages", ["OK"]);
-        } else {
-          commit("setMessages", data.messages);
-        }
+        const data = await countRooms();
+        commit("setCountOwnerships", data);
+        commit("setMessages", ["OK"]);
       } catch (error) {
-        alert("Error !!! OwnershipModule --> fetchOneOwnershipAndListOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

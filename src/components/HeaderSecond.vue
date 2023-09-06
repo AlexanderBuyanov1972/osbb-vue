@@ -1,9 +1,6 @@
 <template>
   <div class="main">
     <div class="">
-      <button-simple class="btn" @click="goToPageCreateOwner"
-        >Создать собственника.</button-simple
-      >
       <button-simple class="btn" @click="goToPageCreateOwnership"
         >Создать собственность.
       </button-simple>
@@ -23,21 +20,18 @@ export default {
 };
 </script>
 
-<style scoped>
-* {
+<style scoped >
+ * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 .main {
-  margin: 0px 0px 0px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .btn {
-  margin: 10px 5px;
-}
-p,
-h4 {
-  color: red;
-  font-size: 1.4em;
+  margin: 10px 0px;
 }
 </style>

@@ -55,7 +55,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! PasswordModule --> createPassword");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -72,7 +72,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! PasswordModule --> updatePassword");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -88,7 +88,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! PasswordModule --> getPassword");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -100,7 +100,7 @@ export default {
         commit("setMessages", data.messages);
         commit("setPassword", {});
       } catch (error) {
-        alert("Error !!! PasswordModule --> deletePassword");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

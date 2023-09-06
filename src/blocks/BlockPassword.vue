@@ -1,24 +1,25 @@
 <template>
-  <div class="main">
-    <h3>Паспорт</h3>
-    <p><span>Дата выдачи : </span>{{ getDateIssue(password.dateIssue) }}</p>
-    <p><span>Номер записи : </span>{{ password.numberEntry }}</p>
-    <p><span>Серийный номер : </span>{{ password.passwordID }}</p>
-    <p><span>Орган выдачи : </span>{{ password.issuingAuthority }}</p>
-    <p><span>ИНН : </span>{{ password.registrationNumberCardPayerTaxes }}</p>
+  <div class="wrapper">
+    <div class="item">Паспорт</div>
+    <div class="item">
+      <span>Серийный номер : </span>{{ password.passwordID }}
+    </div>
+    <div class="item">
+      <span>Номер записи : </span>{{ password.numberEntry }}
+    </div>
+    <div class="item"><span>Дата выдачи : </span>{{ password.dateIssue }}</div>
+    <div class="item">
+      <span>Орган выдачи : </span>{{ password.issuingAuthority }}
+    </div>
+    <div class="item">
+      <span>ИНН : </span>{{ password.registrationNumberCardPayerTaxes }}
+    </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    password: {
-      Type: Object,
-    },
-  },
-  methods: {
-    getDateIssue(str) {
-      return str.substring(0, str.indexOf("T"));
-    },
+    password: Object,
   },
 };
 </script>
@@ -29,17 +30,21 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
-  margin: 15px 5px;
-  padding: 5px;
-  border: 2px solid blueviolet;
+.wrapper {
+  margin: 15px 0px;
   color: teal;
-  font-size: 1.2em;
-}
-p, h3 {
-  margin: 0 30px;
+  font-size: 1em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
 }
 span {
   color: blueviolet;
+}
+.item {
+  margin: 5px 0px;
+  align-self: start;
 }
 </style>

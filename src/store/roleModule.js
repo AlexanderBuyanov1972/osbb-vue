@@ -46,7 +46,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! RoleModule --> createRole");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -63,7 +63,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! RoleModule --> updateRole");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -79,7 +79,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! RoleModule --> getRole");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -91,7 +91,7 @@ export default {
         commit("setMessages", data.messages);
         commit("setRole", {});
       } catch (error) {
-        console.log("Error !!! RoleModule --> deleteRole");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

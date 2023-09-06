@@ -51,7 +51,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! UserModule --> createUser");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -68,7 +68,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! UserModule --> updateUser");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -84,7 +84,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! UserModule --> getUser");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -96,7 +96,7 @@ export default {
         commit("setMessages", data.messages);
         commit("setUser", {});
       } catch (error) {
-        alert("Error !!! UserModule --> deleteUser");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, OWNER, ALL } from "@/http/apiHttp";
+import { API_BASE, OWNER, ALL, COUNT } from "@/http/apiHttp";
 
 // ------------- one --------------------
 
@@ -40,5 +40,12 @@ export const getAllOwner = async () => {
 };
 export const deleteAllOwner = async () => {
   const response = await axios.delete(API_BASE + OWNER + ALL);
+  return response.data;
+};
+
+// -------------- size -------------
+
+export const countOwners = async () => {
+  const response = await axios.get(API_BASE + OWNER + COUNT);
   return response.data;
 };

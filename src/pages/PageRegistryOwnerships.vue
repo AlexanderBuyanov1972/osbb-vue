@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <block-messages :messages="getMessages" />
     <block-information-about-house :info="getBuildingCharacteristics" />
     <ownership-list-registry :list="getRegistryOwnerships" />
   </div>
@@ -25,6 +26,7 @@ export default {
     ...mapGetters({
       getRegistryOwnerships: "registry/getRegistryOwnerships",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
+      getMessages: "registry/getMessages",
     }),
   },
 };
@@ -35,8 +37,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.main {
-  margin: 0px 50px;
 }
 </style>

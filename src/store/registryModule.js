@@ -66,7 +66,7 @@ export default {
         commit("setBuildingCharacteristics", data.buildingCharacteristics);
         commit("setMessages", ["OK"]);
       } catch (error) {
-        alert("Error !!! RegistryModule --> getRegistryOwners");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -79,7 +79,7 @@ export default {
         commit("setBuildingCharacteristics", data.buildingCharacteristics);
         commit("setMessages", ["OK"]);
       } catch (error) {
-        alert("Error !!! RegistryModule --> getRegistryOwnerships");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

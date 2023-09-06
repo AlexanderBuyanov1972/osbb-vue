@@ -1,8 +1,9 @@
 <template>
   <div class="main">
-    <div class="list" v-for="one in getOwners" :key="one.id">
+    <block-messages :messages="getMessages" />
+    <div class="list" v-for="(one, index) in getOwners" :key="one.id">
       <div class="item" @click="() => this.$router.push('/owner/' + one.id)">
-        <owner-item :owner="one" />
+        <owner-item :owner="one" :count="index + 1" />
       </div>
     </div>
     <owner-list :owners="getOwners"></owner-list>
@@ -26,6 +27,7 @@ export default {
   computed: {
     ...mapGetters({
       getOwners: "owner/getOwners",
+      getMessages: "owner/getMessages",
     }),
   },
   mounted() {
@@ -39,7 +41,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.main {
 }
 </style>

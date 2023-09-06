@@ -4,6 +4,7 @@ import {
   getOwner,
   deleteOwner,
   getAllOwner,
+  countOwners,
 } from "@/http/owner";
 
 export default {
@@ -13,7 +14,9 @@ export default {
       firstName: "",
       secondName: "",
       lastName: "",
+      dateBirth: "",
       gender: "",
+      familyStatus: "",
       email: "",
       phoneNumber: "",
       password: {
@@ -29,6 +32,7 @@ export default {
     owners: [],
     messages: [],
     isLoading: false,
+    countOwners: 0,
   }),
 
   mutations: {
@@ -43,6 +47,9 @@ export default {
     },
     setMessages(state, messages) {
       state.messages = messages;
+    },
+    setCountOwners(state, number) {
+      state.countOwners = number;
     },
   },
 
@@ -59,6 +66,9 @@ export default {
     getMessages(state) {
       return state.messages;
     },
+    getCountOwners(state) {
+      return state.countOwners;
+    },
   },
 
   actions: {
@@ -73,7 +83,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnerModule --> createOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -82,6 +92,7 @@ export default {
       try {
         commit("setIsLoading", true);
         const data = await updateOwner(object);
+
         if (Array.isArray(data)) {
           commit("setOwner", data[0]);
           commit("setMessages", ["OK"]);
@@ -89,7 +100,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnerModule --> updateOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -105,7 +116,7 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnerModule --> fetchOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -117,7 +128,7 @@ export default {
         commit("setMessages", data.messages);
         commit("setOwner", {});
       } catch (error) {
-        alert("Error !!! OwnerModule --> deleteOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -133,7 +144,19 @@ export default {
           commit("setMessages", data.messages);
         }
       } catch (error) {
-        alert("Error !!! OwnerModule --> getAllOwner");
+        commit("setMessages", ["Сервер не отвечает."]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchCountOwners({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const data = await countOwners();
+        commit("setCountOwners", data);
+        commit("setMessages", ["OK"]);
+      } catch (error) {
+        commit("setMessages", ["Сервер не отвечает."]);
       } finally {
         commit("setIsLoading", false);
       }

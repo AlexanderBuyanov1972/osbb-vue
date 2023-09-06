@@ -1,28 +1,26 @@
 <template>
-  <header-first></header-first>
-  <header-messages></header-messages>
-  <header-second></header-second>
-  <router-view></router-view>
+  <div class="app">
+    <header-first></header-first>
+    <header-second></header-second>
+    <router-view></router-view>
+  </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
 import HeaderFirst from "@/components/HeaderFirst.vue";
 import HeaderSecond from "@/components/HeaderSecond.vue";
-import HeaderMessages from "@/components/HeaderMessages.vue";
 export default {
   components: {
     HeaderFirst,
     HeaderSecond,
-    HeaderMessages,
   },
-  methods: {
-    ...mapActions({}),
-  },
-  mounted() {},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.app {
+  margin: 0px 150px;
+}
+</style>
 
 <!-- <template>
   <div class="main"></div>

@@ -1,18 +1,26 @@
 <template>
   <div class="main">
-    <h3>Собственник</h3>
-    <p><span>Фамилия : </span>{{ owner.lastName }}</p>
-    <p><span>Имя : </span>{{ owner.firstName }}</p>
-    <p><span>Отчество : </span>{{ owner.secondName }}</p>
-    <p><span>Пол : </span>{{ getGender(owner.gender) }}</p>
-    <p><span>Номер телефона : </span>{{ owner.phoneNumber }}</p>
-    <p><span>Электронная почта : </span>{{ owner.email }}</p>
-    <block-password :password="owner.password" />
+    <div class="img">
+      <img :src="man" alt="Not Found" />
+    </div>
+    <div class="info">
+      <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
+      <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
+      <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
+      <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
+      <div class="item"><span>Семейное положение : </span>{{ owner.familyStatus }}</div>
+      <div class="item"><span>Пол : </span>{{ getGender(owner.gender) }}</div>
+      <div class="item"><span>Номер телефона : </span>{{ owner.phoneNumber }}</div>
+      <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
+      <div class="item">
+        <block-password :password="owner.password" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import BlockPassword from "@/blocks/BlockPassword.vue";
-
+import man from "@/photos/owners/man.webp";
 export default {
   components: {
     BlockPassword,
@@ -21,6 +29,11 @@ export default {
     owner: {
       Type: Object,
     },
+  },
+  data() {
+    return {
+      man,
+    };
   },
   methods: {
     getGender(gender) {
@@ -37,17 +50,38 @@ export default {
   box-sizing: border-box;
 }
 .main {
-  margin: 15px 5px;
+  margin: 15px 0px;
   padding: 5px;
   border: 2px solid blueviolet;
-  color: teal;
   font-size: 1.2em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
-p,
-h3 {
-  margin: 0 30px;
+img {
+  width: 50vh;
+  height: 35vw;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  color: blueviolet;
+  font-size: 1.2em;
+  align-items: flex-start;
+  justify-content: start;
+}
+.img {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 span {
-  color: blueviolet;
+  color: teal;
+}
+.item{
+  margin: 5px 0px;
 }
 </style>

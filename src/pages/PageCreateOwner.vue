@@ -1,50 +1,84 @@
 <template>
   <div class="main">
+    <block-messages :messages="getMessages" />
     <div class="blocks">
-      <div class="block1"><block-create-owner @owner="makeOwner" /></div>
+      <div class="block1">
+        <block-create-owner
+          @owner="(data) => (owner = data)"
+          :arrayGender="arrayGender"
+          :arrayFamilyStatus="arrayFamilyStatus"
+        />
+      </div>
       <div class="block2">
-        <block-create-password @password="makeOwner" />
+        <block-create-password @password="(data) => (password = data)" />
       </div>
       <div class="block3">
-        <block-create-ownership @ownership="makeOwner" />
+        <block-create-ownership
+          @ownership="(data) => (ownership = data)"
+          :arrayDocumentConfirmsRightOwn="arrayDocumentConfirmsRightOwn"
+          :arrayTypeRoom="arrayTypeRoom"
+          :arrayLoggia="arrayLoggia"
+        />
       </div>
       <div class="block4">
-        <block-create-address @address="makeOwner" />
+        <block-create-address @address="(data) => (address = data)" />
       </div>
     </div>
     <hr class="teal" />
-    <button-simple class="btn" @click="createOwner">Создать</button-simple>
+    <button-simple class="btn" @click="sendOwner"
+      >Создать собственника</button-simple
+    >
   </div>
 </template>
 <script>
-import BlockCreateOwner from "@/pages/blocks/BlockCreateOwner.vue";
-import BlockCreatePassword from "@/pages/blocks/BlockCreatePassword.vue";
-import BlockCreateOwnership from "@/pages/blocks/BlockCreateOwnership.vue";
-import BlockCreateAddress from "@/pages/blocks/BlockCreateAddress.vue";
+import {
+  arrayGender,
+  arrayTypeRoom,
+  arrayDocumentConfirmsRightOwn,
+  arrayLoggia,
+} from "@/pages/arraysOfData";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
 export default {
-  component: {
-    BlockCreateOwner,
-    BlockCreatePassword,
-    BlockCreateOwnership,
-    BlockCreateAddress,
-  },
   data() {
     return {
       owner: {},
-      password: {},
       ownership: {},
+      password: {},
       address: {},
+
+      arrayGender,
+      arrayDocumentConfirmsRightOwn,
+      arrayTypeRoom,
+      arrayLoggia,
     };
   },
   methods: {
-    createOwner() {
-      console.log(this.owner);
-    },
-    makeOwner() {
+    ...mapActions({
+      createOwner: "owner/createOwner",
+      fetchCountOwners: "owner/fetchCountOwners",
+      fetchCountOwnerships: "ownership/fetchCountRooms",
+    }),
+    sendOwner() {
+      const ownershipID = this.countOwnerships + 1;
+      const ownerID = this.countOwners + 1;
       this.ownership.address = this.address;
-      this.owner.password = this.password;
       this.owner.ownerships = [this.ownership];
+      this.owner.password = this.password;
+      console.log(this.owner);
+      // this.createOwner(this.owner);
     },
+  },
+  mounted() {
+    this.fetchCountOwners();
+    this.fetchCountOwnerships();
+  },
+  computed: {
+    ...mapGetters({
+      countOwners: "owner/getCountOwners",
+      countOwnerships: "ownership/getCountOwnerships",
+      getMessages: "owner/getMessages",
+    }),
   },
 };
 </script>

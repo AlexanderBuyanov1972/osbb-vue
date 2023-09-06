@@ -3,7 +3,7 @@
   <div :class="!show ? 'blocks' : ['blocks', 'active']">
     <div class="block_1">
       <div class="item" @click="show = !show">
-        {{ flagReset ? change(array[0]) : selectName }}
+        {{  selectName }}
       </div>
     </div>
     <div class="block_2" v-if="show">
@@ -15,19 +15,19 @@
 </template>
 <script>
 export default {
-  name: "select-simple",
+  name: "select-edit",
   props: {
     array: {
       type: Array,
       default: () => [],
     },
-    flagReset: Boolean,
+    startObject: Object,
   },
 
   data() {
     return {
       show: false,
-      selectName: this.array[0].name,
+      selectName: this.startObject.name,
     };
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
     },
   },
   mounted() {
-    this.select(this.array[0]);
+    this.select(this.startObject);
   },
 };
 </script>

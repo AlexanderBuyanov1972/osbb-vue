@@ -1,9 +1,11 @@
 <template>
   <div class="main">
-    <span>{{ haveRoom(ownership) }}</span>
-    <span>Кол-во метров : {{ ownership.areaRoomThatIsInProperty }} м2</span>
-    <span>Кол-во комнат : {{ ownership.numberRooms }}</span>
-    <span>Балкон : {{ haveLoggia(ownership) }}</span>
+    <div class="count">{{ count }}. </div>
+    <div class="apartment">{{ haveRoom(ownership) }}</div>
+    <div class="total_area">Общая площадь : {{ ownership.totalArea }} м2</div>
+    <div class="living_area">Жилая площадь : {{ ownership.livingArea }} м2</div>
+    <div class="number">Кол-во комнат : {{ ownership.numberRooms }}</div>
+    <div class="loggia">Балкон : {{ haveLoggia(ownership) }}</div>
   </div>
 </template>
 <script>
@@ -12,6 +14,7 @@ export default {
     ownership: {
       Type: Object,
     },
+    count: Number,
   },
   data() {
     return {};
@@ -36,22 +39,31 @@ export default {
   box-sizing: border-box;
 }
 .main {
-  margin: 15px 5px;
+  margin: 15px 0px;
   padding: 5px;
   border: 2px solid blueviolet;
   color: teal;
   font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
-span {
-  margin: 0 30px;
+.count{
+  width: 2%;
+}
+.apartment{
+  width: 20%;
+}
+.total_area{
+  width: 20%;
+}
+.living_area{
+  width: 20%;
+}
+.number{
+  width: 15%;
+}
+.loggia{
+  width: 15%;
 }
 </style>
-
-<!-- "id":0,
-"typeRoom":"",
-"areaRoomThatIsInProperty":0,
-"documentConfirmsRightOwn":"",
-"numberRooms":0,
-"loggia":false,
-"address":{},
-"owners":[] -->

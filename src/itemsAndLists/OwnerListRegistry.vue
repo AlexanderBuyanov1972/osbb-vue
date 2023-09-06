@@ -38,12 +38,12 @@ export default {
 }
 .list {
   border: 2px solid teal;
-  padding: 5px;
-  margin: 25px 5px;
+  padding: 10px;
+  margin: 25px 0px;
 }
 p {
   color: brown;
   font-size: 1.2em;
-  margin: 0px 5px;
+  margin: 10px 10px;
 }
 </style>

@@ -22,8 +22,10 @@ input {
   border: 1px solid teal;
   width: 100%;
   text-indent: 1em;
-  margin-top: 0.5em;
   color: teal;
   font-size: 1em;
+}
+::placeholder{
+  color: #999999;
 }
 </style>

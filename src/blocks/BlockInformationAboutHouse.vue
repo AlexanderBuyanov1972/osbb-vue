@@ -1,15 +1,15 @@
 <template>
   <div class="main">
     <p>
-      <span>Адресс : </span> {{ info.addressDto.city }} /
-      {{ info.addressDto.street }} /
+      <span>Адресс : </span> {{ info.addressDto.city }},
+      {{ info.addressDto.street }} №
       {{ info.addressDto.house }}
     </p>
-    <p><span>Кол-во помещений в доме : </span>{{ info.countRooms }}</p>
-    <p><span>Кол-во квартир в доме : </span>{{ info.countApartment }}</p>
+    <p><span>Кол-во помещений в доме : </span>{{ info.countRooms }} шт.</p>
+    <p><span>Кол-во квартир в доме : </span>{{ info.countApartment }} шт.</p>
     <p>
       <span>Кол-во нежилых помещений в доме : </span
-      >{{ info.countNonResidentialRoom }}
+      >{{ info.countNonResidentialRoom }} шт.
     </p>
     <p><span>Общая площадь помещений : </span>{{ info.summaAreaRooms }} м2</p>
     <p><span>Общая площадь квартир : </span>{{ info.summaAreaApartment }} м2</p>
@@ -26,10 +26,6 @@ export default {
       Type: Object,
     },
   },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
 
@@ -39,16 +35,21 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
+
+p,
+span {
+  font-size: 23px;
+  margin: 10px 0px;
 }
 p {
-  color: red;
-  font-size: 1.3em;
-  margin: 10px 5px;
+  color: brown;
 }
-span{
-  color:blueviolet;
-  font-size: 1.2em;
-  margin: 10px 5px;
+span {
+  color: blueviolet;
+}
+.main {
+  margin: 10px 0px;
+  border: 2px solid blueviolet;
+  padding-left: 10px;
 }
 </style>

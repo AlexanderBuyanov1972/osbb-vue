@@ -1,43 +1,34 @@
 <template>
-  <div class="main">
-    <button-simple class="btn" @click="backToRegister"
-      >К регистру собственников.</button-simple
-    >
-    <button-simple class="btn" @click="backToList"
-      >К списку собственников.</button-simple
-    >
-
+  <div class="">
+    <block-messages :messages="getMessages" />
+    <h2>Собственник - {{ getFullNameOwner() }}.</h2>
     <block-owner :owner="getOwner" />
-    <div class="list" v-for="one in getOwner.ownerships" :key="one.id">
-      <block-ownership :ownership="one" />
-    </div>
-
-    <button-simple class="btn" @click="backToRegister"
-      >К регистру собственников.</button-simple
-    >
-    <button-simple class="btn" @click="backToList"
-      >К списку собственников.</button-simple
+    <button-simple
+      class="btn"
+      @click="$router.push('/edit/owner/' + getOwner.id)"
+      >Редактировать собственника.</button-simple
     >
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
 import BlockOwner from "@/blocks/BlockOwner.vue";
-import BlockOwnership from "@/blocks/BlockOwnership.vue";
 export default {
   components: {
     BlockOwner,
-    BlockOwnership,
   },
   methods: {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
     }),
-    backToRegister() {
-      this.$router.push("/registry/owners");
-    },
-    backToList() {
-      this.$router.push("/owners");
+    getFullNameOwner() {
+      return (
+        this.getOwner.lastName +
+        " " +
+        this.getOwner.firstName +
+        " " +
+        this.getOwner.secondName
+      );
     },
   },
   mounted() {
@@ -46,6 +37,7 @@ export default {
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
+      getMessages: "owner/getMessages",
     }),
   },
 };
@@ -57,7 +49,10 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
+h2 {
+  color: blueviolet;
+  margin: 10px 0px;
+  text-align: center;
 }
 .btn {
   margin: 20px 0px 10px 5px;

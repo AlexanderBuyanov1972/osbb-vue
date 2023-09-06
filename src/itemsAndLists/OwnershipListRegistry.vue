@@ -6,9 +6,9 @@
       @click="() => this.$router.push('/ownership/' + one.ownership.id)"
       :key="one.id"
     >
-      <ownership-item :ownership="one.ownership" />
-      <p v-for="two in one.listFullNameOwner" :key="two.ownerId">
-        {{ two.fullNameOwner }}
+      <ownership-item class="item" :ownership="one.ownership" />
+      <p v-for="(two, index) in one.listFullNameOwner" :key="two.ownerId">
+        {{ index + 1 }}. {{ two.fullNameOwner }}
       </p>
     </div>
   </div>
@@ -39,13 +39,16 @@ export default {
 }
 .list {
   border: 2px solid teal;
-  padding: 5px;
-  margin: 25px 5px;
+  padding: 10px;
+  margin: 25px 0px;
 }
 
 p {
   color: brown;
   font-size: 1.2em;
   margin: 10px 5px;
+}
+.item{
+margin-left: 10px;
 }
 </style>

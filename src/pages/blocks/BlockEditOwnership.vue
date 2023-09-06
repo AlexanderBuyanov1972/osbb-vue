@@ -1,49 +1,55 @@
 <template>
-  <div class="main"  @mousemove="emitOwnership">
+  <div class="main" @mousemove="emitOwnership">
     <h2>Собственность.</h2>
     <div class="blocks">
       <block-error
-        :field="ownership.typeRoom"
+        :field="ownershipSend.typeRoom"
         message="Укажите тип помещения."
       />
       <select-simple
         :array="arrayTypeRoom"
         @select="(value) => changeSelectTypeRoom(value)"
         :flagReset="flagReset"
+        :startValue="ownershipSend.typeRoom"
       />
 
       <block-error
-        :field="ownership.totalArea"
+        :field="ownershipSend.totalArea"
         message="Укажите общую площадь."
       />
       <input-simple
-        v-model="ownership.totalArea"
+        v-model="ownershipSend.totalArea"
         placeholder="Общая площадь помещения"
       />
 
       <block-error
-        :field="ownership.livingArea"
+        :field="ownershipSend.livingArea"
         message="Укажите жилую площадь."
       />
       <input-simple
-        v-model="ownership.livingArea"
+        v-model="ownershipSend.livingArea"
         placeholder="Жилая площадь помещения"
       />
 
       <block-error
-        :field="ownership.documentConfirmsRightOwn"
+        :field="ownershipSend.documentConfirmsRightOwn"
         message="Укажите документ о праве собственности."
       />
       <select-simple
         :array="arrayDocumentConfirmsRightOwn"
         @select="(value) => changeSelectDocumentConfirmsRightOwn(value)"
         :flagReset="flagReset"
+        :startValue="ownershipSend.documentConfirmsRightOwn"
       />
 
       <block-error
-        :field="ownership.numberRooms"
+        :field="ownershipSend.numberRooms"
         message="Укажите кол-во комнат."
       />
+      <!-- <input-simple
+        v-model="ownershipSend.numberRooms"
+        placeholder="Кол-во комнат"
+      /> -->
       <select-simple
         :array="arrayNumberRooms"
         @select="(value) => changeSelectNumberRooms(value)"
@@ -51,34 +57,26 @@
       />
 
       <block-error
-        :field="ownership.loggia"
+        :field="ownershipSend.loggia"
         message="Укажите есть ли балкон."
       />
       <select-simple
         :array="arrayLoggia"
         @select="(value) => changeSelectLoggia(value)"
         :flagReset="flagReset"
+        :startValue="ownershipSend.loggia"
       />
     </div>
-    <button-reset @click="reset" :hidden="!validOwnership"
-      >Очистить</button-reset
-    >
   </div>
 </template>
 <script>
 export default {
-  name: "block-create-ownership",
+  name: "block-edit-ownership",
   data() {
     return {
-      ownership: {
-        typeRoom: "",
-        totalArea: "",
-        livingArea: "",
-        documentConfirmsRightOwn: "",
-        numberRooms: "",
-        loggia: "",
-      },
+      ownershipSend: { ...this.ownership },
       flagReset: false,
+      validOwnership: false,
     };
   },
   props: {
@@ -90,61 +88,40 @@ export default {
       Type: Array,
       default: () => [],
     },
-    arrayLoggia: {
-      Type: Array,
-      default: () => [],
-    },
     arrayNumberRooms: {
       Type: Array,
       default: () => [],
     },
+    arrayLoggia: {
+      Type: Array,
+      default: () => [],
+    },
+    ownership: Object,
   },
   methods: {
     emitOwnership() {
-      const send = { ...this.ownership };
-      send.loggia = this.getFieldLoggia(this.ownership.loggia)
-      this.$emit("validOwnership", this.validOwnership);
+      const send = { ...this.ownershipSend };
+      send.loggia = this.getFieldLoggia(this.ownership.loggia);
       this.$emit("ownership", send);
     },
     changeSelectTypeRoom(value) {
-      this.ownership.typeRoom = value;
+      this.ownershipSend.typeRoom = value;
       this.flagReset = false;
     },
     changeSelectDocumentConfirmsRightOwn(value) {
-      this.ownership.documentConfirmsRightOwn = value;
+      this.ownershipSend.documentConfirmsRightOwn = value;
       this.flagReset = false;
     },
     changeSelectLoggia(value) {
-      this.ownership.loggia = value;
+      this.ownershipSend.loggia = value;
       this.flagReset = false;
     },
     changeSelectNumberRooms(value) {
-      this.ownership.numberRooms = value;
+      this.ownershipSend.numberRooms = value;
       this.flagReset = false;
-    },
-    reset() {
-      this.ownership.typeRoom = "";
-      this.ownership.totalArea = "";
-      this.ownership.livingArea = "";
-      this.ownership.documentConfirmsRightOwn = "";
-      this.ownership.numberRooms = "";
-      this.ownership.loggia = "";
-      this.flagReset = true;
     },
     getFieldLoggia(value) {
       return value == "ЕСТЬ" ? true : false;
-    },
-  },
-  computed: {
-    validOwnership() {
-      return (
-        this.ownership.typeRoom.length &&
-        this.ownership.livingArea.length &&
-        this.ownership.totalArea.length &&
-        this.ownership.documentConfirmsRightOwn.length &&
-        this.ownership.numberRooms.length &&
-        this.ownership.loggia.length
-      );
     },
   },
 };
@@ -156,10 +133,10 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main{
+.main {
   padding-bottom: 100px;
 }
-h2{
+h2 {
   color: blueviolet;
   margin-bottom: 10px;
   text-align: center;
