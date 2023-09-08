@@ -11,7 +11,11 @@
         />
         <select-edit
           :array="arrayTypeRoom"
-          :startObject="getSelectElement(arrayTypeRoom, ownershipSend.typeRoom)"
+          :startObject="
+            ownershipSend == undefined || ownershipSend.typeRoom == undefined
+              ? arrayTypeRoom[0]
+              : getElementByValue(arrayTypeRoom, ownershipSend.typeRoom)
+          "
           @select="(value) => (ownershipSend.typeRoom = value)"
         />
       </div>
@@ -52,10 +56,13 @@
         <select-edit
           :array="arrayDocumentConfirmsRightOwn"
           :startObject="
-            getSelectElement(
-              arrayDocumentConfirmsRightOwn,
-              ownershipSend.documentConfirmsRightOwn
-            )
+            ownershipSend == undefined ||
+            ownershipSend.documentConfirmsRightOwn == undefined
+              ? arrayDocumentConfirmsRightOwn[0]
+              : getElementByValue(
+                  arrayDocumentConfirmsRightOwn,
+                  ownershipSend.documentConfirmsRightOwn
+                )
           "
           @select="(value) => (ownershipSend.documentConfirmsRightOwn = value)"
         />
@@ -71,7 +78,9 @@
         <select-edit
           :array="arrayNumberRooms"
           :startObject="
-            getSelectElement(arrayNumberRooms, ownershipSend.numberRooms)
+            ownershipSend == undefined || ownershipSend.numberRooms == undefined
+              ? arrayNumberRooms[0]
+              : getElementByValue(arrayNumberRooms, ownershipSend.numberRooms)
           "
           @select="(value) => (ownershipSend.numberRooms = value)"
         />
@@ -87,7 +96,9 @@
         <select-edit
           :array="arrayLoggia"
           :startObject="
-            getSelectElement(arrayLoggia, mapLoggiaValue(ownershipSend.loggia))
+            ownershipSend == undefined || ownershipSend.loggia == undefined
+              ? arrayLoggia[0]
+              : getElementByValue(arrayLoggia, ownershipSend.loggia)
           "
           @select="(value) => (ownershipSend.loggia = value)"
         />
@@ -96,48 +107,39 @@
   </div>
 </template>
 <script>
+import { getElementByValue } from "@/pages/functions";
+import {
+  arrayTypeRoom,
+  arrayDocumentConfirmsRightOwn,
+  arrayLoggia,
+  arrayNumberRooms,
+} from "@/pages/arraysOfData";
 export default {
   name: "block-edit-ownership",
+  props: {
+    ownership: Object,
+  },
   data() {
     return {
       ownershipSend: { ...this.ownership },
+      getElementByValue,
       validTypeRoom: false,
       validTotalArea: false,
       validLivingArea: false,
       validDocumentConfirmsRightOwn: false,
       validNumberRooms: false,
       validLoggia: false,
+      arrayTypeRoom,
+      arrayDocumentConfirmsRightOwn,
+      arrayLoggia,
+      arrayNumberRooms,
     };
   },
-  props: {
-    arrayTypeRoom: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayDocumentConfirmsRightOwn: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayNumberRooms: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayLoggia: {
-      Type: Array,
-      default: () => [],
-    },
-    ownership: Object,
-  },
+
   methods: {
     emitOwnership() {
       this.$emit("isValidOwnership", this.isValidOwnership);
       this.$emit("ownership", this.ownershipSend);
-    },
-    getSelectElement(array, value) {
-      return array.find((el) => el.value == value);
-    },
-    mapLoggiaValue(value) {
-      return value == true ? "YES" : "NO";
     },
   },
   computed: {

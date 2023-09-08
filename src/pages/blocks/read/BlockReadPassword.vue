@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <div class="item">Паспорт</div>
     <div class="item">
       <span>Серийный номер : </span>{{ password.passwordID }}
     </div>
@@ -18,6 +17,7 @@
 </template>
 <script>
 export default {
+  name: "block-read-password",
   props: {
     password: Object,
   },
@@ -33,12 +33,13 @@ export default {
 .wrapper {
   margin: 15px 0px;
   color: teal;
-  font-size: 1em;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
+  padding: 5px;
+  border: 2px solid blueviolet;
+  font-size: 1.2em;
 }
 span {
   color: blueviolet;

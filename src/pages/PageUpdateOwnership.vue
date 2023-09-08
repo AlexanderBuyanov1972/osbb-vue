@@ -3,45 +3,44 @@
     <block-messages
       :messages="[...getMessagesOwnership, ...getMessagesOwner]"
     />
-    <div class="header">Создание записи о собственности.</div>
+    <div class="header">Редактирование записи о собственности..</div>
     <div class="blocks">
       <div class="block1">
-        <block-create-ownership
+        <block-edit-ownership
           @ownership="(data) => (ownership = data)"
-          :arrayDocumentConfirmsRightOwn="arrayDocumentConfirmsRightOwn"
-          :arrayTypeRoom="arrayTypeRoom"
-          :arrayLoggia="arrayLoggia"
-          :arrayNumberRooms="arrayNumberRooms"
           @isValidOwnership="(value) => (isValidOwnership = value)"
+          :ownership="{ ...this.getOwnership }"
         />
       </div>
+
       <div class="block3">
-        <block-create-address
+        <block-edit-address
           @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
+          :address="{ ...this.getOwnership.address }"
         />
       </div>
-      <!-- ------------------------------------------------------------------------ -->
+
       <div class="column">
-        <div class="list" v-for="one in owners">
+        <div class="list" v-for="one in owners" :key="one.id">
           <div class="block4">
-            <block-create-owner
+            <block-edit-owner
               @owner="(data) => (one.owner = data)"
-              :arrayGender="arrayGender"
-              :arrayFamilyStatus="arrayFamilyStatus"
               @isValidOwner="(value) => (isValidOwner = value)"
+              :owner="one"
             />
           </div>
           <div class="block2">
-            <block-create-password
+            <block-edit-password
               @password="(data) => (one.password = data)"
               @isValidPassword="(value) => (isValidPassword = value)"
+              :password="one.password"
             />
           </div>
         </div>
       </div>
     </div>
-    <!-- ------------------------------------------------------------------------ -->
+
     <hr class="teal" />
     <button-simple
       class="btn"
@@ -60,29 +59,14 @@
   </div>
 </template>
 <script>
-import {
-  arrayGender,
-  arrayTypeRoom,
-  arrayDocumentConfirmsRightOwn,
-  arrayLoggia,
-  arrayFamilyStatus,
-  arrayNumberRooms,
-} from "@/pages/arraysOfData";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      size: 0,
       ownership: {},
+      owners: [],
       address: {},
-      owners: [{}],
-
-      arrayGender,
-      arrayDocumentConfirmsRightOwn,
-      arrayTypeRoom,
-      arrayLoggia,
-      arrayFamilyStatus,
-      arrayNumberRooms,
-
       isValidOwnership: false,
       isValidOwner: false,
       isValidAddress: false,
@@ -91,21 +75,19 @@ export default {
   },
   methods: {
     sendOwnership() {
-      const ownershipID = this.countOwnerships + 1;
-      this.address.id = ownershipID;
-      this.ownership.id = ownershipID;
       this.ownership.address = this.address;
-
-      this.ownership.owners = this.mapListOwners(this.countOwners + 1);
-      this.createOwnership(this.ownership).then(() => {
-        this.$router.push("/ownership/" + ownershipID);
+      this.ownership.owners = this.mapListOwners();
+      this.updateOwnership(this.ownership).then(() => {
+        setTimeout(() => {
+          this.$router.push("/ownership/" + this.ownership.id);
+        }, 3000);
       });
     },
     plusOwnership() {
-      this.owners.push({});
+      this.owners.push({ ownership: { address: {} } });
     },
     minusOwnership() {
-      if (this.owners.length > 1) {
+      if (this.owners.length > this.size) {
         this.owners.length -= 1;
       }
     },
@@ -114,34 +96,37 @@ export default {
       this.owners.forEach((el) => {
         let objectOwner = el.owner;
         let objectPassword = el.password;
-
-        objectOwner.id = id;
-        objectPassword.id = id;
-
         objectOwner.password = objectPassword;
         result.push(objectOwner);
-
-        id += 1;
       });
       return result;
     },
     ...mapActions({
-      createOwnership: "ownership/createOwnership",
+      fetchOwnership: "ownership/fetchOwnership",
+      updateOwnership: "ownership/updateOwnership",
       fetchCountOwners: "owner/fetchCountOwners",
       fetchCountOwnerships: "ownership/fetchCountRooms",
     }),
   },
   mounted() {
-    this.fetchCountOwners();
-    this.fetchCountOwnerships();
+    this.fetchOwnership(this.$route.params.id).then(() => {
+      setTimeout(() => {
+        this.fetchCountOwners();
+        this.fetchCountOwnerships();
+        this.owners = [...this.getOwnership.owners];
+        this.size = this.owners.length;
+        this.ownership = { ...this.getOwnership };
+        this.address = { ...this.getOwnership.address };
+      }, 3000);
+    });
   },
   computed: {
     ...mapGetters({
-      countOwners: "owner/getCountOwners",
-      getOwnership: "owner/getOwnership",
+      getOwnership: "ownership/getOwnership",
       countOwnerships: "ownership/getCountOwnerships",
       getMessagesOwnership: "ownership/getMessages",
       getMessagesOwner: "owner/getMessages",
+      countOwners: "owner/getCountOwners",
     }),
   },
 };
@@ -197,5 +182,8 @@ export default {
   margin-bottom: 10px;
   text-align: center;
   font-size: 1.8em;
+}
+hr{
+  margin-top: 25px;
 }
 </style>

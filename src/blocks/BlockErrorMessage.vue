@@ -3,22 +3,27 @@
     {{ flag(field) ? messageTrue : messageFalse }}
   </div>
 </template>
+
 <script>
 export default {
   name: "block-error-message",
   props: {
-    field: String,
+    field: undefined,
     messageFalse: String,
     messageTrue: String,
   },
-  data() {
-    return {
-
-    };
-  },
   methods: {
     flag(value) {
-      return value == undefined || value.length == 0 ? false : true;
+      if (value == undefined) {
+        return false;
+      }
+      if (typeof value == "boolean") {
+        return true;
+      }
+      if (typeof value == "number") {
+        return value > 0 ? true : false;
+      }
+      return value.length == 0 ? false : true;
     },
   },
   watch: {
@@ -37,5 +42,9 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+div {
+  min-height: 40px;
+  padding-top: 5px;
 }
 </style>

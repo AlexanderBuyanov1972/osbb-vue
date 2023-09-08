@@ -6,10 +6,6 @@
       <div class="ownership">
         <block-edit-ownership
           @ownership="(data) => (ownership = data)"
-          :arrayDocumentConfirmsRightOwn="arrayDocumentConfirmsRightOwn"
-          :arrayTypeRoom="arrayTypeRoom"
-          :arrayLoggia="arrayLoggia"
-          :arrayNumberRooms="arrayNumberRooms"
           :ownership="getOwnership"
           @isValidOwnership="(value) => (isValidOwnership = value)"
         />
@@ -32,20 +28,10 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import {
-  arrayTypeRoom,
-  arrayDocumentConfirmsRightOwn,
-  arrayLoggia,
-  arrayNumberRooms,
-} from "@/pages/arraysOfData";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      arrayTypeRoom,
-      arrayDocumentConfirmsRightOwn,
-      arrayLoggia,
-      arrayNumberRooms,
       ownership: {},
       address: {},
       isValidOwnership: false,
@@ -59,7 +45,6 @@ export default {
     }),
     sendOwnership() {
       const send = { ...this.ownership };
-      send.loggia = this.mapLoggiaValue(this.ownership.loggia);
       send.address = this.address;
 
       this.updateOwnership(send).then(() => {
@@ -67,9 +52,6 @@ export default {
           this.$router.push("/ownership/" + this.$route.params.id);
         }, 3000);
       });
-    },
-    mapLoggiaValue(value) {
-      return value == "YES" ? true : false;
     },
   },
   mounted() {

@@ -47,12 +47,6 @@ export const arrayGender = [
   { id: 3, name: "Женский", value: "FEMALE" },
 ];
 
-export const arrayLoggia = [
-  { id: 1, name: "Балкон", value: "" },
-  { id: 2, name: "Есть", value: "YES" },
-  { id: 3, name: "Нет", value: "NO" },
-];
-
 export const arrayFamilyStatus = [
   { id: 1, name: "Семейное положение", value: "" },
   { id: 2, name: "В браке", value: "MARRIED" },
@@ -61,9 +55,14 @@ export const arrayFamilyStatus = [
 
 export const arrayNumberRooms = [
   { id: 1, name: "Количество комнат", value: "" },
-  { id: 2, name: "1", value: "1" },
-  { id: 3, name: "2", value: "2" },
-  { id: 4, name: "3", value: "3" },
-  { id: 5, name: "4", value: "4" },
-  { id: 6, name: "5", value: "5" },
+  { id: 2, name: "1 ком.", value: 1 },
+  { id: 3, name: "2 ком.", value: 2 },
+  { id: 4, name: "3 ком.", value: 3 },
+  { id: 5, name: "4 ком.", value: 4 },
+  { id: 6, name: "5 ком.", value: 5 },
+];
+export const arrayLoggia = [
+  { id: 1, name: "Балкон", value: "" },
+  { id: 2, name: "Есть", value: true },
+  { id: 3, name: "Нет", value: false },
 ];

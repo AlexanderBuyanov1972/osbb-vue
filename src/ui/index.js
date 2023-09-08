@@ -21,6 +21,11 @@ import BlockEditPassword from "@/pages/blocks/edit/BlockEditPassword.vue";
 import BlockEditOwnership from "@/pages/blocks/edit/BlockEditOwnership.vue";
 import BlockEditAddress from "@/pages/blocks/edit/BlockEditAddress.vue";
 
+import BlockReadOwner from "@/pages/blocks/read/BlockReadOwner.vue";
+import BlockReadPassword from "@/pages/blocks/read/BlockReadPassword.vue";
+import BlockReadOwnership from "@/pages/blocks/read/BlockReadOwnership.vue";
+import BlockReadAddress from "@/pages/blocks/read/BlockReadAddress.vue";
+
 export default [
   InputSimple,
   ButtonSimple,
@@ -42,4 +47,9 @@ export default [
   BlockEditOwnership,
   BlockEditOwner,
   BlockEditPassword,
+
+  BlockReadAddress,
+  BlockReadOwnership,
+  BlockReadOwner,
+  BlockReadPassword,
 ];

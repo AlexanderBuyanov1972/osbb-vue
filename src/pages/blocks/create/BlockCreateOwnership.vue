@@ -94,14 +94,7 @@ export default {
   name: "block-create-ownership",
   data() {
     return {
-      ownership: {
-        typeRoom: "",
-        totalArea: "",
-        livingArea: "",
-        documentConfirmsRightOwn: "",
-        numberRooms: "",
-        loggia: "",
-      },
+      ownership: {},
       flagReset: false,
       validTypeRoom: false,
       validTotalArea: false,
@@ -131,10 +124,8 @@ export default {
   },
   methods: {
     emitOwnership() {
-      const send = { ...this.ownership };
-      send.loggia = this.getFieldLoggia(this.ownership.loggia);
       this.$emit("isValidOwnership", this.isValidOwnership);
-      this.$emit("ownership", send);
+      this.$emit("ownership", this.ownership);
     },
     changeSelectTypeRoom(value) {
       this.ownership.typeRoom = value;
@@ -158,11 +149,8 @@ export default {
       this.ownership.livingArea = "";
       this.ownership.documentConfirmsRightOwn = "";
       this.ownership.numberRooms = "";
-      this.ownership.loggia = "";
+      this.ownership.loggia = false;
       this.flagReset = true;
-    },
-    getFieldLoggia(value) {
-      return value == "YES" ? true : false;
     },
   },
   computed: {

@@ -79,6 +79,7 @@ export default {
   data() {
     return {
       passwordSend: { ...this.password },
+      
       validPassword: false,
       validNumberEntry: false,
       validDateIssue: false,

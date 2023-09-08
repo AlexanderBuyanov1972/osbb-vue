@@ -3,6 +3,9 @@
     <block-messages :messages="getMessages" />
     <h2>Собственник - {{ getFullNameOwner() }}.</h2>
     <block-read-owner :owner="getOwner" />
+    <block-read-password :password="getOwner.password" />
+    <img src="" alt="Not found" />
+    <hr />
     <button-simple
       class="btn"
       @click="$router.push('/edit/owner/' + getOwner.id)"
@@ -12,11 +15,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import BlockReadOwner from "@/pages/blocks/read/BlockReadOwner.vue";
 export default {
-  components: {
-    BlockReadOwner,
-  },
   methods: {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
@@ -56,5 +55,9 @@ h2 {
 }
 .btn {
   margin: 20px 0px 10px 5px;
+}
+hr{
+  counter-reset: teal;
+  margin-top: 20px;
 }
 </style>

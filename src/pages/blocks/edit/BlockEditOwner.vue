@@ -3,7 +3,6 @@
     <h2>Собственник.</h2>
 
     <div class="owner">
-      
       <div class="lastName">
         <block-error-message
           :field="ownerSend.lastName"
@@ -60,7 +59,11 @@
         />
         <select-edit
           :array="arrayGender"
-          :startObject="getSelectElement(arrayGender, ownerSend.gender)"
+          :startObject="
+            ownerSend == undefined || ownerSend.gender == undefined
+              ? arrayGender[0]
+              : getElementByValue(arrayGender, ownerSend.gender)
+          "
           @select="(value) => (ownerSend.gender = value)"
         />
       </div>
@@ -75,7 +78,9 @@
         <select-edit
           :array="arrayFamilyStatus"
           :startObject="
-            getSelectElement(arrayFamilyStatus, ownerSend.familyStatus)
+            ownerSend == undefined || ownerSend.familyStatus == undefined
+              ? arrayFamilyStatus[0]
+              : getElementByValue(arrayFamilyStatus, ownerSend.familyStatus)
           "
           @select="(value) => (ownerSend.familyStatus = value)"
         />
@@ -104,11 +109,19 @@
   </div>
 </template>
 <script>
+import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
+import { getElementByValue } from "@/pages/functions";
 export default {
   name: "block-edit-owner",
+  props: {
+    owner: Object,
+  },
   data() {
     return {
       ownerSend: { ...this.owner },
+      getElementByValue,
+      arrayGender,
+      arrayFamilyStatus,
       validLastName: false,
       validFirstName: false,
       validSecondName: false,
@@ -119,24 +132,11 @@ export default {
       validPhoneNumber: false,
     };
   },
-  props: {
-    arrayGender: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayFamilyStatus: {
-      Type: Array,
-      default: () => [],
-    },
-    owner: Object,
-  },
+
   methods: {
     emitOwner() {
       this.$emit("isValidOwner", this.isValidOwner);
       this.$emit("owner", this.ownerSend);
-    },
-    getSelectElement(array, value) {
-      return array.find((el) => el.value == value);
     },
   },
   computed: {

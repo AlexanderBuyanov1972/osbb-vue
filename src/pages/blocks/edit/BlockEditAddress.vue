@@ -116,6 +116,7 @@ export default {
   data() {
     return {
       addressSend: { ...this.address },
+      
       validZipCode: false,
       validCountry: false,
       validRegion: false,
