@@ -1,13 +1,16 @@
 <template>
   <div class="main">
-    <div
-      class="list"
-      v-for="one in list"
-      @click="() => this.$router.push('/ownership/' + one.ownership.id)"
-      :key="one.id"
-    >
-      <ownership-item class="item" :ownership="one.ownership" />
-      <p v-for="(two, index) in one.listFullNameOwner" :key="two.ownerId">
+    <div class="list" v-for="one in list" :key="one.id">
+      <ownership-item
+        class="item"
+        :ownership="one.ownership"
+        @click="() => this.$router.push('/ownership/' + one.ownership.id)"
+      />
+      <p
+        v-for="(two, index) in one.listFullNameOwner"
+        :key="two.ownerId"
+        @click="() => this.$router.push('/owner/' + two.ownerId)"
+      >
         {{ index + 1 }}. {{ two.fullNameOwner }}
       </p>
     </div>
@@ -48,7 +51,7 @@ p {
   font-size: 1.2em;
   margin: 10px 5px;
 }
-.item{
-margin-left: 10px;
+.item {
+  margin-left: 10px;
 }
 </style>

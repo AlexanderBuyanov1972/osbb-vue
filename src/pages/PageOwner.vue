@@ -2,7 +2,7 @@
   <div class="">
     <block-messages :messages="getMessages" />
     <h2>Собственник - {{ getFullNameOwner() }}.</h2>
-    <block-owner :owner="getOwner" />
+    <block-read-owner :owner="getOwner" />
     <button-simple
       class="btn"
       @click="$router.push('/edit/owner/' + getOwner.id)"
@@ -12,10 +12,10 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import BlockOwner from "@/blocks/BlockOwner.vue";
+import BlockReadOwner from "@/pages/blocks/read/BlockReadOwner.vue";
 export default {
   components: {
-    BlockOwner,
+    BlockReadOwner,
   },
   methods: {
     ...mapActions({

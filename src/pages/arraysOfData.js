@@ -49,8 +49,8 @@ export const arrayGender = [
 
 export const arrayLoggia = [
   { id: 1, name: "Балкон", value: "" },
-  { id: 2, name: "Есть", value: "ЕСТЬ" },
-  { id: 3, name: "Нет", value: "НЕТ" },
+  { id: 2, name: "Есть", value: "YES" },
+  { id: 3, name: "Нет", value: "NO" },
 ];
 
 export const arrayFamilyStatus = [

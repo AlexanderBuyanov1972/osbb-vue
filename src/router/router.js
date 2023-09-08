@@ -5,7 +5,6 @@ import PageOwnerships from "@/pages/PageOwnerships.vue";
 import PageMain from "@/pages/PageMain.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
-import PageCreateOwner from "@/pages/PageCreateOwner.vue";
 import PageCreateOwnership from "@/pages/PageCreateOwnership.vue";
 import PageEditOwner from "@/pages/PageEditOwner.vue";
 import PageEditOwnership from "@/pages/PageEditOwnership.vue";
@@ -19,7 +18,6 @@ const routes = [
   { path: "/ownerships", component: PageOwnerships },
   { path: "/registry/owners", component: PageRegistryOwners },
   { path: "/registry/ownerships", component: PageRegistryOwnerships },
-  { path: "/create/owner", component: PageCreateOwner },
   { path: "/create/ownership", component: PageCreateOwnership },
   { path: "/edit/owner/:id", component: PageEditOwner },
   { path: "/edit/ownership/:id", component: PageEditOwnership },

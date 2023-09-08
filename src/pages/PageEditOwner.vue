@@ -9,17 +9,22 @@
           :arrayGender="arrayGender"
           :arrayFamilyStatus="arrayFamilyStatus"
           @owner="(data) => (owner = data)"
+          @isValidOwner="(value) => (isValidOwner = value)"
         />
       </div>
       <div class="password">
         <block-edit-password
           :password="getOwner.password"
           @password="(data) => (password = data)"
+          @isValidPassword="(value) => (isValidPassword = value)"
         />
       </div>
     </div>
     <hr />
-    <button-simple class="btn" @click="sendOwner"
+    <button-simple
+      class="btn"
+      @click="sendOwner"
+      :hidden="!(isValidOwner && isValidPassword)"
       >Послать на сервер.</button-simple
     >
   </div>
@@ -34,22 +39,25 @@ export default {
       arrayFamilyStatus,
       owner: {},
       password: {},
+      isValidOwner: false,
+      isValidPassword: false,
     };
   },
   methods: {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
+      updateOwner: "owner/updateOwner",
     }),
     sendOwner() {
       this.owner.password = this.password;
-      console.log(this.owner);
-      // this.updateOwner(this.owner);
+      this.updateOwner(this.owner).then(() => {
+        setTimeout(() => {
+          this.$router.push("/owner/" + this.$route.params.id);
+        }, 3000);
+      });
     },
   },
   mounted() {
-    this.fetchOwner(this.$route.params.id);
-  },
-  updated() {
     this.fetchOwner(this.$route.params.id);
   },
   computed: {

@@ -13,6 +13,7 @@
     </p>
     <p><span>Общая площадь помещений : </span>{{ info.summaAreaRooms }} м2</p>
     <p><span>Общая площадь квартир : </span>{{ info.summaAreaApartment }} м2</p>
+    <p><span>Общая жилая площадь квартир : </span>{{ info.summaAreaLivingApartment }} м2</p>
     <p>
       <span>Общая площадь нежилых помещений : </span
       >{{ info.summaAreaNonResidentialRoom }} м2

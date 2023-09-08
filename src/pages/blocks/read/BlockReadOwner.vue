@@ -1,29 +1,43 @@
 <template>
   <div class="main">
     <div class="img">
-      <img :src="man" alt="Not Found" />
+      <img
+        :src="
+          getElementArrayGender(owner.gender).value === 'FEMALE' ? female : male
+        "
+        alt="Not Found"
+      />
     </div>
     <div class="info">
       <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
       <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
       <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
       <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
-      <div class="item"><span>Семейное положение : </span>{{ owner.familyStatus }}</div>
-      <div class="item"><span>Пол : </span>{{ getGender(owner.gender) }}</div>
-      <div class="item"><span>Номер телефона : </span>{{ owner.phoneNumber }}</div>
+      <div class="item">
+        <span>Семейное положение : </span
+        >{{ getElementName(arrayFamilyStatus, owner.familyStatus).name }}
+      </div>
+      <div class="item">
+        <span>Пол : </span>{{ getElementArrayGender(owner.gender).name }}
+      </div>
+      <div class="item">
+        <span>Номер телефона : </span>{{ owner.phoneNumber }}
+      </div>
       <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
       <div class="item">
-        <block-password :password="owner.password" />
+        <block-read-password :password="owner.password" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import BlockPassword from "@/blocks/BlockPassword.vue";
-import man from "@/photos/owners/man.webp";
+import BlockReadPassword from "@/pages/blocks/read/BlockReadPassword.vue";
+import male from "@/photos/owners/male.jpg";
+import female from "@/photos/owners/female.jpg";
+import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
 export default {
   components: {
-    BlockPassword,
+    BlockReadPassword,
   },
   props: {
     owner: {
@@ -32,12 +46,18 @@ export default {
   },
   data() {
     return {
-      man,
+      female,
+      male,
+      arrayGender,
+      arrayFamilyStatus,
     };
   },
   methods: {
-    getGender(gender) {
-      return gender === "MALE" ? "мужчина" : "женщина";
+    getElementName(array, value) {
+      return array.find((el) => el.value === value);
+    },
+    getElementArrayGender(value) {
+      return arrayGender.find((el) => el.value === value);
     },
   },
 };
@@ -81,7 +101,7 @@ img {
 span {
   color: teal;
 }
-.item{
+.item {
   margin: 5px 0px;
 }
 </style>

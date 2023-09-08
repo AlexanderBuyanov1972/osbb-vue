@@ -11,17 +11,22 @@
           :arrayLoggia="arrayLoggia"
           :arrayNumberRooms="arrayNumberRooms"
           :ownership="getOwnership"
+          @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
       <div class="address">
         <block-edit-address
           @address="(data) => (address = data)"
           :address="getOwnership.address"
+          @isValidAddress="(value) => (isValidAddress = value)"
         />
       </div>
     </div>
     <hr />
-    <button-simple class="btn" @click="sendOwnership"
+    <button-simple
+      class="btn"
+      @click="sendOwnership"
+      :hidden="!(isValidOwnership && isValidAddress)"
       >Послать на сервер.</button-simple
     >
   </div>
@@ -41,19 +46,30 @@ export default {
       arrayDocumentConfirmsRightOwn,
       arrayLoggia,
       arrayNumberRooms,
-
       ownership: {},
       address: {},
+      isValidOwnership: false,
+      isValidAddress: false,
     };
   },
   methods: {
     ...mapActions({
       fetchOwnership: "ownership/fetchOwnership",
+      updateOwnership: "ownership/updateOwnership",
     }),
     sendOwnership() {
-      this.ownership.address = this.address;
-      console.log(this.ownership);
-      // this.updateOwnership(this.ownership);
+      const send = { ...this.ownership };
+      send.loggia = this.mapLoggiaValue(this.ownership.loggia);
+      send.address = this.address;
+
+      this.updateOwnership(send).then(() => {
+        setTimeout(() => {
+          this.$router.push("/ownership/" + this.$route.params.id);
+        }, 3000);
+      });
+    },
+    mapLoggiaValue(value) {
+      return value == "YES" ? true : false;
     },
   },
   mounted() {

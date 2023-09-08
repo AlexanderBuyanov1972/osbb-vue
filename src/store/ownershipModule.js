@@ -92,12 +92,12 @@ export default {
     async updateOwnership({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await updateOwnership(object);
-        if (Array.isArray(data)) {
-          commit("setOwnership", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await updateOwnership(object);
+        if (Array.isArray(response)) {
+          commit("setOwnership", response[0].data[0]);
+          commit("setMessages",  response[0].messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages",  response.messages);
         }
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
@@ -108,12 +108,12 @@ export default {
     async fetchOwnership({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await getOwnership(id);
-        if (Array.isArray(data)) {
-          commit("setOwnership", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await getOwnership(id);
+        if (Array.isArray(response)) {
+          commit("setOwnership", response[0].data[0]);
+          commit("setMessages", response[0].messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
@@ -136,12 +136,12 @@ export default {
     async getAllOwnership({ commit }) {
       try {
         commit("setIsLoading", true);
-        const data = await getAllOwnership();
-        if (Array.isArray(data)) {
-          commit("setOwnerships", data);
-          commit("setMessages", ["OK"]);
+        const response = await getAllOwnership();
+        if (Array.isArray(response)) {
+          commit("setOwnerships", response[0].data);
+          commit("setMessages", response[0].messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
@@ -154,7 +154,7 @@ export default {
         commit("setIsLoading", true);
         const data = await countRooms();
         commit("setCountOwnerships", data);
-        commit("setMessages", ["OK"]);
+        commit("setMessages", ['Существующее количество объектов недвижимости - ' + data]);
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
       } finally {

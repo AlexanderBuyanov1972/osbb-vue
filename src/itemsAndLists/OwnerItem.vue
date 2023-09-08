@@ -1,11 +1,17 @@
 <template>
   <div class="main">
-    <div class="count">{{ count}}.</div>
-    <div class="name">{{ getFullName(owner) }} </div>
-    <div class="phone">{{ owner.phoneNumber }} </div>
+    <div class="count">{{ count }}.</div>
+    <div class="name">{{ getFullName(owner) }}</div>
+    <div class="phone">{{ owner.phoneNumber }}</div>
+    <div class="birth">{{ owner.dateBirth }}</div>
+    <div class="family">
+      {{ getElementName(arrayFamilyStatus, owner.familyStatus) }}
+    </div>
+    <div class="email">{{ owner.email }}</div>
   </div>
 </template>
 <script>
+import { arrayFamilyStatus } from "@/pages/arraysOfData";
 export default {
   name: "owner-item",
   props: {
@@ -14,9 +20,17 @@ export default {
     },
     count: Number,
   },
+  data() {
+    return {
+      arrayFamilyStatus,
+    };
+  },
   methods: {
     getFullName(obj) {
       return obj.lastName + " " + obj.firstName + " " + obj.secondName;
+    },
+    getElementName(array, value) {
+      return array.find((el) => el.value === value).name;
     },
   },
 };
@@ -41,14 +55,22 @@ export default {
 span {
   margin: 0 10px;
 }
-.count{
+.count {
   width: 2%;
 }
-.name{
+.name {
   width: 22%;
 }
-.phone{
+.phone {
   width: 15%;
 }
-
+.birth {
+  width: 15%;
+}
+.email {
+  width: 15%;
+}
+.family {
+  width: 15%;
+}
 </style>

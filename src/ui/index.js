@@ -4,17 +4,22 @@ import InputSimple from "@/ui/elements/InputSimple.vue";
 import SelectSimple from "@/ui/elements/SelectSimple.vue";
 import SelectEdit from "@/ui/elements/SelectEdit.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
-import BlockCreateOwner from "@/pages/blocks/BlockCreateOwner.vue";
-import BlockCreatePassword from "@/pages/blocks/BlockCreatePassword.vue";
-import BlockCreateOwnership from "@/pages/blocks/BlockCreateOwnership.vue";
-import BlockCreateAddress from "@/pages/blocks/BlockCreateAddress.vue";
+
 import BlockMessages from "@/blocks/BlockMessages.vue";
-import BlockError from "@/blocks/BlockError.vue";
+import BlockErrorMessage from "@/blocks/BlockErrorMessage.vue";
+
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import BlockEditOwner from "@/pages/blocks/BlockEditOwner.vue";
-import BlockEditPassword from "@/pages/blocks/BlockEditPassword.vue";
-import BlockEditOwnership from "@/pages/blocks/BlockEditOwnership.vue";
-import BlockEditAddress from "@/pages/blocks/BlockEditAddress.vue";
+import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
+
+import BlockCreateOwner from "@/pages/blocks/create/BlockCreateOwner.vue";
+import BlockCreatePassword from "@/pages/blocks/create/BlockCreatePassword.vue";
+import BlockCreateOwnership from "@/pages/blocks/create/BlockCreateOwnership.vue";
+import BlockCreateAddress from "@/pages/blocks/create/BlockCreateAddress.vue";
+
+import BlockEditOwner from "@/pages/blocks/edit/BlockEditOwner.vue";
+import BlockEditPassword from "@/pages/blocks/edit/BlockEditPassword.vue";
+import BlockEditOwnership from "@/pages/blocks/edit/BlockEditOwnership.vue";
+import BlockEditAddress from "@/pages/blocks/edit/BlockEditAddress.vue";
 
 export default [
   InputSimple,
@@ -28,8 +33,11 @@ export default [
   BlockCreateOwner,
   BlockCreatePassword,
   BlockMessages,
-  BlockError,
+  BlockErrorMessage,
+  
   OwnerItem,
+  OwnershipItem,
+
   BlockEditAddress,
   BlockEditOwnership,
   BlockEditOwner,

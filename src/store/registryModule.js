@@ -61,10 +61,16 @@ export default {
     async fetchRegistryOwners({ commit }) {
       try {
         commit("setIsLoading", true);
-        const data = await getRegistryOwners();
-        commit("setRegistryOwners", data.setFullNameOwnerAndListOwnership);
-        commit("setBuildingCharacteristics", data.buildingCharacteristics);
-        commit("setMessages", ["OK"]);
+        const response = await getRegistryOwners();
+        commit(
+          "setRegistryOwners",
+          response.data.setFullNameOwnerAndListOwnership
+        );
+        commit(
+          "setBuildingCharacteristics",
+          response.data.buildingCharacteristics
+        );
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
       } finally {
@@ -74,10 +80,16 @@ export default {
     async fetchRegistryOwnerships({ commit }) {
       try {
         commit("setIsLoading", true);
-        const data = await getRegistryOwnerships();
-        commit("setRegistryOwnerships", data.setOwnershipAndListFullNameOwners);
-        commit("setBuildingCharacteristics", data.buildingCharacteristics);
-        commit("setMessages", ["OK"]);
+        const response = await getRegistryOwnerships();
+        commit(
+          "setRegistryOwnerships",
+          response.data.setOwnershipAndListFullNameOwners
+        );
+        commit(
+          "setBuildingCharacteristics",
+          response.data.buildingCharacteristics
+        );
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", ["Сервер не отвечает."]);
       } finally {

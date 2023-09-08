@@ -27,13 +27,13 @@ export default {
 
 p,
 h4 {
-  color: green;
+  color: brown;
   font-size: 1.3em;
   margin: 10px 0px;
 }
 .main{
   margin: 10px 0px;
-  border: 2px solid green;
+  border: 2px solid brown;
   padding-left: 10px;
 }
 </style>

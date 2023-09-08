@@ -1,22 +1,30 @@
 <template>
   <div class="main">
-    <div
-      class="list"
-      v-for="one in list"
-      :key="one.id"
-      @click="() => this.$router.push('/owner/' + one.fullNameOwner.ownerId)"
-    >
-      <p>{{ one.fullNameOwner.fullNameOwner }}</p>
-      <ownership-list :ownerships="one.listOwnership" />
+    <div class="list" v-for="one in list" :key="one.id">
+      <p
+        @click="() => this.$router.push('/owner/' + one.fullNameOwner.ownerId)"
+      >
+        {{ one.fullNameOwner.fullNameOwner }}
+      </p>
+
+      <ownership-item
+        v-for="(two, index) in one.listOwnership"
+        :ownership="two"
+        :key="two.id"
+        :count="index + 1"
+        @click="() => this.$router.push('/ownership/' + two.id)"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import OwnershipList from "@/itemsAndLists/OwnershipList.vue";
+import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 export default {
   components: {
     OwnershipList,
+    OwnershipItem,
   },
   props: {
     list: {

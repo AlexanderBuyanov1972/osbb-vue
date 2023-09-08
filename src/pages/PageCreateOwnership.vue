@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
+    <block-messages
+      :messages="[...getMessagesOwnership, ...getMessagesOwner]"
+    />
     <div class="header">Создание записи о помещении.</div>
     <div class="blocks">
       <div class="block1">
@@ -10,13 +12,13 @@
           :arrayTypeRoom="arrayTypeRoom"
           :arrayLoggia="arrayLoggia"
           :arrayNumberRooms="arrayNumberRooms"
-          @validOwnership="(value) => (validOwnership = value)"
+          @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
       <div class="block3">
         <block-create-address
           @address="(data) => (address = data)"
-          @validAddress="(value) => (validAddress = value)"
+          @isValidAddress="(value) => (isValidAddress = value)"
         />
       </div>
       <!-- ------------------------------------------------------------------------ -->
@@ -27,13 +29,13 @@
               @owner="(data) => (one.owner = data)"
               :arrayGender="arrayGender"
               :arrayFamilyStatus="arrayFamilyStatus"
-              @validOwner="(value) => (validOwner = value)"
+              @isValidOwner="(value) => (isValidOwner = value)"
             />
           </div>
           <div class="block2">
             <block-create-password
-              @password="(data) => (one.owner.password = data)"
-              @validPassword="(value) => (validPassword = value)"
+              @password="(data) => (one.password = data)"
+              @isValidPassword="(value) => (isValidPassword = value)"
             />
           </div>
         </div>
@@ -44,7 +46,9 @@
     <button-simple
       class="btn"
       @click="sendOwnership"
-      :hidden="!(validOwnership && validOwner && validAddress && validPassword)"
+      :hidden="
+        !(isValidOwnership && isValidOwner && isValidAddress && isValidPassword)
+      "
       >Послать на сервер.</button-simple
     >
     <button-simple class="btn" @click="plusOwnership"
@@ -68,21 +72,22 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
+      messages: [],
       ownership: {},
       address: {},
       owners: [{}],
-      
+
       arrayGender,
       arrayDocumentConfirmsRightOwn,
       arrayTypeRoom,
       arrayLoggia,
       arrayFamilyStatus,
       arrayNumberRooms,
-      
-      validOwnership: false,
-      validOwner: false,
-      validAddress: false,
-      validPassword: false,
+
+      isValidOwnership: false,
+      isValidOwner: false,
+      isValidAddress: false,
+      isValidPassword: false,
     };
   },
   methods: {
@@ -93,8 +98,9 @@ export default {
       this.ownership.address = this.address;
 
       this.ownership.owners = this.mapListOwners(this.countOwners + 1);
-      console.log(this.ownership);
-      // this.createOwnership(this.ownership);
+      this.createOwnership(this.ownership).then(() => {
+        this.$router.push("/ownership/" + ownershipID);
+      });
     },
     plusOwnership() {
       this.owners.push({});
@@ -107,10 +113,15 @@ export default {
     mapListOwners(id) {
       let result = [];
       this.owners.forEach((el) => {
-        let object = el.owner;
-        object.id = id;
-        object.password.id = id;
-        result.push(object);
+        let objectOwner = el.owner;
+        let objectPassword = el.password;
+
+        objectOwner.id = id;
+        objectPassword.id = id;
+
+        objectOwner.password = objectPassword;
+        result.push(objectOwner);
+
         id += 1;
       });
       return result;
@@ -128,8 +139,10 @@ export default {
   computed: {
     ...mapGetters({
       countOwners: "owner/getCountOwners",
+      getOwnership: "owner/getOwnership",
       countOwnerships: "ownership/getCountOwnerships",
-      getMessages: "ownership/getMessages",
+      getMessagesOwnership: "ownership/getMessages",
+      getMessagesOwner: "owner/getMessages",
     }),
   },
 };
@@ -154,7 +167,7 @@ export default {
   align-items: flex-start;
   border: 1px solid blueviolet;
   width: 100%;
- margin-top: 10px;
+  margin-top: 10px;
 }
 .column {
   display: flex;
@@ -180,11 +193,10 @@ export default {
 .btn {
   margin: 10px 0 0 10px;
 }
-.header{
+.header {
   color: brown;
   margin-bottom: 10px;
   text-align: center;
   font-size: 1.8em;
 }
-
 </style>

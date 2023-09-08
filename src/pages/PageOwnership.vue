@@ -5,7 +5,7 @@
       Объект недвижимости - квартира № {{ getOwnership.address.apartment }}.
     </h2>
     <h2 class="header2">{{ getLineAddress() }}</h2>
-    <block-ownership :ownership="getOwnership || {}" />
+    <block-read-ownership :ownership="getOwnership || {}" />
 
     <button-simple
       class="btn"
@@ -15,11 +15,11 @@
   </div>
 </template>
 <script>
-import BlockOwnership from "@/blocks/BlockOwnership.vue";
+import BlockReadOwnership from "@/pages/blocks/read/BlockReadOwnership.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    BlockOwnership,
+    BlockReadOwnership,
   },
   methods: {
     ...mapActions({
