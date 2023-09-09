@@ -1,15 +1,15 @@
 <template>
   <div class="main">
-    <p><span>Тип : </span>{{ ownership.typeRoom }}</p>
-    <p><span>Кол-во комнат : </span>{{ ownership.numberRooms }}</p>
-    <p><span>Общая площадь : </span>{{ ownership.totalArea }} м2</p>
-    <p><span>Жилая площадь : </span>{{ ownership.livingArea }} м2</p>
+    <p><span>Тип : </span>{{ ownership.typeRoom || "" }}</p>
+    <p><span>Кол-во комнат : </span>{{ ownership.numberRooms || "" }}</p>
+    <p><span>Общая площадь : </span>{{ ownership.totalArea || 0.0 }} м2</p>
+    <p><span>Жилая площадь : </span>{{ ownership.livingArea || 0.0 }} м2</p>
     <p>
       <span>Основание собственности : </span
-      >{{ ownership.documentConfirmsRightOwn }}
+      >{{ ownership.documentConfirmsRightOwn || "" }}
     </p>
-    <p><span>Наличие балкона : </span>{{ ownership.loggia }}</p>
-    <img :src="ownership.photo" alt="" />
+    <p><span>Наличие балкона : </span>{{ ownership.loggia || "" }}</p>
+    <img :src="ownership.photo" alt="Not Found" />
   </div>
 </template>
 <script>

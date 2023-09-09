@@ -1,16 +1,14 @@
 <template>
   <div class="main">
+    <img :src="owner.photo" alt="Not found" />
     <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
     <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
     <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
     <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
     <div class="item">
-      <span>Семейное положение : </span
-      >{{ getElementByValue(arrayFamilyStatus, owner.familyStatus).name }}
+      <span>Семейное положение : </span>{{ owner.familyStatus }}
     </div>
-    <div class="item">
-      <span>Пол : </span>{{ getElementByValue(arrayGender, owner.gender).name }}
-    </div>
+    <div class="item"><span>Пол : </span>{{ owner.gender }}</div>
     <div class="item">
       <span>Номер телефона : </span>{{ owner.phoneNumber }}
     </div>
@@ -18,21 +16,12 @@
   </div>
 </template>
 <script>
-import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
-import { getElementByValue } from "@/pages/functions";
 export default {
   name: "block-read-owner",
   props: {
     owner: {
       Type: Object,
     },
-  },
-  data() {
-    return {
-      arrayGender,
-      arrayFamilyStatus,
-      getElementByValue,
-    };
   },
 };
 </script>

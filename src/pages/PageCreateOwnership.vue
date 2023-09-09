@@ -23,7 +23,7 @@
       </div>
       <!-- ------------------------------------------------------------------------ -->
       <div class="column">
-        <div class="list" v-for="one in owners">
+        <div class="list" v-for="one in owners" :key="one.id">
           <div class="block4">
             <block-create-owner
               @owner="(data) => (one.owner = data)"

@@ -12,10 +12,10 @@ export default {
     ownership: {
       id: 0,
       typeRoom: "",
-      totalArea: "",
-      livingArea: "",
+      totalArea: 0.0,
+      livingArea: 0.0,
       documentConfirmsRightOwn: "",
-      numberRooms: "",
+      numberRooms: 0,
       loggia: false,
       address: {
         id: 0,
@@ -75,15 +75,15 @@ export default {
     async createOwnership({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await createOwnership(object);
-        if (Array.isArray(data)) {
-          commit("setOwnership", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await createOwnership(object);
+        if (Array.isArray(response)) {
+          commit("setOwnership", response[0].data[0]);
+          commit("setMessages", response[0].messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response[0].messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -100,7 +100,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -116,7 +116,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -124,11 +124,11 @@ export default {
     async deleteOwnership({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deleteOwnership(id);
-        commit("setMessages", data.messages);
+        const response = await deleteOwnership(id);
+        commit("setMessages", response.messages);
         commit("setOwnership", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -144,7 +144,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -152,13 +152,13 @@ export default {
     async fetchCountRooms({ commit, getters }) {
       try {
         commit("setIsLoading", true);
-        const data = await countRooms();
-        commit("setCountOwnerships", data);
+        const response = await countRooms();
+        commit("setCountOwnerships", response);
         commit("setMessages", [
-          "Существующее количество объектов недвижимости - " + data,
+          "Существующее количество объектов недвижимости - " + response,
         ]);
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }

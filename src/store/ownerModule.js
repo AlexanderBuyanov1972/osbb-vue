@@ -83,7 +83,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -99,7 +99,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -115,7 +115,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -123,11 +123,11 @@ export default {
     async deleteOwner({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deleteOwner(id);
-        commit("setMessages", data.messages);
+        const response = await deleteOwner(id);
+        commit("setMessages", response.messages);
         commit("setOwner", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -143,7 +143,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -151,13 +151,13 @@ export default {
     async fetchCountOwners({ commit }) {
       try {
         commit("setIsLoading", true);
-        const data = await countOwners();
-        commit("setCountOwners", data);
+        const response = await countOwners();
+        commit("setCountOwners", response);
         commit("setMessages", [
-          "Существующее количество собственников - " + data,
+          "Существующее количество собственников - " + response,
         ]);
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }

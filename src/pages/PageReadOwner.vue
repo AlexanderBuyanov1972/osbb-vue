@@ -1,37 +1,42 @@
 <template>
   <div class="">
-    <block-messages :messages="getMessages" />
-    <h2>Собственник - {{ getFullNameOwner() }}.</h2>
-    <block-read-owner :owner="getOwner" />
-    <block-read-password :password="getOwner.password" />
-    <img src="" alt="Not found" />
+    <block-messages :messages="this.getMessages" />
+    <h2>Собственник - {{ mapOwnerToLineFullNamesOwner(this.getOwner) }}.</h2>
+    <block-read-owner :owner="owner" />
+    <block-read-password :password="this.getOwner.password" />
     <hr />
     <button-simple
       class="btn"
-      @click="$router.push('/edit/owner/' + getOwner.id)"
+      @click="this.$router.push('/edit/owner/' + this.getOwner.id)"
       >Редактировать собственника.</button-simple
     >
   </div>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import man from "@/photos/owners/male.jpg";
+import {
+  mapOwnerToLineFullNamesOwner,
+  mapOwnerValuesToRead,
+} from "@/pages/functions";
 export default {
+  data() {
+    return {
+      mapOwnerToLineFullNamesOwner,
+      mapOwnerValuesToRead,
+      man,
+      owner: {},
+    };
+  },
   methods: {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
     }),
-    getFullNameOwner() {
-      return (
-        this.getOwner.lastName +
-        " " +
-        this.getOwner.firstName +
-        " " +
-        this.getOwner.secondName
-      );
-    },
   },
   mounted() {
-    this.fetchOwner(this.$route.params.id);
+    this.fetchOwner(this.$route.params.id).then(() => {
+      this.owner = this.mapOwnerValuesToRead(this.getOwner, this.man);
+    });
   },
   computed: {
     ...mapGetters({
@@ -56,7 +61,7 @@ h2 {
 .btn {
   margin: 20px 0px 10px 5px;
 }
-hr{
+hr {
   counter-reset: teal;
   margin-top: 20px;
 }

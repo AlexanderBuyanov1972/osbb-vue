@@ -2,25 +2,28 @@
   <div class="main">
     <block-messages :messages="getMessages" />
     <h2 class="header1">
-      Объект недвижимости - квартира № {{ getOwnership.address.apartment }}.
+      Объект недвижимости - квартира №
+      {{ this.getOwnership.address.apartment }}.
     </h2>
-    <h2 class="header2">{{ getLineAddress() }}</h2>
-    <block-read-ownership :ownership="mapValue()" />
+    <h2 class="header2">
+      {{ this.mapAddressToLineAddress(this.getOwnership.address) }}
+    </h2>
+    <block-read-ownership :ownership="ownership" />
 
     <div class="btns">
       <button-simple
         class="btn"
-        @click="$router.push('/edit/ownership/' + getOwnership.id)"
+        @click="this.$router.push('/edit/ownership/' + this.getOwnership.id)"
         >Редактировать собственность.</button-simple
       >
       <button-simple
         class="btn"
-        @click="$router.push('/update/ownership/' + getOwnership.id)"
+        @click="this.$router.push('/update/ownership/' + this.getOwnership.id)"
         >Редактировать запись о собственности.</button-simple
       >
       <button-simple
         class="btn"
-        @click="$router.push('/show/ownership/' + getOwnership.id)"
+        @click="this.$router.push('/show/ownership/' + this.getOwnership.id)"
         >Смотреть запись о собственности.</button-simple
       >
     </div>
@@ -29,68 +32,30 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import {
-  arrayTypeRoom,
-  arrayDocumentConfirmsRightOwn,
-  arrayNumberRooms,
-  arrayLoggia,
-} from "@/pages/arraysOfData";
-import { getElementByValue } from "@/pages/functions";
+  mapOwnershipValuesToRead,
+  mapAddressToLineAddress,
+} from "@/pages/functions";
 import photo from "@/photos/rooms/1_1.png";
 
 export default {
   data() {
     return {
-      getElementByValue,
+      mapOwnershipValuesToRead,
+      mapAddressToLineAddress,
+      photo,
+      ownership: {},
     };
   },
   methods: {
     ...mapActions({
       fetchOwnership: "ownership/fetchOwnership",
     }),
-    getLineAddress() {
-      const address = this.getOwnership.address;
-      return (
-        address.zipCode +
-        ",  " +
-        address.country +
-        ",  " +
-        address.region +
-        ",  " +
-        address.city +
-        ",  " +
-        address.street +
-        ",  дом № " +
-        address.house +
-        ",  кв. " +
-        address.apartment
-      );
-    },
-    mapValue() {
-      let send = { ...this.getOwnership };
-      send.numberRooms = this.getElementByValue(
-        arrayNumberRooms,
-        this.getOwnership.numberRooms
-      ).name;
-      send.typeRoom = this.getElementByValue(
-        arrayTypeRoom,
-        this.getOwnership.typeRoom
-      ).name;
-      send.documentConfirmsRightOwn = this.getElementByValue(
-        arrayDocumentConfirmsRightOwn,
-        this.getOwnership.documentConfirmsRightOwn
-      ).name;
-      send.loggia = this.getElementByValue(
-        arrayLoggia,
-        this.getOwnership.loggia
-      ).name;
-      send.photo = photo;
-      console.log(send);
-      return send;
-    },
   },
 
   mounted() {
-    this.fetchOwnership(this.$route.params.id);
+    this.fetchOwnership(this.$route.params.id).then(() => {
+      this.ownership = this.mapOwnershipValuesToRead(this.getOwnership, photo);
+    });
   },
   computed: {
     ...mapGetters({
