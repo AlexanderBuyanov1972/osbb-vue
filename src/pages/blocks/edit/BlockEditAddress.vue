@@ -5,13 +5,13 @@
     <div class="address">
       <div class="zipCode">
         <block-error-message
-          :field="addressSend.zipCode"
+          :field="address.zipCode"
           messageFalse="Укажите индекс."
           messageTrue="Индекс (XXXXX)."
           @valid="(value) => (validZipCode = value)"
         />
         <input-simple
-          v-model="addressSend.zipCode"
+          v-model="address.zipCode"
           placeholder="Индекс"
           :readonly="true"
         />
@@ -19,13 +19,13 @@
 
       <div class="country">
         <block-error-message
-          :field="addressSend.country"
+          :field="address.country"
           messageFalse="Укажите страну."
           messageTrue="Страна."
           @valid="(value) => (validCountry = value)"
         />
         <input-simple
-          v-model="addressSend.country"
+          v-model="address.country"
           placeholder="Страна"
           :readonly="true"
         />
@@ -33,13 +33,13 @@
 
       <div class="region">
         <block-error-message
-          :field="addressSend.region"
+          :field="address.region"
           messageFalse="Укажите регион."
           messageTrue="Регион."
           @valid="(value) => (validRegion = value)"
         />
         <input-simple
-          v-model="addressSend.region"
+          v-model="address.region"
           placeholder="Регион"
           :readonly="true"
         />
@@ -47,13 +47,13 @@
 
       <div class="city">
         <block-error-message
-          :field="addressSend.city"
+          :field="address.city"
           messageFalse="Укажите город."
           messageTrue="Город."
           @valid="(value) => (validCity = value)"
         />
         <input-simple
-          v-model="addressSend.city"
+          v-model="address.city"
           placeholder="Город"
           :readonly="true"
         />
@@ -61,13 +61,13 @@
 
       <div class="street">
         <block-error-message
-          :field="addressSend.street"
+          :field="address.street"
           messageFalse="Укажите название улицы."
           messageTrue="Улица."
           @valid="(value) => (validStreet = value)"
         />
         <input-simple
-          v-model="addressSend.street"
+          v-model="address.street"
           placeholder="Улица"
           :readonly="true"
         />
@@ -75,13 +75,13 @@
 
       <div class="house">
         <block-error-message
-          :field="addressSend.house"
+          :field="address.house"
           messageFalse="Укажите номер дома."
           messageTrue="Дом."
           @valid="(value) => (validHouse = value)"
         />
         <input-simple
-          v-model="addressSend.house"
+          v-model="address.house"
           placeholder="Дом."
           :readonly="true"
         />
@@ -89,34 +89,32 @@
 
       <div class="floor">
         <block-error-message
-          :field="addressSend.floor"
+          :field="address.floor"
           messageFalse="Укажите этаж."
           messageTrue="Этаж."
           @valid="(value) => (validFloor = value)"
         />
-        <input-simple v-model="addressSend.floor" placeholder="Этаж." />
+        <input-simple v-model="address.floor" placeholder="Этаж." />
       </div>
 
       <block-error-message
-        :field="addressSend.apartment"
+        :field="address.apartment"
         messageFalse="Укажите номер квартиры."
         messageTrue="Квартира."
         @valid="(value) => (validApartment = value)"
       />
-      <input-simple v-model="addressSend.apartment" placeholder="Квартира." />
+      <input-simple v-model="address.apartment" placeholder="Квартира." />
     </div>
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-edit-address",
-  props: {
-    address: Object,
-  },
   data() {
     return {
-      addressSend: { ...this.address },
-      
+      address: {},
+
       validZipCode: false,
       validCountry: false,
       validRegion: false,
@@ -130,10 +128,13 @@ export default {
   methods: {
     emitAddress() {
       this.$emit("isValidAddress", this.isValidAddress);
-      this.$emit("address", this.addressSend);
+      this.$emit("address", this.address);
     },
   },
   computed: {
+    ...mapGetters({
+      getOwnership: "ownership/getOwnership",
+    }),
     isValidAddress() {
       return (
         this.validZipCode &&
@@ -146,6 +147,9 @@ export default {
         this.validApartment
       );
     },
+  },
+  mounted() {
+    this.address = this.getOwnership.address;
   },
 };
 </script>

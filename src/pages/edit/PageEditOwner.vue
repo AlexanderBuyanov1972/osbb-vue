@@ -5,16 +5,12 @@
     <div class="blocks">
       <div class="owner">
         <block-edit-owner
-          :owner="getOwner"
-          :arrayGender="arrayGender"
-          :arrayFamilyStatus="arrayFamilyStatus"
           @owner="(data) => (owner = data)"
           @isValidOwner="(value) => (isValidOwner = value)"
         />
       </div>
       <div class="password">
         <block-edit-password
-          :password="getOwner.password"
           @password="(data) => (password = data)"
           @isValidPassword="(value) => (isValidPassword = value)"
         />
@@ -30,13 +26,10 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      arrayGender,
-      arrayFamilyStatus,
       owner: {},
       password: {},
       isValidOwner: false,

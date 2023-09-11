@@ -4,65 +4,59 @@
     <div class="password">
       <div class="passwordID">
         <block-error-message
-          :field="passwordSend.passwordID"
+          :field="password.passwordID"
           messageFalse="Укажите номер паспорта (XXXXXXXXX)."
           messageTrue="Паспорт ID."
           @valid="(value) => (validPassword = value)"
         />
-        <input-simple
-          v-model="passwordSend.passwordID"
-          placeholder="Паспорт ID"
-        />
+        <input-simple v-model="password.passwordID" placeholder="Паспорт ID" />
       </div>
 
       <div class="numberEntry">
         <block-error-message
-          :field="passwordSend.numberEntry"
+          :field="password.numberEntry"
           messageFalse="Укажите номер записи YYYYMMDD-XXXXX."
           messageTrue="Номер записи."
           @valid="(value) => (validNumberEntry = value)"
         />
         <input-simple
-          v-model="passwordSend.numberEntry"
+          v-model="password.numberEntry"
           placeholder="Номер записи"
         />
       </div>
 
       <div class="dateIssue">
         <block-error-message
-          :field="passwordSend.dateIssue"
+          :field="password.dateIssue"
           messageFalse="Укажите дату выдачи (YYYY-MM-DD)."
           messageTrue="Дата выдачи."
           @valid="(value) => (validDateIssue = value)"
         />
-        <input-simple
-          v-model="passwordSend.dateIssue"
-          placeholder="Дата выдачи."
-        />
+        <input-simple v-model="password.dateIssue" placeholder="Дата выдачи." />
       </div>
 
       <div class="issuingAuthority">
         <block-error-message
-          :field="passwordSend.issuingAuthority"
+          :field="password.issuingAuthority"
           messageFalse="Укажите кем выдан (XXXX)."
           messageTrue="Орган выдачи."
           @valid="(value) => (validIssuingAuthority = value)"
         />
         <input-simple
-          v-model="passwordSend.issuingAuthority"
+          v-model="password.issuingAuthority"
           placeholder="Орган выдачи."
         />
       </div>
 
       <div class="registrationNumberCardPayerTaxes">
         <block-error-message
-          :field="passwordSend.registrationNumberCardPayerTaxes"
+          :field="password.registrationNumberCardPayerTaxes"
           messageFalse="Укажите ИНН (XXXXXXXXXX)."
           messageTrue="ИНН."
           @valid="(value) => (validRegistrationNumberCardPayerTaxes = value)"
         />
         <input-simple
-          v-model="passwordSend.registrationNumberCardPayerTaxes"
+          v-model="password.registrationNumberCardPayerTaxes"
           placeholder="ИНН"
         />
       </div>
@@ -70,16 +64,13 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-password",
-  props: {
-    password: Object,
-  },
-
   data() {
     return {
-      passwordSend: { ...this.password },
-      
+      password: {},
+
       validPassword: false,
       validNumberEntry: false,
       validDateIssue: false,
@@ -90,10 +81,13 @@ export default {
   methods: {
     emitPassword() {
       this.$emit("isValidPassword", this.isValidPassword);
-      this.$emit("password", this.passwordSend);
+      this.$emit("password", this.password);
     },
   },
   computed: {
+    ...mapGetters({
+      getOwner: "owner/getOwner",
+    }),
     isValidPassword() {
       return (
         this.validPassword &&
@@ -103,6 +97,9 @@ export default {
         this.validRegistrationNumberCardPayerTaxes
       );
     },
+  },
+  mounted() {
+    this.password = this.getOwner.password;
   },
 };
 </script>

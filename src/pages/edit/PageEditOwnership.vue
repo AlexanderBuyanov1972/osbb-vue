@@ -6,14 +6,12 @@
       <div class="ownership">
         <block-edit-ownership
           @ownership="(data) => (ownership = data)"
-          :ownership="ownership"
           @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
       <div class="address">
         <block-edit-address
-          @address="(data) => (ownership.address = data)"
-          :address="ownership.address"
+          @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
         />
       </div>
@@ -33,6 +31,7 @@ export default {
   data() {
     return {
       ownership: {},
+      address: {},
       isValidOwnership: false,
       isValidAddress: false,
     };
@@ -43,6 +42,7 @@ export default {
       updateOwnership: "ownership/updateOwnership",
     }),
     sendOwnership() {
+      this.ownership.address = this.address;
       this.updateOwnership(this.ownership).then(() => {
         setTimeout(() => {
           this.$router.push("/ownership/" + this.$route.params.id);
@@ -51,9 +51,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchOwnership(this.$route.params.id).then(() => {
-      this.ownership = this.getOwnership;
-    });
+    this.fetchOwnership(this.$route.params.id);
   },
   computed: {
     ...mapGetters({

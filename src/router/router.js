@@ -1,23 +1,23 @@
-import PageReadOwner from "@/pages/PageReadOwner.vue";
-import PageReadOwnership from "@/pages/PageReadOwnership.vue";
-import PageOwners from "@/pages/PageOwners.vue";
-import PageOwnerships from "@/pages/PageOwnerships.vue";
+import PageReadOwner from "@/pages/read/PageReadOwner.vue";
+import PageReadOwnership from "@/pages/read/PageReadOwnership.vue";
+import PageReadOwners from "@/pages/read/PageReadOwners.vue";
+import PageReadOwnerships from "@/pages/read/PageReadOwnerships.vue";
 import PageMain from "@/pages/PageMain.vue";
-import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
-import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
+import PageRegistryOwners from "@/pages/registry/PageRegistryOwners.vue";
+import PageRegistryOwnerships from "@/pages/registry/PageRegistryOwnerships.vue";
 import PageCreateOwnership from "@/pages/PageCreateOwnership.vue";
 import PageUpdateOwnership from "@/pages/PageUpdateOwnership.vue";
 import PageShowOwnership from "@/pages/PageShowOwnership.vue";
-import PageEditOwner from "@/pages/PageEditOwner.vue";
-import PageEditOwnership from "@/pages/PageEditOwnership.vue";
+import PageEditOwner from "@/pages/edit/PageEditOwner.vue";
+import PageEditOwnership from "@/pages/edit/PageEditOwnership.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   { path: "/", component: PageMain },
   { path: "/owner/:id", component: PageReadOwner },
   { path: "/ownership/:id", component: PageReadOwnership },
-  { path: "/owners", component: PageOwners },
-  { path: "/ownerships", component: PageOwnerships },
+  { path: "/owners", component: PageReadOwners },
+  { path: "/ownerships", component: PageReadOwnerships },
   { path: "/registry/owners", component: PageRegistryOwners },
   { path: "/registry/ownerships", component: PageRegistryOwnerships },
   { path: "/create/ownership", component: PageCreateOwnership },

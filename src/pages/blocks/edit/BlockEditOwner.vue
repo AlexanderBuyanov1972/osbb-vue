@@ -5,54 +5,47 @@
     <div class="owner">
       <div class="lastName">
         <block-error-message
-          :field="ownerSend.lastName"
+          :field="owner.lastName"
           messageFalse="Укажите фамилию."
           messageTrue="Фамилия."
           @valid="(value) => (validLastName = value)"
         />
-        <input-simple
-          v-focus
-          v-model="ownerSend.lastName"
-          placeholder="Фамилия"
-        />
+        <input-simple v-focus v-model="owner.lastName" placeholder="Фамилия" />
       </div>
 
       <div class="firstName">
         <block-error-message
-          :field="ownerSend.firstName"
+          :field="owner.firstName"
           messageFalse="Укажите имя."
           messageTrue="Имя."
           @valid="(value) => (validFirstName = value)"
         />
-        <input-simple v-model="ownerSend.firstName" placeholder="Имя" />
+        <input-simple v-model="owner.firstName" placeholder="Имя" />
       </div>
 
       <div class="secondName">
         <block-error-message
-          :field="ownerSend.secondName"
+          :field="owner.secondName"
           messageFalse="Укажите отчество."
           messageTrue="Отчество."
           @valid="(value) => (validSecondName = value)"
         />
-        <input-simple v-model="ownerSend.secondName" placeholder="Отчество" />
+        <input-simple v-model="owner.secondName" placeholder="Отчество" />
       </div>
 
       <div class="dateBirth">
         <block-error-message
-          :field="ownerSend.dateBirth"
+          :field="owner.dateBirth"
           messageFalse="Укажите дату рождения (YYYY-MM-DD)."
           messageTrue="Дата рождения (YYYY-MM-DD)."
           @valid="(value) => (validDateBirth = value)"
         />
-        <input-simple
-          v-model="ownerSend.dateBirth"
-          placeholder="Дата рождения."
-        />
+        <input-simple v-model="owner.dateBirth" placeholder="Дата рождения." />
       </div>
 
       <div class="gender">
         <block-error-message
-          :field="ownerSend.gender"
+          :field="owner.gender"
           messageFalse="Укажите пол."
           messageTrue="Пол."
           @valid="(value) => (validGender = value)"
@@ -60,17 +53,17 @@
         <select-edit
           :array="arrayGender"
           :startObject="
-            ownerSend == undefined || ownerSend.gender == undefined
+            owner == undefined || owner.gender == undefined
               ? arrayGender[0]
-              : getElementByValue(arrayGender, ownerSend.gender)
+              : getElementByValue(arrayGender, owner.gender)
           "
-          @select="(value) => (ownerSend.gender = value)"
+          @select="(value) => (owner.gender = value)"
         />
       </div>
 
       <div class="familyStatus">
         <block-error-message
-          :field="ownerSend.familyStatus"
+          :field="owner.familyStatus"
           messageFalse="Укажите семейное положение."
           messageTrue="Семейное положение."
           @valid="(value) => (validFamilyStatus = value)"
@@ -78,32 +71,32 @@
         <select-edit
           :array="arrayFamilyStatus"
           :startObject="
-            ownerSend == undefined || ownerSend.familyStatus == undefined
+            owner == undefined || owner.familyStatus == undefined
               ? arrayFamilyStatus[0]
-              : getElementByValue(arrayFamilyStatus, ownerSend.familyStatus)
+              : getElementByValue(arrayFamilyStatus, owner.familyStatus)
           "
-          @select="(value) => (ownerSend.familyStatus = value)"
+          @select="(value) => (owner.familyStatus = value)"
         />
       </div>
 
       <div class="email">
         <block-error-message
-          :field="ownerSend.email"
+          :field="owner.email"
           messageFalse="Укажите электронный адресс."
           messageTrue="E-mail."
           @valid="(value) => (validEmail = value)"
         />
-        <input-simple v-model="ownerSend.email" placeholder="E-mail." />
+        <input-simple v-model="owner.email" placeholder="E-mail." />
       </div>
 
       <div class="phoneNumber">
         <block-error-message
-          :field="ownerSend.phoneNumber"
+          :field="owner.phoneNumber"
           messageFalse="Укажите номер телефона +38(0XX)XXXXXXX."
           messageTrue="Телефон  +38(0XX)XXXXXXX."
           @valid="(value) => (validPhoneNumber = value)"
         />
-        <input-simple v-model="ownerSend.phoneNumber" placeholder="Телефон." />
+        <input-simple v-model="owner.phoneNumber" placeholder="Телефон." />
       </div>
     </div>
   </div>
@@ -111,14 +104,12 @@
 <script>
 import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
 import { getElementByValue } from "@/pages/functions";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-owner",
-  props: {
-    owner: Object,
-  },
   data() {
     return {
-      ownerSend: { ...this.owner },
+      owner: {},
       getElementByValue,
       arrayGender,
       arrayFamilyStatus,
@@ -136,10 +127,13 @@ export default {
   methods: {
     emitOwner() {
       this.$emit("isValidOwner", this.isValidOwner);
-      this.$emit("owner", this.ownerSend);
+      this.$emit("owner", this.owner);
     },
   },
   computed: {
+    ...mapGetters({
+      getOwner: "owner/getOwner",
+    }),
     isValidOwner() {
       return (
         this.validLastName &&
@@ -152,6 +146,9 @@ export default {
         this.validPhoneNumber
       );
     },
+  },
+  mounted() {
+    this.owner = this.getOwner;
   },
 };
 </script>

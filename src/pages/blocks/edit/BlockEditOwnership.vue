@@ -4,7 +4,7 @@
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
-          :field="ownershipSend.typeRoom"
+          :field="ownership.typeRoom"
           messageFalse="Укажите тип помещения."
           messageTrue="Тип помещения."
           @valid="(value) => (validTypeRoom = value)"
@@ -12,43 +12,43 @@
         <select-edit
           :array="arrayTypeRoom"
           :startObject="
-            ownershipSend == undefined || ownershipSend.typeRoom == undefined
+            ownership == undefined || ownership.typeRoom == undefined
               ? arrayTypeRoom[0]
-              : getElementByValue(arrayTypeRoom, ownershipSend.typeRoom)
+              : getElementByValue(arrayTypeRoom, ownership.typeRoom)
           "
-          @select="(value) => (ownershipSend.typeRoom = value)"
+          @select="(value) => (ownership.typeRoom = value)"
         />
       </div>
 
       <div class="totalArea">
         <block-error-message
-          :field="ownershipSend.totalArea"
+          :field="ownership.totalArea"
           messageFalse="Укажите общую площадь помещения."
           messageTrue="Общая площадь помещения, м2."
           @valid="(value) => (validTotalArea = value)"
         />
         <input-simple
-          v-model="ownershipSend.totalArea"
+          v-model="ownership.totalArea"
           placeholder="Общая площадь помещения"
         />
       </div>
 
       <div class="livingArea">
         <block-error-message
-          :field="ownershipSend.livingArea"
+          :field="ownership.livingArea"
           messageFalse="Укажите жилую площадь помещения."
           messageTrue="Жилая площадь помещения, м2."
           @valid="(value) => (validLivingArea = value)"
         />
         <input-simple
-          v-model="ownershipSend.livingArea"
+          v-model="ownership.livingArea"
           placeholder="Жилая площадь помещения."
         />
       </div>
 
       <div class="documentConfirmsRightOwn">
         <block-error-message
-          :field="ownershipSend.documentConfirmsRightOwn"
+          :field="ownership.documentConfirmsRightOwn"
           messageFalse="Укажите документ о праве собственности."
           messageTrue="Документ о праве собственности."
           @valid="(value) => (validDocumentConfirmsRightOwn = value)"
@@ -56,21 +56,21 @@
         <select-edit
           :array="arrayDocumentConfirmsRightOwn"
           :startObject="
-            ownershipSend == undefined ||
-            ownershipSend.documentConfirmsRightOwn == undefined
+            ownership == undefined ||
+            ownership.documentConfirmsRightOwn == undefined
               ? arrayDocumentConfirmsRightOwn[0]
               : getElementByValue(
                   arrayDocumentConfirmsRightOwn,
-                  ownershipSend.documentConfirmsRightOwn
+                  ownership.documentConfirmsRightOwn
                 )
           "
-          @select="(value) => (ownershipSend.documentConfirmsRightOwn = value)"
+          @select="(value) => (ownership.documentConfirmsRightOwn = value)"
         />
       </div>
 
       <div class="numberRooms">
         <block-error-message
-          :field="ownershipSend.numberRooms"
+          :field="ownership.numberRooms"
           messageFalse="Укажите кол-во комнат."
           messageTrue="Количество комнат."
           @valid="(value) => (validNumberRooms = value)"
@@ -78,17 +78,17 @@
         <select-edit
           :array="arrayNumberRooms"
           :startObject="
-            ownershipSend == undefined || ownershipSend.numberRooms == undefined
+            ownership == undefined || ownership.numberRooms == undefined
               ? arrayNumberRooms[0]
-              : getElementByValue(arrayNumberRooms, ownershipSend.numberRooms)
+              : getElementByValue(arrayNumberRooms, ownership.numberRooms)
           "
-          @select="(value) => (ownershipSend.numberRooms = value)"
+          @select="(value) => (ownership.numberRooms = value)"
         />
       </div>
 
       <div class="loggia">
         <block-error-message
-          :field="ownershipSend.loggia"
+          :field="ownership.loggia"
           messageFalse="Укажите есть ли балкон."
           messageTrue="Есть ли балкон."
           @valid="(value) => (validLoggia = value)"
@@ -96,11 +96,11 @@
         <select-edit
           :array="arrayLoggia"
           :startObject="
-            ownershipSend == undefined || ownershipSend.loggia == undefined
+            ownership == undefined || ownership.loggia == undefined
               ? arrayLoggia[0]
-              : getElementByValue(arrayLoggia, ownershipSend.loggia)
+              : getElementByValue(arrayLoggia, ownership.loggia)
           "
-          @select="(value) => (ownershipSend.loggia = value)"
+          @select="(value) => (ownership.loggia = value)"
         />
       </div>
     </div>
@@ -114,14 +114,12 @@ import {
   arrayLoggia,
   arrayNumberRooms,
 } from "@/pages/arraysOfData";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-ownership",
-  props: {
-    ownership: Object,
-  },
   data() {
     return {
-      ownershipSend: { ...this.ownership },
+      ownership: {},
       getElementByValue,
       validTypeRoom: false,
       validTotalArea: false,
@@ -143,6 +141,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({
+      getOwnership: "ownership/getOwnership",
+    }),
     isValidOwnership() {
       return (
         this.validTypeRoom &&
@@ -153,6 +154,9 @@ export default {
         this.validLoggia
       );
     },
+  },
+  mounted() {
+    this.ownership = this.getOwnership;
   },
 };
 </script>
