@@ -72,7 +72,7 @@ export default {
         );
         commit("setMessages", response.messages);
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -91,7 +91,7 @@ export default {
         );
         commit("setMessages", response.messages);
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }

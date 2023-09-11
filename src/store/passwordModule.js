@@ -47,15 +47,15 @@ export default {
     async createPassword({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await createPassword(object);
-        if (Array.isArray(data)) {
-          commit("setPassword", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await createPassword(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setPassword", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -64,15 +64,15 @@ export default {
     async updatePassword({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await updatePassword(object);
-        if (Array.isArray(data)) {
-          commit("setPassword", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await updatePassword(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setPassword", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -80,15 +80,15 @@ export default {
     async getPassword({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await getPassword(id);
-        if (Array.isArray(data)) {
-          commit("setPassword", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await getPassword(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setPassword", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -96,11 +96,11 @@ export default {
     async deletePassword({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deletePassword(id);
-        commit("setMessages", data.messages);
+        const response = await deletePassword(id);
+        commit("setMessages", response.messages);
         commit("setPassword", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }

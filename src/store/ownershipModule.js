@@ -76,14 +76,14 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createOwnership(object);
-        if (Array.isArray(response)) {
-          commit("setOwnership", response[0].data[0]);
-          commit("setMessages", response[0].messages);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnership", response.data);
+          commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response[0].messages]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -93,14 +93,14 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await updateOwnership(object);
-        if (Array.isArray(response)) {
-          commit("setOwnership", response[0].data[0]);
-          commit("setMessages", response[0].messages);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnership", response.data);
+          commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -109,14 +109,14 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getOwnership(id);
-        if (Array.isArray(response)) {
-          commit("setOwnership", response[0].data[0]);
-          commit("setMessages", response[0].messages);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnership", response.data);
+          commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -128,7 +128,7 @@ export default {
         commit("setMessages", response.messages);
         commit("setOwnership", {});
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -137,14 +137,14 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllOwnership();
-        if (Array.isArray(response)) {
-          commit("setOwnerships", response[0].data);
-          commit("setMessages", response[0].messages);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnerships", response.data);
+          commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -153,12 +153,10 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await countRooms();
-        commit("setCountOwnerships", response);
-        commit("setMessages", [
-          "Существующее количество объектов недвижимости - " + response,
-        ]);
+        commit("setCountOwnerships", response.data);
+        commit("setMessages", response.messages);
       } catch (error) {
-        commit("setMessages", ["Проблемы на сервере", ...response.messages]);
+        commit("setMessages", [...response.messages]);
       } finally {
         commit("setIsLoading", false);
       }

@@ -43,15 +43,15 @@ export default {
     async createUser({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await createUser(object);
-        if (Array.isArray(data)) {
-          commit("setUser", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await createUser(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setUser", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -60,15 +60,15 @@ export default {
     async updateUser({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await updateUser(object);
-        if (Array.isArray(data)) {
-          commit("setUser", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await updateUser(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setUser", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -76,15 +76,15 @@ export default {
     async getUser({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await getUser(id);
-        if (Array.isArray(data)) {
-          commit("setUser", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await getUser(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setUser", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -92,11 +92,11 @@ export default {
     async deleteUser({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deleteUser(id);
-        commit("setMessages", data.messages);
+        const response = await deleteUser(id);
+        commit("setMessages", response.messages);
         commit("setUser", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }

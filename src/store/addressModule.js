@@ -50,32 +50,31 @@ export default {
     async createAddress({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await createAddress(object);
-        if (Array.isArray(data)) {
-          commit("setAddress", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await createAddress(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setAddress", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
     },
-
     async updateAddress({ commit }, object) {
       try {
         commit("setIsLoading", true);
         const data = await updateAddress(object);
-        if (Array.isArray(data)) {
-          commit("setAddress", data[0]);
-          commit("setMessages", ["OK"]);
+        if (response != undefined && response.data != undefined) {
+          commit("setAddress", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -84,14 +83,14 @@ export default {
       try {
         commit("setIsLoading", true);
         const data = await getAddress(id);
-        if (Array.isArray(data)) {
-          commit("setAddress", data[0]);
-          commit("setMessages", ["OK"]);
+        if (response != undefined && response.data != undefined) {
+          commit("setAddress", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -99,11 +98,11 @@ export default {
     async deleteAddress({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deleteAddress(id);
-        commit("setMessages", data.messages);
+        const response = await deleteAddress(id);
+        commit("setMessages", response.messages);
         commit("setAddress", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }

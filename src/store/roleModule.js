@@ -38,15 +38,15 @@ export default {
     async createRole({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await createRole(object);
-        if (Array.isArray(data)) {
-          commit("setRole", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await createRole(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setRole", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -55,15 +55,15 @@ export default {
     async updateRole({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await updateRole(object);
-        if (Array.isArray(data)) {
-          commit("setRole", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await updateRole(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setRole", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -71,15 +71,15 @@ export default {
     async getRole({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await getRole(id);
-        if (Array.isArray(data)) {
-          commit("setRole", data[0]);
-          commit("setMessages", ["OK"]);
+        const response = await getRole(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setRole", response.data);
+          commit("setMessages", response.messages);
         } else {
-          commit("setMessages", data.messages);
+          commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -87,11 +87,11 @@ export default {
     async deleteRole({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await deleteRole(id);
-        commit("setMessages", data.messages);
+        const response = await deleteRole(id);
+        commit("setMessages", response.messages);
         commit("setRole", {});
       } catch (error) {
-        commit("setMessages", ["Сервер не отвечает."]);
+        commit("setMessages", [...error.messages]);
       } finally {
         commit("setIsLoading", false);
       }
