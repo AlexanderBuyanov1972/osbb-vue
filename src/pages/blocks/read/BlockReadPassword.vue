@@ -33,7 +33,7 @@ export default {
 }
 .wrapper {
   margin: 15px 0px;
-  padding: 10px;
+  padding: 25px;
   color: teal;
   display: flex;
   flex-direction: column;

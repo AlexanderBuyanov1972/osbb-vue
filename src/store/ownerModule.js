@@ -19,6 +19,7 @@ export default {
       familyStatus: "",
       email: "",
       phoneNumber: "",
+      shareInRealEstate: 0,
       photos: [],
       password: {
         id: 0,

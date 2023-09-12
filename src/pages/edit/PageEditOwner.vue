@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
+    <header-messages :messages="getMessages" />
     <div class="header">Редактирование записи о собственнике.</div>
     <div class="blocks">
       <div class="owner">
@@ -17,6 +17,11 @@
       </div>
     </div>
     <hr />
+    <button-simple
+      class="btn"
+      @click="$router.push('/owner/' + this.$route.params.id)"
+      >Назад.</button-simple
+    >
     <button-simple
       class="btn"
       @click="sendOwner"
@@ -38,7 +43,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchOwner: "owner/fetchOwner",
       updateOwner: "owner/updateOwner",
     }),
     sendOwner() {
@@ -54,12 +58,8 @@ export default {
       });
     },
   },
-  mounted() {
-    this.fetchOwner(this.$route.params.id);
-  },
   computed: {
     ...mapGetters({
-      getOwner: "owner/getOwner",
       getMessages: "owner/getMessages",
     }),
   },

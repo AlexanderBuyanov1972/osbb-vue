@@ -24,6 +24,7 @@
         <span>Номер телефона : </span>{{ owner.phoneNumber }}
       </div>
       <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
+      <div class="item"><span>Доля в собственности : </span>{{ owner.shareInRealEstate }}</div>
     </div>
   </div>
 </template>

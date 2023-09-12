@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousemove="emitOwner">
+  <div class="main">
     <h2>Собственник.</h2>
 
     <div class="owner">
@@ -8,7 +8,7 @@
           :field="owner.lastName"
           messageFalse="Укажите фамилию."
           messageTrue="Фамилия."
-          @valid="(value) => (validLastName = value)"
+          @valid="(value) => handlerLastName(value)"
         />
         <input-simple v-focus v-model="owner.lastName" placeholder="Фамилия" />
       </div>
@@ -18,7 +18,7 @@
           :field="owner.firstName"
           messageFalse="Укажите имя."
           messageTrue="Имя."
-          @valid="(value) => (validFirstName = value)"
+          @valid="(value) => handlerFirstName(value)"
         />
         <input-simple v-model="owner.firstName" placeholder="Имя" />
       </div>
@@ -28,7 +28,7 @@
           :field="owner.secondName"
           messageFalse="Укажите отчество."
           messageTrue="Отчество."
-          @valid="(value) => (validSecondName = value)"
+          @valid="(value) => handlerSecondName(value)"
         />
         <input-simple v-model="owner.secondName" placeholder="Отчество" />
       </div>
@@ -38,7 +38,7 @@
           :field="owner.dateBirth"
           messageFalse="Укажите дату рождения (YYYY-MM-DD)."
           messageTrue="Дата рождения (YYYY-MM-DD)."
-          @valid="(value) => (validDateBirth = value)"
+          @valid="(value) => handlerDateBirth(value)"
         />
         <input-simple v-model="owner.dateBirth" placeholder="Дата рождения." />
       </div>
@@ -48,7 +48,7 @@
           :field="owner.gender"
           messageFalse="Укажите пол."
           messageTrue="Пол."
-          @valid="(value) => (validGender = value)"
+          @valid="(value) => handlerGender(value)"
         />
         <select-edit
           :array="arrayGender"
@@ -62,7 +62,7 @@
           :field="owner.familyStatus"
           messageFalse="Укажите семейное положение."
           messageTrue="Семейное положение."
-          @valid="(value) => (validFamilyStatus = value)"
+          @valid="(value) => handlerFamilyStatus(value)"
         />
         <select-edit
           :array="arrayFamilyStatus"
@@ -76,7 +76,7 @@
           :field="owner.email"
           messageFalse="Укажите электронный адресс."
           messageTrue="E-mail."
-          @valid="(value) => (validEmail = value)"
+          @valid="(value) => handlerEmail(value)"
         />
         <input-simple v-model="owner.email" placeholder="E-mail." />
       </div>
@@ -86,9 +86,21 @@
           :field="owner.phoneNumber"
           messageFalse="Укажите номер телефона +38(0XX)XXXXXXX."
           messageTrue="Телефон  +38(0XX)XXXXXXX."
-          @valid="(value) => (validPhoneNumber = value)"
+          @valid="(value) => handlerPhoneNumber(value)"
         />
         <input-simple v-model="owner.phoneNumber" placeholder="Телефон." />
+      </div>
+      <div class="shareInRealEstate">
+        <block-error-message
+          :field="owner.shareInRealEstate"
+          messageFalse="Укажите долю в собственности (от 0 до 1, три знака после точки)."
+          messageTrue="Доля в собственности (от 0 до 1, три знака после точки)."
+          @valid="(value) => handlerShareInRealEstate(value)"
+        />
+        <input-simple
+          v-model="owner.shareInRealEstate"
+          placeholder="Доля в собственности (от 0 до 1, три знака после точки)."
+        />
       </div>
     </div>
   </div>
@@ -103,6 +115,9 @@ import {
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-owner",
+  props: {
+    id: Number,
+  },
   data() {
     return {
       owner: {},
@@ -120,13 +135,53 @@ export default {
       validFamilyStatus: false,
       validEmail: false,
       validPhoneNumber: false,
+      validShareInRealEstate: false,
     };
   },
 
   methods: {
+    ...mapActions({
+      fetchOwner: "owner/fetchOwner",
+    }),
     emitOwner() {
       this.$emit("isValidOwner", this.isValidOwner);
       this.$emit("owner", this.owner);
+    },
+    handlerLastName(value) {
+      this.validLastName = value;
+      this.emitOwner();
+    },
+    handlerFirstName(value) {
+      this.validFirstName = value;
+      this.emitOwner();
+    },
+    handlerSecondName(value) {
+      this.validSecondName = value;
+      this.emitOwner();
+    },
+    handlerDateBirth(value) {
+      this.validDateBirth = value;
+      this.emitOwner();
+    },
+    handlerGender(value) {
+      this.validGender = value;
+      this.emitOwner();
+    },
+    handlerFamilyStatus(value) {
+      this.validFamilyStatus = value;
+      this.emitOwner();
+    },
+    handlerEmail(value) {
+      this.validEmail = value;
+      this.emitOwner();
+    },
+    handlerPhoneNumber(value) {
+      this.validPhoneNumber = value;
+      this.emitOwner();
+    },
+    handlerShareInRealEstate(value) {
+      this.validShareInRealEstate = value;
+      this.emitOwner();
     },
   },
   computed: {
@@ -142,12 +197,19 @@ export default {
         this.validGender &&
         this.validFamilyStatus &&
         this.validEmail &&
-        this.validPhoneNumber
+        this.validPhoneNumber &&
+        this.validShareInRealEstate
       );
     },
   },
   mounted() {
-    this.owner = this.getOwner;
+    if (this.id != undefined) {
+      this.fetchOwner(this.id).then(() => (this.owner = this.getOwner));
+    } else {
+      this.fetchOwner(this.$route.params.id).then(
+        () => (this.owner = this.getOwner)
+      );
+    }
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
-    <div class="header">Редактирование записи о помещении.</div>
+    <header-messages :messages="getMessages" />
+    <line-header text="Редактирование записи о помещении." />
     <div class="blocks">
       <div class="ownership">
         <block-edit-ownership
@@ -17,6 +17,11 @@
       </div>
     </div>
     <hr />
+    <button-simple
+      class="btn"
+      @click="$router.push('/ownership/' + this.$route.params.id)"
+      >Назад.</button-simple
+    >
     <button-simple
       class="btn"
       @click="sendOwnership"
@@ -38,25 +43,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
       updateOwnership: "ownership/updateOwnership",
     }),
     sendOwnership() {
       this.ownership.address = this.address;
-      console.log(this.ownership)
       this.updateOwnership(this.ownership).then(() => {
-        setTimeout(() => {
-          this.$router.push("/ownership/" + this.$route.params.id);
-        }, 3000);
+        this.$router.push("/ownership/" + this.$route.params.id);
       });
     },
   },
-  mounted() {
-    this.fetchOwnership(this.$route.params.id);
-  },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
       getMessages: "ownership/getMessages",
     }),
   },
@@ -68,12 +65,6 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.header {
-  color: brown;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.8em;
 }
 hr {
   color: teal;
@@ -89,14 +80,12 @@ hr {
   border: 2px solid blueviolet;
   padding: 10px;
 }
-.ownership,
-.address {
-  width: 50%;
-}
 .ownership {
   margin-right: 10px;
+  width: 50%;
 }
 .address {
   margin-left: 10px;
+  width: 50%;
 }
 </style>

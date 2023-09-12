@@ -1,33 +1,30 @@
 <template>
   <div class="main">
-    <block-messages :messages="[...getMessagesOwnership]" />
-    <div class="header">Просмотр записи о собственности.</div>
+    <header-messages :messages="getMessagesOwnership" />
+    <line-header text="Просмотр записи о собственности." />
+    <line-address :address="this.address" />
     <div class="blocks">
-      <div class="block1">
-        <block-read-ownership :ownership="this.getOwnership" />
+      <div class="ownership">
+        <block-read-ownership :ownership="this.ownership" />
       </div>
 
-      <div class="block3">
-        <block-read-address :address="this.getOwnership.address" />
-      </div>
-
-      <div class="column">
-        <div
-          class="list"
-          v-for="one in [...this.getOwnership.owners]"
-          :key="one.id"
-        >
-          <div class="block4">
-            <block-read-owner :owner="one" />
-          </div>
-          <div class="block2">
-            <block-read-password :password="one.password" />
-          </div>
+      <div class="owner" v-for="one in owners" :key="one.id">
+        <div class="read_owner">
+          <block-read-owner :owner="one" />
+        </div>
+        <div class="read_password">
+          <block-read-password
+            :class="read_password"
+            :password="one.password"
+          />
         </div>
       </div>
     </div>
 
-    <hr class="teal" />
+    <hr class="hr" />
+    <button-simple class="btn" @click="this.$router.push('/ownership/' + this.getOwnership.id)"
+      >Назад.</button-simple
+    >
     <button-simple class="btn" @click="goToPageUpdateOwnership"
       >Редактировать запись о собственности.</button-simple
     >
@@ -36,6 +33,13 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      ownership: {},
+      address: {},
+      owners: [],
+    };
+  },
   methods: {
     goToPageUpdateOwnership() {
       this.$router.push("/update/ownership/" + this.getOwnership.id);
@@ -46,7 +50,11 @@ export default {
     }),
   },
   mounted() {
-    this.fetchOwnership(this.$route.params.id);
+    this.fetchOwnership(this.$route.params.id).then(() => {
+      this.ownership = this.getOwnership;
+      this.address = this.getOwnership.address;
+      this.owners = this.getOwnership.owners;
+    });
   },
   computed: {
     ...mapGetters({
@@ -66,49 +74,27 @@ export default {
 .blocks {
   color: red;
   font-size: 1.2em;
+}
+.owner {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-}
-.list {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border: 1px solid blueviolet;
+  align-items: center;
   width: 100%;
   margin-top: 10px;
 }
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 50%;
-  margin-right: 10px;
+.read_owner {
+  width: 60%;
 }
-.block2,
-.block4 {
-  margin: 10px;
-  width: 50%;
+.read_password {
+  width: 35%;
+  align-self: flex-start;
 }
-.block1,
-.block3 {
-  margin: 10px;
-  width: 25%;
-}
-.teal {
+
+.hr {
+  margin-top: 25px;
   color: teal;
 }
 .btn {
   margin: 10px 0 0 10px;
-}
-.header {
-  color: brown;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.8em;
-}
-hr {
-  margin-top: 25px;
 }
 </style>

@@ -90,6 +90,16 @@
         />
         <input-simple v-model="owner.phoneNumber" placeholder="Телефон" />
       </div>
+
+      <div class="shareInRealEstate">
+        <block-error-message
+          :field="owner.shareInRealEstate"
+          messageFalse="Укажите долю в собственности (от 0 до 1, три знака после точки)."
+          messageTrue="Доля в собственности (от 0 до 1, три знака после точки)."
+          @valid="(value) => (validShareInRealEstate = value)"
+        />
+        <input-simple v-model="owner.shareInRealEstate" placeholder="Доля в собственности (от 0 до 1, три знака после точки)." />
+      </div>
     </div>
     <button-reset @click="reset" :hidden="!isValidOwner">Очистить</button-reset>
   </div>
@@ -109,6 +119,7 @@ export default {
       validFamilyStatus: false,
       validEmail: false,
       validPhoneNumber: false,
+      validShareInRealEstate: false,
     };
   },
   props: {
@@ -144,6 +155,7 @@ export default {
       this.owner.gender = "";
       this.owner.email = "";
       this.owner.phoneNumber = "";
+      this.owner.shareInRealEstate = "";
       this.flagReset = true;
     },
   },
@@ -157,7 +169,8 @@ export default {
         this.validGender &&
         this.validFamilyStatus &&
         this.validEmail &&
-        this.validPhoneNumber
+        this.validPhoneNumber &&
+        this.validShareInRealEstate
       );
     },
   },

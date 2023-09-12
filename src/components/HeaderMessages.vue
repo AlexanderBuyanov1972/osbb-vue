@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: "block-messages",
+  name: "header-messages",
   props: {
     messages: {
       Type: Array,

@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousemove="emitPassword">
+  <div class="main">
     <h2>Паспорт собственника.</h2>
     <div class="password">
       <div class="passwordID">
@@ -7,7 +7,7 @@
           :field="password.passwordID"
           messageFalse="Укажите номер паспорта (XXXXXXXXX)."
           messageTrue="Паспорт ID."
-          @valid="(value) => (validPassword = value)"
+          @valid="(value) => handlerPasswordID(value)"
         />
         <input-simple v-model="password.passwordID" placeholder="Паспорт ID" />
       </div>
@@ -17,7 +17,7 @@
           :field="password.numberEntry"
           messageFalse="Укажите номер записи YYYYMMDD-XXXXX."
           messageTrue="Номер записи."
-          @valid="(value) => (validNumberEntry = value)"
+          @valid="(value) => handlerNumberEntry(value)"
         />
         <input-simple
           v-model="password.numberEntry"
@@ -30,7 +30,7 @@
           :field="password.dateIssue"
           messageFalse="Укажите дату выдачи (YYYY-MM-DD)."
           messageTrue="Дата выдачи."
-          @valid="(value) => (validDateIssue = value)"
+          @valid="(value) => handlerDateIssue(value)"
         />
         <input-simple v-model="password.dateIssue" placeholder="Дата выдачи." />
       </div>
@@ -40,7 +40,7 @@
           :field="password.issuingAuthority"
           messageFalse="Укажите кем выдан (XXXX)."
           messageTrue="Орган выдачи."
-          @valid="(value) => (validIssuingAuthority = value)"
+          @valid="(value) => handlerIssuingAuthority(value)"
         />
         <input-simple
           v-model="password.issuingAuthority"
@@ -53,7 +53,7 @@
           :field="password.registrationNumberCardPayerTaxes"
           messageFalse="Укажите ИНН (XXXXXXXXXX)."
           messageTrue="ИНН."
-          @valid="(value) => (validRegistrationNumberCardPayerTaxes = value)"
+          @valid="(value) => handlerRegistrationNumberCardPayerTaxes(value)"
         />
         <input-simple
           v-model="password.registrationNumberCardPayerTaxes"
@@ -64,14 +64,16 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters} from "vuex";
 export default {
   name: "block-edit-password",
+  props: {
+    id: Number,
+  },
   data() {
     return {
       password: {},
-
-      validPassword: false,
+      validPasswordID: false,
       validNumberEntry: false,
       validDateIssue: false,
       validIssuingAuthority: false,
@@ -79,18 +81,42 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      fetchPassword: "password/fetchPassword",
+    }),
     emitPassword() {
       this.$emit("isValidPassword", this.isValidPassword);
       this.$emit("password", this.password);
+    },
+    handlerPasswordID(value) {
+      this.validPasswordID = value;
+      this.emitPassword();
+    },
+    handlerNumberEntry(value) {
+      this.validNumberEntry = value;
+      this.emitPassword();
+    },
+    handlerDateIssue(value) {
+      this.validDateIssue = value;
+      this.emitPassword();
+    },
+    handlerIssuingAuthority(value) {
+      this.validIssuingAuthority = value;
+      this.emitPassword();
+    },
+    handlerRegistrationNumberCardPayerTaxes(value) {
+      this.validRegistrationNumberCardPayerTaxes = value;
+      this.emitPassword();
     },
   },
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
+      getPassword: "password/getPassword",
     }),
     isValidPassword() {
       return (
-        this.validPassword &&
+        this.validPasswordID &&
         this.validNumberEntry &&
         this.validDateIssue &&
         this.validIssuingAuthority &&
@@ -99,7 +125,15 @@ export default {
     },
   },
   mounted() {
-    this.password = this.getOwner.password;
+    if (this.id != undefined) {
+      this.fetchPassword(this.id).then(
+        () => (this.password = this.getPassword)
+      );
+    } else {
+      this.fetchPassword(this.$route.params.id).then(
+        () => (this.password = this.getPassword)
+      );
+    }
   },
 };
 </script>

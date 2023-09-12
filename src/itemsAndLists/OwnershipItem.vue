@@ -5,6 +5,8 @@
     <div class="total_area">Общая площадь : {{ ownership.totalArea }} м2</div>
     <div class="living_area">Жилая площадь : {{ ownership.livingArea }} м2</div>
     <div class="number">Кол-во комнат : {{ ownership.numberRooms }}</div>
+    <div class="entrance">Подъезд : {{ ownership.address.entrance }}</div>
+    <div class="floor">Этаж : {{ ownership.address.floor }}</div>
     <div class="loggia">Балкон : {{ haveLoggia(ownership) }}</div>
   </div>
 </template>
@@ -52,16 +54,22 @@ export default {
   width: 2%;
 }
 .apartment{
-  width: 20%;
+  width: 15%;
 }
 .total_area{
-  width: 20%;
+  width: 15%;
 }
 .living_area{
-  width: 20%;
+  width: 15%;
 }
 .number{
-  width: 15%;
+  width: 10%;
+}
+.entrance{
+  width: 10%;
+}
+.floor{
+  width: 10%;
 }
 .loggia{
   width: 15%;

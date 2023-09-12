@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <block-messages :messages="this.getMessages" />
+    <header-messages :messages="this.getMessages" />
     <h2>Собственник - {{ mapOwnerToLineFullNamesOwner(this.getOwner) }}.</h2>
     <block-read-owner :owner="owner" />
     <block-read-password :password="this.getOwner.password" />

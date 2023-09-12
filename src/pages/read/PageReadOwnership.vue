@@ -1,13 +1,14 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
-    <h2 class="header1">
-      Объект недвижимости - квартира №
-      {{ this.getOwnership.address.apartment }}.
-    </h2>
-    <h2 class="header2">
-      {{ this.mapAddressToLineAddress(this.getOwnership.address) }}
-    </h2>
+    <header-messages :messages="getMessages" />
+    <line-header
+      :text="
+        'Объект недвижимости - квартира № ' +
+        this.getOwnership.address.apartment
+      "
+    />
+    <line-address :address="this.getOwnership.address" />
+
     <block-read-ownership :ownership="ownership" />
 
     <div class="btns">
@@ -26,12 +27,9 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { mapAddressToLineAddress } from "@/pages/functions";
-
 export default {
   data() {
     return {
-      mapAddressToLineAddress,
       ownership: {},
     };
   },
@@ -60,16 +58,6 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  margin: 10px 0px;
-  text-align: center;
-}
-.header1 {
-  color: blueviolet;
-}
-.header2 {
-  color: teal;
 }
 
 .btn {

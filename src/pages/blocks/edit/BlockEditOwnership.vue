@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousemove="emitOwnership">
+  <div class="main">
     <h2>Собственность.</h2>
     <div class="blocks">
       <div class="typeRoom">
@@ -12,7 +12,7 @@
         <select-edit
           :array="arrayTypeRoom"
           :startName="getNameByValue(arrayTypeRoom, ownership.typeRoom)"
-          @select="(value) => (ownership.typeRoom = value)"
+          @select="(value) => handlerTypeRoom(value)"
         />
       </div>
 
@@ -21,7 +21,7 @@
           :field="ownership.totalArea"
           messageFalse="Укажите общую площадь помещения."
           messageTrue="Общая площадь помещения, м2."
-          @valid="(value) => (validTotalArea = value)"
+          @valid="(value) => handlerTotalArea(value)"
         />
         <input-simple
           v-model="ownership.totalArea"
@@ -34,7 +34,7 @@
           :field="ownership.livingArea"
           messageFalse="Укажите жилую площадь помещения."
           messageTrue="Жилая площадь помещения, м2."
-          @valid="(value) => (validLivingArea = value)"
+          @valid="(value) => handlerLivingArea(value)"
         />
         <input-simple
           v-model="ownership.livingArea"
@@ -47,7 +47,7 @@
           :field="ownership.documentConfirmsRightOwn"
           messageFalse="Укажите документ о праве собственности."
           messageTrue="Документ о праве собственности."
-          @valid="(value) => (validDocumentConfirmsRightOwn = value)"
+          @valid="(value) => handlerDocumentConfirmsRightOwn(value)"
         />
         <select-edit
           :array="arrayDocumentConfirmsRightOwn"
@@ -66,7 +66,7 @@
           :field="ownership.numberRooms"
           messageFalse="Укажите кол-во комнат."
           messageTrue="Количество комнат."
-          @valid="(value) => (validNumberRooms = value)"
+          @valid="(value) => handlerNumberRooms(value)"
         />
         <select-edit
           :array="arrayNumberRooms"
@@ -80,7 +80,7 @@
           :field="ownership.loggia"
           messageFalse="Укажите есть ли балкон."
           messageTrue="Есть ли балкон."
-          @valid="(value) => (validLoggia = value)"
+          @valid="(value) => handlerLoggia(value)"
         />
         <select-edit
           :array="arrayLoggia"
@@ -105,7 +105,6 @@ export default {
   data() {
     return {
       ownership: {},
-
       getNameByValue,
       validTypeRoom: false,
       validTotalArea: false,
@@ -113,6 +112,7 @@ export default {
       validDocumentConfirmsRightOwn: false,
       validNumberRooms: false,
       validLoggia: false,
+
       arrayTypeRoom,
       arrayDocumentConfirmsRightOwn,
       arrayLoggia,
@@ -121,9 +121,36 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      fetchOwnership: "ownership/fetchOwnership",
+    }),
     emitOwnership() {
       this.$emit("isValidOwnership", this.isValidOwnership);
       this.$emit("ownership", this.ownership);
+    },
+    handlerTypeRoom(value) {
+      this.validTypeRoom = value;
+      this.emitOwnership();
+    },
+    handlerLivingArea(value) {
+      this.validLivingArea = value;
+      this.emitOwnership();
+    },
+    handlerTotalArea(value) {
+      this.validTotalArea = value;
+      this.emitOwnership();
+    },
+    handlerDocumentConfirmsRightOwn(value) {
+      this.validDocumentConfirmsRightOwn = value;
+      this.emitOwnership();
+    },
+    handlerNumberRooms(value) {
+      this.validNumberRooms = value;
+      this.emitOwnership();
+    },
+    handlerLoggia(value) {
+      this.validLoggia = value;
+      this.emitOwnership();
     },
   },
   computed: {
@@ -142,7 +169,9 @@ export default {
     },
   },
   mounted() {
-    this.ownership = this.getOwnership;
+    this.fetchOwnership(this.$route.params.id).then(
+      () => (this.ownership = this.getOwnership)
+    );
   },
 };
 </script>

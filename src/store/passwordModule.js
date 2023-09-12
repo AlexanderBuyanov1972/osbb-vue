@@ -77,7 +77,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async getPassword({ commit }, id) {
+    async fetchPassword({ commit }, id) {
       try {
         commit("setIsLoading", true);
         const response = await getPassword(id);

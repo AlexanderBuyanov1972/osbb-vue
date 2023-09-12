@@ -60,7 +60,7 @@ export default {
 }
 .main {
   margin: 15px 0px;
-  padding: 10px 0px;
+  padding: 25px;
   border: 2px solid blueviolet;
   color: teal;
   font-size: 1.2em;
@@ -68,14 +68,19 @@ export default {
   width: 100%;
   display: flex;
   align-items: start;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 img {
-  width: 50wh;
+  width: 70vh;
   height: 75vh;
+
+}
+.img{
+width: 45%;
 }
 .spans {
   font-size: 1.5em;
+  width: 45%;
 }
 .item {
   margin-top: 10px;

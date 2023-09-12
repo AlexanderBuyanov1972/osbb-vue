@@ -94,7 +94,9 @@ export const mapAddressToLineAddress = (address) => {
     address.street +
     ",  дом № " +
     address.house +
-    ",  кв. " +
+    ",  подъезд № " +
+    address.entrance +
+    ",  кв. № " +
     address.apartment
   );
 };

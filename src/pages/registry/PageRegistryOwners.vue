@@ -1,6 +1,7 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
+    <header-messages :messages="getMessages" />
+    <line-header text="Реестр собственников"/>
     <block-information-about-house :info="getBuildingCharacteristics" />
     <owner-list-registry :list="getRegistryOwners" />
   </div>

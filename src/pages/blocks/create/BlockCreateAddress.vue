@@ -85,6 +85,20 @@
           placeholder="Дом"
           :readonly="true"
         />
+        </div>
+
+      <div class="entrance">
+        <block-error-message
+          :field="address.entrance"
+          messageFalse="Укажите номер подъезда."
+          messageTrue="Подъезд."
+          @valid="(value) => (validEntrance = value)"
+        />
+        <input-simple
+          v-model="address.entrance"
+          placeholder="Подъезд."
+          :readonly="true"
+        />
       </div>
 
       <div class="floor">
@@ -132,6 +146,7 @@ export default {
       validCity: false,
       validStreet: false,
       validHouse: false,
+      validEntrance: false,
       validFloor: false,
       validApartment: false,
     };
@@ -142,6 +157,7 @@ export default {
       this.$emit("address", this.address);
     },
     reset() {
+      this.address.entrance = "";
       this.address.floor = "";
       this.address.apartment = "";
     },
@@ -155,6 +171,7 @@ export default {
         this.validCity &&
         this.validStreet &&
         this.validHouse &&
+        this.validEntrance &&
         this.validFloor &&
         this.validApartment
       );

@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousemove="emitAddress">
+  <div class="main">
     <h2>Адресс собственности.</h2>
 
     <div class="address">
@@ -8,7 +8,7 @@
           :field="address.zipCode"
           messageFalse="Укажите индекс."
           messageTrue="Индекс (XXXXX)."
-          @valid="(value) => (validZipCode = value)"
+          @valid="(value) => handlerZipCode(value)"
         />
         <input-simple
           v-model="address.zipCode"
@@ -22,7 +22,7 @@
           :field="address.country"
           messageFalse="Укажите страну."
           messageTrue="Страна."
-          @valid="(value) => (validCountry = value)"
+          @valid="(value) => handlerCountry(value)"
         />
         <input-simple
           v-model="address.country"
@@ -36,7 +36,7 @@
           :field="address.region"
           messageFalse="Укажите регион."
           messageTrue="Регион."
-          @valid="(value) => (validRegion = value)"
+          @valid="(value) => handlerRegion(value)"
         />
         <input-simple
           v-model="address.region"
@@ -50,7 +50,7 @@
           :field="address.city"
           messageFalse="Укажите город."
           messageTrue="Город."
-          @valid="(value) => (validCity = value)"
+          @valid="(value) => handlerCity(value)"
         />
         <input-simple
           v-model="address.city"
@@ -64,7 +64,7 @@
           :field="address.street"
           messageFalse="Укажите название улицы."
           messageTrue="Улица."
-          @valid="(value) => (validStreet = value)"
+          @valid="(value) => handlerStreet(value)"
         />
         <input-simple
           v-model="address.street"
@@ -78,7 +78,7 @@
           :field="address.house"
           messageFalse="Укажите номер дома."
           messageTrue="Дом."
-          @valid="(value) => (validHouse = value)"
+          @valid="(value) => handlerHouse(value)"
         />
         <input-simple
           v-model="address.house"
@@ -87,12 +87,22 @@
         />
       </div>
 
+      <div class="entrance">
+        <block-error-message
+          :field="address.entrance"
+          messageFalse="Укажите номер подъезда."
+          messageTrue="Подъезд."
+          @valid="(value) => handlerEntrance(value)"
+        />
+        <input-simple v-model="address.entrance" placeholder="Подъезд." />
+      </div>
+
       <div class="floor">
         <block-error-message
           :field="address.floor"
           messageFalse="Укажите этаж."
           messageTrue="Этаж."
-          @valid="(value) => (validFloor = value)"
+          @valid="(value) => handlerFloor(value)"
         />
         <input-simple v-model="address.floor" placeholder="Этаж." />
       </div>
@@ -101,7 +111,7 @@
         :field="address.apartment"
         messageFalse="Укажите номер квартиры."
         messageTrue="Квартира."
-        @valid="(value) => (validApartment = value)"
+        @valid="(value) => handlerApartment(value)"
       />
       <input-simple v-model="address.apartment" placeholder="Квартира." />
     </div>
@@ -114,26 +124,66 @@ export default {
   data() {
     return {
       address: {},
-
       validZipCode: false,
       validCountry: false,
       validRegion: false,
       validCity: false,
       validStreet: false,
       validHouse: false,
+      validEntrance: false,
       validFloor: false,
       validApartment: false,
     };
   },
   methods: {
+    ...mapActions({
+      fetchAddress: "address/fetchAddress",
+    }),
     emitAddress() {
       this.$emit("isValidAddress", this.isValidAddress);
       this.$emit("address", this.address);
     },
+    handlerZipCode(value) {
+      this.validZipCode = value;
+      this.emitAddress();
+    },
+    handlerCountry(value) {
+      this.validCountry = value;
+      this.emitAddress();
+    },
+    handlerRegion(value) {
+      this.validRegion = value;
+      this.emitAddress();
+    },
+    handlerCity(value) {
+      this.validCity = value;
+      this.emitAddress();
+    },
+    handlerStreet(value) {
+      this.validStreet = value;
+      this.emitAddress();
+    },
+    handlerHouse(value) {
+      this.validHouse = value;
+      this.emitAddress();
+    },
+    handlerEntrance(value) {
+      this.validEntrance = value;
+      this.emitAddress();
+    },
+    handlerFloor(value) {
+      this.validFloor = value;
+      this.emitAddress();
+    },
+    handlerApartment(value) {
+      this.validApartment = value;
+      this.emitAddress();
+    },
   },
+
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
+      getAddress: "address/getAddress",
     }),
     isValidAddress() {
       return (
@@ -143,13 +193,16 @@ export default {
         this.validCity &&
         this.validStreet &&
         this.validHouse &&
+        this.validEntrance &&
         this.validFloor &&
         this.validApartment
       );
     },
   },
   mounted() {
-    this.address = this.getOwnership.address;
+    this.fetchAddress(this.$route.params.id).then(
+      () => (this.address = this.getAddress)
+    );
   },
 };
 </script>

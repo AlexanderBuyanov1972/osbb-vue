@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <block-messages
+    <header-messages
       :messages="
         this.mergingTwoArraysAndRemovingIdenticalMessages(
           getMessagesOwnership,

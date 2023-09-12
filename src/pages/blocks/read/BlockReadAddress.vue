@@ -6,6 +6,7 @@
     <p><span>Город : </span>{{ address.city }}</p>
     <p><span>Улица : </span>{{ address.street }}</p>
     <p><span>Дом : </span>{{ address.house }}</p>
+    <p><span>Дом : </span>{{ address.entrance }}</p>
     <p><span>Этаж : </span>{{ address.floor }}</p>
     <p><span>Квартира : </span>{{ address.apartment }}</p>
   </div>

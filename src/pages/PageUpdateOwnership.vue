@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <block-messages
+    <header-messages
       :messages="
         this.mergingTwoArraysAndRemovingIdenticalMessages(
           getMessagesOwnership,
@@ -8,13 +8,13 @@
         )
       "
     />
-    <div class="header">Редактирование записи о собственности..</div>
+    <line-header text="Редактирование записи о собственности." />
     <div class="blocks">
       <div class="block1">
         <block-edit-ownership
           @ownership="(data) => (ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
-          :ownership="{ ...this.getOwnership }"
+          :ownership="ownership"
         />
       </div>
 
@@ -22,7 +22,7 @@
         <block-edit-address
           @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
-          :address="{ ...this.getOwnership.address }"
+          :address="address"
         />
       </div>
 
@@ -32,14 +32,14 @@
             <block-edit-owner
               @owner="(data) => (one.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
-              :owner="one"
+              :id="one.id"
             />
           </div>
           <div class="block2">
             <block-edit-password
               @password="(data) => (one.password = data)"
               @isValidPassword="(value) => (isValidPassword = value)"
-              :password="one.password"
+              :id="one.id"
             />
           </div>
         </div>
@@ -49,9 +49,14 @@
     <hr class="teal" />
     <button-simple
       class="btn"
+      @click="this.$router.push('/show/ownership/' + this.ownership.id)"
+      >Назад.</button-simple
+    >
+    <button-simple
+      class="btn"
       @click="sendOwnership"
       :hidden="
-        !(isValidOwnership && isValidOwner && isValidAddress && isValidPassword)
+        !(isValidOwnership && isValidAddress && isValidOwner && isValidPassword)
       "
       >Послать на сервер.</button-simple
     >
@@ -64,8 +69,8 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
 import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -74,20 +79,24 @@ export default {
       owners: [],
       address: {},
       isValidOwnership: false,
-      isValidOwner: false,
       isValidAddress: false,
+      isValidOwner: false,
       isValidPassword: false,
       mergingTwoArraysAndRemovingIdenticalMessages,
     };
   },
   methods: {
+    ...mapActions({
+      fetchOwnership: "ownership/fetchOwnership",
+      updateOwnership: "ownership/updateOwnership",
+      fetchCountOwners: "owner/fetchCountOwners",
+      fetchCountOwnerships: "ownership/fetchCountRooms",
+    }),
     sendOwnership() {
       this.ownership.address = this.address;
       this.ownership.owners = this.mapListOwners();
       this.updateOwnership(this.ownership).then(() => {
-        setTimeout(() => {
-          this.$router.push("/ownership/" + this.ownership.id);
-        }, 3000);
+        this.$router.push("/show/ownership/" + this.ownership.id);
       });
     },
     plusOwnership() {
@@ -98,7 +107,7 @@ export default {
         this.owners.length -= 1;
       }
     },
-    mapListOwners(id) {
+    mapListOwners() {
       let result = [];
       this.owners.forEach((el) => {
         let objectOwner = el.owner;
@@ -108,30 +117,24 @@ export default {
       });
       return result;
     },
-    ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
-      updateOwnership: "ownership/updateOwnership",
-      fetchCountOwners: "owner/fetchCountOwners",
-      fetchCountOwnerships: "ownership/fetchCountRooms",
-    }),
   },
   mounted() {
     this.fetchOwnership(this.$route.params.id).then(() => {
       this.fetchCountOwners();
       this.fetchCountOwnerships();
-      this.owners = [...this.getOwnership.owners];
+      this.owners = this.getOwnership.owners;
       this.size = this.owners.length;
-      this.ownership = { ...this.getOwnership };
-      this.address = { ...this.getOwnership.address };
+      this.ownership = this.getOwnership;
+      this.address = this.getOwnership.address;
     });
   },
   computed: {
     ...mapGetters({
       getOwnership: "ownership/getOwnership",
       countOwnerships: "ownership/getCountOwnerships",
+      countOwners: "owner/getCountOwners",
       getMessagesOwnership: "ownership/getMessages",
       getMessagesOwner: "owner/getMessages",
-      countOwners: "owner/getCountOwners",
     }),
   },
 };

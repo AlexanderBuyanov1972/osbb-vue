@@ -15,6 +15,7 @@ export default {
       city: "",
       street: "",
       house: "",
+      entrance: "",
       floor: "",
       apartment: "",
     },
@@ -66,7 +67,7 @@ export default {
     async updateAddress({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const data = await updateAddress(object);
+        const response = await updateAddress(object);
         if (response != undefined && response.data != undefined) {
           commit("setAddress", response.data);
           commit("setMessages", response.messages);
@@ -79,10 +80,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async getAddress({ commit }, id) {
+    async fetchAddress({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const data = await getAddress(id);
+        const response = await getAddress(id);
         if (response != undefined && response.data != undefined) {
           commit("setAddress", response.data);
           commit("setMessages", response.messages);

@@ -1,12 +1,13 @@
 <template>
   <div class="main">
-    <block-messages :messages="getMessages" />
+    <header-messages :messages="getMessages" />
+    <line-header text="Список недвижимости"/>
     <div class="list" v-for="(one, index) in getOwnerships" :key="one.id">
       <div
         class="item"
         @click="() => this.$router.push('/ownership/' + one.id)"
       >
-        <ownership-item :ownership="one" :count="index + 1" />
+        <ownership-item :ownership="one" :count="index + 1"/>
       </div>
     </div>
   </div>
