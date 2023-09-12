@@ -11,11 +11,7 @@
         />
         <select-edit
           :array="arrayTypeRoom"
-          :startObject="
-            ownership == undefined || ownership.typeRoom == undefined
-              ? arrayTypeRoom[0]
-              : getElementByValue(arrayTypeRoom, ownership.typeRoom)
-          "
+          :startName="getNameByValue(arrayTypeRoom, ownership.typeRoom)"
           @select="(value) => (ownership.typeRoom = value)"
         />
       </div>
@@ -55,14 +51,11 @@
         />
         <select-edit
           :array="arrayDocumentConfirmsRightOwn"
-          :startObject="
-            ownership == undefined ||
-            ownership.documentConfirmsRightOwn == undefined
-              ? arrayDocumentConfirmsRightOwn[0]
-              : getElementByValue(
-                  arrayDocumentConfirmsRightOwn,
-                  ownership.documentConfirmsRightOwn
-                )
+          :startName="
+            getNameByValue(
+              arrayDocumentConfirmsRightOwn,
+              ownership.documentConfirmsRightOwn
+            )
           "
           @select="(value) => (ownership.documentConfirmsRightOwn = value)"
         />
@@ -77,11 +70,7 @@
         />
         <select-edit
           :array="arrayNumberRooms"
-          :startObject="
-            ownership == undefined || ownership.numberRooms == undefined
-              ? arrayNumberRooms[0]
-              : getElementByValue(arrayNumberRooms, ownership.numberRooms)
-          "
+          :startName="getNameByValue(arrayNumberRooms, ownership.numberRooms)"
           @select="(value) => (ownership.numberRooms = value)"
         />
       </div>
@@ -95,11 +84,7 @@
         />
         <select-edit
           :array="arrayLoggia"
-          :startObject="
-            ownership == undefined || ownership.loggia == undefined
-              ? arrayLoggia[0]
-              : getElementByValue(arrayLoggia, ownership.loggia)
-          "
+          :startName="getNameByValue(arrayLoggia, ownership.loggia)"
           @select="(value) => (ownership.loggia = value)"
         />
       </div>
@@ -107,7 +92,7 @@
   </div>
 </template>
 <script>
-import { getElementByValue } from "@/pages/functions";
+import { getNameByValue } from "@/pages/functions";
 import {
   arrayTypeRoom,
   arrayDocumentConfirmsRightOwn,
@@ -120,7 +105,8 @@ export default {
   data() {
     return {
       ownership: {},
-      getElementByValue,
+
+      getNameByValue,
       validTypeRoom: false,
       validTotalArea: false,
       validLivingArea: false,
@@ -137,7 +123,7 @@ export default {
   methods: {
     emitOwnership() {
       this.$emit("isValidOwnership", this.isValidOwnership);
-      this.$emit("ownership", this.ownershipSend);
+      this.$emit("ownership", this.ownership);
     },
   },
   computed: {

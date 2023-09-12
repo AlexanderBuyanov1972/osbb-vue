@@ -1,27 +1,46 @@
 <template>
   <div class="main">
-    <img :src="owner.photo" alt="Not found" />
-    <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
-    <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
-    <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
-    <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
-    <div class="item">
-      <span>Семейное положение : </span>{{ owner.familyStatus }}
+    <div class="img">
+      <img
+        :src="
+          owner.gender === 'FEMALE'
+            ? require(`@/photos/owners/female.jpg`)
+            : require(`@/photos/owners/male.jpg`)
+        "
+        alt="Not found"
+      />
     </div>
-    <div class="item"><span>Пол : </span>{{ owner.gender }}</div>
-    <div class="item">
-      <span>Номер телефона : </span>{{ owner.phoneNumber }}
+    <div class="spans">
+      <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
+      <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
+      <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
+      <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
+      <div class="item">
+        <span>Семейное положение : </span
+        >{{ showFamilyStatus(owner.familyStatus) }}
+      </div>
+      <div class="item"><span>Пол : </span>{{ showGender(owner.gender) }}</div>
+      <div class="item">
+        <span>Номер телефона : </span>{{ owner.phoneNumber }}
+      </div>
+      <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
     </div>
-    <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
   </div>
 </template>
 <script>
+import { showGender, showFamilyStatus } from "@/pages/functions";
 export default {
   name: "block-read-owner",
   props: {
     owner: {
       Type: Object,
     },
+  },
+  data() {
+    return {
+      showGender,
+      showFamilyStatus,
+    };
   },
 };
 </script>
@@ -33,21 +52,30 @@ export default {
   box-sizing: border-box;
 }
 .main {
+  width: 100%;
+  color: blueviolet;
   margin: 15px 0px;
   border: 2px solid blueviolet;
   font-size: 1.2em;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  color: blueviolet;
-  align-items: flex-start;
-  justify-content: start;
+
+  align-items: center;
+  justify-content: space-around;
 }
 
 span {
   color: teal;
 }
 .item {
-  margin: 5px 0px;
+  margin: 7px 0px;
+  font-size: 1.3em;
+}
+img {
+  width: 25wh;
+  height: 35vh;
+  padding: 10px;
+}
+.spans {
+  padding: 10px;
 }
 </style>

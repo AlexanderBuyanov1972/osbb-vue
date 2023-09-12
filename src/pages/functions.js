@@ -7,44 +7,80 @@ import {
   arrayFamilyStatus,
 } from "@/pages/arraysOfData";
 
-export const getElementByValue = (array, value) => {
-  return array.find((el) => el.value === value);
+// ------------ show fields odjects  arrays ---------------
+
+export const showGender = (value) => {
+  try {
+    return arrayGender.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
 };
-export const getElementByName = (array, name) => {
-  return array.find((el) => el.name === name);
+export const showFamilyStatus = (value) => {
+  try {
+    return arrayFamilyStatus.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
 };
-export const getElementById = (array, id) => {
-  return array.find((el) => el.id === id);
+export const showLoggia = (value) => {
+  try {
+    return arrayLoggia.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showDocumentConfirmsRightOwn = (value) => {
+  try {
+    return arrayDocumentConfirmsRightOwn.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showNumberRooms = (value) => {
+  try {
+    return arrayNumberRooms.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showTypeRoom = (value) => {
+  try {
+    return arrayTypeRoom.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
 };
 
-export const mapOwnershipValuesToRead = (ownership, photo) => {
-  ownership.numberRooms = getElementByValue(
-    arrayNumberRooms,
-    ownership.numberRooms
-  ).name;
-  ownership.typeRoom = getElementByValue(
-    arrayTypeRoom,
-    ownership.typeRoom
-  ).name;
-  ownership.documentConfirmsRightOwn = getElementByValue(
-    arrayDocumentConfirmsRightOwn,
-    ownership.documentConfirmsRightOwn
-  ).name;
-  ownership.loggia = getElementByValue(arrayLoggia, ownership.loggia).name;
-  ownership.photo = photo;
-  return ownership;
+// ------------ get Element of array by --------------------
+
+export const getElementArrayByValue = (array, value) => {
+  try {
+    return array.find((el) => el.value == value);
+  } catch (error) {
+    return array[0];
+  }
 };
 
-export const mapOwnerValuesToRead = (owner, photo) => {
-  owner.gender = getElementByValue(arrayGender, owner.gender).name;
-  owner.familyStatus = getElementByValue(
-    arrayFamilyStatus,
-    owner.familyStatus
-  ).name;
-  owner.photo = photo;
-  return owner;
+export const getElementArrayByName = (array, name) => {
+  try {
+    return array.find((el) => el.name == name);
+  } catch (error) {
+    return array[0];
+  }
 };
 
+// ------------------ get Name Element of array by Value -------
+
+export const getNameByValue = (array, value) => {
+  try {
+    return array.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+
+// получение строки адресса из объекта
 export const mapAddressToLineAddress = (address) => {
   return (
     address.zipCode +
@@ -62,7 +98,17 @@ export const mapAddressToLineAddress = (address) => {
     address.apartment
   );
 };
-
+// получение строки ФИО из объекта
 export const mapOwnerToLineFullNamesOwner = (fio) => {
   return fio.lastName + " " + fio.firstName + " " + fio.secondName;
+};
+
+// слияние двух массивов и удаление одинаковых сообщений.
+
+export const mergingTwoArraysAndRemovingIdenticalMessages = (arr1, arr2) => {
+  let result = [...arr1];
+  arr2.forEach((el) => {
+    if (!result.includes(el)) result.unshift(el);
+  });
+  return result;
 };

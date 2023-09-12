@@ -1,7 +1,12 @@
 <template>
   <div class="main">
     <block-messages
-      :messages="[...getMessagesOwnership, ...getMessagesOwner]"
+      :messages="
+        this.mergingTwoArraysAndRemovingIdenticalMessages(
+          getMessagesOwnership,
+          getMessagesOwner
+        )
+      "
     />
     <div class="header">Редактирование записи о собственности..</div>
     <div class="blocks">
@@ -60,6 +65,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
 export default {
   data() {
     return {
@@ -71,6 +77,7 @@ export default {
       isValidOwner: false,
       isValidAddress: false,
       isValidPassword: false,
+      mergingTwoArraysAndRemovingIdenticalMessages,
     };
   },
   methods: {
@@ -110,14 +117,12 @@ export default {
   },
   mounted() {
     this.fetchOwnership(this.$route.params.id).then(() => {
-      setTimeout(() => {
-        this.fetchCountOwners();
-        this.fetchCountOwnerships();
-        this.owners = [...this.getOwnership.owners];
-        this.size = this.owners.length;
-        this.ownership = { ...this.getOwnership };
-        this.address = { ...this.getOwnership.address };
-      }, 3000);
+      this.fetchCountOwners();
+      this.fetchCountOwnerships();
+      this.owners = [...this.getOwnership.owners];
+      this.size = this.owners.length;
+      this.ownership = { ...this.getOwnership };
+      this.address = { ...this.getOwnership.address };
     });
   },
   computed: {
@@ -183,7 +188,7 @@ export default {
   text-align: center;
   font-size: 1.8em;
 }
-hr{
+hr {
   margin-top: 25px;
 }
 </style>

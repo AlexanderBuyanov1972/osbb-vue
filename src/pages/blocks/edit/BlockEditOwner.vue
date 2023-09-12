@@ -52,11 +52,7 @@
         />
         <select-edit
           :array="arrayGender"
-          :startObject="
-            owner == undefined || owner.gender == undefined
-              ? arrayGender[0]
-              : getElementByValue(arrayGender, owner.gender)
-          "
+          :startName="getNameByValue(arrayGender, owner.gender)"
           @select="(value) => (owner.gender = value)"
         />
       </div>
@@ -70,11 +66,7 @@
         />
         <select-edit
           :array="arrayFamilyStatus"
-          :startObject="
-            owner == undefined || owner.familyStatus == undefined
-              ? arrayFamilyStatus[0]
-              : getElementByValue(arrayFamilyStatus, owner.familyStatus)
-          "
+          :startName="getNameByValue(arrayFamilyStatus, owner.familyStatus)"
           @select="(value) => (owner.familyStatus = value)"
         />
       </div>
@@ -103,7 +95,11 @@
 </template>
 <script>
 import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
-import { getElementByValue } from "@/pages/functions";
+import {
+  getElementByValue,
+  getElementByName,
+  getNameByValue,
+} from "@/pages/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-owner",
@@ -111,7 +107,10 @@ export default {
     return {
       owner: {},
       getElementByValue,
+      getElementByName,
+      getNameByValue,
       arrayGender,
+
       arrayFamilyStatus,
       validLastName: false,
       validFirstName: false,

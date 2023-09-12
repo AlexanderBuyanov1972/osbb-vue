@@ -1,9 +1,8 @@
 <template>
-  <!-- { id: 1, name: "Пол", value: "" }, -->
   <div :class="!show ? 'blocks' : ['blocks', 'active']">
     <div class="block_1">
       <div class="item" @click="show = !show">
-        {{  selectName }}
+        {{ selectName == "" ? startName : selectName }}
       </div>
     </div>
     <div class="block_2" v-if="show">
@@ -21,27 +20,21 @@ export default {
       type: Array,
       default: () => [],
     },
-    startObject: Object,
+    startName: String,
   },
 
   data() {
     return {
+      selectName: "",
       show: false,
-      selectName: this.startObject.name,
     };
   },
   methods: {
     select(one) {
-      this.change(one);
       this.show = false;
-    },
-    change(one) {
       this.selectName = one.name;
       this.$emit("select", one.value);
     },
-  },
-  mounted() {
-    this.select(this.startObject);
   },
 };
 </script>
@@ -99,3 +92,52 @@ export default {
   text-indent: 1em;
 }
 </style>
+
+<!-- 
+<template>
+  <div :class="!show ? 'blocks' : ['blocks', 'active']">
+    <div class="block_1">
+      <div class="item" @click="show = !show">
+        {{  selectName }}
+      </div>
+    </div>
+    <div class="block_2" v-if="show">
+      <div class="item" v-for="one in array" :key="one.id" @click="select(one)">
+        {{ one.name }}
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "select-edit",
+  props: {
+    array: {
+      type: Array,
+      default: () => [],
+    },
+    startObject: Object,
+  },
+
+  data() {
+    return {
+      show: false,
+      selectName: this.startObject.name,
+    };
+  },
+  methods: {
+    select(one) {
+      this.change(one);
+      this.show = false;
+    },
+    change(one) {
+      this.selectName = one.name;
+      this.$emit("select", one.value);
+    },
+  },
+  mounted() {
+    this.select(this.startObject);
+  },
+};
+</script>
+</style> -->

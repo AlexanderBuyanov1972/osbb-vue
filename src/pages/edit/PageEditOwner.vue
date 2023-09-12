@@ -42,6 +42,10 @@ export default {
       updateOwner: "owner/updateOwner",
     }),
     sendOwner() {
+      this.owner.photos =
+        this.owner.gender == "MALE"
+          ? [{ id: 1, name: "male", url: "@/photos/owners/male.jpg" }]
+          : [{ id: 2, name: "female", url: "@/photos/owners/female.jpg" }];
       this.owner.password = this.password;
       this.updateOwner(this.owner).then(() => {
         setTimeout(() => {

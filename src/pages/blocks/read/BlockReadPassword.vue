@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <div class="item" :style="{'color':'brown', 'font-size':'1.5em'}">Паспорт :</div>
     <div class="item">
       <span>Серийный номер : </span>{{ password.passwordID }}
     </div>
@@ -32,12 +33,12 @@ export default {
 }
 .wrapper {
   margin: 15px 0px;
+  padding: 10px;
   color: teal;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
-  padding: 5px;
   border: 2px solid blueviolet;
   font-size: 1.2em;
 }
@@ -45,7 +46,8 @@ span {
   color: blueviolet;
 }
 .item {
-  margin: 5px 0px;
+  margin: 7px 0px;
+  font-size: 1.3em;
   align-self: start;
 }
 </style>

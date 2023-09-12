@@ -14,17 +14,11 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import man from "@/photos/owners/male.jpg";
-import {
-  mapOwnerToLineFullNamesOwner,
-  mapOwnerValuesToRead,
-} from "@/pages/functions";
+import { mapOwnerToLineFullNamesOwner } from "@/pages/functions";
 export default {
   data() {
     return {
       mapOwnerToLineFullNamesOwner,
-      mapOwnerValuesToRead,
-      man,
       owner: {},
     };
   },
@@ -34,9 +28,9 @@ export default {
     }),
   },
   mounted() {
-    this.fetchOwner(this.$route.params.id).then(() => {
-      this.owner = this.mapOwnerValuesToRead(this.getOwner, this.man);
-    });
+    this.fetchOwner(this.$route.params.id).then(
+      () => (this.owner = this.getOwner)
+    );
   },
   computed: {
     ...mapGetters({

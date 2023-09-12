@@ -4,11 +4,11 @@
     <div class="header">Просмотр записи о собственности.</div>
     <div class="blocks">
       <div class="block1">
-        <block-read-ownership :ownership="mapValue(this.getOwnership, photo)" />
+        <block-read-ownership :ownership="this.getOwnership" />
       </div>
 
       <div class="block3">
-        <block-read-address :address="{ ...this.getOwnership.address }" />
+        <block-read-address :address="this.getOwnership.address" />
       </div>
 
       <div class="column">
@@ -35,14 +35,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { mapValue } from "@/pages/functions";
-import photo from "@/photos/rooms/1_1.png";
 export default {
-  data() {
-    return {
-      mapValue,
-    };
-  },
   methods: {
     goToPageUpdateOwnership() {
       this.$router.push("/update/ownership/" + this.getOwnership.id);

@@ -18,11 +18,6 @@
       >
       <button-simple
         class="btn"
-        @click="this.$router.push('/update/ownership/' + this.getOwnership.id)"
-        >Редактировать запись о собственности.</button-simple
-      >
-      <button-simple
-        class="btn"
         @click="this.$router.push('/show/ownership/' + this.getOwnership.id)"
         >Смотреть запись о собственности.</button-simple
       >
@@ -31,18 +26,12 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {
-  mapOwnershipValuesToRead,
-  mapAddressToLineAddress,
-} from "@/pages/functions";
-import photo from "@/photos/rooms/1_1.png";
+import { mapAddressToLineAddress } from "@/pages/functions";
 
 export default {
   data() {
     return {
-      mapOwnershipValuesToRead,
       mapAddressToLineAddress,
-      photo,
       ownership: {},
     };
   },
@@ -54,7 +43,7 @@ export default {
 
   mounted() {
     this.fetchOwnership(this.$route.params.id).then(() => {
-      this.ownership = this.mapOwnershipValuesToRead(this.getOwnership, photo);
+      this.ownership = this.getOwnership;
     });
   },
   computed: {

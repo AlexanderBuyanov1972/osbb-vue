@@ -43,6 +43,7 @@ export default {
     }),
     sendOwnership() {
       this.ownership.address = this.address;
+      console.log(this.ownership)
       this.updateOwnership(this.ownership).then(() => {
         setTimeout(() => {
           this.$router.push("/ownership/" + this.$route.params.id);

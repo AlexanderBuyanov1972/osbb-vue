@@ -1,7 +1,12 @@
 <template>
   <div class="main">
     <block-messages
-      :messages="[...getMessagesOwnership, ...getMessagesOwner]"
+      :messages="
+        this.mergingTwoArraysAndRemovingIdenticalMessages(
+          getMessagesOwnership,
+          getMessagesOwner
+        )
+      "
     />
     <div class="header">Создание записи о собственности.</div>
     <div class="blocks">
@@ -69,6 +74,7 @@ import {
   arrayNumberRooms,
 } from "@/pages/arraysOfData";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
 export default {
   data() {
     return {
@@ -87,6 +93,8 @@ export default {
       isValidOwner: false,
       isValidAddress: false,
       isValidPassword: false,
+
+      mergingTwoArraysAndRemovingIdenticalMessages,
     };
   },
   methods: {

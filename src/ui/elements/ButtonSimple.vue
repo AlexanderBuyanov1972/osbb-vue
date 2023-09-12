@@ -9,7 +9,7 @@ export default {
 
 <style scoped>
 button {
-  font-size: 0.8em;
+  font-size: 1em;
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.1em;

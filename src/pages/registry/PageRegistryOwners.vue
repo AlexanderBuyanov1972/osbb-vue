@@ -7,12 +7,10 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import BlockInformationAboutHouse from "@/blocks/BlockInformationAboutHouse.vue";
 import OwnerListRegistry from "@/itemsAndLists/OwnerListRegistry.vue";
 
 export default {
   components: {
-    BlockInformationAboutHouse,
     OwnerListRegistry,
   },
   methods: {

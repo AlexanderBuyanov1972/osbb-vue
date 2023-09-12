@@ -5,8 +5,9 @@ import SelectSimple from "@/ui/elements/SelectSimple.vue";
 import SelectEdit from "@/ui/elements/SelectEdit.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
 
-import BlockMessages from "@/blocks/BlockMessages.vue";
-import BlockErrorMessage from "@/blocks/BlockErrorMessage.vue";
+import BlockMessages from "@/pages/blocks/BlockMessages.vue";
+import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
+import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
@@ -39,7 +40,7 @@ export default [
   BlockCreatePassword,
   BlockMessages,
   BlockErrorMessage,
-  
+
   OwnerItem,
   OwnershipItem,
 
@@ -52,4 +53,6 @@ export default [
   BlockReadOwnership,
   BlockReadOwner,
   BlockReadPassword,
+
+  BlockInformationAboutHouse,
 ];

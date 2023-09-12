@@ -22,6 +22,7 @@
 </template>
 <script>
 export default {
+  name:"block-information-about-house",
   props: {
     info: {
       Type: Object,
