@@ -8,15 +8,11 @@
         )
       "
     />
-    <div class="header">Создание записи о собственности.</div>
+    <line-header text="Создание записи о собственности" />
     <div class="blocks">
       <div class="block1">
         <block-create-ownership
           @ownership="(data) => (ownership = data)"
-          :arrayDocumentConfirmsRightOwn="arrayDocumentConfirmsRightOwn"
-          :arrayTypeRoom="arrayTypeRoom"
-          :arrayLoggia="arrayLoggia"
-          :arrayNumberRooms="arrayNumberRooms"
           @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
@@ -32,49 +28,35 @@
           <div class="block4">
             <block-create-owner
               @owner="(data) => (one.owner = data)"
-              :arrayGender="arrayGender"
-              :arrayFamilyStatus="arrayFamilyStatus"
               @isValidOwner="(value) => (isValidOwner = value)"
             />
           </div>
           <div class="block2">
-            <block-create-password
-              @password="(data) => (one.password = data)"
-              @isValidPassword="(value) => (isValidPassword = value)"
+            <block-create-passport
+              @passport="(data) => (one.passport = data)"
+              @isValidPassport="(value) => (isValidPassport = value)"
             />
           </div>
         </div>
       </div>
     </div>
-    <!-- ------------------------------------------------------------------------ -->
-    <hr class="teal" />
+    <vue-hr />
     <button-simple
-      class="btn"
       @click="sendOwnership"
       :hidden="
-        !(isValidOwnership && isValidOwner && isValidAddress && isValidPassword)
+        !(isValidOwnership && isValidOwner && isValidAddress && isValidPassport)
       "
-      >Послать на сервер.</button-simple
+      >{{ SEND_TO_SERVER }}</button-simple
     >
-    <button-simple class="btn" @click="plusOwnership"
-      >Добавить собственника</button-simple
-    >
-    <button-simple class="btn" @click="minusOwnership"
-      >Убавить собственника</button-simple
-    >
+    <button-create @click="plusOwnership">{{ CREATE_OWNER }}</button-create>
+    <button-delete @click="minusOwnership">{{ DELETE_OWNER }}</button-delete>
   </div>
 </template>
 <script>
-import {
-  arrayGender,
-  arrayTypeRoom,
-  arrayDocumentConfirmsRightOwn,
-  arrayLoggia,
-  arrayFamilyStatus,
-  arrayNumberRooms,
-} from "@/pages/arraysOfData";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
+import { SEND_TO_SERVER, CREATE_OWNER, DELETE_OWNER } from "@/ui/namesButton";
+import { PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -82,17 +64,15 @@ export default {
       address: {},
       owners: [{}],
 
-      arrayGender,
-      arrayDocumentConfirmsRightOwn,
-      arrayTypeRoom,
-      arrayLoggia,
-      arrayFamilyStatus,
-      arrayNumberRooms,
-
       isValidOwnership: false,
       isValidOwner: false,
       isValidAddress: false,
-      isValidPassword: false,
+      isValidPassport: false,
+
+      SEND_TO_SERVER,
+      CREATE_OWNER,
+      DELETE_OWNER,
+      PAGE_SHOW_OWNERSHIP,
 
       mergingTwoArraysAndRemovingIdenticalMessages,
     };
@@ -106,7 +86,9 @@ export default {
 
       this.ownership.owners = this.mapListOwners(this.countOwners + 1);
       this.createOwnership(this.ownership).then(() => {
-        this.$router.push("/ownership/" + ownershipID);
+        setTimeout(() => {
+          this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + ownershipID);
+        }, 5000);
       });
     },
     plusOwnership() {
@@ -121,12 +103,12 @@ export default {
       let result = [];
       this.owners.forEach((el) => {
         let objectOwner = el.owner;
-        let objectPassword = el.password;
+        let objectPassport = el.passport;
 
         objectOwner.id = id;
-        objectPassword.id = id;
+        objectPassport.id = id;
 
-        objectOwner.password = objectPassword;
+        objectOwner.passport = objectPassport;
         result.push(objectOwner);
 
         id += 1;
@@ -172,9 +154,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  border: 1px solid blueviolet;
   width: 100%;
-  margin-top: 10px;
 }
 .column {
   display: flex;
@@ -193,17 +173,5 @@ export default {
 .block3 {
   margin: 10px;
   width: 25%;
-}
-.teal {
-  color: teal;
-}
-.btn {
-  margin: 10px 0 0 10px;
-}
-.header {
-  color: brown;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.8em;
 }
 </style>

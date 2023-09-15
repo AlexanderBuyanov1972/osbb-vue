@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header
       :text="
@@ -8,29 +9,32 @@
       "
     />
     <line-address :address="this.getOwnership.address" />
-
     <block-read-ownership :ownership="ownership" />
-
+    <vue-hr/>
     <div class="btns">
-      <button-simple
-        class="btn"
-        @click="this.$router.push('/edit/ownership/' + this.getOwnership.id)"
-        >Редактировать собственность.</button-simple
+      <button-edit
+        @click="this.$router.push(PAGE_EDIT_OWNERSHIP + '/' + this.getOwnership.id)"
+        >{{ EDIT_OWNERSHIP }}</button-edit
       >
       <button-simple
-        class="btn"
-        @click="this.$router.push('/show/ownership/' + this.getOwnership.id)"
-        >Смотреть запись о собственности.</button-simple
+        @click="this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.getOwnership.id)"
+        >{{ SHOW_ENTRY_ABOUT_OWNERSHIP }}</button-simple
       >
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import {EDIT_OWNERSHIP, SHOW_ENTRY_ABOUT_OWNERSHIP} from "@/ui/namesButton"
+import { PAGE_EDIT_OWNERSHIP, PAGE_SHOW_ENTRY_OWNERSHIP } from "@/router/apiRouter";
 export default {
   data() {
     return {
       ownership: {},
+      EDIT_OWNERSHIP,
+      SHOW_ENTRY_ABOUT_OWNERSHIP,
+      PAGE_SHOW_ENTRY_OWNERSHIP,
+      PAGE_EDIT_OWNERSHIP,
     };
   },
   methods: {
@@ -48,6 +52,7 @@ export default {
     ...mapGetters({
       getOwnership: "ownership/getOwnership",
       getMessages: "ownership/getMessages",
+      getIsLoading: "ownership/getIsLoading",
     }),
   },
 };
@@ -59,13 +64,9 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-
-.btn {
-  margin: 20px 0px 10px 0px;
-}
 .btns {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 </style>

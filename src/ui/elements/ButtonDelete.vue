@@ -1,10 +1,10 @@
 <script>
 export default {
-  name: "button-reset",
+  name: "button-delete",
 };
 </script>
 <template>
-  <button><slot></slot></button>
+  <button ><slot></slot></button>
 </template>
 
 <style scoped>
@@ -17,8 +17,8 @@ button {
   cursor: pointer;
   padding: 0.7em 1.4em;
   background-color: white;
-  color: red;
-  border: 2px solid red;
+  color: brown;
+  border: 2px solid brown;
   margin: 10px 10px 10px 0px;
 }
 </style>

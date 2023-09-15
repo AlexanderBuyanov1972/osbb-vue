@@ -1,17 +1,21 @@
 <template>
   <div class="main">
     <div class="count">{{ count }}.</div>
-    <div class="name">{{ getFullName(owner) }}</div>
+    <div class="name">{{ mapOwnerToLineFullNamesOwner(owner) }}</div>
     <div class="phone">{{ owner.phoneNumber }}</div>
     <div class="birth">{{ owner.dateBirth }}</div>
     <div class="family">
-      {{ getElementName(arrayFamilyStatus, owner.familyStatus) }}
+      {{ showFamilyStatus(owner.familyStatus) }}
     </div>
     <div class="email">{{ owner.email }}</div>
+    <div class="share">{{ owner.shareInRealEstate }}</div>
+     <div class="family">
+      {{ showGender( owner.gender) }}
+    </div>
   </div>
 </template>
 <script>
-import { arrayFamilyStatus } from "@/pages/arraysOfData";
+import {mapOwnerToLineFullNamesOwner, showFamilyStatus, showGender } from "@/pages/functions"
 export default {
   name: "owner-item",
   props: {
@@ -22,16 +26,10 @@ export default {
   },
   data() {
     return {
-      arrayFamilyStatus,
+      mapOwnerToLineFullNamesOwner,
+      showFamilyStatus,
+      showGender,
     };
-  },
-  methods: {
-    getFullName(obj) {
-      return obj.lastName + " " + obj.firstName + " " + obj.secondName;
-    },
-    getElementName(array, value) {
-      return array.find((el) => el.value === value).name;
-    },
   },
 };
 </script>
@@ -56,21 +54,24 @@ span {
   margin: 0 10px;
 }
 .count {
-  width: 2%;
+  width: 5%;
 }
 .name {
   width: 22%;
 }
 .phone {
-  width: 15%;
+  width: 12%;
 }
 .birth {
-  width: 15%;
+  width: 10%;
 }
 .email {
-  width: 15%;
+  width: 17%;
 }
 .family {
-  width: 15%;
+ width: 12%;
+}
+.share{
+  width: 10%;
 }
 </style>

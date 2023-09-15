@@ -14,7 +14,6 @@
         <block-edit-ownership
           @ownership="(data) => (ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
-          :ownership="ownership"
         />
       </div>
 
@@ -22,7 +21,6 @@
         <block-edit-address
           @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
-          :address="address"
         />
       </div>
 
@@ -32,57 +30,71 @@
             <block-edit-owner
               @owner="(data) => (one.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
-              :id="one.id"
+              :id="flag ? 0 : one.id"
             />
           </div>
           <div class="block2">
-            <block-edit-password
-              @password="(data) => (one.password = data)"
-              @isValidPassword="(value) => (isValidPassword = value)"
-              :id="one.id"
+            <block-edit-passport
+              @passport="(data) => (one.passport = data)"
+              @isValidPassport="(value) => (isValidPassport = value)"
+              :id="flag ? 0 : one.id"
             />
           </div>
+          <button-delete
+            v-show="this.owners.length > 1"
+            @click="() => removeOwner(one.id)"
+            >{{ DELETE }}</button-delete
+          >
         </div>
       </div>
     </div>
-
-    <hr class="teal" />
+    <vue-hr />
+    <button-back
+      @click="
+        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.ownership.id)
+      "
+    />
     <button-simple
-      class="btn"
-      @click="this.$router.push('/show/ownership/' + this.ownership.id)"
-      >Назад.</button-simple
-    >
-    <button-simple
-      class="btn"
       @click="sendOwnership"
       :hidden="
-        !(isValidOwnership && isValidAddress && isValidOwner && isValidPassword)
+        !(isValidOwnership && isValidAddress && isValidOwner && isValidPassport)
       "
-      >Послать на сервер.</button-simple
+      >{{ SEND_TO_SERVER }}</button-simple
     >
-    <button-simple class="btn" @click="plusOwnership"
-      >Добавить собственника</button-simple
-    >
-    <button-simple class="btn" @click="minusOwnership"
-      >Убавить собственника</button-simple
-    >
+    <button-create @click="plusOwner">{{ CREATE_OWNER }}</button-create>
+    <button-delete @click="minusOwner">{{ DELETE_OWNER }}</button-delete>
   </div>
 </template>
 <script>
 import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import {
+  DELETE,
+  BACK,
+  DELETE_OWNER,
+  CREATE_OWNER,
+  SEND_TO_SERVER,
+} from "@/ui/namesButton";
+import { PAGE_SHOW_ENTRY_OWNERSHIP } from "@/router/apiRouter";
 export default {
   data() {
     return {
       size: 0,
+      flag: false,
       ownership: {},
       owners: [],
       address: {},
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
-      isValidPassword: false,
+      isValidPassport: false,
       mergingTwoArraysAndRemovingIdenticalMessages,
+      DELETE,
+      BACK,
+      DELETE_OWNER,
+      SEND_TO_SERVER,
+      CREATE_OWNER,
+      PAGE_SHOW_ENTRY_OWNERSHIP,
     };
   },
   methods: {
@@ -90,32 +102,48 @@ export default {
       fetchOwnership: "ownership/fetchOwnership",
       updateOwnership: "ownership/updateOwnership",
       fetchCountOwners: "owner/fetchCountOwners",
+      deleteOwner: "owner/deleteOwner",
       fetchCountOwnerships: "ownership/fetchCountRooms",
     }),
     sendOwnership() {
       this.ownership.address = this.address;
       this.ownership.owners = this.mapListOwners();
       this.updateOwnership(this.ownership).then(() => {
-        this.$router.push("/show/ownership/" + this.ownership.id);
+        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.ownership.id);
       });
     },
-    plusOwnership() {
-      this.owners.push({ ownership: { address: {} } });
+    plusOwner() {
+      this.flag = true;
+      this.owners.push({ owner: { id: 0, password: { id: 0 } } });
     },
-    minusOwnership() {
+    minusOwner() {
+      this.flag = false;
       if (this.owners.length > this.size) {
         this.owners.length -= 1;
       }
     },
     mapListOwners() {
       let result = [];
+      let count = this.countOwners + 1;
       this.owners.forEach((el) => {
         let objectOwner = el.owner;
-        let objectPassword = el.password;
-        objectOwner.password = objectPassword;
+        let objectPassport = el.passport;
+        if (objectOwner.id == undefined) {
+          objectOwner.id = count;
+          objectPassport.id = count;
+          count++;
+        }
+        objectOwner.passport = objectPassport;
         result.push(objectOwner);
       });
       return result;
+    },
+    removeOwner(id) {
+      this.deleteOwner(id).then(() =>
+        this.fetchOwnership(this.$route.params.id).then(
+          () => (this.ownership = this.getOwnership)
+        )
+      );
     },
   },
   mounted() {
@@ -147,7 +175,6 @@ export default {
   box-sizing: border-box;
 }
 .blocks {
-  color: red;
   font-size: 1.2em;
   display: flex;
   justify-content: space-between;
@@ -179,19 +206,8 @@ export default {
   margin: 10px;
   width: 25%;
 }
-.teal {
-  color: teal;
-}
-.btn {
-  margin: 10px 0 0 10px;
-}
-.header {
-  color: brown;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.8em;
-}
 hr {
-  margin-top: 25px;
+  margin: 25px 0px;
+  color: teal;
 }
 </style>

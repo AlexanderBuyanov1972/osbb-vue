@@ -12,39 +12,50 @@
         <div class="read_owner">
           <block-read-owner :owner="one" />
         </div>
-        <div class="read_password">
-          <block-read-password
-            :class="read_password"
-            :password="one.password"
+        <div class="read_passport">
+          <block-read-passport
+            :class="read_passport"
+            :passport="one.passport"
           />
         </div>
       </div>
     </div>
 
-    <hr class="hr" />
-    <button-simple class="btn" @click="this.$router.push('/ownership/' + this.getOwnership.id)"
-      >Назад.</button-simple
-    >
-    <button-simple class="btn" @click="goToPageUpdateOwnership"
-      >Редактировать запись о собственности.</button-simple
-    >
+    <vue-hr />
+    <button-back
+      @click="
+        this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + this.getOwnership.id)
+      "
+    />
+    <button-edit @click="goToPageUpdateOwnership">{{
+      EDIT_ENTRY_ABOUT_OWNERSHIP
+    }}</button-edit>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { EDIT_ENTRY_ABOUT_OWNERSHIP } from "@/ui/namesButton";
+import {
+  PAGE_SHOW_OWNERSHIP,
+  PAGE_UPDATE_ENTRY_OWNERSHIP,
+} from "@/router/apiRouter";
 export default {
   data() {
     return {
       ownership: {},
       address: {},
       owners: [],
+      EDIT_ENTRY_ABOUT_OWNERSHIP,
+      PAGE_SHOW_OWNERSHIP,
+      PAGE_UPDATE_ENTRY_OWNERSHIP,
     };
   },
   methods: {
     goToPageUpdateOwnership() {
-      this.$router.push("/update/ownership/" + this.getOwnership.id);
+      this.$router.push(
+        PAGE_UPDATE_ENTRY_OWNERSHIP + "/" + this.getOwnership.id
+      );
     },
-
     ...mapActions({
       fetchOwnership: "ownership/fetchOwnership",
     }),
@@ -72,7 +83,6 @@ export default {
   box-sizing: border-box;
 }
 .blocks {
-  color: red;
   font-size: 1.2em;
 }
 .owner {
@@ -85,16 +95,13 @@ export default {
 .read_owner {
   width: 60%;
 }
-.read_password {
+.read_passport {
   width: 35%;
   align-self: flex-start;
 }
 
-.hr {
+hr {
   margin-top: 25px;
   color: teal;
-}
-.btn {
-  margin: 10px 0 0 10px;
 }
 </style>

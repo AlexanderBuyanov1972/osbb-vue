@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h2>Собственник.</h2>
+    <line-header-block text="Собственник" />
 
     <div class="owner">
       <div class="lastName">
@@ -203,12 +203,14 @@ export default {
     },
   },
   mounted() {
-    if (this.id != undefined) {
-      this.fetchOwner(this.id).then(() => (this.owner = this.getOwner));
-    } else {
-      this.fetchOwner(this.$route.params.id).then(
-        () => (this.owner = this.getOwner)
-      );
+    if (this.id != 0) {
+      if (this.id != undefined) {
+        this.fetchOwner(this.id).then(() => (this.owner = this.getOwner));
+      } else {
+        this.fetchOwner(this.$route.params.id).then(
+          () => (this.owner = this.getOwner)
+        );
+      }
     }
   },
 };
@@ -219,10 +221,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

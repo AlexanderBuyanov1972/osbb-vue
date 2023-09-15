@@ -1,16 +1,20 @@
 <template>
   <div class="main">
-    <div class="count">{{ count }}. </div>
-    <div class="apartment">{{ haveRoom(ownership) }}</div>
-    <div class="total_area">Общая площадь : {{ ownership.totalArea }} м2</div>
-    <div class="living_area">Жилая площадь : {{ ownership.livingArea }} м2</div>
-    <div class="number">Кол-во комнат : {{ ownership.numberRooms }}</div>
-    <div class="entrance">Подъезд : {{ ownership.address.entrance }}</div>
-    <div class="floor">Этаж : {{ ownership.address.floor }}</div>
-    <div class="loggia">Балкон : {{ haveLoggia(ownership) }}</div>
+    <div class="count">{{ count }}</div>
+    <div class="type_room">
+      {{ showTypeRoom(ownership.typeRoom) }}
+    </div>
+    <div class="apartment">{{ ownership.address.apartment }}</div>
+    <div class="item">{{ ownership.totalArea }}</div>
+    <div class="item">{{ ownership.livingArea }}</div>
+    <div class="item">{{ ownership.numberRooms }}</div>
+    <div class="item">{{ ownership.address.entrance }}</div>
+    <div class="item">{{ ownership.address.floor }}</div>
+    <div class="item">{{ showLoggia(ownership.loggia) }}</div>
   </div>
 </template>
 <script>
+import { showTypeRoom,showLoggia } from "@/pages/functions";
 export default {
   props: {
     ownership: {
@@ -19,17 +23,10 @@ export default {
     count: Number,
   },
   data() {
-    return {};
-  },
-  methods: {
-    haveRoom(obj) {
-      return obj.typeRoom === "APARTMENT"
-        ? "Квартира № " + obj.address.apartment
-        : "Нежилое помещение";
-    },
-    haveLoggia(obj) {
-      return obj.loggia ? "есть" : "нет";
-    },
+    return {
+      showTypeRoom,
+      showLoggia,
+    };
   },
 };
 </script>
@@ -50,28 +47,19 @@ export default {
   align-items: center;
   justify-content: start;
 }
-.count{
-  width: 2%;
+.count {
+  width: 3%;
 }
-.apartment{
+.type_room {
+  width: 20%;
+}
+.apartment {
   width: 15%;
 }
-.total_area{
-  width: 15%;
+.item {
+  width: 16%;
 }
-.living_area{
-  width: 15%;
-}
-.number{
-  width: 10%;
-}
-.entrance{
-  width: 10%;
-}
-.floor{
-  width: 10%;
-}
-.loggia{
-  width: 15%;
+.danger {
+  background-color: honeydew;
 }
 </style>

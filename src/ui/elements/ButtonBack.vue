@@ -1,10 +1,16 @@
 <script>
+import { BACK } from "@/ui/namesButton";
 export default {
-  name: "button-reset",
+  name: "button-back",
+  data() {
+    return {
+      BACK,
+    };
+  },
 };
 </script>
 <template>
-  <button><slot></slot></button>
+  <button>{{ BACK }}</button>
 </template>
 
 <style scoped>
@@ -17,8 +23,8 @@ button {
   cursor: pointer;
   padding: 0.7em 1.4em;
   background-color: white;
-  color: red;
-  border: 2px solid red;
+  color: #999999;
+  border: 2px solid #999999;
   margin: 10px 10px 10px 0px;
 }
 </style>

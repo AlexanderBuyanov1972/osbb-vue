@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "button-reset",
+  name: "button-edit",
 };
 </script>
 <template>
@@ -17,8 +17,8 @@ button {
   cursor: pointer;
   padding: 0.7em 1.4em;
   background-color: white;
-  color: red;
-  border: 2px solid red;
+  color: darkgoldenrod;
+  border: 2px solid darkgoldenrod;
   margin: 10px 10px 10px 0px;
 }
 </style>

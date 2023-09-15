@@ -1,25 +1,29 @@
 <template>
-  <div class="">
-    <header-messages :messages="this.getMessages" />
-    <h2>Собственник - {{ mapOwnerToLineFullNamesOwner(this.getOwner) }}.</h2>
-    <block-read-owner :owner="owner" />
-    <block-read-password :password="this.getOwner.password" />
-    <hr />
-    <button-simple
-      class="btn"
-      @click="this.$router.push('/edit/owner/' + this.getOwner.id)"
-      >Редактировать собственника.</button-simple
-    >
-  </div>
+  <vue-loader :isLoader="this.getIsLoading" />
+  <header-messages :messages="this.getMessages" />
+  <line-header
+    :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(this.getOwner)}`"
+  />
+  <block-read-owner :owner="owner" />
+  <block-read-passport :passport="this.getOwner.passport" />
+  <vue-hr />
+  <button-edit
+    @click="this.$router.push(PAGE_EDIT_OWNER + '/' + this.getOwner.id)"
+    >{{ EDIT_OWNER }}</button-edit
+  >
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 import { mapOwnerToLineFullNamesOwner } from "@/pages/functions";
+import { EDIT_OWNER } from "@/ui/namesButton";
+import { PAGE_EDIT_OWNER } from "@/router/apiRouter";
 export default {
   data() {
     return {
       mapOwnerToLineFullNamesOwner,
       owner: {},
+      EDIT_OWNER,
+      PAGE_EDIT_OWNER,
     };
   },
   methods: {
@@ -36,6 +40,7 @@ export default {
     ...mapGetters({
       getOwner: "owner/getOwner",
       getMessages: "owner/getMessages",
+      getIsLoading: "owner/getIsLoading",
     }),
   },
 };
@@ -46,17 +51,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin: 10px 0px;
-  text-align: center;
-}
-.btn {
-  margin: 20px 0px 10px 5px;
-}
-hr {
-  counter-reset: teal;
-  margin-top: 20px;
 }
 </style>

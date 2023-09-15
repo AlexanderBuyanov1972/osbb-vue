@@ -2,25 +2,25 @@
   <div class="wrapper">
     <div class="item" :style="{'color':'brown', 'font-size':'1.5em'}">Паспорт :</div>
     <div class="item">
-      <span>Серийный номер : </span>{{ password.passwordID }}
+      <span>Серийный номер : </span>{{ passport.numberPassport }}
     </div>
     <div class="item">
-      <span>Номер записи : </span>{{ password.numberEntry }}
+      <span>Номер записи : </span>{{ passport.numberEntry }}
     </div>
-    <div class="item"><span>Дата выдачи : </span>{{ password.dateIssue }}</div>
+    <div class="item"><span>Дата выдачи : </span>{{ passport.dateIssue }}</div>
     <div class="item">
-      <span>Орган выдачи : </span>{{ password.issuingAuthority }}
+      <span>Орган выдачи : </span>{{ passport.issuingAuthority }}
     </div>
     <div class="item">
-      <span>ИНН : </span>{{ password.registrationNumberCardPayerTaxes }}
+      <span>ИНН : </span>{{ passport.registrationNumberCardPayerTaxes }}
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "block-read-password",
+  name: "block-read-passport",
   props: {
-    password: Object,
+    passport: Object,
   },
 };
 </script>

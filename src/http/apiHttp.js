@@ -6,7 +6,10 @@ export const ROLE = "/role";
 export const OWNER = "/owner";
 export const OWNERSHIP = "/ownership";
 export const ADDRESS = "/address";
-export const PASSWORD = "/password";
+export const PASSPORT = "/passport";
+export const PHOTO = "/photo";
+export const SELECT = "/select";
+export const QUESTIONNAIRE = "/questionnaire";
 // ---------------- summa -------------------
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
 export const SUMMA_AREA_APARTMENT = "/summa_area_apartment";

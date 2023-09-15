@@ -2,7 +2,10 @@
   <div class="main">
     <div class="list" v-for="one in list" :key="one.id">
       <p
-        @click="() => this.$router.push('/owner/' + one.fullNameOwner.ownerId)"
+        @click="
+          () =>
+            this.$router.push(PAGE_SHOW_OWNER + '/' + one.fullNameOwner.ownerId)
+        "
       >
         {{ one.fullNameOwner.fullNameOwner }}
       </p>
@@ -12,7 +15,7 @@
         :ownership="two"
         :key="two.id"
         :count="index + 1"
-        @click="() => this.$router.push('/ownership/' + two.id)"
+        @click="() => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + two.id)"
       />
     </div>
   </div>
@@ -21,7 +24,14 @@
 <script>
 import OwnershipList from "@/itemsAndLists/OwnershipList.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
+import { PAGE_SHOW_OWNER, PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
 export default {
+  data() {
+    return {
+      PAGE_SHOW_OWNER,
+      PAGE_SHOW_OWNERSHIP,
+    };
+  },
   components: {
     OwnershipList,
     OwnershipItem,

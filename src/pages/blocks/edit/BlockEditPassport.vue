@@ -1,62 +1,65 @@
 <template>
   <div class="main">
-    <h2>Паспорт собственника.</h2>
-    <div class="password">
-      <div class="passwordID">
+    <line-header-block text="Паспорт собственника" />
+    <div class="passport">
+      <div class="numberPassport">
         <block-error-message
-          :field="password.passwordID"
+          :field="passport.numberPassport"
           messageFalse="Укажите номер паспорта (XXXXXXXXX)."
-          messageTrue="Паспорт ID."
-          @valid="(value) => handlerPasswordID(value)"
+          messageTrue="Номер паспорта."
+          @valid="(value) => handlerNumberPassport(value)"
         />
-        <input-simple v-model="password.passwordID" placeholder="Паспорт ID" />
+        <input-simple
+          v-model="passport.numberPassport"
+          placeholder="Номер паспорта"
+        />
       </div>
 
       <div class="numberEntry">
         <block-error-message
-          :field="password.numberEntry"
+          :field="passport.numberEntry"
           messageFalse="Укажите номер записи YYYYMMDD-XXXXX."
           messageTrue="Номер записи."
           @valid="(value) => handlerNumberEntry(value)"
         />
         <input-simple
-          v-model="password.numberEntry"
+          v-model="passport.numberEntry"
           placeholder="Номер записи"
         />
       </div>
 
       <div class="dateIssue">
         <block-error-message
-          :field="password.dateIssue"
+          :field="passport.dateIssue"
           messageFalse="Укажите дату выдачи (YYYY-MM-DD)."
           messageTrue="Дата выдачи."
           @valid="(value) => handlerDateIssue(value)"
         />
-        <input-simple v-model="password.dateIssue" placeholder="Дата выдачи." />
+        <input-simple v-model="passport.dateIssue" placeholder="Дата выдачи." />
       </div>
 
       <div class="issuingAuthority">
         <block-error-message
-          :field="password.issuingAuthority"
+          :field="passport.issuingAuthority"
           messageFalse="Укажите кем выдан (XXXX)."
           messageTrue="Орган выдачи."
           @valid="(value) => handlerIssuingAuthority(value)"
         />
         <input-simple
-          v-model="password.issuingAuthority"
+          v-model="passport.issuingAuthority"
           placeholder="Орган выдачи."
         />
       </div>
 
       <div class="registrationNumberCardPayerTaxes">
         <block-error-message
-          :field="password.registrationNumberCardPayerTaxes"
+          :field="passport.registrationNumberCardPayerTaxes"
           messageFalse="Укажите ИНН (XXXXXXXXXX)."
           messageTrue="ИНН."
           @valid="(value) => handlerRegistrationNumberCardPayerTaxes(value)"
         />
         <input-simple
-          v-model="password.registrationNumberCardPayerTaxes"
+          v-model="passport.registrationNumberCardPayerTaxes"
           placeholder="ИНН"
         />
       </div>
@@ -64,16 +67,16 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "block-edit-password",
+  name: "block-edit-passport",
   props: {
     id: Number,
   },
   data() {
     return {
-      password: {},
-      validPasswordID: false,
+      passport: {},
+      validNumberPassport: false,
       validNumberEntry: false,
       validDateIssue: false,
       validIssuingAuthority: false,
@@ -82,41 +85,41 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPassword: "password/fetchPassword",
+      fetchPassport: "passport/fetchPassport",
     }),
-    emitPassword() {
-      this.$emit("isValidPassword", this.isValidPassword);
-      this.$emit("password", this.password);
+    emitPassport() {
+      this.$emit("isValidPassport", this.isValidPassport);
+      this.$emit("passport", this.passport);
     },
-    handlerPasswordID(value) {
-      this.validPasswordID = value;
-      this.emitPassword();
+    handlerNumberPassport(value) {
+      this.validNumberPassport = value;
+      this.emitPassport();
     },
     handlerNumberEntry(value) {
       this.validNumberEntry = value;
-      this.emitPassword();
+      this.emitPassport();
     },
     handlerDateIssue(value) {
       this.validDateIssue = value;
-      this.emitPassword();
+      this.emitPassport();
     },
     handlerIssuingAuthority(value) {
       this.validIssuingAuthority = value;
-      this.emitPassword();
+      this.emitPassport();
     },
     handlerRegistrationNumberCardPayerTaxes(value) {
       this.validRegistrationNumberCardPayerTaxes = value;
-      this.emitPassword();
+      this.emitPassport();
     },
   },
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
-      getPassword: "password/getPassword",
+      getPassport: "passport/getPassport",
     }),
-    isValidPassword() {
+    isValidPassport() {
       return (
-        this.validPasswordID &&
+        this.validNumberPassport &&
         this.validNumberEntry &&
         this.validDateIssue &&
         this.validIssuingAuthority &&
@@ -125,14 +128,16 @@ export default {
     },
   },
   mounted() {
-    if (this.id != undefined) {
-      this.fetchPassword(this.id).then(
-        () => (this.password = this.getPassword)
-      );
-    } else {
-      this.fetchPassword(this.$route.params.id).then(
-        () => (this.password = this.getPassword)
-      );
+    if (this.id != 0) {
+      if (this.id != undefined) {
+        this.fetchPassport(this.id).then(
+          () => (this.passport = this.getPassport)
+        );
+      } else {
+        this.fetchPassport(this.$route.params.id).then(
+          () => (this.passport = this.getPassport)
+        );
+      }
     }
   },
 };
@@ -143,10 +148,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

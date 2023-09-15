@@ -1,24 +1,31 @@
 <template>
-  <div class="main">
     <div class="list" v-for="one in list" :key="one.id">
       <ownership-item
-        class="item"
-        :ownership="one.ownership"
-        @click="() => this.$router.push('/ownership/' + one.ownership.id)"
+         :ownership="one.ownership"
+        @click="
+          () => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + one.ownership.id)
+        "
       />
       <p
         v-for="(two, index) in one.listFullNameOwner"
         :key="two.ownerId"
-        @click="() => this.$router.push('/owner/' + two.ownerId)"
+        @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + two.ownerId)"
       >
         {{ index + 1 }}. {{ two.fullNameOwner }}
       </p>
     </div>
-  </div>
+
 </template>
 <script>
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
+import { PAGE_SHOW_OWNERSHIP, PAGE_SHOW_OWNER } from "@/router/apiRouter";
 export default {
+  data() {
+    return {
+      PAGE_SHOW_OWNERSHIP,
+      PAGE_SHOW_OWNER,
+    };
+  },
   components: {
     OwnershipItem,
   },
@@ -37,9 +44,6 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
-  margin: 10px 0px;
-}
 .list {
   border: 2px solid teal;
   padding: 10px;
@@ -50,8 +54,5 @@ p {
   color: brown;
   font-size: 1.2em;
   margin: 10px 5px;
-}
-.item {
-  margin-left: 10px;
 }
 </style>

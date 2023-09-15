@@ -10,11 +10,17 @@
   </div>
 </template>
 <script>
+import { generateJson } from "@/pages/generateJSON";
 export default {
   data() {
-    return {};
+    return {
+      generateJson,
+    };
   },
   methods: {},
+  mounted() {
+    this.generateJson();
+  },
 };
 </script>
 
@@ -35,7 +41,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.header{
+.header {
   text-align: center;
   color: teal;
   font-size: 2em;

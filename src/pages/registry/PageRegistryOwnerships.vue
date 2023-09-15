@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Реестр недвижимости"/>
     <block-information-about-house :info="getBuildingCharacteristics" />
@@ -26,6 +27,7 @@ export default {
       getRegistryOwnerships: "registry/getRegistryOwnerships",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
       getMessages: "registry/getMessages",
+      getIsLoading: "registry/getIsLoading",
     }),
   },
 };

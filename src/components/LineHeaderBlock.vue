@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: "line-header",
+  name: "line-header-block",
   props: {
     text: String,
   },
@@ -18,10 +18,10 @@ export default {
 }
 
 .header {
-  color: teal;
+  color: blueviolet;
   margin: 20px 0px;
   text-align: center;
-  font-size: 2.2em;
+  font-size: 1.5em;
   text-decoration: underline;
 }
 </style>

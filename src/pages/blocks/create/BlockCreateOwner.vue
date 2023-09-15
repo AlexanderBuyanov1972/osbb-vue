@@ -1,7 +1,6 @@
 <template>
   <div class="main" @mousemove="emitOwner">
-    <h2>Собственник.</h2>
-
+    <line-header-block text="Собственник" />
     <div class="owner">
       <div class="lastName">
         <block-error-message
@@ -98,13 +97,17 @@
           messageTrue="Доля в собственности (от 0 до 1, три знака после точки)."
           @valid="(value) => (validShareInRealEstate = value)"
         />
-        <input-simple v-model="owner.shareInRealEstate" placeholder="Доля в собственности (от 0 до 1, три знака после точки)." />
+        <input-simple
+          v-model="owner.shareInRealEstate"
+          placeholder="Доля в собственности (от 0 до 1, три знака после точки)."
+        />
       </div>
     </div>
     <button-reset @click="reset" :hidden="!isValidOwner">Очистить</button-reset>
   </div>
 </template>
 <script>
+import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
 export default {
   name: "block-create-owner",
   data() {
@@ -120,17 +123,9 @@ export default {
       validEmail: false,
       validPhoneNumber: false,
       validShareInRealEstate: false,
+      arrayGender,
+      arrayFamilyStatus,
     };
-  },
-  props: {
-    arrayGender: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayFamilyStatus: {
-      Type: Array,
-      default: () => [],
-    },
   },
   methods: {
     emitOwner() {
@@ -182,10 +177,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

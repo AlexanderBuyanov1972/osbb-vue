@@ -1,38 +1,63 @@
 <template>
   <div class="main">
-    <button-simple class="btn" @click="goToPageMain">На главную.</button-simple>
-    <button-simple class="btn" @click="goToPageOwners"
-      >Список собственников.
+    <button-simple @click="goToPageMain">{{ MAIN }}</button-simple>
+    <button-simple @click="goToPageOwners">{{ LIST_OWNER }} </button-simple>
+    <button-simple @click="goToPageOwnerships"
+      >{{ LIST_OWNERSHIP }}
     </button-simple>
-    <button-simple class="btn" @click="goToPageOwnerships"
-      >Список объектов недвижимости.
+    <button-simple @click="goToPageRegistryOwners"
+      >{{ REGISTRY_OWNER }}
     </button-simple>
-    <button-simple class="btn" @click="goToPageRegistryOwners"
-      >Реестр собственников.
-    </button-simple>
-
-    <button-simple class="btn" @click="goToPageRegistryOwnerships"
-      >Реестр объектов недвижимости.
+    <button-simple @click="goToPageRegistryOwnerships"
+      >{{ REGISTRY_OWNERSHIP }}
     </button-simple>
   </div>
 </template>
 <script>
+import {
+  PAGE_MAIN,
+  PAGE_SHOW_OWNERS,
+  PAGE_SHOW_OWNERSHIPS,
+  PAGE_REGISTRY_OWNERS,
+  PAGE_REGISTRY_OWNERSHIPS,
+} from "@/router/apiRouter";
+import {
+  LIST_OWNER,
+  LIST_OWNERSHIP,
+  REGISTRY_OWNER,
+  REGISTRY_OWNERSHIP,
+  MAIN,
+} from "@/ui/namesButton";
 export default {
+  data() {
+    return {
+      LIST_OWNER,
+      LIST_OWNERSHIP,
+      REGISTRY_OWNER,
+      REGISTRY_OWNERSHIP,
+      MAIN,
+      PAGE_MAIN,
+      PAGE_SHOW_OWNERS,
+      PAGE_SHOW_OWNERSHIPS,
+      PAGE_REGISTRY_OWNERS,
+      PAGE_REGISTRY_OWNERSHIPS,
+    };
+  },
   methods: {
     goToPageMain() {
-      this.$router.push("/");
+      this.$router.push(PAGE_MAIN);
     },
     goToPageOwners() {
-      this.$router.push("/owners");
+      this.$router.push(PAGE_SHOW_OWNERS);
     },
     goToPageOwnerships() {
-      this.$router.push("/ownerships");
+      this.$router.push(PAGE_SHOW_OWNERSHIPS);
     },
     goToPageRegistryOwners() {
-      this.$router.push("/registry/owners");
+      this.$router.push(PAGE_REGISTRY_OWNERS);
     },
     goToPageRegistryOwnerships() {
-      this.$router.push("/registry/ownerships");
+      this.$router.push(PAGE_REGISTRY_OWNERSHIPS);
     },
   },
 };
@@ -47,9 +72,6 @@ export default {
 .main {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.btn {
-  margin: 10px 0px;
+  justify-content: flex-start;
 }
 </style>

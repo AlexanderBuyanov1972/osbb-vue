@@ -1,6 +1,6 @@
 <template>
   <div class="main" @mousemove="emitAddress">
-    <h2>Адресс собственности.</h2>
+    <line-header-block text="Адресс собственности" />
 
     <div class="address">
       <div class="zipCode">
@@ -85,7 +85,7 @@
           placeholder="Дом"
           :readonly="true"
         />
-        </div>
+      </div>
 
       <div class="entrance">
         <block-error-message
@@ -94,11 +94,7 @@
           messageTrue="Подъезд."
           @valid="(value) => (validEntrance = value)"
         />
-        <input-simple
-          v-model="address.entrance"
-          placeholder="Подъезд."
-          :readonly="true"
-        />
+        <input-simple v-model="address.entrance" placeholder="Подъезд." />
       </div>
 
       <div class="floor">
@@ -122,7 +118,9 @@
       </div>
     </div>
 
-    <button-reset @click="reset" :hidden="!isValidAddress">Очистить</button-reset>
+    <button-reset @click="reset" :hidden="!isValidAddress"
+      >Очистить</button-reset
+    >
   </div>
 </template>
 <script>
@@ -185,10 +183,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

@@ -16,22 +16,19 @@
         />
       </div>
     </div>
-    <hr />
+    <vue-hr />
+    <button-back @click="$router.push('/ownership/' + this.$route.params.id)" />
     <button-simple
-      class="btn"
-      @click="$router.push('/ownership/' + this.$route.params.id)"
-      >Назад.</button-simple
-    >
-    <button-simple
-      class="btn"
       @click="sendOwnership"
       :hidden="!(isValidOwnership && isValidAddress)"
-      >Послать на сервер.</button-simple
+      >{{ SEND_TO_SERVER }}</button-simple
     >
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -39,6 +36,8 @@ export default {
       address: {},
       isValidOwnership: false,
       isValidAddress: false,
+      SEND_TO_SERVER,
+      PAGE_SHOW_OWNERSHIP,
     };
   },
   methods: {
@@ -48,7 +47,7 @@ export default {
     sendOwnership() {
       this.ownership.address = this.address;
       this.updateOwnership(this.ownership).then(() => {
-        this.$router.push("/ownership/" + this.$route.params.id);
+        this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + this.$route.params.id);
       });
     },
   },
@@ -65,12 +64,6 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-hr {
-  color: teal;
-}
-.btn {
-  margin: 10px 0 0 10px;
 }
 .blocks {
   display: flex;

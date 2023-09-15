@@ -4,7 +4,7 @@ export default {
 };
 </script>
 <template>
-  <button><slot></slot></button>
+  <button ><slot></slot></button>
 </template>
 
 <style scoped>
@@ -19,6 +19,6 @@ button {
   background-color: white;
   color: blueviolet;
   border: 2px solid blueviolet;
-  margin: 10px 0px;
+  margin: 10px 10px 10px 0px;
 }
 </style>

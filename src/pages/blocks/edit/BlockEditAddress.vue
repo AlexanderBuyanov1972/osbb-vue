@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h2>Адресс собственности.</h2>
+    <line-header-block text="Адресс собственности" />
 
     <div class="address">
       <div class="zipCode">
@@ -212,10 +212,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

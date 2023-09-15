@@ -21,9 +21,9 @@ export default {
       phoneNumber: "",
       shareInRealEstate: 0,
       photos: [],
-      password: {
+      passport: {
         id: 0,
-        passwordID: "",
+        passportId: "",
         numberEntry: "",
         dateIssue: "",
         issuingAuthority: "",

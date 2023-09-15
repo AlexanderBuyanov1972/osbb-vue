@@ -1,6 +1,6 @@
 <template>
   <div class="main" @mousemove="emitOwnership">
-    <h2>Собственность.</h2>
+    <line-header-block text="Собственность" />
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
@@ -49,10 +49,9 @@
           messageTrue="Документ о праве собственности."
           @valid="(value) => (validDocumentConfirmsRightOwn = value)"
         />
-        <select-simple
-          :array="arrayDocumentConfirmsRightOwn"
-          @select="(value) => changeSelectDocumentConfirmsRightOwn(value)"
-          :flagReset="flagReset"
+        <input-simple
+          v-model="ownership.documentConfirmsRightOwn"
+          placeholder="Документ о праве собственности."
         />
       </div>
 
@@ -90,6 +89,11 @@
   </div>
 </template>
 <script>
+import {
+  arrayTypeRoom,
+  arrayLoggia,
+  arrayNumberRooms,
+} from "@/pages/arraysOfData";
 export default {
   name: "block-create-ownership",
   data() {
@@ -102,25 +106,11 @@ export default {
       validDocumentConfirmsRightOwn: false,
       validNumberRooms: false,
       validLoggia: false,
+
+      arrayTypeRoom,
+      arrayLoggia,
+      arrayNumberRooms,
     };
-  },
-  props: {
-    arrayTypeRoom: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayDocumentConfirmsRightOwn: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayLoggia: {
-      Type: Array,
-      default: () => [],
-    },
-    arrayNumberRooms: {
-      Type: Array,
-      default: () => [],
-    },
   },
   methods: {
     emitOwnership() {
@@ -129,10 +119,6 @@ export default {
     },
     changeSelectTypeRoom(value) {
       this.ownership.typeRoom = value;
-      this.flagReset = false;
-    },
-    changeSelectDocumentConfirmsRightOwn(value) {
-      this.ownership.documentConfirmsRightOwn = value;
       this.flagReset = false;
     },
     changeSelectLoggia(value) {
@@ -173,13 +159,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.main {
-  padding-bottom: 100px;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

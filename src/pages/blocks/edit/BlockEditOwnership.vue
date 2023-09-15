@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h2>Собственность.</h2>
+    <line-header-block text="Собственность" />
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
@@ -49,15 +49,9 @@
           messageTrue="Документ о праве собственности."
           @valid="(value) => handlerDocumentConfirmsRightOwn(value)"
         />
-        <select-edit
-          :array="arrayDocumentConfirmsRightOwn"
-          :startName="
-            getNameByValue(
-              arrayDocumentConfirmsRightOwn,
-              ownership.documentConfirmsRightOwn
-            )
-          "
-          @select="(value) => (ownership.documentConfirmsRightOwn = value)"
+        <input-simple
+          v-model="ownership.documentConfirmsRightOwn"
+          placeholder="Документ о праве собственности."
         />
       </div>
 
@@ -95,7 +89,6 @@
 import { getNameByValue } from "@/pages/functions";
 import {
   arrayTypeRoom,
-  arrayDocumentConfirmsRightOwn,
   arrayLoggia,
   arrayNumberRooms,
 } from "@/pages/arraysOfData";
@@ -114,7 +107,6 @@ export default {
       validLoggia: false,
 
       arrayTypeRoom,
-      arrayDocumentConfirmsRightOwn,
       arrayLoggia,
       arrayNumberRooms,
     };
@@ -181,13 +173,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.main {
-  padding-bottom: 100px;
-}
-h2 {
-  color: blueviolet;
-  margin-bottom: 10px;
-  text-align: center;
 }
 </style>

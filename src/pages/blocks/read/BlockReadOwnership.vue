@@ -19,7 +19,7 @@
       </div>
       <div class="item">
         <span>Основание собственности : </span
-        >{{ showDocumentConfirmsRightOwn(ownership.documentConfirmsRightOwn) }}
+        >{{ ownership.documentConfirmsRightOwn }}
       </div>
       <div class="item">
         <span>Наличие балкона : </span>{{ showLoggia(ownership.loggia) }}
@@ -30,7 +30,6 @@
 <script>
 import {
   showLoggia,
-  showDocumentConfirmsRightOwn,
   showTypeRoom,
   showNumberRooms,
 } from "@/pages/functions";
@@ -44,7 +43,6 @@ export default {
   data() {
     return {
       showLoggia,
-      showDocumentConfirmsRightOwn,
       showTypeRoom,
       showNumberRooms,
     };

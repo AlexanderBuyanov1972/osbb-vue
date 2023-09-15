@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <header-messages :messages="getMessages" />
-    <div class="header">Редактирование записи о собственнике.</div>
+    <line-header text="Редактирование данных о собственнике" />
     <div class="blocks">
       <div class="owner">
         <block-edit-owner
@@ -9,58 +9,61 @@
           @isValidOwner="(value) => (isValidOwner = value)"
         />
       </div>
-      <div class="password">
-        <block-edit-password
-          @password="(data) => (password = data)"
-          @isValidPassword="(value) => (isValidPassword = value)"
+      <div class="passport">
+        <block-edit-passport
+          @passport="(data) => (passport = data)"
+          @isValidPassport="(value) => (isValidPassport = value)"
         />
       </div>
     </div>
-    <hr />
+    <vue-hr />
+    <button-back
+      @click="$router.push(PAGE_SHOW_OWNER + '/' + this.$route.params.id)"
+    />
     <button-simple
-      class="btn"
-      @click="$router.push('/owner/' + this.$route.params.id)"
-      >Назад.</button-simple
-    >
-    <button-simple
-      class="btn"
       @click="sendOwner"
-      :hidden="!(isValidOwner && isValidPassword)"
-      >Послать на сервер.</button-simple
+      :hidden="!(isValidOwner && isValidPassport)"
+      >{{ SEND_TO_SERVER }}</button-simple
     >
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { PAGE_SHOW_OWNER } from "@/router/apiRouter";
+import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
       owner: {},
-      password: {},
+      passport: {},
       isValidOwner: false,
-      isValidPassword: false,
+      isValidPassport: false,
+      SEND_TO_SERVER,
+      PAGE_SHOW_OWNER,
     };
   },
   methods: {
     ...mapActions({
       updateOwner: "owner/updateOwner",
     }),
+    ...mapMutations({
+      setIsLoading: "owner/setIsLoading",
+    }),
     sendOwner() {
       this.owner.photos =
         this.owner.gender == "MALE"
           ? [{ id: 1, name: "male", url: "@/photos/owners/male.jpg" }]
           : [{ id: 2, name: "female", url: "@/photos/owners/female.jpg" }];
-      this.owner.password = this.password;
+      this.owner.passport = this.passport;
       this.updateOwner(this.owner).then(() => {
-        setTimeout(() => {
-          this.$router.push("/owner/" + this.$route.params.id);
-        }, 3000);
+        this.$router.push(PAGE_SHOW_OWNER + "/" + this.$route.params.id);
       });
     },
   },
   computed: {
     ...mapGetters({
       getMessages: "owner/getMessages",
+      getIsLoading: "owner/getIsLoading",
     }),
   },
 };
@@ -72,18 +75,6 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.header {
-  color: brown;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 1.8em;
-}
-hr {
-  color: teal;
-}
-.btn {
-  margin: 10px 0 0 10px;
-}
 .blocks {
   display: flex;
   align-items: start;
@@ -91,15 +82,16 @@ hr {
   margin-bottom: 10px;
   border: 2px solid blueviolet;
   padding: 10px;
+  font-size: 1.3em;
 }
 .owner,
-.password {
+.passport {
   width: 50%;
 }
 .owner {
   margin-right: 10px;
 }
-.password {
+.passport {
   margin-left: 10px;
 }
 </style>

@@ -1,13 +1,12 @@
 import {
   arrayTypeRoom,
   arrayNumberRooms,
-  arrayDocumentConfirmsRightOwn,
   arrayLoggia,
   arrayGender,
   arrayFamilyStatus,
 } from "@/pages/arraysOfData";
 
-// ------------ show fields odjects  arrays ---------------
+// ------------ show fields objects  arrays ---------------
 
 export const showGender = (value) => {
   try {
@@ -26,13 +25,6 @@ export const showFamilyStatus = (value) => {
 export const showLoggia = (value) => {
   try {
     return arrayLoggia.find((el) => el.value === value).name;
-  } catch (error) {
-    return "";
-  }
-};
-export const showDocumentConfirmsRightOwn = (value) => {
-  try {
-    return arrayDocumentConfirmsRightOwn.find((el) => el.value == value).name;
   } catch (error) {
     return "";
   }
@@ -113,4 +105,12 @@ export const mergingTwoArraysAndRemovingIdenticalMessages = (arr1, arr2) => {
     if (!result.includes(el)) result.unshift(el);
   });
   return result;
+};
+
+// подсветка незаполненых полей
+
+export const checkFilling = (field) => {
+  return field == undefined || field == null || field == "" || field == 0
+    ? ["item", "danger"]
+    : ["item"];
 };
