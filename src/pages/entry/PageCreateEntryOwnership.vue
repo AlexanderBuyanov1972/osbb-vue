@@ -54,7 +54,7 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions/functions";
 import { SEND_TO_SERVER, CREATE_OWNER, DELETE_OWNER } from "@/ui/namesButton";
 import { PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
 export default {
@@ -79,16 +79,10 @@ export default {
   },
   methods: {
     sendOwnership() {
-      const ownershipID = this.countOwnerships + 1;
-      this.address.id = ownershipID;
-      this.ownership.id = ownershipID;
       this.ownership.address = this.address;
-
-      this.ownership.owners = this.mapListOwners(this.countOwners + 1);
+      this.ownership.owners = this.mapListOwners();
       this.createOwnership(this.ownership).then(() => {
-        setTimeout(() => {
-          this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + ownershipID);
-        }, 5000);
+        this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + this.getOwnership.id);
       });
     },
     plusOwnership() {
@@ -104,14 +98,8 @@ export default {
       this.owners.forEach((el) => {
         let objectOwner = el.owner;
         let objectPassport = el.passport;
-
-        objectOwner.id = id;
-        objectPassport.id = id;
-
         objectOwner.passport = objectPassport;
         result.push(objectOwner);
-
-        id += 1;
       });
       return result;
     },
@@ -175,3 +163,4 @@ export default {
   width: 25%;
 }
 </style>
+@/pages/functions/functions

@@ -93,7 +93,7 @@ import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
-} from "@/pages/arraysOfData";
+} from "@/pages/functions/arraysOfData";
 export default {
   name: "block-create-ownership",
   data() {
@@ -161,3 +161,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/functions/arraysOfData

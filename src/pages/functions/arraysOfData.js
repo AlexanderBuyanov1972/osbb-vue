@@ -3,7 +3,7 @@ export const arrayTypeRoom = [
   { id: 2, name: "Квартира", value: "APARTMENT" },
   {
     id: 3,
-    name: "Нежилая помещение",
+    name: "Нежилое помещение",
     value: "NON_RESIDENTIAL_ROOM",
   },
 ];

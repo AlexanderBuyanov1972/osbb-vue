@@ -66,7 +66,7 @@
   </div>
 </template>
 <script>
-import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import {
   DELETE,
@@ -108,6 +108,9 @@ export default {
     sendOwnership() {
       this.ownership.address = this.address;
       this.ownership.owners = this.mapListOwners();
+      this.updateOwnership(this.ownership).then(() => {
+        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.ownership.id);
+      });
       this.updateOwnership(this.ownership).then(() => {
         this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.ownership.id);
       });
@@ -211,3 +214,4 @@ hr {
   color: teal;
 }
 </style>
+@/pages/functions/functions

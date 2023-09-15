@@ -85,8 +85,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPassport: "passport/fetchPassport",
+      fetchOwner: "owner/fetchOwner",
     }),
+
     emitPassport() {
       this.$emit("isValidPassport", this.isValidPassport);
       this.$emit("passport", this.passport);
@@ -115,7 +116,6 @@ export default {
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
-      getPassport: "passport/getPassport",
     }),
     isValidPassport() {
       return (
@@ -130,12 +130,12 @@ export default {
   mounted() {
     if (this.id != 0) {
       if (this.id != undefined) {
-        this.fetchPassport(this.id).then(
-          () => (this.passport = this.getPassport)
+        this.fetchOwner(this.id).then(
+          () => (this.passport = this.getOwner.passport)
         );
       } else {
-        this.fetchPassport(this.$route.params.id).then(
-          () => (this.passport = this.getPassport)
+        this.fetchOwner(this.$route.params.id).then(
+          () => (this.passport = this.getOwner.passport)
         );
       }
     }

@@ -2,30 +2,52 @@
   <div class="main">
     <div class="count">{{ count }}</div>
     <div class="type_room">
+      <span v-show="flag">Тип : </span>
       {{ showTypeRoom(ownership.typeRoom) }}
     </div>
-    <div class="apartment">{{ ownership.address.apartment }}</div>
-    <div class="item">{{ ownership.totalArea }}</div>
-    <div class="item">{{ ownership.livingArea }}</div>
-    <div class="item">{{ ownership.numberRooms }}</div>
-    <div class="item">{{ ownership.address.entrance }}</div>
-    <div class="item">{{ ownership.address.floor }}</div>
-    <div class="item">{{ showLoggia(ownership.loggia) }}</div>
+    <div class="apartment">
+      <span v-show="flag">Квартира № : </span>
+      {{ ownership.address.apartment }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Общая площадь : </span>
+      {{ ownership.totalArea }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Жилая площадь : </span>
+      {{ ownership.livingArea }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Кол-во комнат : </span>
+      {{ ownership.numberRooms }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Подъезд : </span>
+      {{ ownership.address.entrance }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Этаж : </span>
+      {{ ownership.address.floor }}
+    </div>
+    <div class="item">
+      <span v-show="flag">Балкон : </span>
+      {{ showLoggia(ownership.loggia) }}
+    </div>
   </div>
 </template>
 <script>
-import { showTypeRoom,showLoggia } from "@/pages/functions";
+import { showTypeRoom, showLoggia } from "@/pages/functions/functions";
 export default {
   props: {
-    ownership: {
-      Type: Object,
-    },
+    ownership: Object,
+    flag: false,
     count: Number,
   },
   data() {
     return {
       showTypeRoom,
       showLoggia,
+      flag: this.flag,
     };
   },
 };
@@ -62,4 +84,8 @@ export default {
 .danger {
   background-color: honeydew;
 }
+span {
+  color: blueviolet;
+}
 </style>
+@/pages/functions/functions

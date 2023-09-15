@@ -1,20 +1,20 @@
 <template>
-    <div class="list" v-for="one in list" :key="one.id">
-      <ownership-item
-         :ownership="one.ownership"
-        @click="
-          () => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + one.ownership.id)
-        "
-      />
-      <p
-        v-for="(two, index) in one.listFullNameOwner"
-        :key="two.ownerId"
-        @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + two.ownerId)"
-      >
-        {{ index + 1 }}. {{ two.fullNameOwner }}
-      </p>
-    </div>
-
+  <div class="list" v-for="one in list" :key="one.id">
+    <ownership-item
+      :ownership="one.ownership"
+      @click="
+        () => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + one.ownership.id)
+      "
+      :flag="true"
+    />
+    <p
+      v-for="(two, index) in one.listFullNameOwner"
+      :key="two.ownerId"
+      @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + two.ownerId)"
+    >
+      {{ index + 1 }}. {{ two.fullNameOwner }}
+    </p>
+  </div>
 </template>
 <script>
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";

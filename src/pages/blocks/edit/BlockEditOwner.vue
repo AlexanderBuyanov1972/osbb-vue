@@ -106,12 +106,12 @@
   </div>
 </template>
 <script>
-import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
+import { arrayGender, arrayFamilyStatus } from "@/pages/functions/arraysOfData";
 import {
   getElementByValue,
   getElementByName,
   getNameByValue,
-} from "@/pages/functions";
+} from "@/pages/functions/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-owner",
@@ -223,3 +223,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/functions/arraysOfData @/pages/functions/functions

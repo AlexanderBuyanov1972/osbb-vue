@@ -5,6 +5,7 @@ import {
   deleteOwnership,
   getAllOwnership,
   countRooms,
+  createAllOwnership,
 } from "@/http/ownership";
 
 export default {
@@ -88,7 +89,6 @@ export default {
         commit("setIsLoading", false);
       }
     },
-
     async updateOwnership({ commit }, object) {
       try {
         commit("setIsLoading", true);
@@ -149,12 +149,28 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchCountRooms({ commit, getters }) {
+    async fetchCountRooms({ commit }) {
       try {
         commit("setIsLoading", true);
         const response = await countRooms();
         commit("setCountOwnerships", response.data);
         commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async createJsonForDB({ commit }, list) {
+      try {
+        commit("setIsLoading", true);
+        const response = await createAllOwnership(list);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnerships", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

@@ -17,7 +17,7 @@
       </div>
     </div>
     <vue-hr />
-    <button-back @click="$router.push('/ownership/' + this.$route.params.id)" />
+    <button-back @click="getToPageOwnership" />
     <button-simple
       @click="sendOwnership"
       :hidden="!(isValidOwnership && isValidAddress)"
@@ -47,8 +47,11 @@ export default {
     sendOwnership() {
       this.ownership.address = this.address;
       this.updateOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + this.$route.params.id);
+        this.getToPageOwnership();
       });
+    },
+    getToPageOwnership() {
+      this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + this.$route.params.id);
     },
   },
   computed: {

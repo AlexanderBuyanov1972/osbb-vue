@@ -36,7 +36,7 @@ export const deleteOwnership = async (id) => {
 // -------------- all ------------------
 
 export const createAllOwnership = async (list) => {
-  const response = await axios.post(API_BASE + OWNERSHIP + ApiAll, list);
+  const response = await axios.post(API_BASE + OWNERSHIP + ALL, list);
   return response.data;
 };
 

@@ -24,12 +24,14 @@
         <span>Номер телефона : </span>{{ owner.phoneNumber }}
       </div>
       <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
-      <div class="item"><span>Доля в собственности : </span>{{ owner.shareInRealEstate }}</div>
+      <div class="item">
+        <span>Доля в собственности : </span>{{ owner.shareInRealEstate }}
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { showGender, showFamilyStatus } from "@/pages/functions";
+import { showGender, showFamilyStatus } from "@/pages/functions/functions";
 export default {
   name: "block-read-owner",
   props: {
@@ -80,3 +82,4 @@ img {
   padding: 10px;
 }
 </style>
+@/pages/functions/functions

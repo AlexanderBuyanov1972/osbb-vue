@@ -1,12 +1,26 @@
 import { faker } from "@faker-js/faker";
 
 export const generateJson = () => {
-  const countApartment = 37;
+  // общее количество квартир вдоме
+  const countApartment = 84;
+  // общее количество квартир в подъезде
+  const countEntrance = 12;
+  // общее количество квартир на этаже
+  const countFloor = 3;
+  //variables
+  let currentApartment = 1;
+  let currentEntrance = 1;
+  let currentFloor = 1;
+  // array result
   let result = [];
 
-  for (let i = 0; i < countApartment; i++) {
+  for (
+    currentApartment = 1;
+    currentApartment <= countApartment;
+    currentApartment++
+  ) {
     let owners = [];
-    for (let j = 0; j < (i % 3) + 1; j++) {
+    for (let j = 0; j < (currentApartment % 3) + 1; j++) {
       let owner = {
         firstName: faker.person.lastName() + "",
         secondName: faker.person.lastName() + "",
@@ -14,7 +28,12 @@ export const generateJson = () => {
         gender: faker.helpers.arrayElement(["MALE", "FEMALE"]),
         email: faker.internet.email(),
         phoneNumber: faker.phone.number("+38 (097) ### ## ##"),
-        dateBirth: faker.date.birthdate({ min: 16, max: 85, mode: "age" }) + "",
+        dateBirth:
+          faker.date
+            .birthdate({ min: 16, max: 85, mode: "age" })
+            .toISOString()
+            .substring(0, 10) + "",
+
         shareInRealEstate: faker.number.float({ precision: 0.1 }),
         familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
         passport: {
@@ -23,11 +42,14 @@ export const generateJson = () => {
             faker.number.int({ min: 10000000, max: 50000000 }) +
             "-" +
             faker.finance.accountNumber(4),
-          dateIssue: faker.date.birthdate({
-            min: 1960,
-            max: 2022,
-            mode: "year",
-          }),
+          dateIssue: faker.date
+            .birthdate({
+              min: 1960,
+              max: 2022,
+              mode: "year",
+            })
+            .toISOString()
+            .substring(0, 10),
           issuingAuthority: faker.number.int({ min: 1000, max: 1500 }) + "",
           registrationNumberCardPayerTaxes:
             faker.finance.accountNumber(10) + "",
@@ -58,16 +80,25 @@ export const generateJson = () => {
         city: "Каменское",
         street: "Свободы",
         house: "51",
+        entrance: currentEntrance + "",
 
-        entrance: Math.floor(i / 12) + 1 + "",
-        floor: Math.floor(i / 3) + 1 + "",
+        floor: currentFloor + "",
 
-        apartment: i + 1 + "",
+        apartment: currentApartment + "",
       },
     };
     ownership.owners = owners;
     result.push(ownership);
+
+    if (currentApartment % countFloor == 0) {
+      currentFloor++;
+    }
+
+    if (currentApartment % countEntrance == 0) {
+      currentEntrance++;
+      currentFloor = 1;
+    }
   }
 
-  console.log(result);
+  return result;
 };

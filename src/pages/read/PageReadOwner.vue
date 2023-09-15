@@ -14,7 +14,7 @@
 </template>
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import { mapOwnerToLineFullNamesOwner } from "@/pages/functions";
+import { mapOwnerToLineFullNamesOwner } from "@/pages/functions/functions";
 import { EDIT_OWNER } from "@/ui/namesButton";
 import { PAGE_EDIT_OWNER } from "@/router/apiRouter";
 export default {
@@ -53,3 +53,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/functions/functions

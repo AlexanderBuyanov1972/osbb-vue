@@ -7,20 +7,34 @@
         alt="Not Found"
       />
     </div>
+    <button-create @click="sendJsonToServer">Json</button-create>
   </div>
 </template>
 <script>
-import { generateJson } from "@/pages/generateJSON";
+import { generateJson } from "@/pages/functions/generate";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
       generateJson,
     };
   },
-  methods: {},
-  mounted() {
-    this.generateJson();
+  methods: {
+    ...mapActions({
+      createJsonForDB: "ownership/createJsonForDB",
+      createOwnership: "ownership/createOwnership",
+    }),
+    sendJsonToServer() {
+      let list = this.generateJson();
+      //console.log(list);
+      list.forEach((el) => {
+        setTimeout(() => {
+          this.createOwnership(el);
+        }, 1000);
+      });
+    },
   },
+  mounted() {},
 };
 </script>
 
@@ -47,3 +61,4 @@ export default {
   font-size: 2em;
 }
 </style>
+@/pages/generate @/pages/functions/generate

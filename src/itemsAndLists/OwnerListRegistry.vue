@@ -16,6 +16,7 @@
         :key="two.id"
         :count="index + 1"
         @click="() => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + two.id)"
+        :flag="true"
       />
     </div>
   </div>

@@ -107,7 +107,7 @@
   </div>
 </template>
 <script>
-import { arrayGender, arrayFamilyStatus } from "@/pages/arraysOfData";
+import { arrayGender, arrayFamilyStatus } from "@/pages/functions/arraysOfData";
 export default {
   name: "block-create-owner",
   data() {
@@ -179,3 +179,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/functions/arraysOfData

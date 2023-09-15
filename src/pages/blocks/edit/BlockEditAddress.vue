@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchAddress: "address/fetchAddress",
+      fetchOwnership: "ownership/fetchOwnership",
     }),
     emitAddress() {
       this.$emit("isValidAddress", this.isValidAddress);
@@ -183,7 +183,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      getAddress: "address/getAddress",
+      getOwnership: "ownership/getOwnership",
     }),
     isValidAddress() {
       return (
@@ -200,8 +200,8 @@ export default {
     },
   },
   mounted() {
-    this.fetchAddress(this.$route.params.id).then(
-      () => (this.address = this.getAddress)
+    this.fetchOwnership(this.$route.params.id).then(
+      () => (this.address = this.getOwnership.address)
     );
   },
 };

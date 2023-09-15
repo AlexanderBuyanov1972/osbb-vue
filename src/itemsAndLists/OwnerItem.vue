@@ -9,13 +9,17 @@
     </div>
     <div class="email">{{ owner.email }}</div>
     <div class="share">{{ owner.shareInRealEstate }}</div>
-     <div class="family">
-      {{ showGender( owner.gender) }}
+    <div class="family">
+      {{ showGender(owner.gender) }}
     </div>
   </div>
 </template>
 <script>
-import {mapOwnerToLineFullNamesOwner, showFamilyStatus, showGender } from "@/pages/functions"
+import {
+  mapOwnerToLineFullNamesOwner,
+  showFamilyStatus,
+  showGender,
+} from "@/pages/functions/functions";
 export default {
   name: "owner-item",
   props: {
@@ -69,9 +73,10 @@ span {
   width: 17%;
 }
 .family {
- width: 12%;
+  width: 12%;
 }
-.share{
+.share {
   width: 10%;
 }
 </style>
+@/pages/functions/functions

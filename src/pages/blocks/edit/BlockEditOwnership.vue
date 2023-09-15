@@ -86,12 +86,12 @@
   </div>
 </template>
 <script>
-import { getNameByValue } from "@/pages/functions";
+import { getNameByValue } from "@/pages/functions/functions";
 import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
-} from "@/pages/arraysOfData";
+} from "@/pages/functions/arraysOfData";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-edit-ownership",
@@ -175,3 +175,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/functions/arraysOfData @/pages/functions/functions

@@ -32,7 +32,7 @@ import {
   showLoggia,
   showTypeRoom,
   showNumberRooms,
-} from "@/pages/functions";
+} from "@/pages/functions/functions";
 export default {
   name: "block-read-ownership",
   props: {
@@ -71,10 +71,9 @@ export default {
 img {
   width: 70vh;
   height: 75vh;
-
 }
-.img{
-width: 45%;
+.img {
+  width: 45%;
 }
 .spans {
   font-size: 1.5em;
@@ -87,3 +86,4 @@ span {
   color: blueviolet;
 }
 </style>
+@/pages/functions/functions

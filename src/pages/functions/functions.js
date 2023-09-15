@@ -4,7 +4,7 @@ import {
   arrayLoggia,
   arrayGender,
   arrayFamilyStatus,
-} from "@/pages/arraysOfData";
+} from "@/pages/functions/arraysOfData";
 
 // ------------ show fields objects  arrays ---------------
 
