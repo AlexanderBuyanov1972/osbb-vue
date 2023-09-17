@@ -43,7 +43,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      apartment: 0,
+      apartment: "",
       LIST_OWNER,
       LIST_OWNERSHIP,
       REGISTRY_OWNER,

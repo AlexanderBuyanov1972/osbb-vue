@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     sendToServer() {
-      console.log(this.list);
+      const response = { ownerId: 0, list: this.list };
+      console.log(response);
     },
   },
 };
