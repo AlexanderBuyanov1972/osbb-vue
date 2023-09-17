@@ -6,6 +6,7 @@ import {
   getAllOwnership,
   countRooms,
   createAllOwnership,
+  getIdOwnershipByApartment,
 } from "@/http/ownership";
 
 export default {
@@ -30,6 +31,7 @@ export default {
         apartment: "",
       },
     },
+    idOwnership: 0,
     ownerships: [],
     messages: [],
     isLoading: false,
@@ -52,6 +54,9 @@ export default {
     setCountOwnerships(state, number) {
       state.countOwnerships = number;
     },
+    setIdOwnership(state, number) {
+      state.idOwnership = number;
+    },
   },
 
   getters: {
@@ -69,6 +74,9 @@ export default {
     },
     getCountOwnerships(state) {
       return state.countOwnerships;
+    },
+    getIdOwnership(state) {
+      return state.idOwnership;
     },
   },
 
@@ -167,6 +175,22 @@ export default {
         const response = await createAllOwnership(list);
         if (response != undefined && response.data != undefined) {
           commit("setOwnerships", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchIdOwnershipByIdApartment({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getIdOwnershipByApartment(apartment);
+        if (response != undefined && response.data != undefined) {
+          commit("setIdOwnership", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

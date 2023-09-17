@@ -3,62 +3,34 @@
     <header-messages :messages="[]" />
     <line-header text="Опросный лист" />
     <div class="list" v-for="item in list" :key="item.id">
-      <input-simple class="item" />
-      <div>
-        <div>
-          <input
-            class="input"
-            type="radio"
-            id="one"
-            value="За"
-            v-model="picked"
-          />
-          <label for="one">За</label>
-        </div>
-        <div>
-          <input
-            class="input"
-            type="radio"
-            id="two"
-            value="Против"
-            v-model="picked"
-          />
-          <label for="two">Против</label>
-        </div>
-        <div>
-          <input
-            class="input"
-            type="radio"
-            id="three"
-            value="Воздержался"
-            v-model="picked"
-          />
-          <label for="three">Воздержался</label>
-        </div>
-
-        <label>Выбрано: {{ picked }}</label>
+      <div class="item">
+        <div class="question">{{ item.title }}</div>
+        <line-radio @select="(value) => (item.select = value)" />
       </div>
     </div>
     <vue-hr />
-    <button-simple @click="addLine">Add</button-simple>
-    <button-simple @click="removeLine">Remove</button-simple>
+    <button-simple @click="sendToServer">SEND_TO_SERVER</button-simple>
   </div>
 </template>
 <script>
+import { SEND_TO_SERVER } from "@/ui/namesButton";
 export default {
   data() {
     return {
       questionnaire: { title: "" },
-      list: [{}],
-      picked: "",
+      list: [
+        { id: 1, title: "Красить крышу в красный цвет", select: "" },
+        { id: 2, title: "Красить крышу в синий цвет", select: "" },
+        { id: 3, title: "Красить крышу в зелёный цвет", select: "" },
+        { id: 4, title: "Красить крышу в фиолетовый цвет", select: "" },
+        { id: 5, title: "Красить крышу в жёлтый цвет", select: "" },
+      ],
+      SEND_TO_SERVER,
     };
   },
   methods: {
-    addLine() {
-      this.list.push({});
-    },
-    removeLine() {
-      this.list.length -= 1;
+    sendToServer() {
+      console.log(this.list);
     },
   },
 };
@@ -70,32 +42,19 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+.question {
+  width: 100%;
+  border: 2px solid teal;
+  font-size: 2em;
+  color: blueviolet;
+  padding: 15px;
+  margin: 15px 20px;
+}
+.list {
+  padding: 10px 10px;
+}
 .item {
   margin: 20px 0px;
-  font-size: 25px;
-}
-label {
-  font-size: 1.5em;
-  color: blueviolet;
-}
-.input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-
-  border: 2px solid #999;
-  transition: 0.2s all linear;
-  outline: none;
-  margin-right: 10px;
-
-  position: relative;
-  top: 4px;
-}
-input:checked {
-  border: 5px solid blueviolet;
+  border: 2px solid blueviolet;
 }
 </style>

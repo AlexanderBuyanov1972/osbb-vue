@@ -45,6 +45,7 @@ export const updateAllAddress = async (list) => {
   const response = await axios.put(API_BASE + ADDRESS + ALL, list);
   return response.data;
 };
+
 export const getAllAddress = async () => {
   const response = await axios.get(API_BASE + ADDRESS + ALL);
   return response.data;

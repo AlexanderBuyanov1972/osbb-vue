@@ -35,7 +35,10 @@ export const EDIT_QUESTIONNAIRE = "Редактировать опросный �
 export const SHOW_QUESTIONNAIRE = "Смотреть опросный лист";
 export const DELETE_QUESTIONNAIRE = "Удалить опросный лист";
 // ----------------------------------------------------------
-export const BACK = "Назад";
 export const SEND_TO_SERVER = "Послать на сервер";
+export const CREATE = "Создать";
+export const EDIT = "Редактировать";
 export const DELETE = "Удалить";
+export const BACK = "Назад";
 export const MAIN = "На главную";
+export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";

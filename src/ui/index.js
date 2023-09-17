@@ -11,6 +11,7 @@ import SelectEdit from "@/ui/elements/SelectEdit.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
 import VueLoader from "@/ui/elements/VueLoader.vue";
 import VueHr from "@/ui/elements/VueHr.vue";
+import LineRadio from "@/ui/elements/LineRadio.vue";
 // --------------- components -------------------
 import HeaderMessages from "@/components/HeaderMessages.vue";
 import LineAddress from "@/components/LineAddress.vue";
@@ -52,6 +53,7 @@ export default [
   CheckboxSimple,
   VueLoader,
   VueHr,
+  LineRadio,
 
   // ----------------
   HeaderMessages,

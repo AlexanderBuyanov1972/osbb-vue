@@ -6,6 +6,7 @@ export const ROLE = "/role";
 export const OWNER = "/owner";
 export const OWNERSHIP = "/ownership";
 export const ADDRESS = "/address";
+export const APARTMENT = "/apartment";
 export const PASSPORT = "/passport";
 export const PHOTO = "/photo";
 export const SELECT = "/select";
@@ -15,7 +16,7 @@ export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
 export const SUMMA_AREA_APARTMENT = "/summa_area_apartment";
 export const SUMMA_AREA_NON_RESIDENTIAL_ROOM =
   "/summa_area_non_residential_room";
-  
+
 // ----------- count ------------------------
 export const COUNT_ROOMS = "/count_rooms";
 export const COUNT_APARTMENT = "/count_apartment";
@@ -34,7 +35,7 @@ export const ALL = "/all";
 export const ID = "/{id}";
 export const STREET = "/{street}";
 export const HOUSE = "/{house}";
-export const APARTMENT = "/{apartment}";
+// export const APARTMENT = "/apartment";
 export const REGISTRATION_NUMBER_CARD_PAYER_TAXES =
   "/{registrationNumberCardPayerTaxes}";
 export const REGISTRATION_NUMBER = "/registration_number";

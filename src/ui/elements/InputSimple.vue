@@ -25,7 +25,7 @@ input {
   color: teal;
   font-size: 1em;
 }
-::placeholder{
+::placeholder {
   color: #999999;
 }
 </style>

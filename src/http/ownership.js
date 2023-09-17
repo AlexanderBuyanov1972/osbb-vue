@@ -3,6 +3,7 @@ import {
   API_BASE,
   OWNERSHIP,
   ALL,
+  APARTMENT,
   SUMMA_AREA_ROOMS,
   SUMMA_AREA_APARTMENT,
   SUMMA_AREA_NON_RESIDENTIAL_ROOM,
@@ -92,6 +93,14 @@ export const countApartment = async () => {
 export const countNonResidentialRoom = async () => {
   const response = await axios.get(
     API_BASE + OWNERSHIP + COUNT_NON_RESIDENTIAL_ROOM
+  );
+  return response.data;
+};
+//---------------id -----------------------
+
+export const getIdOwnershipByApartment = async (apartment) => {
+  const response = await axios.get(
+    API_BASE + OWNERSHIP + APARTMENT + "/" + apartment
   );
   return response.data;
 };
