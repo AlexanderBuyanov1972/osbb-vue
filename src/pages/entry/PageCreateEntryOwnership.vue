@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
     <header-messages
       :messages="
         this.mergingTwoArraysAndRemovingIdenticalMessages(
@@ -120,6 +121,7 @@ export default {
       countOwnerships: "ownership/getCountOwnerships",
       getMessagesOwnership: "ownership/getMessages",
       getMessagesOwner: "owner/getMessages",
+      getIsLoading: "ownership/getIsLoading",
     }),
   },
 };

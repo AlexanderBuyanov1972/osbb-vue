@@ -17,13 +17,13 @@ export default {
 <style scoped>
 input {
   background-color: white;
-  height: 2.5em;
+  height: 30px;
   outline: none;
   border: 1px solid teal;
   width: 100%;
   text-indent: 1em;
   color: teal;
-  font-size: 1em;
+  font-size: 15px;
 }
 ::placeholder {
   color: #999999;

@@ -45,14 +45,14 @@ export default {
   box-sizing: border-box;
 }
 .list {
-  border: 2px solid teal;
-  padding: 10px;
-  margin: 25px 0px;
+  border: 1px solid teal;
+  padding: 0px 5px;
+  margin: 5px 0px;
 }
 
 p {
   color: brown;
-  font-size: 1.2em;
-  margin: 10px 5px;
+  font-size: 17px;
+  margin: 5px 0px;
 }
 </style>

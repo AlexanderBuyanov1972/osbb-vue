@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header-block text="Собственность" />
+    <line-header text="Собственность" :style="{'color':'brown'}"/>
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
@@ -175,4 +175,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
-@/pages/functions/arraysOfData @/pages/functions/functions

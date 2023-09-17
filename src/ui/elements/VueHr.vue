@@ -14,6 +14,6 @@ export default {
 }
 hr {
   margin: 20px 0px;
-  border: 2px solid #999999;
+  border: 1px solid #999999;
 }
 </style>

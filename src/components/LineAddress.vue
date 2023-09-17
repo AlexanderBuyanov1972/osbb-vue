@@ -28,8 +28,7 @@ export default {
   color: brown;
   margin: 10px 0px;
   text-align: center;
-  font-size: 2em;
-  text-decoration: underline;
+  font-size: 22px;
 }
 </style>
 @/pages/functions/functions

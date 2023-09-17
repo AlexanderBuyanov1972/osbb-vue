@@ -28,12 +28,12 @@ export default {
 p,
 h4 {
   color: brown;
-  font-size: 1.5em;
-  margin: 10px 0px;
+  font-size: 20px;
+  margin: 5px 0px;
 }
 .main{
   margin: 10px 0px;
-  border: 2px solid brown;
+  border: 1px solid brown;
   padding: 10px 20px;
 }
 </style>

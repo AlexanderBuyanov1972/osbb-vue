@@ -6,7 +6,7 @@
         type="radio"
         id="1"
         value="За"
-        @click="() => (picked = emitValue1('За'))"
+        @click="emitValue1"
       />
       <label for="1">За</label>
     </div>
@@ -17,7 +17,7 @@
         type="radio"
         id="2"
         value="Против"
-        @click="() => (picked = emitValue2('Против'))"
+        @click="emitValue2"
       />
       <label for="2">Против</label>
     </div>
@@ -27,7 +27,7 @@
         type="radio"
         id="3"
         value="Воздержался"
-        @click="() => (picked = emitValue3('Воздержался'))"
+        @click="emitValue3"
       />
       <label for="3">Воздержался</label>
     </div>
@@ -48,25 +48,25 @@ export default {
     };
   },
   methods: {
-    emitValue1(value) {
+    emitValue1() {
       this.show1 = true;
       this.show2 = false;
       this.show3 = false;
-      this.picked = value;
+      this.picked = "За";
       this.$emit("select", this.picked);
     },
-    emitValue2(value) {
+    emitValue2() {
       this.show1 = false;
       this.show2 = true;
       this.show3 = false;
-      this.picked = value;
+      this.picked = "Против";
       this.$emit("select", this.picked);
     },
-    emitValue3(value) {
+    emitValue3() {
       this.show1 = false;
       this.show2 = false;
       this.show3 = true;
-      this.picked = value;
+      this.picked = "Воздержался";
       this.$emit("select", this.picked);
     },
   },
@@ -85,22 +85,20 @@ export default {
   justify-content: start;
 }
 .item {
-  margin: 15px 25px;
+  margin: 5px 15px;
 }
 label {
-  font-size: 1.5em;
+  font-size: 15px;
   color: brown;
 }
 span {
-  color: teal;
-  margin-left: 25px;
-  text-decoration: underline;
+  color: red;
+  margin-left: 20px;
 }
 .select {
   color: blueviolet;
-  margin-left: 50px;
-  font-size: 2em;
-  margin-top: 10px;
+  font-size: 20px;
+  margin: 5px 10px 5px 25px;
 }
 
 .input {
@@ -109,18 +107,18 @@ span {
   appearance: none;
 
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
 
-  border: 2px solid #999;
+  border: 1px solid #999;
   transition: 0.2s all linear;
   outline: none;
-  margin-right: 10px;
+  margin-right: 5px;
 
   position: relative;
   top: 4px;
 }
 .input_checked {
-  border: 5px solid blueviolet;
+  border: 3px solid blueviolet;
 }
 </style>

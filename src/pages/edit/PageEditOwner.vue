@@ -80,9 +80,9 @@ export default {
   align-items: start;
   justify-content: space-around;
   margin-bottom: 10px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   padding: 10px;
-  font-size: 1.3em;
+  font-size: 20px;
 }
 .owner,
 .passport {

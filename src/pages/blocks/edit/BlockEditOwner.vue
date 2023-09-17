@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header-block text="Собственник" />
+    <line-header text="Собственник" :style="{'color':'brown'}" />
 
     <div class="owner">
       <div class="lastName">
@@ -223,4 +223,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
-@/pages/functions/arraysOfData @/pages/functions/functions

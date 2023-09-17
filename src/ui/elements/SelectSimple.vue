@@ -54,13 +54,13 @@ export default {
   background-color: white;
   width: 100%;
   position: relative;
-  height: 2.5em;
-  font-size: 1em;
+  height: 30px;
+  font-size: 20px;
 }
 
 .block_1 {
   margin-top: 0.2em;
-  height: 2.2em;
+  height: 30px;
 }
 
 .block_1:after {
@@ -92,10 +92,10 @@ export default {
 }
 
 .item {
-  color: #999999;
-  font-size: 1.1em;
+  color: teal;
+  font-size: 17px;
   line-height: 1.5;
-  height: 2em;
-  text-indent: 1em;
+  height: 30px;
+  text-indent: 13px;
 }
 </style>

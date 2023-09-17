@@ -1,5 +1,5 @@
 <template>
-  <div class="header">{{ text }}.</div>
+  <div class="header">{{ text }}</div>
 </template>
 <script>
 export default {
@@ -19,9 +19,8 @@ export default {
 
 .header {
   color: teal;
-  margin: 20px 0px;
+  margin: 15px 0px;
   text-align: center;
-  font-size: 2.2em;
-  text-decoration: underline;
+  font-size: 23px;
 }
 </style>

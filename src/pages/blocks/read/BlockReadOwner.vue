@@ -58,10 +58,8 @@ export default {
   width: 100%;
   color: blueviolet;
   margin: 15px 0px;
-  border: 2px solid blueviolet;
-  font-size: 1.2em;
+  border: 1px solid blueviolet;
   display: flex;
-
   align-items: center;
   justify-content: space-around;
 }
@@ -70,8 +68,8 @@ span {
   color: teal;
 }
 .item {
-  margin: 7px 0px;
-  font-size: 1.3em;
+  margin: 5px 0px;
+  font-size: 20px;
 }
 img {
   width: 25wh;

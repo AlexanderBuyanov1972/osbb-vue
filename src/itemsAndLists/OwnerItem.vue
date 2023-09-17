@@ -45,38 +45,34 @@ export default {
   box-sizing: border-box;
 }
 .main {
-  margin: 15px 0px;
+  margin: 5px 0px;
   padding: 5px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   color: teal;
-  font-size: 1.2em;
+  font-size: 17px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
-span {
-  margin: 0 10px;
-}
 .count {
-  width: 5%;
+  width: 2%;
 }
 .name {
   width: 22%;
 }
 .phone {
-  width: 12%;
+  width: 13%;
 }
 .birth {
   width: 10%;
 }
 .email {
-  width: 17%;
+  width: 20%;
 }
 .family {
-  width: 12%;
+  width: 10%;
 }
 .share {
   width: 10%;
 }
 </style>
-@/pages/functions/functions

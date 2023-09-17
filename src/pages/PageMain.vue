@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
     <div class="header">ОСББ "Свободы 51"</div>
     <div class="img">
       <img
@@ -7,7 +8,9 @@
         alt="Not Found"
       />
     </div>
-    <button-create @click="sendJsonToServer">Json</button-create>
+    <div class="">
+      <button-create @click="sendJsonToServer">Json</button-create>
+    </div>
   </div>
 </template>
 <script>
@@ -26,7 +29,6 @@ export default {
     }),
     sendJsonToServer() {
       let list = this.generateJson();
-      //console.log(list);
       list.forEach((el) => {
         setTimeout(() => {
           this.createOwnership(el);
@@ -46,19 +48,20 @@ export default {
 }
 .main {
   color: red;
-  font-size: 1.2em;
-}
-.img {
-  width: 80vw;
-  height: 80vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.img {
+  width: 1050px;
+  height: 800px;
+  padding: 10px;
+  align-self: center;
 }
 .header {
   text-align: center;
   color: teal;
-  font-size: 2em;
+  font-size: 25px;
 }
 </style>
-@/pages/generate @/pages/functions/generate

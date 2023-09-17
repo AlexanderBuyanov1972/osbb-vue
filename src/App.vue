@@ -2,16 +2,19 @@
   <div class="app">
     <header-first></header-first>
     <header-second></header-second>
+    <header-third></header-third>
     <router-view></router-view>
   </div>
 </template>
 <script>
 import HeaderFirst from "@/components/HeaderFirst.vue";
 import HeaderSecond from "@/components/HeaderSecond.vue";
+import HeaderThird from "@/components/HeaderThird.vue";
 export default {
   components: {
     HeaderFirst,
     HeaderSecond,
+    HeaderThird,
   },
 };
 </script>

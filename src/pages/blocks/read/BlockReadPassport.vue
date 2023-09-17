@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="item" :style="{'color':'brown', 'font-size':'1.5em'}">Паспорт :</div>
+    <div class="item" :style="{'color':'brown', 'font-size':'25px'}">Паспорт :</div>
     <div class="item">
       <span>Серийный номер : </span>{{ passport.numberPassport }}
     </div>
@@ -39,15 +39,14 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: start;
-  border: 2px solid blueviolet;
-  font-size: 1.2em;
+  border: 1px solid blueviolet;
+  font-size: 20px;
 }
 span {
   color: blueviolet;
 }
 .item {
-  margin: 7px 0px;
-  font-size: 1.3em;
+  margin: 5px 0px;
   align-self: start;
 }
 </style>

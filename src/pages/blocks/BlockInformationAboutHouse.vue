@@ -40,7 +40,7 @@ export default {
 
 p,
 span {
-  font-size: 23px;
+  font-size: 20px;
   margin: 10px 0px;
 }
 p {
@@ -51,7 +51,7 @@ span {
 }
 .main {
   margin: 10px 0px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   padding-left: 10px;
 }
 </style>

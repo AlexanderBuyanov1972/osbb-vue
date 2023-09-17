@@ -30,9 +30,9 @@ export default {
 }
 .main {
   margin: 15px 0px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   color: teal;
-  font-size: 1.2em;
+  font-size: 20px;
 }
 span {
   color: blueviolet;

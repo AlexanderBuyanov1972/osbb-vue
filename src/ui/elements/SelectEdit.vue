@@ -47,13 +47,12 @@ export default {
   background-color: white;
   width: 100%;
   position: relative;
-  height: 2.5em;
-  font-size: 1em;
+  height: 30px;
+  font-size: 20px;
 }
 
 .block_1 {
-  margin-top: 0.2em;
-  height: 2.2em;
+  height: 30px;
 }
 
 .block_1:after {
@@ -85,59 +84,10 @@ export default {
 }
 
 .item {
-  color: #999999;
-  font-size: 1.1em;
+  color: teal;
+  font-size: 17px;
   line-height: 1.5;
-  height: 2em;
-  text-indent: 1em;
+  height: 30px;
+  text-indent: 13px;
 }
 </style>
-
-<!-- 
-<template>
-  <div :class="!show ? 'blocks' : ['blocks', 'active']">
-    <div class="block_1">
-      <div class="item" @click="show = !show">
-        {{  selectName }}
-      </div>
-    </div>
-    <div class="block_2" v-if="show">
-      <div class="item" v-for="one in array" :key="one.id" @click="select(one)">
-        {{ one.name }}
-      </div>
-    </div>
-  </div>
-</template>
-<script>
-export default {
-  name: "select-edit",
-  props: {
-    array: {
-      type: Array,
-      default: () => [],
-    },
-    startObject: Object,
-  },
-
-  data() {
-    return {
-      show: false,
-      selectName: this.startObject.name,
-    };
-  },
-  methods: {
-    select(one) {
-      this.change(one);
-      this.show = false;
-    },
-    change(one) {
-      this.selectName = one.name;
-      this.$emit("select", one.value);
-    },
-  },
-  mounted() {
-    this.select(this.startObject);
-  },
-};
-</script>
-</style> -->

@@ -44,18 +44,17 @@ export default {
   box-sizing: border-box;
 }
 .question {
-  width: 100%;
-  border: 2px solid teal;
-  font-size: 2em;
+  width: auto;
+  border: 1px solid teal;
+  font-size: 17px;
   color: blueviolet;
-  padding: 15px;
-  margin: 15px 20px;
+  padding: 5px;
+  margin: 5px 5px;
 }
 .list {
-  padding: 10px 10px;
+  padding: 10px 0px;
 }
 .item {
-  margin: 20px 0px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
 }
 </style>

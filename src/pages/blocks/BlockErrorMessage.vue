@@ -44,7 +44,8 @@ export default {
   box-sizing: border-box;
 }
 div {
-  min-height: 40px;
-  padding-top: 5px;
+  min-height: 20px;
+  padding: 5px 0px;
+  font-size: 16px;
 }
 </style>

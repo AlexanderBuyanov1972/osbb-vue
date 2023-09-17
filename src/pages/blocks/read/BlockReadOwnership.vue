@@ -59,9 +59,9 @@ export default {
 .main {
   margin: 15px 0px;
   padding: 25px;
-  border: 2px solid blueviolet;
+  border: 1px solid blueviolet;
   color: teal;
-  font-size: 1.2em;
+  font-size: 20px;
   align-self: start;
   width: 100%;
   display: flex;
@@ -76,7 +76,6 @@ img {
   width: 45%;
 }
 .spans {
-  font-size: 1.5em;
   width: 45%;
 }
 .item {

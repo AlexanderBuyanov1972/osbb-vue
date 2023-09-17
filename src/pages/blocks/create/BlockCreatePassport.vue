@@ -1,6 +1,6 @@
 <template>
   <div class="main" @mousemove="emitPassport">
-    <line-header-block text="Паспорт собственника" />
+    <line-header text="Паспорт собственника" :style="{'color':'brown'}"/>
     <div class="passport">
       <div class="numberPassport">
         <block-error-message

@@ -11,15 +11,6 @@
     <button-simple @click="goToPageRegistryOwnerships"
       >{{ REGISTRY_OWNERSHIP }}
     </button-simple>
-    <div class="title">Введите № помещения :</div>
-    <input-simple
-      class="input"
-      v-model="apartment"
-      :style="{ width: '100px', height: '1.8em', 'font-size': '1.5em' }"
-    />
-    <button-simple :hidden="!checkApartment" @click="goToPageShowEntryOwnership"
-      >Нажать
-    </button-simple>
   </div>
 </template>
 <script>
@@ -29,21 +20,18 @@ import {
   PAGE_SHOW_OWNERSHIPS,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
-  PAGE_SHOW_ENTRY_OWNERSHIP,
 } from "@/router/apiRouter";
 import {
   LIST_OWNER,
   LIST_OWNERSHIP,
   REGISTRY_OWNER,
   REGISTRY_OWNERSHIP,
-  INFO_ABOUT_APARTMENT,
   MAIN,
 } from "@/ui/namesButton";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      apartment: "",
       LIST_OWNER,
       LIST_OWNERSHIP,
       REGISTRY_OWNER,
@@ -54,7 +42,6 @@ export default {
       PAGE_SHOW_OWNERSHIPS,
       PAGE_REGISTRY_OWNERS,
       PAGE_REGISTRY_OWNERSHIPS,
-      PAGE_SHOW_ENTRY_OWNERSHIP,
     };
   },
   methods: {
@@ -79,21 +66,11 @@ export default {
     goToPageRegistryOwnerships() {
       this.$router.push(PAGE_REGISTRY_OWNERSHIPS);
     },
-    goToPageShowEntryOwnership() {
-      this.fetchIdOwnershipByIdApartment(this.apartment).then(() => {
-        return this.$router.push(
-          PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.getIdOwnership
-        );
-      });
-    },
   },
   computed: {
     ...mapGetters({
       getIdOwnership: "ownership/getIdOwnership",
     }),
-    checkApartment() {
-      return this.apartment > 0 && this.apartment < 85;
-    },
   },
 };
 </script>
@@ -108,12 +85,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-}
-.title {
-  font-size: 1.5em;
-  color: blueviolet;
-}
-.input {
-  margin-right: 10px;
 }
 </style>

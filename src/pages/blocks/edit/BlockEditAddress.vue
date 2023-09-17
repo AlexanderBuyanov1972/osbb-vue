@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header-block text="Адресс собственности" />
+    <line-header text="Адресс собственности" :style="{'color':'brown'}"/>
 
     <div class="address">
       <div class="zipCode">

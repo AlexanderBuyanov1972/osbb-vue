@@ -1,6 +1,6 @@
 <template>
   <div class="main" @mousemove="emitOwner">
-    <line-header-block text="Собственник" />
+    <line-header text="Собственник" :style="{'color':'brown'}"/>
     <div class="owner">
       <div class="lastName">
         <block-error-message
