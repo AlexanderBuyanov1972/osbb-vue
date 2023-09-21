@@ -6,6 +6,7 @@ import ButtonDelete from "@/ui/elements/ButtonDelete.vue";
 import ButtonSimple from "@/ui/elements/ButtonSimple.vue";
 import ButtonReset from "@/ui/elements/ButtonReset.vue";
 import InputSimple from "@/ui/elements/InputSimple.vue";
+import SelectTitle from "@/ui/elements/SelectTitle.vue";
 import SelectSimple from "@/ui/elements/SelectSimple.vue";
 import SelectEdit from "@/ui/elements/SelectEdit.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
@@ -50,6 +51,7 @@ export default [
   ButtonSimple,
   ButtonReset,
   SelectSimple,
+  SelectTitle,
   SelectEdit,
   CheckboxSimple,
   VueLoader,

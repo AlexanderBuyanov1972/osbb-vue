@@ -1,29 +1,27 @@
 <template>
-  <div class="main">
+  <div class="main" @mousemove="$emit('apartment', apartment)">
     <div class="title">Введите № помещения :</div>
-    <button-simple @click="this.apartment = this.apartment * 1 - 1"
-      >-</button-simple
-    >
+    <button-simple @click="minus">-</button-simple>
     <input-simple
       class="input"
       v-model="apartment"
       :style="{ width: '65px' }"
     />
-    <button-simple @click="this.apartment = this.apartment * 1 + 1">+</button-simple>
+    <button-simple @click="plus">+</button-simple>
     <button-simple :hidden="!checkApartment" @click="goToPageShowEntryOwnership"
-      >{{ SEND_TO_SERVER }}
+      >{{ GET }}
     </button-simple>
   </div>
 </template>
 <script>
 import { PAGE_SHOW_ENTRY_OWNERSHIP } from "@/router/apiRouter";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { GET } from "@/ui/namesButton";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
       apartment: "",
-      SEND_TO_SERVER,
+      GET,
       PAGE_SHOW_ENTRY_OWNERSHIP,
     };
   },
@@ -40,6 +38,14 @@ export default {
           PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.getIdOwnership
         );
       });
+    },
+    plus() {
+      this.apartment = this.apartment * 1 + 1;
+      // this.goToPageShowEntryOwnership();
+    },
+    minus() {
+      this.apartment = this.apartment * 1 - 1;
+      // this.goToPageShowEntryOwnership();
     },
   },
   computed: {
@@ -71,5 +77,6 @@ export default {
 }
 .input {
   margin: 5px 5px 5px 0px;
+  border-color: blueviolet;
 }
 </style>

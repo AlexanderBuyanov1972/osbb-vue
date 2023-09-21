@@ -11,17 +11,19 @@
       </div>
     </div>
     <vue-hr />
-    <button-simple @click="sendToServer">SEND_TO_SERVER</button-simple>
+    <button-simple @click="sendToServer" :hidden="!checkValid">{{
+      SELECT
+    }}</button-simple>
   </div>
 </template>
 <script>
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { SELECT } from "@/ui/namesButton";
 import {
   PAGE_SHOW_QUESTIONNAIRE,
   PAGE_SHOW_QUESTIONNAIRES,
 } from "@/router/apiRouter";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     QuestionnaireItem,
@@ -30,20 +32,21 @@ export default {
     return {
       list: [],
       info: {},
-      SEND_TO_SERVER,
+      SELECT,
       PAGE_SHOW_QUESTIONNAIRE,
     };
   },
   methods: {
     ...mapActions({
       createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
-      fetchQuestionnaire: "questionnaire/fetchQuestionnaire",
-      fetchQuestionnaireByTitleAndFullname:
-        "questionnaire/fetchQuestionnaireByTitleAndFullname",
+      fetchAllQuestionnaireByTitleAndFullname:
+        "questionnaire/fetchAllQuestionnaireByTitleAndFullname",
     }),
     sendToServer() {
       this.createAllQuestionnaire(this.list).then(() => {
-        this.$router.push(PAGE_SHOW_QUESTIONNAIRES);
+        this.$router.push(
+          PAGE_SHOW_QUESTIONNAIRES + "/" + this.$route.params.title
+        );
       });
     },
   },
@@ -53,27 +56,31 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
-    ...mapMutations({
-      setMessages: "questionnaire/setMessages",
-    }),
+    checkValid() {
+      let valid = 1;
+      this.list.forEach((el) => {
+        if (el == undefined || el.answer == null || el.answer.length < 5) {
+          valid *= 0;
+        } else {
+          valid *= 1;
+        }
+      });
+      return valid;
+    },
   },
   mounted() {
     const payload = {
       title: this.$route.params.title,
       fullname: this.$route.params.fullname,
     };
-    this.fetchQuestionnaireByTitleAndFullname(payload)
-      .then(() => {
-        this.list = this.getQuestionnaires;
-        this.info.dateDispatch = this.list[0].dateDispatch;
-        this.info.byWhom = this.list[0].byWhom;
-        this.info.fullname = this.list[0].fullname;
-        this.info.apartment = this.list[0].apartment;
-        this.info.title = this.list[0].title;
-      })
-      .catch((err) => {
-        this.setMessages([err.message, ...this.getMessages]);
-      });
+    this.fetchAllQuestionnaireByTitleAndFullname(payload).then(() => {
+      this.list = this.getQuestionnaires;
+      this.info.dateDispatch = this.list[0].dateDispatch;
+      this.info.byWhom = this.list[0].byWhom;
+      this.info.fullname = this.list[0].fullname;
+      this.info.apartment = this.list[0].apartment;
+      this.info.title = this.list[0].title;
+    });
   },
 };
 </script>

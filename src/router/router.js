@@ -1,4 +1,6 @@
 import PageShowQuestionnaire from "@/pages/read/PageShowQuestionnaire.vue";
+import PageShowQuestionnairesByTitleAndByApartment from "@/pages/read/PageShowQuestionnairesByTitleAndByApartment.vue";
+import PageShowQuestionnairesByTitle from "@/pages/read/PageShowQuestionnairesByTitle.vue";
 import PageShowQuestionnaires from "@/pages/read/PageShowQuestionnaires.vue";
 import PageReadOwner from "@/pages/read/PageReadOwner.vue";
 import PageReadOwnership from "@/pages/read/PageReadOwnership.vue";
@@ -67,8 +69,16 @@ const routes = [
   // questionnaire
   { path: PAGE_SHOW_QUESTIONNAIRES, component: PageShowQuestionnaires },
   {
-    path: PAGE_SHOW_QUESTIONNAIRE + "/:id",
-    component: PageShowQuestionnaire,
+    path: PAGE_SHOW_QUESTIONNAIRES,
+    component: PageShowQuestionnaires,
+  },
+  {
+    path: PAGE_SHOW_QUESTIONNAIRES + "/:title",
+    component: PageShowQuestionnairesByTitle,
+  },
+  {
+    path: PAGE_SHOW_QUESTIONNAIRES + "/:title" + "/:apartment",
+    component: PageShowQuestionnairesByTitleAndByApartment,
   },
   {
     path: PAGE_ANSWER_FOR_QUESTIONNAIRE + "/:title" + "/:fullname",

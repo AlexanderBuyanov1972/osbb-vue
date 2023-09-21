@@ -60,7 +60,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -77,7 +77,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -93,7 +93,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -105,27 +105,27 @@ export default {
         commit("setMessages", response.messages);
         commit("setPhoto", {});
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
     },
     async getAllPhoto({ commit }) {
-        try {
-          commit("setIsLoading", true);
-          const response = await getAllPhoto();
-          if (response != undefined && response.data != undefined) {
-            commit("setPhotos", response.data);
-            commit("setMessages", response.messages);
-          } else {
-            commit("setMessages", response.messages);
-          }
-        } catch (error) {
-          commit("setMessages", [...error.messages]);
-        } finally {
-          commit("setIsLoading", false);
+      try {
+        commit("setIsLoading", true);
+        const response = await getAllPhoto();
+        if (response != undefined && response.data != undefined) {
+          commit("setPhotos", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
         }
-      },
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
   },
   namespaced: true,
 };

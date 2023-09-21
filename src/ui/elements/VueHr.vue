@@ -13,7 +13,7 @@ export default {
   box-sizing: border-box;
 }
 hr {
-  margin: 20px 0px;
+  margin: 10px 0px;
   border: 1px solid #999999;
 }
 </style>

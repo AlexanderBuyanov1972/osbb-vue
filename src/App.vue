@@ -1,20 +1,33 @@
 <template>
   <div class="app">
-    <header-first></header-first>
-    <header-second></header-second>
-    <header-third></header-third>
+    <header-data></header-data>
+    <header-data-search
+      @apartment="(value) => (apartment = value)"
+    ></header-data-search>
+    <vue-hr />
+    <header-polls></header-polls>
+    <header-polls-search :apartment="apartment"></header-polls-search>
     <router-view></router-view>
   </div>
 </template>
 <script>
-import HeaderFirst from "@/components/HeaderFirst.vue";
-import HeaderSecond from "@/components/HeaderSecond.vue";
-import HeaderThird from "@/components/HeaderThird.vue";
+import HeaderData from "@/components/HeaderData.vue";
+import HeaderDataSearch from "@/components/HeaderDataSearch.vue";
+import HeaderPolls from "@/components/HeaderPolls.vue";
+import HeaderPollsSearch from "@/components/HeaderPollsSearch.vue";
+import VueHr from "./ui/elements/VueHr.vue";
 export default {
   components: {
-    HeaderFirst,
-    HeaderSecond,
-    HeaderThird,
+    HeaderData,
+    HeaderDataSearch,
+    HeaderPolls,
+    HeaderPollsSearch,
+    VueHr,
+  },
+  data() {
+    return {
+      apartment: "",
+    };
   },
 };
 </script>

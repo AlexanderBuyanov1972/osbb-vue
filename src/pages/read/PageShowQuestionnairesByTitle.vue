@@ -4,7 +4,7 @@
     <header-messages :messages="getMessages" />
     <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
     <questionnaire-item :questionnaire="header" count="№" />
-    <div v-for="one in array" :key="one.id">
+    <div v-for="one in getQuestionnaires" :key="one.id">
       <div
         @click="
           () =>
@@ -32,7 +32,6 @@ export default {
   },
   data() {
     return {
-      array: [],
       header: {
         title: "Тема опроса",
         byWhom: "Кем инициализирован",
@@ -46,7 +45,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchAllQuestionnaire: "questionnaire/fetchAllQuestionnaire",
+      fetchAllQuestionnaireByTitle:
+        "questionnaire/fetchAllQuestionnaireByTitle",
     }),
   },
   computed: {
@@ -55,11 +55,15 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
+    check() {
+      return this.fetchAllQuestionnaireByTitle(this.$route.params.title);
+    },
   },
   mounted() {
-    this.fetchAllQuestionnaire().then(() => {
-      this.array = this.getQuestionnaires;
-    });
+    this.check;
+  },
+  updated() {
+    this.check;
   },
 };
 </script>

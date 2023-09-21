@@ -39,9 +39,16 @@ export const SHOW_QUESTIONNAIRE = "Смотреть опросный лист";
 export const DELETE_QUESTIONNAIRE = "Удалить опросный лист";
 // ----------------------------------------------------------
 export const SEND_TO_SERVER = "Послать на сервер";
+export const GET_RESULT_POLL = "Получить результаты опроса";
+export const GET_POLLS_BY_TITLE = "Получить опросы по теме";
+export const GET_POLLS_BY_TITLE_AND_BY_APARTMENT =
+  "Получить опросы по теме и № помещения";
 export const CREATE = "Создать";
 export const EDIT = "Редактировать";
 export const DELETE = "Удалить";
+export const SELECT = "Голосовать";
+
+export const GET = "Получить";
 export const BACK = "Назад";
 export const MAIN = "На главную";
 export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";

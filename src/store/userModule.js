@@ -51,7 +51,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -68,7 +68,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -84,7 +84,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -96,7 +96,7 @@ export default {
         commit("setMessages", response.messages);
         commit("setUser", {});
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }

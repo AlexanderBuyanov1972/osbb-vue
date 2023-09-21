@@ -128,7 +128,7 @@ export default {
         commit("setMessages", response.messages);
         commit("setOwner", {});
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
