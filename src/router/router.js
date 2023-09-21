@@ -1,3 +1,5 @@
+import PageShowQuestionnaire from "@/pages/read/PageShowQuestionnaire.vue";
+import PageShowQuestionnaires from "@/pages/read/PageShowQuestionnaires.vue";
 import PageReadOwner from "@/pages/read/PageReadOwner.vue";
 import PageReadOwnership from "@/pages/read/PageReadOwnership.vue";
 import PageReadOwners from "@/pages/read/PageReadOwners.vue";
@@ -10,7 +12,9 @@ import PageUpdateEntryOwnership from "@/pages/entry/PageUpdateEntryOwnership.vue
 import PageShowEntryOwnership from "@/pages/entry/PageShowEntryOwnership.vue";
 import PageEditOwner from "@/pages/edit/PageEditOwner.vue";
 import PageEditOwnership from "@/pages/edit/PageEditOwnership.vue";
-import PageCreateQuestionnaire from "@/pages/questionnaire/PageCreateQuestionnaire.vue"
+import PageAnswerForQuestionnaire from "@/pages/questionnaire/PageAnswerForQuestionnaire.vue";
+import PageCreateQuestionnaire from "@/pages/questionnaire/PageCreateQuestionnaire.vue";
+import PageResultQuestionnaire from "@/pages/questionnaire/PageResultQuestionnaire.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   PAGE_MAIN,
@@ -25,17 +29,31 @@ import {
   PAGE_SHOW_ENTRY_OWNERSHIP,
   PAGE_EDIT_OWNER,
   PAGE_EDIT_OWNERSHIP,
+  PAGE_ANSWER_FOR_QUESTIONNAIRE,
   PAGE_CREATE_QUESTIONNAIRE,
+  PAGE_SHOW_QUESTIONNAIRES,
+  PAGE_SHOW_QUESTIONNAIRE,
+  PAGE_RESULT_QUESTIONNAIRE,
 } from "./apiRouter.js";
 
 const routes = [
+  // main
   { path: PAGE_MAIN, component: PageMain },
-  { path: PAGE_SHOW_OWNER + "/:id", component: PageReadOwner },
-  { path: PAGE_SHOW_OWNERSHIP + "/:id", component: PageReadOwnership },
-  { path: PAGE_SHOW_OWNERS, component: PageReadOwners },
+  // ownership
+  { path: PAGE_EDIT_OWNERSHIP + "/:id", component: PageEditOwnership },
   { path: PAGE_SHOW_OWNERSHIPS, component: PageReadOwnerships },
+  { path: PAGE_SHOW_OWNERSHIP + "/:id", component: PageReadOwnership },
+
+  // owner
+  { path: PAGE_EDIT_OWNER + "/:id", component: PageEditOwner },
+  { path: PAGE_SHOW_OWNER + "/:id", component: PageReadOwner },
+  { path: PAGE_SHOW_OWNERS, component: PageReadOwners },
+
+  // registry
   { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwners },
   { path: PAGE_REGISTRY_OWNERSHIPS, component: PageRegistryOwnerships },
+
+  // entry ownership
   { path: PAGE_CREATE_ENTRY_OWNERSHIP, component: PageCreateEntryOwnership },
   {
     path: PAGE_UPDATE_ENTRY_OWNERSHIP + "/:id",
@@ -45,9 +63,25 @@ const routes = [
     path: PAGE_SHOW_ENTRY_OWNERSHIP + "/:id",
     component: PageShowEntryOwnership,
   },
-  { path: PAGE_EDIT_OWNER + "/:id", component: PageEditOwner },
-  { path: PAGE_EDIT_OWNERSHIP + "/:id", component: PageEditOwnership },
-  { path: PAGE_CREATE_QUESTIONNAIRE, component: PageCreateQuestionnaire },
+
+  // questionnaire
+  { path: PAGE_SHOW_QUESTIONNAIRES, component: PageShowQuestionnaires },
+  {
+    path: PAGE_SHOW_QUESTIONNAIRE + "/:id",
+    component: PageShowQuestionnaire,
+  },
+  {
+    path: PAGE_ANSWER_FOR_QUESTIONNAIRE + "/:title" + "/:fullname",
+    component: PageAnswerForQuestionnaire,
+  },
+  {
+    path: PAGE_RESULT_QUESTIONNAIRE + "/:title",
+    component: PageResultQuestionnaire,
+  },
+  {
+    path: PAGE_CREATE_QUESTIONNAIRE,
+    component: PageCreateQuestionnaire,
+  },
 ];
 const router = createRouter({
   routes,

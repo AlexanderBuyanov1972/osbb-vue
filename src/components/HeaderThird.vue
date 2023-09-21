@@ -1,11 +1,15 @@
 <template>
   <div class="main">
     <div class="title">Введите № помещения :</div>
+    <button-simple @click="this.apartment = this.apartment * 1 - 1"
+      >-</button-simple
+    >
     <input-simple
       class="input"
       v-model="apartment"
       :style="{ width: '65px' }"
     />
+    <button-simple @click="this.apartment = this.apartment * 1 + 1">+</button-simple>
     <button-simple :hidden="!checkApartment" @click="goToPageShowEntryOwnership"
       >{{ SEND_TO_SERVER }}
     </button-simple>

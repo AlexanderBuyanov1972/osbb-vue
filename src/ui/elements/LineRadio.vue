@@ -37,6 +37,8 @@
   </div>
 </template>
 <script>
+import { arrayAnswer } from "@/pages/functions/arraysOfData";
+import { getValueByName } from "@/pages/functions/functions";
 export default {
   name: "line-radio",
   data() {
@@ -45,6 +47,8 @@ export default {
       show1: false,
       show2: false,
       show3: false,
+      arrayAnswer,
+      getValueByName,
     };
   },
   methods: {
@@ -53,21 +57,21 @@ export default {
       this.show2 = false;
       this.show3 = false;
       this.picked = "За";
-      this.$emit("select", this.picked);
+      this.$emit("select", this.getValueByName(this.arrayAnswer, this.picked));
     },
     emitValue2() {
       this.show1 = false;
       this.show2 = true;
       this.show3 = false;
       this.picked = "Против";
-      this.$emit("select", this.picked);
+      this.$emit("select", this.getValueByName(this.arrayAnswer, this.picked));
     },
     emitValue3() {
       this.show1 = false;
       this.show2 = false;
       this.show3 = true;
       this.picked = "Воздержался";
-      this.$emit("select", this.picked);
+      this.$emit("select", this.getValueByName(this.arrayAnswer, this.picked));
     },
   },
 };

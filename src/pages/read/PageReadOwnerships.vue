@@ -27,23 +27,16 @@ export default {
         totalArea: "Общая площадь, м2",
         livingArea: "Жилая площадь, м2",
         numberRooms: "Количество комнат",
-        address: { entrance: "Подъезд", floor: "Этаж", apartment: "Квартира №" },
+        address: {
+          entrance: "Подъезд",
+          floor: "Этаж",
+          apartment: "Квартира №",
+        },
         loggia: "Балкон",
       },
     };
   },
 
-  //   <div class="item">{{ haveRoom(ownership) }}</div>
-  //   <div class="item">Общая площадь : {{ ownership.totalArea }} м2</div>
-  //   <div class="item">Жилая площадь : {{ ownership.livingArea }} м2</div>
-  //   <div class="item">Кол-во комнат : {{ ownership.numberRooms }}</div>
-  //   <div class="item">
-  //     Подъезд : {{ ownership.address.entrance }}
-  //   </div>
-  //   <div class="item">Этаж : {{ ownership.address.floor }}</div>
-  //   <div :class="checkFilling(haveLoggia(ownership))">
-  //     Балкон : {{ haveLoggia(ownership) }}
-  //   </div>
   computed: {
     ...mapGetters({
       getOwnerships: "ownership/getOwnerships",

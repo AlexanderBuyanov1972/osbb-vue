@@ -1,5 +1,11 @@
 import { faker } from "@faker-js/faker";
 
+export const getShareInRealEstate = (value) => {
+  if (value % 3 == 0) return 1;
+  if (value % 3 == 1) return 0.5;
+  return 0.33333;
+};
+
 export const generateJson = () => {
   // общее количество квартир вдоме
   const countApartment = 84;
@@ -34,7 +40,10 @@ export const generateJson = () => {
             .toISOString()
             .substring(0, 10) + "",
 
-        shareInRealEstate: faker.number.float({ precision: 0.1 }),
+        // shareInRealEstate: faker.number.float({ precision: 0.1 }),
+
+        shareInRealEstate: getShareInRealEstate(currentApartment),
+
         familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
         passport: {
           numberPassport: faker.finance.accountNumber(9) + "",

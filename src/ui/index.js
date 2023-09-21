@@ -16,13 +16,14 @@ import LineRadio from "@/ui/elements/LineRadio.vue";
 import HeaderMessages from "@/components/HeaderMessages.vue";
 import LineAddress from "@/components/LineAddress.vue";
 import LineHeader from "@/components/LineHeader.vue";
-import LineHeaderBlock from "@/components/LineHeaderBlock.vue";
 // --------------- pages blocks -------------------
 import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
+import BlockInformationQuestionnaire from "@/pages/blocks/BlockInformationQuestionnaire.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 // --------------- items and lists -------------------
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
+import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 // --------------- pages blocks create --------------------------------
 import BlockCreateOwner from "@/pages/blocks/create/BlockCreateOwner.vue";
 import BlockCreatePassport from "@/pages/blocks/create/BlockCreatePassport.vue";
@@ -58,13 +59,14 @@ export default [
   // ----------------
   HeaderMessages,
   LineAddress,
-  LineHeaderBlock,
   LineHeader,
   BlockErrorMessage,
   BlockInformationAboutHouse,
+  BlockInformationQuestionnaire,
   // ---- items ---------
   OwnerItem,
   OwnershipItem,
+  QuestionnaireItem,
   // ---- create -----
   BlockCreateAddress,
   BlockCreateOwnership,

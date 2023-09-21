@@ -4,6 +4,8 @@ import {
   arrayLoggia,
   arrayGender,
   arrayFamilyStatus,
+  arrayQuestionnaire,
+  arrayAnswer,
 } from "@/pages/functions/arraysOfData";
 
 // ------------ show fields objects  arrays ---------------
@@ -43,6 +45,13 @@ export const showTypeRoom = (value) => {
     return "";
   }
 };
+export const showTypeAnswer = (value) => {
+  try {
+    return arrayAnswer.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
 
 // ------------ get Element of array by --------------------
 
@@ -67,6 +76,16 @@ export const getElementArrayByName = (array, name) => {
 export const getNameByValue = (array, value) => {
   try {
     return array.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+
+// ------------------ get Value Element of array by Name -------
+
+export const getValueByName = (array, name) => {
+  try {
+    return array.find((el) => el.name === name).value;
   } catch (error) {
     return "";
   }

@@ -10,6 +10,7 @@ export const PAGE_CREATE_OWNERSHIP = "/create/ownership";
 // --------- show list ---------------
 export const PAGE_SHOW_OWNERS = "/show/owners";
 export const PAGE_SHOW_OWNERSHIPS = "/show/ownerships";
+export const PAGE_SHOW_QUESTIONNAIRES = "/show/questionnaires";
 // ---------- registry -----------------
 export const PAGE_REGISTRY_OWNERS = "/registry/owners";
 export const PAGE_REGISTRY_OWNERSHIPS = "/registry/ownerships";
@@ -18,8 +19,9 @@ export const PAGE_CREATE_ENTRY_OWNERSHIP = "/create/entry/ownership";
 export const PAGE_UPDATE_ENTRY_OWNERSHIP = "/update/entry/ownership";
 export const PAGE_SHOW_ENTRY_OWNERSHIP = "/show/entry/ownership";
 // -------------- questionnaire -------------------------
-export const PAGE_CREATE_QUESTIONNAIRE = "/create/questionnaire";
 export const PAGE_EDIT_QUESTIONNAIRE = "/edit/questionnaire";
+export const PAGE_CREATE_QUESTIONNAIRE = "/create/questionnaire";
 export const PAGE_SHOW_QUESTIONNAIRE = "/show/questionnaire";
-
-
+//---------------- answer --------------------------
+export const PAGE_ANSWER_FOR_QUESTIONNAIRE = "/answer/questionnaire";
+export const PAGE_RESULT_QUESTIONNAIRE = "/result/questionnaire";

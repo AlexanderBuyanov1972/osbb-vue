@@ -1,5 +1,11 @@
 import axios from "axios";
-import { API_BASE, QUESTIONNAIRE, ALL } from "@/http/apiHttp";
+import {
+  API_BASE,
+  QUESTIONNAIRE,
+  ALL,
+  GENERATION,
+  RESULT,
+} from "@/http/apiHttp";
 
 // ------------- one --------------------
 
@@ -26,7 +32,7 @@ export const deleteQuestionnaire = async (id) => {
 // -------------- all ------------------
 
 export const createAllQuestionnaire = async (list) => {
-  const response = await axios.post(API_BASE + QUESTIONNAIRE + ApiAll, list);
+  const response = await axios.post(API_BASE + QUESTIONNAIRE + ALL, list);
   return response.data;
 };
 
@@ -41,5 +47,21 @@ export const getAllQuestionnaire = async () => {
 
 export const deleteAllQuestionnaire = async () => {
   const response = await axios.delete(API_BASE + QUESTIONNAIRE + ALL);
+  return response.data;
+};
+
+// generate
+
+export const generateListQuestionnaire = async (one) => {
+  const response = await axios.post(API_BASE + QUESTIONNAIRE + GENERATION, one);
+  return response.data;
+};
+
+// result
+
+export const getResultQuestionnaire = async (title) => {
+  const response = await axios.get(
+    API_BASE + QUESTIONNAIRE + RESULT + "/" + title
+  );
   return response.data;
 };

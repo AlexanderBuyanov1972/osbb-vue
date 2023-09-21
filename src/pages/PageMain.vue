@@ -9,7 +9,12 @@
       />
     </div>
     <div class="">
-      <button-create @click="sendJsonToServer">Json</button-create>
+      <button-create @click="sendJsonOwnershipsToServer"
+        >Json Ownerships</button-create
+      >
+      <button-create @click="sendJsonQuestionnaireToServer"
+        >Json Questionnaire</button-create
+      >
     </div>
   </div>
 </template>
@@ -26,17 +31,39 @@ export default {
     ...mapActions({
       createJsonForDB: "ownership/createJsonForDB",
       createOwnership: "ownership/createOwnership",
+      generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
     }),
-    sendJsonToServer() {
+    sendJsonOwnershipsToServer() {
       let list = this.generateJson();
+    //  list.forEach(el => console.log(el))
       list.forEach((el) => {
         setTimeout(() => {
           this.createOwnership(el);
         }, 1000);
       });
     },
+    sendJsonQuestionnaireToServer() {
+      let object = [
+        {
+          title: "Вопрос о создании ОСББ",
+          byWhom: "Пупкина Елена Дмитриевна",
+          question: "Согласны ли вы утвердить состав инициативной группы",
+        },
+        {
+          title: "Вопрос о создании ОСББ",
+          byWhom: "Пупкина Елена Дмитриевна",
+          question: "Согласны ли вы утвердить Иванова С.С. секретарём сборов",
+        },
+        {
+          title: "Вопрос о создании ОСББ",
+          byWhom: "Пупкина Елена Дмитриевна",
+          question: "Есть ли жизнь на Марсе",
+        },
+      ];
+
+      this.generateListQuestionnaire(object);
+    },
   },
-  mounted() {},
 };
 </script>
 

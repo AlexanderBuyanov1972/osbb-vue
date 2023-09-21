@@ -21,7 +21,7 @@ import {
   showGender,
 } from "@/pages/functions/functions";
 export default {
-  name: "owner-item",
+  name: "questionnaire-item",
   props: {
     owner: {
       Type: Object,

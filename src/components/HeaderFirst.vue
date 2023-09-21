@@ -11,6 +11,9 @@
     <button-simple @click="goToPageRegistryOwnerships"
       >{{ REGISTRY_OWNERSHIP }}
     </button-simple>
+    <button-simple @click="goToPageCreateOwnership"
+      >{{ CREATE_ENTRY_ABOUT_OWNERSHIP }}
+    </button-simple>
   </div>
 </template>
 <script>
@@ -20,8 +23,10 @@ import {
   PAGE_SHOW_OWNERSHIPS,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
+  PAGE_CREATE_ENTRY_OWNERSHIP,
 } from "@/router/apiRouter";
 import {
+  CREATE_ENTRY_ABOUT_OWNERSHIP,
   LIST_OWNER,
   LIST_OWNERSHIP,
   REGISTRY_OWNER,
@@ -32,6 +37,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
+      CREATE_ENTRY_ABOUT_OWNERSHIP,
       LIST_OWNER,
       LIST_OWNERSHIP,
       REGISTRY_OWNER,
@@ -42,6 +48,7 @@ export default {
       PAGE_SHOW_OWNERSHIPS,
       PAGE_REGISTRY_OWNERS,
       PAGE_REGISTRY_OWNERSHIPS,
+      PAGE_CREATE_ENTRY_OWNERSHIP,
     };
   },
   methods: {
@@ -66,6 +73,9 @@ export default {
     goToPageRegistryOwnerships() {
       this.$router.push(PAGE_REGISTRY_OWNERSHIPS);
     },
+    goToPageCreateOwnership() {
+      this.$router.push(PAGE_CREATE_ENTRY_OWNERSHIP);
+    },
   },
   computed: {
     ...mapGetters({
@@ -84,6 +94,6 @@ export default {
 .main {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 </style>

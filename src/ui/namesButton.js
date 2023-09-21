@@ -21,6 +21,8 @@ export const EDIT_ADDRESS = "Редактировать адресс";
 // ------- list and registry -----------
 export const LIST_OWNER = "Список собственников";
 export const LIST_OWNERSHIP = "Список объектов недвижимости";
+export const LIST_QUESTIONNAIRES = "Список опросов";
+
 export const REGISTRY_OWNER = "Реестр собственников";
 export const REGISTRY_OWNERSHIP = "Реестр объектов недвижимости";
 // ------------- entry  ------------------
@@ -31,6 +33,7 @@ export const CREATE_ENTRY_ABOUT_OWNERSHIP = "Создать запись о со
 export const DELETE_ENTRY_ABOUT_OWNERSHIP = "Удалить запись о собственности";
 // -------------- questionnaire -------------------------
 export const CREATE_QUESTIONNAIRE = "Создать опросный лист";
+export const ANSWER_FOR_QUESTIONNAIRE = "Проголосовать опросный лист";
 export const EDIT_QUESTIONNAIRE = "Редактировать опросный лист";
 export const SHOW_QUESTIONNAIRE = "Смотреть опросный лист";
 export const DELETE_QUESTIONNAIRE = "Удалить опросный лист";

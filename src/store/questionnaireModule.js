@@ -3,16 +3,25 @@ import {
   updateQuestionnaire,
   getQuestionnaire,
   deleteQuestionnaire,
+  createAllQuestionnaire,
+  updateAllQuestionnaire,
   getAllQuestionnaire,
+  deleteAllQuestionnaire,
+  generateListQuestionnaire,
 } from "@/http/questionnaire";
+import { getQuestionnaireByTitleAndFullname } from "@/http/selects";
 export default {
   state: () => ({
     questionnaire: {
-      id: 0,
+      id: 1,
       title: "",
-      dateDispatch: "",
-      dateReceiving: "",
-      selects: [],
+      dateDispatch: null,
+      dateReceiving: null,
+      apartment: "",
+      fullname: "",
+      byWhom: "",
+      question: "",
+      answer: null,
     },
     questionnaires: [],
     messages: [],
@@ -58,7 +67,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
@@ -74,7 +83,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
@@ -90,7 +99,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
@@ -102,7 +111,40 @@ export default {
         commit("setMessages", response.messages);
         commit("setQuestionnaire", {});
       } catch (error) {
-        commit("setMessages", [...error.messages]);
+        commit("setMessages", error.message);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+
+    async createAllQuestionnaire({ commit }, object) {
+      try {
+        commit("setIsLoading", true);
+        const response = await createAllQuestionnaire(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setQuestionnaires", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", error.message);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async updateAllQuestionnaire({ commit }, object) {
+      try {
+        commit("setIsLoading", true);
+        const response = await updateAllQuestionnaire(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setQuestionnaires", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
@@ -118,7 +160,54 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
+        commit("setMessages", error.message);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async deleteAllQuestionnaire({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await deleteAllQuestionnaire();
+        commit("setMessages", response.messages);
+        commit("setQuestionnaires", {});
+      } catch (error) {
+        commit("setMessages", error.message);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async generateListQuestionnaire({ commit }, object) {
+      try {
+        commit("setIsLoading", true);
+        const response = await generateListQuestionnaire(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setQuestionnaires", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
         commit("setMessages", [...error.messages]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchQuestionnaireByTitleAndFullname({ commit }, payload) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getQuestionnaireByTitleAndFullname(
+          payload.title,
+          payload.fullname
+        );
+        if (response != undefined && response.data != undefined) {
+          commit("setQuestionnaires", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }

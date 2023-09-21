@@ -3,12 +3,11 @@
   <header-messages :messages="getMessages" />
   <line-header text="Список собственников" />
   <owner-item :owner="header" count="№" />
-  <div v-for="(one, index) in getOwners" :key="one.id">
+  <div v-for="(one, index) in owners" :key="one.id">
     <div @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + one.id)">
       <owner-item :owner="one" :count="index + 1" />
     </div>
   </div>
-  <owner-list :owners="getOwners"></owner-list>
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
@@ -20,6 +19,7 @@ export default {
   },
   data() {
     return {
+      owners: [],
       header: {
         firstName: "И.",
         secondName: "О.",
@@ -47,7 +47,9 @@ export default {
     }),
   },
   mounted() {
-    this.fetchAllOwner();
+    this.fetchAllOwner().then(() => {
+      this.owners = this.getOwners;
+    });
   },
 };
 </script>

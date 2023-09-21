@@ -28,8 +28,16 @@ export const arrayNumberRooms = [
   { id: 5, name: "4 ком.", value: 4 },
   { id: 6, name: "5 ком.", value: 5 },
 ];
+
 export const arrayLoggia = [
   { id: 1, name: "Балкон", value: "Балкон" },
   { id: 2, name: "Есть", value: true },
   { id: 3, name: "Нет", value: false },
+];
+
+export const arrayAnswer = [
+  { id: 1, name: "Выбрать", value: "Выбрать" },
+  { id: 2, name: "За", value: "BEHIND" },
+  { id: 3, name: "Против", value: "AGAINST" },
+  { id: 4, name: "Воздержался", value: "ABSTAINED" },
 ];

@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
     <header-messages
       :messages="
         this.mergingTwoArraysAndRemovingIdenticalMessages(
@@ -54,6 +55,9 @@
         this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.ownership.id)
       "
     />
+
+    <button-create @click="plusOwner">{{ CREATE_OWNER }}</button-create>
+    <button-delete @click="minusOwner">{{ DELETE_OWNER }}</button-delete>
     <button-simple
       @click="sendOwnership"
       :hidden="
@@ -61,8 +65,6 @@
       "
       >{{ SEND_TO_SERVER }}</button-simple
     >
-    <button-create @click="plusOwner">{{ CREATE_OWNER }}</button-create>
-    <button-delete @click="minusOwner">{{ DELETE_OWNER }}</button-delete>
   </div>
 </template>
 <script>
@@ -162,6 +164,7 @@ export default {
   computed: {
     ...mapGetters({
       getOwnership: "ownership/getOwnership",
+      getIsLoading: "ownership/getIsLoading",
       countOwnerships: "ownership/getCountOwnerships",
       countOwners: "owner/getCountOwners",
       getMessagesOwnership: "ownership/getMessages",

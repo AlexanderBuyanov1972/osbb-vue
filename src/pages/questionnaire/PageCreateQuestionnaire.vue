@@ -1,38 +1,105 @@
 <template>
   <div class="main">
-    <header-messages :messages="[]" />
-    <line-header text="Опросный лист" />
-    <div class="list" v-for="item in list" :key="item.id">
-      <div class="item">
-        <div class="question">{{ item.title }}</div>
-        <line-radio @select="(value) => (item.select = value)" />
+    <vue-loader :isLoader="this.getIsLoading" />
+    <header-messages :messages="getMessages" />
+    <line-header
+      text="Создать опросный лист."
+      :style="{ color: 'blueviolet' }"
+    />
+    <div class="form">
+      <div class="title">
+        <block-error-message
+          :field="title"
+          messageFalse="Укажите тему опроса."
+          messageTrue="Тема опроса."
+          @valid="(value) => (validTitle = value)"
+        />
+        <input-simple v-model="title" placeholder="Тема опроса." />
+      </div>
+
+      <div class="byWhom">
+        <block-error-message
+          :field="byWhom"
+          messageFalse="Кто инициатор опроса."
+          messageTrue="Инициатор опроса."
+          @valid="(value) => (validByWhom = value)"
+        />
+        <input-simple v-model="byWhom" placeholder="Инициатор опроса." />
+      </div>
+
+      <div class="selects" v-for="one in selects">
+        <div class="question">
+          <block-error-message
+            :field="one.question"
+            messageFalse="Опишите вопрос."
+            messageTrue="Вопрос."
+            @valid="(value) => (validQuestion = value)"
+          />
+          <input-simple v-model="one.question" placeholder="Опишите вопрос." />
+        </div>
       </div>
     </div>
+
     <vue-hr />
-    <button-simple @click="sendToServer">SEND_TO_SERVER</button-simple>
+    <button-create @click="addQuestion">Добавить вопрос</button-create>
+    <button-delete @click="removeQuestion"
+      >Удалить последний вопрос</button-delete
+    >
+    <button-simple
+      :hidden="!(validTitle && validByWhom && validQuestion)"
+      @click="sendToServer"
+      >SEND_TO_SERVER</button-simple
+    >
   </div>
 </template>
 <script>
 import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { PAGE_SHOW_QUESTIONNAIRES } from "@/router/apiRouter";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      questionnaire: { title: "" },
-      list: [
-        { id: 1, title: "Красить крышу в красный цвет", select: "" },
-        { id: 2, title: "Красить крышу в синий цвет", select: "" },
-        { id: 3, title: "Красить крышу в зелёный цвет", select: "" },
-        { id: 4, title: "Красить крышу в фиолетовый цвет", select: "" },
-        { id: 5, title: "Красить крышу в жёлтый цвет", select: "" },
-      ],
+      validTitle: false,
+      validByWhom: false,
+      validQuestion: false,
+      questionnaire: {},
       SEND_TO_SERVER,
+      PAGE_SHOW_QUESTIONNAIRES,
+      title: "",
+      byWhom: "",
+      selects: [],
     };
   },
   methods: {
-    sendToServer() {
-      const response = { ownerId: 0, list: this.list };
-      console.log(response);
+    ...mapActions({
+      generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
+    }),
+    addQuestion() {
+      this.selects.push({ question: "" });
     },
+    removeQuestion() {
+      if (this.selects.length > 1) {
+        this.selects.length -= 1;
+      }
+    },
+    sendToServer() {
+      let body = [];
+      this.selects.forEach((el) => {
+        body.push({
+          title: this.title,
+          byWhom: this.byWhom,
+          question: el.question,
+        });
+      });
+      this.generateListQuestionnaire(body);
+      //console.log(body);
+    },
+  },
+  computed: {
+    ...mapGetters({
+      getMessages: "questionnaire/getMessages",
+      getIsLoading: "questionnaire/getIsLoading",
+    }),
   },
 };
 </script>

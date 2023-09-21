@@ -1,37 +1,52 @@
 <template>
   <div class="main">
-    <button-create @click="goToPageCreateOwnership"
-      >{{ CREATE_ENTRY_ABOUT_OWNERSHIP }}
+    <button-create @click="goToPageQuestionnaires"
+      >{{ LIST_QUESTIONNAIRES }}
     </button-create>
     <button-create @click="goToPageCreateQuestionnaire"
       >{{ CREATE_QUESTIONNAIRE }}
     </button-create>
+    <div class="title">Введите тему опроса :</div>
+    <input-simple class="input" v-model="title" :style="{ width: '400px' }" />
+    <button-simple
+      :hidden="this.title.length == 0"
+      @click="goToPageResultQuestionnaire"
+      >{{ SEND_TO_SERVER }}
+    </button-simple>
   </div>
 </template>
 <script>
 import {
-  CREATE_ENTRY_ABOUT_OWNERSHIP,
+  LIST_QUESTIONNAIRES,
   CREATE_QUESTIONNAIRE,
+  SEND_TO_SERVER,
 } from "@/ui/namesButton";
 import {
-  PAGE_CREATE_ENTRY_OWNERSHIP,
+  PAGE_SHOW_QUESTIONNAIRES,
   PAGE_CREATE_QUESTIONNAIRE,
+  PAGE_RESULT_QUESTIONNAIRE,
 } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      CREATE_ENTRY_ABOUT_OWNERSHIP,
+      title: "",
+      SEND_TO_SERVER,
+      LIST_QUESTIONNAIRES,
       CREATE_QUESTIONNAIRE,
-      PAGE_CREATE_ENTRY_OWNERSHIP,
+      PAGE_SHOW_QUESTIONNAIRES,
       PAGE_CREATE_QUESTIONNAIRE,
+      PAGE_RESULT_QUESTIONNAIRE,
     };
   },
   methods: {
-    goToPageCreateOwnership() {
-      this.$router.push(PAGE_CREATE_ENTRY_OWNERSHIP);
+    goToPageQuestionnaires() {
+      this.$router.push(PAGE_SHOW_QUESTIONNAIRES);
     },
     goToPageCreateQuestionnaire() {
       this.$router.push(PAGE_CREATE_QUESTIONNAIRE);
+    },
+    goToPageResultQuestionnaire() {
+      this.$router.push(PAGE_RESULT_QUESTIONNAIRE + "/" + this.title);
     },
   },
 };
@@ -50,5 +65,13 @@ export default {
 }
 .btn {
   margin: 10px 0px;
+}
+.title {
+  font-size: 17px;
+  color: blueviolet;
+  margin-right: 5px;
+}
+.input {
+  margin: 5px 5px 5px 0px;
 }
 </style>
