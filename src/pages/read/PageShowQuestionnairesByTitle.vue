@@ -1,8 +1,12 @@
 <template>
+  <header-polls></header-polls>
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
+    <line-header
+      text="Список непроголосованных опросов по теме"
+      :style="{ color: 'blueviolet' }"
+    />
     <questionnaire-item :questionnaire="header" count="№" />
     <div v-for="one in getQuestionnaires" :key="one.id">
       <div

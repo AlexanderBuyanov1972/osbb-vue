@@ -107,6 +107,8 @@ export const mapAddressToLineAddress = (address) => {
     address.house +
     ",  подъезд № " +
     address.entrance +
+    ",  этаж " +
+    address.floor +
     ",  кв. № " +
     address.apartment
   );

@@ -1,33 +1,17 @@
 <template>
   <div class="app">
-    <header-data></header-data>
-    <header-data-search
-      @apartment="(value) => (apartment = value)"
-    ></header-data-search>
+    <header-blocks></header-blocks>
     <vue-hr />
-    <header-polls></header-polls>
-    <header-polls-search :apartment="apartment"></header-polls-search>
     <router-view></router-view>
   </div>
 </template>
 <script>
-import HeaderData from "@/components/HeaderData.vue";
-import HeaderDataSearch from "@/components/HeaderDataSearch.vue";
-import HeaderPolls from "@/components/HeaderPolls.vue";
-import HeaderPollsSearch from "@/components/HeaderPollsSearch.vue";
+import HeaderBlocks from "@/components/HeaderBlocks.vue";
 import VueHr from "./ui/elements/VueHr.vue";
 export default {
   components: {
-    HeaderData,
-    HeaderDataSearch,
-    HeaderPolls,
-    HeaderPollsSearch,
+    HeaderBlocks,
     VueHr,
-  },
-  data() {
-    return {
-      apartment: "",
-    };
   },
 };
 </script>

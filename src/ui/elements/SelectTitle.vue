@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       show: false,
-      name: this.array[0],
+      name: "",
     };
   },
   methods: {

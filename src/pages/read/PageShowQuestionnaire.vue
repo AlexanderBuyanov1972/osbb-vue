@@ -1,16 +1,19 @@
 <template>
+  <header-polls></header-polls>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Результаты опроса" />
     <div class="items">
-        <div class="item" v-for="one in getQuestionnaire.selects" :key="one.id">{{ one.question }} ---> {{ one.answer }}</div>
+      <div class="item" v-for="one in getQuestionnaire.selects" :key="one.id">
+        {{ one.question }} ---> {{ one.answer }}
+      </div>
     </div>
   </div>
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     OwnerItem,
@@ -20,7 +23,7 @@ export default {
   },
   methods: {
     ...mapActions({
-        fetchQuestionnaire: "questionnaire/fetchQuestionnaire",
+      fetchQuestionnaire: "questionnaire/fetchQuestionnaire",
     }),
   },
   computed: {
@@ -30,9 +33,7 @@ export default {
       getIsLoading: "questionnaire/getIsLoading",
     }),
   },
-  mounted() {
-   
-  },
+  mounted() {},
 };
 </script>
 

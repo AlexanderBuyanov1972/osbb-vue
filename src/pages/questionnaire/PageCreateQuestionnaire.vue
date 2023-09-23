@@ -1,4 +1,5 @@
 <template>
+  <header-polls></header-polls>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
@@ -27,7 +28,7 @@
         <input-simple v-model="byWhom" placeholder="Инициатор опроса." />
       </div>
 
-      <div class="selects" v-for="one in selects">
+      <div class="selects" v-for="one in selects" :key="one.question">
         <div class="question">
           <block-error-message
             :field="one.question"
@@ -73,6 +74,8 @@ export default {
   methods: {
     ...mapActions({
       generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
+      fetchAllTitleOfQuestionnaire:
+        "questionnaire/fetchAllTitleOfQuestionnaire",
     }),
     addQuestion() {
       this.selects.push({ question: "" });
@@ -91,8 +94,9 @@ export default {
           question: el.question,
         });
       });
-      this.generateListQuestionnaire(body);
-      //console.log(body);
+      this.generateListQuestionnaire(body).then(() => {
+        this.fetchAllTitleOfQuestionnaire;
+      });
     },
   },
   computed: {

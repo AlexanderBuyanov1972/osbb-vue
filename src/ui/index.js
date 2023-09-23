@@ -14,6 +14,8 @@ import VueLoader from "@/ui/elements/VueLoader.vue";
 import VueHr from "@/ui/elements/VueHr.vue";
 import LineRadio from "@/ui/elements/LineRadio.vue";
 // --------------- components -------------------
+import HeaderPolls from "@/components/HeaderPolls.vue";
+import HeaderData from "@/components/HeaderData.vue";
 import HeaderMessages from "@/components/HeaderMessages.vue";
 import LineAddress from "@/components/LineAddress.vue";
 import LineHeader from "@/components/LineHeader.vue";
@@ -57,6 +59,8 @@ export default [
   VueLoader,
   VueHr,
   LineRadio,
+  HeaderData,
+  HeaderPolls,
 
   // ----------------
   HeaderMessages,

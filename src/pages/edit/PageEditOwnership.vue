@@ -1,4 +1,5 @@
 <template>
+  <header-data></header-data>
   <div class="main">
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование записи о помещении." />

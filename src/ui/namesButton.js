@@ -51,4 +51,7 @@ export const SELECT = "Голосовать";
 export const GET = "Получить";
 export const BACK = "Назад";
 export const MAIN = "На главную";
+export const BLOCK_OWNERSHIP = "Блок недвижимости";
+export const BLOCK_OWNER = "Блок собственников";
+export const BLOCK_QUESTIONNAIRE = "Блок опросов";
 export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";

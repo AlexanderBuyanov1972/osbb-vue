@@ -1,4 +1,5 @@
 <template>
+  <header-data></header-data>
   <vue-loader :isLoader="this.getIsLoading" />
   <header-messages :messages="getMessages" />
   <line-header text="Список собственников" />

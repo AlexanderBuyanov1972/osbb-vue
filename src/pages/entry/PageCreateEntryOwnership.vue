@@ -1,14 +1,8 @@
 <template>
+  <header-data></header-data>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages
-      :messages="
-        this.mergingTwoArraysAndRemovingIdenticalMessages(
-          getMessagesOwnership,
-          getMessagesOwner
-        )
-      "
-    />
+    <header-messages :messages="getMessagesOwnership" />
     <line-header text="Создание записи о собственности" />
     <div class="blocks">
       <div class="block1">

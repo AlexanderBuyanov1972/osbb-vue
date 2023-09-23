@@ -1,4 +1,5 @@
 <template>
+  <header-data></header-data>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
@@ -10,14 +11,20 @@
     />
     <line-address :address="this.getOwnership.address" />
     <block-read-ownership :ownership="ownership" />
-    <vue-hr/>
+    <vue-hr />
     <div class="btns">
       <button-edit
-        @click="this.$router.push(PAGE_EDIT_OWNERSHIP + '/' + this.getOwnership.id)"
+        @click="
+          this.$router.push(PAGE_EDIT_OWNERSHIP + '/' + this.getOwnership.id)
+        "
         >{{ EDIT_OWNERSHIP }}</button-edit
       >
       <button-simple
-        @click="this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.getOwnership.id)"
+        @click="
+          this.$router.push(
+            PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.getOwnership.id
+          )
+        "
         >{{ SHOW_ENTRY_ABOUT_OWNERSHIP }}</button-simple
       >
     </div>
@@ -25,8 +32,11 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import {EDIT_OWNERSHIP, SHOW_ENTRY_ABOUT_OWNERSHIP} from "@/ui/namesButton"
-import { PAGE_EDIT_OWNERSHIP, PAGE_SHOW_ENTRY_OWNERSHIP } from "@/router/apiRouter";
+import { EDIT_OWNERSHIP, SHOW_ENTRY_ABOUT_OWNERSHIP } from "@/ui/namesButton";
+import {
+  PAGE_EDIT_OWNERSHIP,
+  PAGE_SHOW_ENTRY_OWNERSHIP,
+} from "@/router/apiRouter";
 export default {
   data() {
     return {

@@ -1,8 +1,9 @@
 <template>
   <div class="main">
+    <header-data></header-data>
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Реестр недвижимости"/>
+    <line-header text="Реестр недвижимости" />
     <block-information-about-house :info="getBuildingCharacteristics" />
     <ownership-list-registry :list="getRegistryOwnerships" />
   </div>

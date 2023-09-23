@@ -1,4 +1,5 @@
 <template>
+  <header-data></header-data>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages

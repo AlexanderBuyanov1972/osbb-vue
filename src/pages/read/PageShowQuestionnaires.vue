@@ -1,4 +1,5 @@
 <template>
+  <header-polls></header-polls>
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />

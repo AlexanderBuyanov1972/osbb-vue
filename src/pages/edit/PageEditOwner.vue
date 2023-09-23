@@ -1,4 +1,5 @@
 <template>
+  <header-data></header-data>
   <div class="main">
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование данных о собственнике" />
@@ -31,7 +32,9 @@
 import { PAGE_SHOW_OWNER } from "@/router/apiRouter";
 import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import HeaderData from "@/components/HeaderData.vue";
 export default {
+  components: { HeaderData },
   data() {
     return {
       owner: {},

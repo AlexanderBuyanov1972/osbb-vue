@@ -1,5 +1,5 @@
 export const arrayTypeRoom = [
-  { id: 1, name: "Тип помещения", value: "Тип помещения" },
+  { id: 1, name: "Тип помещения", value: "" },
   { id: 2, name: "Квартира", value: "APARTMENT" },
   {
     id: 3,
@@ -9,13 +9,13 @@ export const arrayTypeRoom = [
 ];
 
 export const arrayGender = [
-  { id: 1, name: "Пол", value: "Пол" },
+  { id: 1, name: "Пол", value: "" },
   { id: 2, name: "Мужской", value: "MALE" },
   { id: 3, name: "Женский", value: "FEMALE" },
 ];
 
 export const arrayFamilyStatus = [
-  { id: 1, name: "Семейное положение", value: "Семейное положение" },
+  { id: 1, name: "Семейное положение", value: "" },
   { id: 2, name: "В браке", value: "MARRIED" },
   { id: 3, name: "Одиночка", value: "SINGLE" },
 ];
@@ -30,7 +30,7 @@ export const arrayNumberRooms = [
 ];
 
 export const arrayLoggia = [
-  { id: 1, name: "Балкон", value: "Балкон" },
+  { id: 1, name: "Балкон", value: "" },
   { id: 2, name: "Есть", value: true },
   { id: 3, name: "Нет", value: false },
 ];
