@@ -6,7 +6,7 @@ import {
   arrayFamilyStatus,
   arrayQuestionnaire,
   arrayAnswer,
-} from "@/pages/functions/arraysOfData";
+} from "@/pages/_functions/arraysOfData";
 
 // ------------ show fields objects  arrays ---------------
 

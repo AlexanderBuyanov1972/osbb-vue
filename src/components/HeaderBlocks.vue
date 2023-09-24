@@ -1,13 +1,13 @@
 <template>
   <div class="main">
     <button-delete @click="$router.push(PAGE_MAIN)">{{ MAIN }}</button-delete>
-    <button-delete @click="$router.push(PAGE_SHOW_OWNERSHIPS)"
+    <button-delete @click="$router.push(PAGE_OWNERSHIPS_READ)"
       >{{ BLOCK_OWNERSHIP }}
     </button-delete>
-    <button-delete @click="$router.push(PAGE_SHOW_OWNERS)"
+    <button-delete @click="$router.push(PAGE_OWNERS_READ)"
       >{{ BLOCK_OWNER }}
     </button-delete>
-    <button-delete @click="$router.push(PAGE_SHOW_QUESTIONNAIRES)"
+    <button-delete @click="$router.push(PAGE_QUESTIONNAIRES_READ)"
       >{{ BLOCK_QUESTIONNAIRE }}
     </button-delete>
   </div>
@@ -15,9 +15,9 @@
 <script>
 import {
   PAGE_MAIN,
-  PAGE_SHOW_QUESTIONNAIRES,
-  PAGE_SHOW_OWNERSHIPS,
-  PAGE_SHOW_OWNERS,
+  PAGE_QUESTIONNAIRES_READ,
+  PAGE_OWNERSHIPS_READ,
+  PAGE_OWNERS_READ,
 } from "@/router/apiRouter";
 import {
   BLOCK_OWNER,
@@ -33,9 +33,9 @@ export default {
       BLOCK_QUESTIONNAIRE,
       MAIN,
       PAGE_MAIN,
-      PAGE_SHOW_OWNERSHIPS,
-      PAGE_SHOW_OWNERS,
-      PAGE_SHOW_QUESTIONNAIRES,
+      PAGE_QUESTIONNAIRES_READ,
+      PAGE_OWNERSHIPS_READ,
+      PAGE_OWNERS_READ,
     };
   },
   updated() {

@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header text="Паспорт собственника" :style="{'color':'brown'}"/>
+    <line-header text="Паспорт собственника" :style="{ color: 'brown' }" />
     <div class="passport">
       <div class="numberPassport">
         <block-error-message
@@ -69,7 +69,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "block-edit-passport",
+  name: "block-update-passport",
   props: {
     id: Number,
   },
@@ -90,6 +90,8 @@ export default {
 
     emitPassport() {
       this.$emit("isValidPassport", this.isValidPassport);
+      if (this.passport.dateIssue == "нет")
+        this.passport.dateIssue = "1900-01-01";
       this.$emit("passport", this.passport);
     },
     handlerNumberPassport(value) {

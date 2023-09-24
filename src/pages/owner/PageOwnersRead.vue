@@ -1,19 +1,19 @@
 <template>
-  <header-data></header-data>
+  <header-data-owners></header-data-owners>
   <vue-loader :isLoader="this.getIsLoading" />
   <header-messages :messages="getMessages" />
   <line-header text="Список собственников" />
   <owner-item :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
-    <div @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + one.id)">
+    <div @click="() => this.$router.push(PAGE_OWNER_READ + '/' + one.id)">
       <owner-item :owner="one" :count="index + 1" />
     </div>
   </div>
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_SHOW_OWNER } from "@/router/apiRouter";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { PAGE_OWNER_READ } from "@/router/apiRouter";
+import { mapActions, mapGetters} from "vuex";
 export default {
   components: {
     OwnerItem,
@@ -32,7 +32,7 @@ export default {
         phoneNumber: "Номер телефона",
         shareInRealEstate: "Доля в собственности",
       },
-      PAGE_SHOW_OWNER,
+      PAGE_OWNER_READ,
     };
   },
   methods: {

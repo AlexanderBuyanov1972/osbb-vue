@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header text="Собственник" :style="{'color':'brown'}" />
+    <line-header text="Собственник" :style="{ color: 'brown' }" />
 
     <div class="owner">
       <div class="lastName">
@@ -106,15 +106,18 @@
   </div>
 </template>
 <script>
-import { arrayGender, arrayFamilyStatus } from "@/pages/functions/arraysOfData";
+import {
+  arrayGender,
+  arrayFamilyStatus,
+} from "@/pages/_functions/arraysOfData";
 import {
   getElementByValue,
   getElementByName,
   getNameByValue,
-} from "@/pages/functions/functions";
+} from "@/pages/_functions/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
-  name: "block-edit-owner",
+  name: "block-update-owner",
   props: {
     id: Number,
   },
@@ -145,6 +148,7 @@ export default {
     }),
     emitOwner() {
       this.$emit("isValidOwner", this.isValidOwner);
+      if (this.owner.dateBirth == "нет") this.owner.dateBirth = "1900-01-01";
       this.$emit("owner", this.owner);
     },
     handlerLastName(value) {

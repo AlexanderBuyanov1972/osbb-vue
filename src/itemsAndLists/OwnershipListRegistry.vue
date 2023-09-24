@@ -3,14 +3,14 @@
     <ownership-item
       :ownership="one.ownership"
       @click="
-        () => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + one.ownership.id)
+        () => this.$router.push(PAGE_OWNERSHIP_READ + '/' + one.ownership.id)
       "
       :flag="true"
     />
     <p
       v-for="(two, index) in one.listFullNameOwner"
       :key="two.ownerId"
-      @click="() => this.$router.push(PAGE_SHOW_OWNER + '/' + two.ownerId)"
+      @click="() => this.$router.push(PAGE_OWNER_READ + '/' + two.ownerId)"
     >
       {{ index + 1 }}. {{ two.fullNameOwner }}
     </p>
@@ -18,12 +18,12 @@
 </template>
 <script>
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
-import { PAGE_SHOW_OWNERSHIP, PAGE_SHOW_OWNER } from "@/router/apiRouter";
+import { PAGE_OWNERSHIP_READ, PAGE_OWNER_READ } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      PAGE_SHOW_OWNERSHIP,
-      PAGE_SHOW_OWNER,
+      PAGE_OWNERSHIP_READ,
+      PAGE_OWNER_READ,
     };
   },
   components: {

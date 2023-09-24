@@ -1,13 +1,22 @@
 <template>
   <div class="wrapper">
-    <div class="item" :style="{'color':'brown', 'font-size':'25px'}">Паспорт :</div>
+    <div class="item" :style="{ color: 'brown', 'font-size': '25px' }">
+      Паспорт :
+    </div>
     <div class="item">
       <span>Серийный номер : </span>{{ passport.numberPassport }}
     </div>
     <div class="item">
       <span>Номер записи : </span>{{ passport.numberEntry }}
     </div>
-    <div class="item"><span>Дата выдачи : </span>{{ passport.dateIssue }}</div>
+    <div class="item">
+      <span>Дата выдачи : </span
+      >{{
+        this.passport.dateIssue == "1900-01-01"
+          ? "нет"
+          : this.passport.dateIssue
+      }}
+    </div>
     <div class="item">
       <span>Орган выдачи : </span>{{ passport.issuingAuthority }}
     </div>

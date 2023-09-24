@@ -3,17 +3,14 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header
-      text="Список непроголосованных опросов по теме и квартирам"
-      :style="{ color: 'blueviolet' }"
-    />
+    <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
     <questionnaire-item :questionnaire="header" count="№" />
-    <div v-for="one in getQuestionnaires" :key="one.id">
+    <div v-for="one in array" :key="one.id">
       <div
         @click="
           () =>
             this.$router.push(
-              PAGE_ANSWER_FOR_QUESTIONNAIRE +
+              PAGE_QUESTIONNAIRE_ANSWER +
                 '/' +
                 one.title +
                 '/' +
@@ -28,7 +25,7 @@
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_ANSWER_FOR_QUESTIONNAIRE } from "@/router/apiRouter";
+import { PAGE_QUESTIONNAIRE_ANSWER } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -36,6 +33,7 @@ export default {
   },
   data() {
     return {
+      array: [],
       header: {
         title: "Тема опроса",
         byWhom: "Кем инициализирован",
@@ -44,15 +42,12 @@ export default {
         apartment: "Квартира №",
         fullname: "Ф.И.О.",
       },
-      PAGE_ANSWER_FOR_QUESTIONNAIRE,
+      PAGE_QUESTIONNAIRE_ANSWER,
     };
   },
   methods: {
     ...mapActions({
-      fetchAllQuestionnaireByTitleAndByApartment:
-        "questionnaire/fetchAllQuestionnaireByTitleAndByApartment",
-      fetchAllTitleOfQuestionnaire:
-        "questionnaire/fetchAllTitleOfQuestionnaire",
+      fetchAllQuestionnaire: "questionnaire/fetchAllQuestionnaire",
     }),
   },
   computed: {
@@ -61,18 +56,11 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
-    check() {
-      return this.fetchAllQuestionnaireByTitleAndByApartment({
-        title: this.$route.params.title,
-        apartment: this.$route.params.apartment,
-      });
-    },
   },
   mounted() {
-    this.check;
-  },
-  updated() {
-    this.check;
+    this.fetchAllQuestionnaire().then(() => {
+      this.array = this.getQuestionnaires;
+    });
   },
 };
 </script>

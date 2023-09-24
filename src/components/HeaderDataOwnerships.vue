@@ -1,17 +1,13 @@
 <template>
   <div class="block1">
-    <button-simple @click="goToPageOwners">{{ LIST_OWNER }} </button-simple>
-    <button-simple @click="goToPageOwnerships"
-      >{{ LIST_OWNERSHIP }}
+    <button-simple @click="$router.push(PAGE_OWNERSHIPS_READ)"
+      >{{ OWNERSHIPS_READ }}
     </button-simple>
-    <button-simple @click="goToPageRegistryOwners"
-      >{{ REGISTRY_OWNER }}
+    <button-simple @click="$router.push(PAGE_REGISTRY_OWNERSHIPS)"
+      >{{ REGISTRY_OWNERSHIPS }}
     </button-simple>
-    <button-simple @click="goToPageRegistryOwnerships"
-      >{{ REGISTRY_OWNERSHIP }}
-    </button-simple>
-    <button-simple @click="goToPageCreateOwnership"
-      >{{ CREATE_ENTRY_ABOUT_OWNERSHIP }}
+    <button-simple @click="$router.push(PAGE_ENTRY_CREATE)"
+      >{{ ENTRY_CREATE }}
     </button-simple>
   </div>
   <div class="block2">
@@ -23,86 +19,62 @@
       :style="{ width: '65px' }"
     />
     <button-simple @click="plus">+</button-simple>
-    <button-simple
-      :hidden="!this.checkApartment"
-      @click="goToPageShowEntryOwnership"
+    <button-simple :hidden="!this.checkApartment" @click="goToPageOwnershipRead"
       >{{ GET }}
     </button-simple>
   </div>
 </template>
 <script>
 import {
-  PAGE_SHOW_OWNERS,
-  PAGE_SHOW_OWNERSHIPS,
-  PAGE_REGISTRY_OWNERS,
+  PAGE_OWNERSHIPS_READ,
   PAGE_REGISTRY_OWNERSHIPS,
-  PAGE_CREATE_ENTRY_OWNERSHIP,
-  PAGE_SHOW_ENTRY_OWNERSHIP,
+  PAGE_ENTRY_CREATE,
+  PAGE_OWNERSHIP_READ,
 } from "@/router/apiRouter";
 import {
-  CREATE_ENTRY_ABOUT_OWNERSHIP,
-  LIST_OWNER,
-  LIST_OWNERSHIP,
-  REGISTRY_OWNER,
-  REGISTRY_OWNERSHIP,
+  OWNERSHIPS_READ,
+  REGISTRY_OWNERSHIPS,
+  ENTRY_CREATE,
   GET,
 } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "header-data",
+  name: "header-data-ownerships",
   data() {
     return {
-      apartment: "",
+      apartment: "1",
+      // buttons
+      OWNERSHIPS_READ,
+      REGISTRY_OWNERSHIPS,
+      ENTRY_CREATE,
       GET,
-      PAGE_SHOW_ENTRY_OWNERSHIP,
-      CREATE_ENTRY_ABOUT_OWNERSHIP,
-      LIST_OWNER,
-      LIST_OWNERSHIP,
-      REGISTRY_OWNER,
-      REGISTRY_OWNERSHIP,
-      PAGE_SHOW_OWNERS,
-      PAGE_SHOW_OWNERSHIPS,
-      PAGE_REGISTRY_OWNERS,
+      // pages
+      PAGE_OWNERSHIPS_READ,
       PAGE_REGISTRY_OWNERSHIPS,
-      PAGE_CREATE_ENTRY_OWNERSHIP,
+      PAGE_ENTRY_CREATE,
+      PAGE_OWNERSHIP_READ,
     };
   },
   methods: {
     ...mapActions({
       fetchIdOwnershipByIdApartment: "ownership/fetchIdOwnershipByIdApartment",
     }),
-    goToPageOwners() {
-      this.$router.push(PAGE_SHOW_OWNERS);
-    },
-    goToPageOwnerships() {
-      this.$router.push(PAGE_SHOW_OWNERSHIPS);
-    },
-    goToPageRegistryOwners() {
-      this.$router.push(PAGE_REGISTRY_OWNERS);
-    },
-    goToPageRegistryOwnerships() {
-      this.$router.push(PAGE_REGISTRY_OWNERSHIPS);
-    },
-    goToPageCreateOwnership() {
-      this.$router.push(PAGE_CREATE_ENTRY_OWNERSHIP);
-    },
-    goToPageShowEntryOwnership() {
+    goToPageOwnershipRead() {
       this.fetchIdOwnershipByIdApartment(this.apartment).then(() => {
-        return this.$router.push(
-          PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.getIdOwnership
-        );
+        this.$emit('id', this.getIdOwnership)
+        this.$router.push(PAGE_OWNERSHIP_READ + "/" + this.getIdOwnership);
       });
     },
     plus() {
       if (this.apartment < 84) {
         this.apartment = this.apartment * 1 + 1;
-        this.goToPageShowEntryOwnership();
+        this.goToPageOwnershipRead();
       }
     },
     minus() {
       if (this.apartment > 1) {
         this.apartment = this.apartment * 1 - 1;
-        this.goToPageShowEntryOwnership();
+        this.goToPageOwnershipRead();
       }
     },
   },
@@ -141,5 +113,6 @@ export default {
 .input {
   margin: 5px 5px 5px 0px;
   border-color: blueviolet;
+  color: blueviolet;
 }
 </style>

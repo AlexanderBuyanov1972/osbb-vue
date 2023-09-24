@@ -1,19 +1,19 @@
 <template>
   <div class="block1">
     <button-create @click="goToPageQuestionnaires"
-      >{{ LIST_QUESTIONNAIRES }}
-    </button-create>
-    <button-create @click="goToPageCreateQuestionnaire"
-      >{{ CREATE_QUESTIONNAIRE }}
-    </button-create>
-    <button-create @click="goToPageResultQuestionnaire"
-      >{{ GET_RESULT_POLL }}
+      >{{ QUESTIONNAIRES_READ }}
     </button-create>
     <button-create @click="goToPageQuestionnairesByTitle"
       >{{ GET_POLLS_BY_TITLE }}
     </button-create>
     <button-create @click="goToPageQuestionnairesByTitleAndByApartment"
       >{{ GET_POLLS_BY_TITLE_AND_BY_APARTMENT }}
+    </button-create>
+    <button-create @click="goToPageResultQuestionnaire"
+      >{{ GET_RESULT_POLL }}
+    </button-create>
+    <button-create @click="goToPageCreateQuestionnaire"
+      >{{ QUESTIONNAIRE_CREATE }}
     </button-create>
   </div>
   <div class="block2" @mousemove="emitTitleAndApartment">
@@ -50,57 +50,76 @@
 </template>
 <script>
 import {
-  LIST_QUESTIONNAIRES,
-  CREATE_QUESTIONNAIRE,
+  QUESTIONNAIRES_READ,
+  QUESTIONNAIRE_CREATE,
   GET_RESULT_POLL,
   GET_POLLS_BY_TITLE,
   GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
 } from "@/ui/namesButton";
 import {
-  PAGE_SHOW_QUESTIONNAIRES,
-  PAGE_CREATE_QUESTIONNAIRE,
-  PAGE_RESULT_QUESTIONNAIRE,
+  PAGE_QUESTIONNAIRES_READ,
+  PAGE_QUESTIONNAIRE_CREATE,
+  PAGE_QUESTIONNAIRE_RESULT,
 } from "@/router/apiRouter";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "header-polls",
   data() {
     return {
       array: [],
       title: "",
-      apartment: "",
+      apartment: "1",
+      // buttons
+      QUESTIONNAIRES_READ,
+      QUESTIONNAIRE_CREATE,
       GET_RESULT_POLL,
       GET_POLLS_BY_TITLE,
       GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
-      LIST_QUESTIONNAIRES,
-      CREATE_QUESTIONNAIRE,
-
-      PAGE_SHOW_QUESTIONNAIRES,
-      PAGE_CREATE_QUESTIONNAIRE,
-      PAGE_RESULT_QUESTIONNAIRE,
+      // pages
+      PAGE_QUESTIONNAIRES_READ,
+      PAGE_QUESTIONNAIRE_CREATE,
+      PAGE_QUESTIONNAIRE_RESULT,
     };
   },
   methods: {
     goToPageQuestionnaires() {
-      this.$router.push(PAGE_SHOW_QUESTIONNAIRES + "/" + "");
+      this.$router.push(PAGE_QUESTIONNAIRES_READ + "/" + "");
     },
     goToPageCreateQuestionnaire() {
-      this.$router.push(PAGE_CREATE_QUESTIONNAIRE);
+      this.$router.push(PAGE_QUESTIONNAIRE_CREATE);
     },
     goToPageResultQuestionnaire() {
-      return this.$router.push(PAGE_RESULT_QUESTIONNAIRE + "/" + this.title);
+      if (this.title == "" || this.title == undefined) {
+        this.setMessages(["Выберите тему опроса"]);
+      } else {
+        this.$router.push(PAGE_QUESTIONNAIRE_RESULT + "/" + this.title);
+      }
     },
     goToPageQuestionnairesByTitle() {
-      return this.$router.push(PAGE_SHOW_QUESTIONNAIRES + "/" + this.title);
+      if (this.title == "" || this.title == undefined) {
+        this.setMessages(["Выберите тему опроса"]);
+      } else {
+        this.$router.push(PAGE_QUESTIONNAIRES_READ + "/" + this.title);
+      }
+      
     },
     goToPageQuestionnairesByTitleAndByApartment() {
-      return this.$router.push(
-        PAGE_SHOW_QUESTIONNAIRES + "/" + this.title + "/" + this.apartment
-      );
+      if (this.title == "" || this.title == undefined) {
+        this.setMessages(["Выберите тему опроса"]);
+      } else if (this.apartment == "" || this.apartment == undefined) {
+        this.setMessages(["Выберите № помещения"]);
+      } else {
+        this.$router.push(
+          PAGE_QUESTIONNAIRES_READ + "/" + this.title + "/" + this.apartment
+        );
+      }
     },
     ...mapActions({
       fetchAllTitleOfQuestionnaire:
         "questionnaire/fetchAllTitleOfQuestionnaire",
+    }),
+    ...mapMutations({
+      setMessages: "questionnaire/setMessages",
     }),
     plus() {
       if (this.apartment < 84) this.apartment = this.apartment * 1 + 1;
@@ -137,7 +156,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.block {
+.main {
   display: flex;
   align-items: center;
   justify-content: start;

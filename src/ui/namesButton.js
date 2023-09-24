@@ -1,57 +1,59 @@
-// ------------- show ------------------
-export const SHOW_OWNER = "Смотреть собственника";
-export const SHOW_OWNERSHIP = "Смотреть собственность";
-export const SHOW_ADDRESS = "Смотреть адресс";
-export const SHOW_PASSPORT = "Смотреть паспорт";
-// ------------- delete ------------------
-export const DELETE_OWNER = "Удалить собственника";
-export const DELETE_OWNERSHIP = "Удалить собственность";
-export const DELETE_ADDRESS = "Удалить адресс";
-export const DELETE_PASSPORT = "Удалить паспорт";
-// ------------- create ------------------
-export const CREATE_OWNER = "Создать собственника";
-export const CREATE_OWNERSHIP = "Создать собственность";
-export const CREATE_PASSPORT = "Создать паспорт";
-export const CREATE_ADDRESS = "Создать адресс";
-// ------------- edit ------------------
-export const EDIT_OWNER = "Редактировать собственника";
-export const EDIT_OWNERSHIP = "Редактировать собственность";
-export const EDIT_PASSPORT = "Редактировать паспорт";
-export const EDIT_ADDRESS = "Редактировать адресс";
-// ------- list and registry -----------
-export const LIST_OWNER = "Список собственников";
-export const LIST_OWNERSHIP = "Список объектов недвижимости";
-export const LIST_QUESTIONNAIRES = "Список опросов";
-
-export const REGISTRY_OWNER = "Реестр собственников";
-export const REGISTRY_OWNERSHIP = "Реестр объектов недвижимости";
-// ------------- entry  ------------------
-export const EDIT_ENTRY_ABOUT_OWNERSHIP =
-  "Редактировать запись о собственности";
-export const SHOW_ENTRY_ABOUT_OWNERSHIP = "Смотреть запись о собственности";
-export const CREATE_ENTRY_ABOUT_OWNERSHIP = "Создать запись о собственности";
-export const DELETE_ENTRY_ABOUT_OWNERSHIP = "Удалить запись о собственности";
+// ------------- entry ------------------
+export const ENTRY_CREATE = "Создать запись";
+export const ENTRY_UPDATE = "Редактировать запись";
+export const ENTRY_READ = "Смотреть запись";
+export const ENTRY_DELETE = "Удалить запись";
+// ------------- owner ------------------
+export const OWNER_CREATE = "Создать собственника";
+export const OWNER_UPDATE = "Редактировать собственника";
+export const OWNER_READ = "Смотреть собственника";
+export const OWNER_DELETE = "Удалить собственника";
+export const OWNERS_READ = "Список собственников";
+// ------------- ownership -----------------
+export const OWNERSHIP_CREATE = "Создать собственность";
+export const OWNERSHIP_UPDATE = "Редактировать собственность";
+export const OWNERSHIP_READ = "Смотреть собственность";
+export const OWNERSHIP_DELETE = "Удалить собственность";
+export const OWNERSHIPS_READ = "Список объектов недвижимости";
+// -------------- passport -----------------
+export const PASSPORT_CREATE = "Создать паспорт";
+export const PASSPORT_UPDATE = "Редактировать паспорт";
+export const PASSPORT_READ = "Смотреть паспорт";
+export const PASSPORT_DELETE = "Удалить паспорт";
+// ------------- address ------------------
+export const ADDRESS_CREATE = "Создать адресс";
+export const ADDRESS_UPDATE = "Редактировать адресс";
+export const ADDRESS_READ = "Смотреть адресс";
+export const ADDRESS_DELETE = "Удалить адресс";
+// ------------ registry ------------------------
+export const REGISTRY_OWNERS = "Реестр собственников";
+export const REGISTRY_OWNERSHIPS = "Реестр объектов недвижимости";
 // -------------- questionnaire -------------------------
-export const CREATE_QUESTIONNAIRE = "Создать опросный лист";
-export const ANSWER_FOR_QUESTIONNAIRE = "Проголосовать опросный лист";
-export const EDIT_QUESTIONNAIRE = "Редактировать опросный лист";
-export const SHOW_QUESTIONNAIRE = "Смотреть опросный лист";
-export const DELETE_QUESTIONNAIRE = "Удалить опросный лист";
-// ----------------------------------------------------------
+export const QUESTIONNAIRE_CREATE = "Создать опросный лист";
+export const QUESTIONNAIRE_ANSWER = "Проголосовать опросный лист";
+export const QUESTIONNAIRE_UPDATE = "Редактировать опросный лист";
+export const QUESTIONNAIRE_READ = "Смотреть опросный лист";
+export const QUESTIONNAIRE_DELETE = "Удалить опросный лист";
+export const QUESTIONNAIRES_READ = "Список опросов";
+// ----------- crud -------------------
+export const CREATE = "Создать";
+export const UPDATE = "Редактировать";
+export const GET = "Получить";
+export const DELETE = "Удалить";
+export const SELECT = "Выбрать";
+export const BACK = "Назад";
+// ------------- block -------------------
+export const BLOCK_OWNERSHIP = "Блок недвижимости";
+export const BLOCK_OWNER = "Блок собственников";
+export const BLOCK_QUESTIONNAIRE = "Блок опросов";
+// ------------------- another -----------------------
+export const MAIN = "На главную";
 export const SEND_TO_SERVER = "Послать на сервер";
+export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";
+export const GET_OWNERS = "Получить собственников";
 export const GET_RESULT_POLL = "Получить результаты опроса";
 export const GET_POLLS_BY_TITLE = "Получить опросы по теме";
 export const GET_POLLS_BY_TITLE_AND_BY_APARTMENT =
   "Получить опросы по теме и № помещения";
-export const CREATE = "Создать";
-export const EDIT = "Редактировать";
-export const DELETE = "Удалить";
-export const SELECT = "Голосовать";
 
-export const GET = "Получить";
-export const BACK = "Назад";
-export const MAIN = "На главную";
-export const BLOCK_OWNERSHIP = "Блок недвижимости";
-export const BLOCK_OWNER = "Блок собственников";
-export const BLOCK_QUESTIONNAIRE = "Блок опросов";
-export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";
+

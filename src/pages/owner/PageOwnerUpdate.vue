@@ -1,17 +1,17 @@
 <template>
-  <header-data></header-data>
+  <header-data-owners></header-data-owners>
   <div class="main">
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование данных о собственнике" />
     <div class="blocks">
       <div class="owner">
-        <block-edit-owner
+        <block-update-owner
           @owner="(data) => (owner = data)"
           @isValidOwner="(value) => (isValidOwner = value)"
         />
       </div>
       <div class="passport">
-        <block-edit-passport
+        <block-update-passport
           @passport="(data) => (passport = data)"
           @isValidPassport="(value) => (isValidPassport = value)"
         />
@@ -19,7 +19,7 @@
     </div>
     <vue-hr />
     <button-back
-      @click="$router.push(PAGE_SHOW_OWNER + '/' + this.$route.params.id)"
+      @click="$router.push(PAGE_OWNER_READ + '/' + this.$route.params.id)"
     />
     <button-simple
       @click="sendOwner"
@@ -29,12 +29,11 @@
   </div>
 </template>
 <script>
-import { PAGE_SHOW_OWNER } from "@/router/apiRouter";
+import { PAGE_OWNER_READ } from "@/router/apiRouter";
 import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import HeaderData from "@/components/HeaderData.vue";
+
 export default {
-  components: { HeaderData },
   data() {
     return {
       owner: {},
@@ -42,7 +41,7 @@ export default {
       isValidOwner: false,
       isValidPassport: false,
       SEND_TO_SERVER,
-      PAGE_SHOW_OWNER,
+      PAGE_OWNER_READ,
     };
   },
   methods: {
@@ -59,7 +58,7 @@ export default {
           : [{ id: 2, name: "female", url: "@/photos/owners/female.jpg" }];
       this.owner.passport = this.passport;
       this.updateOwner(this.owner).then(() => {
-        this.$router.push(PAGE_SHOW_OWNER + "/" + this.$route.params.id);
+        this.$router.push(PAGE_OWNER_READ + "/" + this.$route.params.id);
       });
     },
   },

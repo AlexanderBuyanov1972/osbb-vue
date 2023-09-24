@@ -24,7 +24,7 @@
           @valid="(value) => (validTotalArea = value)"
         />
         <input-simple
-          v-model="ownership.totalArea"
+          v-model.number="ownership.totalArea"
           placeholder="Общая площадь помещения"
         />
       </div>
@@ -37,7 +37,7 @@
           @valid="(value) => (validLivingArea = value)"
         />
         <input-simple
-          v-model="ownership.livingArea"
+          v-model.number="ownership.livingArea"
           placeholder="Жилая площадь помещения"
         />
       </div>
@@ -50,7 +50,7 @@
           @valid="(value) => (validDocumentConfirmsRightOwn = value)"
         />
         <input-simple
-          v-model="ownership.documentConfirmsRightOwn"
+          v-model.trim="ownership.documentConfirmsRightOwn"
           placeholder="Документ о праве собственности."
         />
       </div>
@@ -93,7 +93,7 @@ import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
-} from "@/pages/functions/arraysOfData";
+} from "@/pages/_functions/arraysOfData";
 export default {
   name: "block-create-ownership",
   data() {
@@ -162,3 +162,4 @@ export default {
 }
 </style>
 @/pages/functions/arraysOfData
+@/pages/_functions/arraysOfData

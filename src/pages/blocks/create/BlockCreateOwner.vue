@@ -9,7 +9,7 @@
           messageTrue="Фамилия."
           @valid="(value) => (validLastName = value)"
         />
-        <input-simple v-focus v-model="owner.lastName" placeholder="Фамилия." />
+        <input-simple v-focus v-model.trim="owner.lastName" placeholder="Фамилия." />
       </div>
 
       <div class="firstName">
@@ -19,7 +19,7 @@
           messageTrue="Имя."
           @valid="(value) => (validFirstName = value)"
         />
-        <input-simple v-model="owner.firstName" placeholder="Имя" />
+        <input-simple v-model.trim="owner.firstName" placeholder="Имя" />
       </div>
 
       <div class="secondName">
@@ -29,7 +29,7 @@
           messageTrue="Отчество."
           @valid="(value) => (validSecondName = value)"
         />
-        <input-simple v-model="owner.secondName" placeholder="Отчество" />
+        <input-simple v-model.trim="owner.secondName" placeholder="Отчество" />
       </div>
 
       <div class="dateBirth">
@@ -39,7 +39,7 @@
           messageTrue="Дата рождения (YYYY-MM-DD)."
           @valid="(value) => (validDateBirth = value)"
         />
-        <input-simple v-model="owner.dateBirth" placeholder="Дата рождения." />
+        <input-simple v-model.trim="owner.dateBirth" placeholder="Дата рождения." />
       </div>
 
       <div class="gender">
@@ -77,7 +77,7 @@
           messageTrue="E-mail."
           @valid="(value) => (validEmail = value)"
         />
-        <input-simple v-model="owner.email" placeholder="E-mail" />
+        <input-simple v-model.trim="owner.email" placeholder="E-mail" />
       </div>
 
       <div class="phoneNumber">
@@ -87,7 +87,7 @@
           messageTrue="Телефон  +38(0XX)XXXXXXX."
           @valid="(value) => (validPhoneNumber = value)"
         />
-        <input-simple v-model="owner.phoneNumber" placeholder="Телефон" />
+        <input-simple v-model.trim="owner.phoneNumber" placeholder="Телефон" />
       </div>
 
       <div class="shareInRealEstate">
@@ -98,7 +98,7 @@
           @valid="(value) => (validShareInRealEstate = value)"
         />
         <input-simple
-          v-model="owner.shareInRealEstate"
+          v-model.trim="owner.shareInRealEstate"
           placeholder="Доля в собственности (от 0 до 1, три знака после точки)."
         />
       </div>
@@ -107,7 +107,7 @@
   </div>
 </template>
 <script>
-import { arrayGender, arrayFamilyStatus } from "@/pages/functions/arraysOfData";
+import { arrayGender, arrayFamilyStatus } from "@/pages/_functions/arraysOfData";
 export default {
   name: "block-create-owner",
   data() {
@@ -130,6 +130,8 @@ export default {
   methods: {
     emitOwner() {
       this.$emit("isValidOwner", this.isValidOwner);
+      if (this.owner.dateBirth == "нет")
+        this.owner.dateBirth = "1900-01-01";
       this.$emit("owner", this.owner);
     },
     changeGender(value) {
@@ -180,3 +182,4 @@ export default {
 }
 </style>
 @/pages/functions/arraysOfData
+@/pages/_functions/arraysOfData

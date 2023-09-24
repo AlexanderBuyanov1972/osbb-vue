@@ -37,8 +37,8 @@
   </div>
 </template>
 <script>
-import { arrayAnswer } from "@/pages/functions/arraysOfData";
-import { getValueByName } from "@/pages/functions/functions";
+import { arrayAnswer } from "@/pages/_functions/arraysOfData";
+import { getValueByName } from "@/pages/_functions/functions";
 export default {
   name: "line-radio",
   data() {
@@ -126,3 +126,4 @@ span {
   border: 3px solid blueviolet;
 }
 </style>
+@/pages/_functions/arraysOfData@/pages/_functions/functions

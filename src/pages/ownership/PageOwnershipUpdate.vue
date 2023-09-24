@@ -1,17 +1,17 @@
 <template>
-  <header-data></header-data>
+  <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование записи о помещении." />
     <div class="blocks">
       <div class="ownership">
-        <block-edit-ownership
+        <block-update-ownership
           @ownership="(data) => (ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
       <div class="address">
-        <block-edit-address
+        <block-update-address
           @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
         />

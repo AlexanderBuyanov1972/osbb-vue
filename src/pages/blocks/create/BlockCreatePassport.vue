@@ -1,6 +1,6 @@
 <template>
   <div class="main" @mousemove="emitPassport">
-    <line-header text="Паспорт собственника" :style="{'color':'brown'}"/>
+    <line-header text="Паспорт собственника" :style="{ color: 'brown' }" />
     <div class="passport">
       <div class="numberPassport">
         <block-error-message
@@ -9,7 +9,10 @@
           messageTrue="Номер паспорт (XXXXXXXXX)."
           @valid="(value) => (validNumberPassport = value)"
         />
-        <input-simple v-model="passport.numberPassport" placeholder="Номер паспорта." />
+        <input-simple
+          v-model.trim="passport.numberPassport"
+          placeholder="Номер паспорта."
+        />
       </div>
 
       <div class="numberEntry">
@@ -20,7 +23,7 @@
           @valid="(value) => (validNumberEntry = value)"
         />
         <input-simple
-          v-model="passport.numberEntry"
+          v-model.trim="passport.numberEntry"
           placeholder="Номер записи."
         />
       </div>
@@ -32,7 +35,10 @@
           messageTrue="Дата выдачи (YYYY-MM-DD)."
           @valid="(value) => (validDateIssue = value)"
         />
-        <input-simple v-model="passport.dateIssue" placeholder="Дата выдачи." />
+        <input-simple
+          v-model.trim="passport.dateIssue"
+          placeholder="Дата выдачи."
+        />
       </div>
 
       <div class="issuingAuthority">
@@ -43,7 +49,7 @@
           @valid="(value) => (validIssuingAuthority = value)"
         />
         <input-simple
-          v-model="passport.issuingAuthority"
+          v-model.trim="passport.issuingAuthority"
           placeholder="Орган выдачи."
         />
       </div>
@@ -56,7 +62,7 @@
           @valid="(value) => (validRegistrationNumberCardPayerTaxes = value)"
         />
         <input-simple
-          v-model="passport.registrationNumberCardPayerTaxes"
+          v-model.trim="passport.registrationNumberCardPayerTaxes"
           placeholder="ИНН."
         />
       </div>
@@ -82,6 +88,8 @@ export default {
   methods: {
     emitPassport() {
       this.$emit("isValidPassport", this.isValidPassport);
+      if (this.passport.dateIssue == "нет")
+        this.passport.dateIssue = "1900-01-01";
       this.$emit("passport", this.passport);
     },
     reset() {

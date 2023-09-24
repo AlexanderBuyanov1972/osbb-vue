@@ -120,7 +120,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "block-edit-address",
+  name: "block-update-address",
   data() {
     return {
       address: {},

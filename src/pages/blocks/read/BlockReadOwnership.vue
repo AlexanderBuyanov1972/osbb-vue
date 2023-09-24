@@ -32,7 +32,7 @@ import {
   showLoggia,
   showTypeRoom,
   showNumberRooms,
-} from "@/pages/functions/functions";
+} from "@/pages/_functions/functions";
 export default {
   name: "block-read-ownership",
   props: {
@@ -86,3 +86,4 @@ span {
 }
 </style>
 @/pages/functions/functions
+@/pages/_functions/functions

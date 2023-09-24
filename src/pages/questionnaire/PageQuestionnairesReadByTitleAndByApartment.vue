@@ -4,7 +4,7 @@
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header
-      text="Список непроголосованных опросов по теме"
+      text="Список непроголосованных опросов по теме и квартирам"
       :style="{ color: 'blueviolet' }"
     />
     <questionnaire-item :questionnaire="header" count="№" />
@@ -13,7 +13,7 @@
         @click="
           () =>
             this.$router.push(
-              PAGE_ANSWER_FOR_QUESTIONNAIRE +
+              PAGE_QUESTIONNAIRE_ANSWER +
                 '/' +
                 one.title +
                 '/' +
@@ -28,7 +28,7 @@
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_ANSWER_FOR_QUESTIONNAIRE } from "@/router/apiRouter";
+import { PAGE_QUESTIONNAIRE_ANSWER } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -44,13 +44,15 @@ export default {
         apartment: "Квартира №",
         fullname: "Ф.И.О.",
       },
-      PAGE_ANSWER_FOR_QUESTIONNAIRE,
+      PAGE_QUESTIONNAIRE_ANSWER,
     };
   },
   methods: {
     ...mapActions({
-      fetchAllQuestionnaireByTitle:
-        "questionnaire/fetchAllQuestionnaireByTitle",
+      fetchAllQuestionnaireByTitleAndByApartment:
+        "questionnaire/fetchAllQuestionnaireByTitleAndByApartment",
+      fetchAllTitleOfQuestionnaire:
+        "questionnaire/fetchAllTitleOfQuestionnaire",
     }),
   },
   computed: {
@@ -60,7 +62,10 @@ export default {
       getIsLoading: "questionnaire/getIsLoading",
     }),
     check() {
-      return this.fetchAllQuestionnaireByTitle(this.$route.params.title);
+      return this.fetchAllQuestionnaireByTitleAndByApartment({
+        title: this.$route.params.title,
+        apartment: this.$route.params.apartment,
+      });
     },
   },
   mounted() {

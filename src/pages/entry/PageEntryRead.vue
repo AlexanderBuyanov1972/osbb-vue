@@ -1,5 +1,5 @@
 <template>
-  <header-data></header-data>
+  <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessagesOwnership" />
@@ -21,15 +21,14 @@
         </div>
       </div>
     </div>
-
     <vue-hr />
     <button-back
       @click="
-        this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + this.getOwnership.id)
+        this.$router.push(PAGE_OWNERSHIP_READ + '/' + this.getOwnership.id)
       "
     />
     <button-edit @click="goToPageUpdateOwnership">{{
-      EDIT_ENTRY_ABOUT_OWNERSHIP
+      ENTRY_UPDATE
     }}</button-edit>
     <!-- для отрисовки старницы при обновлении ID - перезагрузка -->
     <button-simple :hidden="true" @click="start">reset</button-simple>
@@ -37,28 +36,25 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { EDIT_ENTRY_ABOUT_OWNERSHIP } from "@/ui/namesButton";
-import {
-  PAGE_SHOW_OWNERSHIP,
-  PAGE_UPDATE_ENTRY_OWNERSHIP,
-} from "@/router/apiRouter";
+import { ENTRY_UPDATE } from "@/ui/namesButton";
+import { PAGE_OWNERSHIP_READ, PAGE_ENTRY_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
       ownership: {},
       address: {},
       owners: [],
-      EDIT_ENTRY_ABOUT_OWNERSHIP,
-      PAGE_SHOW_OWNERSHIP,
-      PAGE_UPDATE_ENTRY_OWNERSHIP,
+      // buttons
+      ENTRY_UPDATE,
+      //pages
+      PAGE_OWNERSHIP_READ,
+      PAGE_ENTRY_UPDATE,
     };
   },
 
   methods: {
     goToPageUpdateOwnership() {
-      this.$router.push(
-        PAGE_UPDATE_ENTRY_OWNERSHIP + "/" + this.getOwnership.id
-      );
+      this.$router.push(PAGE_ENTRY_UPDATE + "/" + this.getOwnership.id);
     },
 
     ...mapActions({

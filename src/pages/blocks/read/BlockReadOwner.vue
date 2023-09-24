@@ -14,7 +14,10 @@
       <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
       <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
       <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
-      <div class="item"><span>Дата рождения : </span>{{ owner.dateBirth }}</div>
+      <div class="item">
+        <span>Дата рождения : </span
+        >{{ owner.dateBirth == "1900-01-01" ? "нет" : owner.dateBirth }}
+      </div>
       <div class="item">
         <span>Семейное положение : </span
         >{{ showFamilyStatus(owner.familyStatus) }}
@@ -31,7 +34,7 @@
   </div>
 </template>
 <script>
-import { showGender, showFamilyStatus } from "@/pages/functions/functions";
+import { showGender, showFamilyStatus } from "@/pages/_functions/functions";
 export default {
   name: "block-read-owner",
   props: {
@@ -80,4 +83,4 @@ img {
   padding: 10px;
 }
 </style>
-@/pages/functions/functions
+@/pages/functions/functions @/pages/_functions/functions

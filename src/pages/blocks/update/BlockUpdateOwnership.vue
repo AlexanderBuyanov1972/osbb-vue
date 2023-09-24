@@ -86,15 +86,15 @@
   </div>
 </template>
 <script>
-import { getNameByValue } from "@/pages/functions/functions";
+import { getNameByValue } from "@/pages/_functions/functions";
 import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
-} from "@/pages/functions/arraysOfData";
+} from "@/pages/_functions/arraysOfData";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
-  name: "block-edit-ownership",
+  name: "block-update-ownership",
   data() {
     return {
       ownership: {},

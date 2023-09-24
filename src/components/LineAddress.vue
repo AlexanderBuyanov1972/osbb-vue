@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { mapAddressToLineAddress } from "@/pages/functions/functions";
+import { mapAddressToLineAddress } from "@/pages/_functions/functions";
 export default {
   name: "line-address",
   data() {
@@ -32,3 +32,4 @@ export default {
 }
 </style>
 @/pages/functions/functions
+@/pages/_functions/functions

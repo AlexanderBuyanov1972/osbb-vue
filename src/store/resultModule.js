@@ -4,8 +4,6 @@ export default {
   state: () => ({
     resultDouble: {},
     resultOwner: {},
-    counterDouble: {},
-    counterOwner: {},
     messages: [],
     isLoading: false,
   }),
@@ -20,14 +18,8 @@ export default {
     setResultDouble(state, object) {
       state.resultDouble = object;
     },
-    setCounterDouble(state, object) {
-      state.counterDouble = object;
-    },
     setResultOwner(state, object) {
       state.resultOwner = object;
-    },
-    setCounterOwner(state, object) {
-      state.counterOwner = object;
     },
   },
 
@@ -41,15 +33,8 @@ export default {
     getResultDouble(state) {
       return state.resultDouble;
     },
-    getCounterDouble(state) {
-      return state.counterDouble;
-    },
-
     getResultOwner(state) {
       return state.resultOwner;
-    },
-    getCounterOwner(state) {
-      return state.counterOwner;
     },
   },
 
@@ -62,16 +47,12 @@ export default {
         if (response != undefined && response.data != undefined) {
           commit("setResultOwner", response.data[0]);
           commit("setResultDouble", response.data[1]);
-          commit("setCounterOwner", response.data[2]);
-          commit("setCounterDouble", response.data[3]);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        response != undefined
-          ? commit("setMessages", [error.message, ...response.messages])
-          : commit("setMessages", [error.message]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }

@@ -6,7 +6,7 @@ export const getShareInRealEstate = (value) => {
   return 0.33333;
 };
 
-export const generateJson = () => {
+export const generateJsonEntries = () => {
   // общее количество квартир вдоме
   const countApartment = 84;
   // общее количество квартир в подъезде
@@ -110,4 +110,20 @@ export const generateJson = () => {
   }
 
   return result;
+};
+
+export const generateJsonQuestionnaires = () => {
+  const list = [];
+  const title = "Вопрос о создании ОСББ";
+  const byWhom = "Гриценко Елена Дмитриевна";
+  let questions = [
+    "Согласны ли вы утвердить состав инициативной группы",
+    "Согласны ли вы утвердить Иванова С.С. секретарём сборов",
+    "Есть ли жизнь на Марсе",
+  ];
+  questions.forEach((el) => {
+    list.push({ title, byWhom, question: el });
+  });
+
+  return list;
 };

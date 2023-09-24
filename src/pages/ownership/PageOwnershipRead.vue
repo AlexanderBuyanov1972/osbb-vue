@@ -1,5 +1,7 @@
 <template>
-  <header-data></header-data>
+  <header-data-ownerships
+    @id="(value) => (id = value)"
+  ></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
@@ -15,36 +17,30 @@
     <div class="btns">
       <button-edit
         @click="
-          this.$router.push(PAGE_EDIT_OWNERSHIP + '/' + this.getOwnership.id)
+          this.$router.push(PAGE_ENTRY_UPDATE + '/' + this.getOwnership.id)
         "
-        >{{ EDIT_OWNERSHIP }}</button-edit
+        >{{ ENTRY_UPDATE }}</button-edit
       >
       <button-simple
-        @click="
-          this.$router.push(
-            PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.getOwnership.id
-          )
-        "
-        >{{ SHOW_ENTRY_ABOUT_OWNERSHIP }}</button-simple
+        @click="this.$router.push(PAGE_ENTRY_READ + '/' + this.getOwnership.id)"
+        >{{ ENTRY_READ }}</button-simple
       >
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { EDIT_OWNERSHIP, SHOW_ENTRY_ABOUT_OWNERSHIP } from "@/ui/namesButton";
-import {
-  PAGE_EDIT_OWNERSHIP,
-  PAGE_SHOW_ENTRY_OWNERSHIP,
-} from "@/router/apiRouter";
+import { ENTRY_UPDATE, ENTRY_READ } from "@/ui/namesButton";
+import { PAGE_ENTRY_UPDATE, PAGE_ENTRY_READ } from "@/router/apiRouter";
 export default {
   data() {
     return {
+      id: 0,
       ownership: {},
-      EDIT_OWNERSHIP,
-      SHOW_ENTRY_ABOUT_OWNERSHIP,
-      PAGE_SHOW_ENTRY_OWNERSHIP,
-      PAGE_EDIT_OWNERSHIP,
+      ENTRY_UPDATE,
+      ENTRY_READ,
+      PAGE_ENTRY_UPDATE,
+      PAGE_ENTRY_READ,
     };
   },
   methods: {
@@ -53,10 +49,11 @@ export default {
     }),
   },
 
+  updated() {
+    this.change;
+  },
   mounted() {
-    this.fetchOwnership(this.$route.params.id).then(() => {
-      this.ownership = this.getOwnership;
-    });
+    this.change;
   },
   computed: {
     ...mapGetters({
@@ -64,6 +61,13 @@ export default {
       getMessages: "ownership/getMessages",
       getIsLoading: "ownership/getIsLoading",
     }),
+    change() {
+      let id =
+        this.id == undefined || this.id == 0 ? this.$route.params.id : this.id;
+      return this.fetchOwnership(id).then(() => {
+        this.ownership = this.getOwnership;
+      });
+    },
   },
 };
 </script>

@@ -19,7 +19,7 @@ import {
   mapOwnerToLineFullNamesOwner,
   showFamilyStatus,
   showGender,
-} from "@/pages/functions/functions";
+} from "@/pages/_functions/functions";
 export default {
   name: "questionnaire-item",
   props: {
@@ -76,3 +76,4 @@ export default {
   width: 10%;
 }
 </style>
+@/pages/_functions/functions

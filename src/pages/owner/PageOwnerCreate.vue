@@ -1,19 +1,22 @@
 <template>
-  <hr />
+  <header-data-owners></header-data-owners>
+  <div class="main">Page Create Owner!</div>
 </template>
 <script>
 export default {
-  name: "vue-hr",
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
+
 <style scoped>
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-hr {
-  margin: 10px 0px;
-  border: 0.5px solid #999999;
+.main {
 }
 </style>

@@ -20,10 +20,6 @@
 <script>
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 import { SELECT } from "@/ui/namesButton";
-import {
-  PAGE_SHOW_QUESTIONNAIRE,
-  PAGE_SHOW_QUESTIONNAIRES,
-} from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -34,7 +30,6 @@ export default {
       list: [],
       info: {},
       SELECT,
-      PAGE_SHOW_QUESTIONNAIRE,
     };
   },
   methods: {
@@ -44,11 +39,7 @@ export default {
         "questionnaire/fetchAllQuestionnaireByTitleAndFullname",
     }),
     sendToServer() {
-      this.createAllQuestionnaire(this.list).then(() => {
-        this.$router.push(
-          PAGE_SHOW_QUESTIONNAIRES + "/" + this.$route.params.title
-        );
-      });
+      this.createAllQuestionnaire(this.list).then(() => this.$router.back());
     },
   },
   computed: {

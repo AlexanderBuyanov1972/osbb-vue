@@ -21,9 +21,7 @@
 export default {
   name: "block-information-questionnaire",
   props: {
-    info: {
-      Type: Object,
-    },
+    info: Object,
   },
 };
 </script>

@@ -94,7 +94,7 @@
           messageTrue="Подъезд."
           @valid="(value) => (validEntrance = value)"
         />
-        <input-simple v-model="address.entrance" placeholder="Подъезд." />
+        <input-simple v-model.trim="address.entrance" placeholder="Подъезд" />
       </div>
 
       <div class="floor">
@@ -104,7 +104,7 @@
           messageTrue="Этаж."
           @valid="(value) => (validFloor = value)"
         />
-        <input-simple v-model="address.floor" placeholder="Этаж" />
+        <input-simple v-model.trim="address.floor" placeholder="Этаж" />
       </div>
 
       <div class="apartment">
@@ -114,7 +114,7 @@
           messageTrue="Квартира."
           @valid="(value) => (validApartment = value)"
         />
-        <input-simple v-model="address.apartment" placeholder="Квартира" />
+        <input-simple v-model.trim="address.apartment" placeholder="Квартира" />
       </div>
     </div>
 

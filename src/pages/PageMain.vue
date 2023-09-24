@@ -9,7 +9,7 @@
       />
     </div>
     <div class="">
-      <button-create @click="sendJsonOwnershipsToServer"
+      <button-create @click="sendJsonEntriesToServer"
         >Json Ownerships</button-create
       >
       <button-create @click="sendJsonQuestionnaireToServer"
@@ -19,12 +19,16 @@
   </div>
 </template>
 <script>
-import { generateJson } from "@/pages/functions/generate";
+import {
+  generateJsonEntries,
+  generateJsonQuestionnaires,
+} from "@/pages/_functions/generate";
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      generateJson,
+      generateJsonEntries,
+      generateJsonQuestionnaires,
     };
   },
   methods: {
@@ -33,9 +37,8 @@ export default {
       createOwnership: "ownership/createOwnership",
       generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
     }),
-    sendJsonOwnershipsToServer() {
-      let list = this.generateJson();
-    //  list.forEach(el => console.log(el))
+    sendJsonEntriesToServer() {
+      let list = this.generateJsonEntries();
       list.forEach((el) => {
         setTimeout(() => {
           this.createOwnership(el);
@@ -43,25 +46,7 @@ export default {
       });
     },
     sendJsonQuestionnaireToServer() {
-      let object = [
-        {
-          title: "Вопрос о создании ОСББ",
-          byWhom: "Пупкина Елена Дмитриевна",
-          question: "Согласны ли вы утвердить состав инициативной группы",
-        },
-        {
-          title: "Вопрос о создании ОСББ",
-          byWhom: "Пупкина Елена Дмитриевна",
-          question: "Согласны ли вы утвердить Иванова С.С. секретарём сборов",
-        },
-        {
-          title: "Вопрос о создании ОСББ",
-          byWhom: "Пупкина Елена Дмитриевна",
-          question: "Есть ли жизнь на Марсе",
-        },
-      ];
-
-      this.generateListQuestionnaire(object);
+      this.generateListQuestionnaire(this.generateJsonQuestionnaires());
     },
   },
 };
@@ -92,3 +77,4 @@ export default {
   font-size: 25px;
 }
 </style>
+@/pages/_functions/generate

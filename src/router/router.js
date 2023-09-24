@@ -1,96 +1,130 @@
-import PageShowQuestionnaire from "@/pages/read/PageShowQuestionnaire.vue";
-import PageShowQuestionnairesByTitleAndByApartment from "@/pages/read/PageShowQuestionnairesByTitleAndByApartment.vue";
-import PageShowQuestionnairesByTitle from "@/pages/read/PageShowQuestionnairesByTitle.vue";
-import PageShowQuestionnaires from "@/pages/read/PageShowQuestionnaires.vue";
-import PageReadOwner from "@/pages/read/PageReadOwner.vue";
-import PageReadOwnership from "@/pages/read/PageReadOwnership.vue";
-import PageReadOwners from "@/pages/read/PageReadOwners.vue";
-import PageReadOwnerships from "@/pages/read/PageReadOwnerships.vue";
+// /
 import PageMain from "@/pages/PageMain.vue";
-import PageRegistryOwners from "@/pages/registry/PageRegistryOwners.vue";
-import PageRegistryOwnerships from "@/pages/registry/PageRegistryOwnerships.vue";
-import PageCreateEntryOwnership from "@/pages/entry/PageCreateEntryOwnership.vue";
-import PageUpdateEntryOwnership from "@/pages/entry/PageUpdateEntryOwnership.vue";
-import PageShowEntryOwnership from "@/pages/entry/PageShowEntryOwnership.vue";
-import PageEditOwner from "@/pages/edit/PageEditOwner.vue";
-import PageEditOwnership from "@/pages/edit/PageEditOwnership.vue";
-import PageAnswerForQuestionnaire from "@/pages/questionnaire/PageAnswerForQuestionnaire.vue";
-import PageCreateQuestionnaire from "@/pages/questionnaire/PageCreateQuestionnaire.vue";
-import PageResultQuestionnaire from "@/pages/questionnaire/PageResultQuestionnaire.vue";
+import PageRegistryOwnersRead from "@/pages/PageRegistryOwnersRead.vue";
+import PageRegistryOwnershipsRead from "@/pages/PageRegistryOwnershipsRead.vue";
+// questionnaire
+import PageQuestionnaireCreate from "@/pages/questionnaire/PageQuestionnaireCreate.vue";
+import PageQuestionnaireRead from "@/pages/questionnaire/PageQuestionnaireRead.vue";
+import PageQuestionnairesReadByTitleAndByApartment from "@/pages/questionnaire/PageQuestionnairesReadByTitleAndByApartment.vue";
+import PageQuestionnairesReadByTitle from "@/pages/questionnaire/PageQuestionnairesReadByTitle.vue";
+import PageQuestionnairesRead from "@/pages/questionnaire/PageQuestionnairesRead.vue";
+import PageQuestionnaireAnswer from "@/pages/questionnaire/PageQuestionnaireAnswer.vue";
+import PageQuestionnaireResult from "@/pages/questionnaire/PageQuestionnaireResult.vue";
+// owner
+import PageOwnerCreate from "@/pages/owner/PageOwnerCreate.vue";
+import PageOwnerUpdate from "@/pages/owner/PageOwnerUpdate.vue";
+import PageOwnerRead from "@/pages/owner/PageOwnerRead.vue";
+import PageOwnersRead from "@/pages/owner/PageOwnersRead.vue";
+// ownership
+import PageOwnershipCreate from "@/pages/ownership/PageOwnershipCreate.vue";
+import PageOwnershipUpdate from "@/pages/ownership/PageOwnershipUpdate.vue";
+import PageOwnershipRead from "@/pages/ownership/PageOwnershipRead.vue";
+import PageOwnershipsRead from "@/pages/ownership/PageOwnershipsRead.vue";
+// entry
+import PageEntryCreate from "@/pages/entry/PageEntryCreate.vue";
+import PageEntryUpdate from "@/pages/entry/PageEntryUpdate.vue";
+import PageEntryRead from "@/pages/entry/PageEntryRead.vue";
+
 import { createRouter, createWebHistory } from "vue-router";
 import {
+  //
   PAGE_MAIN,
-  PAGE_SHOW_OWNER,
-  PAGE_SHOW_OWNERSHIP,
-  PAGE_SHOW_OWNERS,
-  PAGE_SHOW_OWNERSHIPS,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
-  PAGE_CREATE_ENTRY_OWNERSHIP,
-  PAGE_UPDATE_ENTRY_OWNERSHIP,
-  PAGE_SHOW_ENTRY_OWNERSHIP,
-  PAGE_EDIT_OWNER,
-  PAGE_EDIT_OWNERSHIP,
-  PAGE_ANSWER_FOR_QUESTIONNAIRE,
-  PAGE_CREATE_QUESTIONNAIRE,
-  PAGE_SHOW_QUESTIONNAIRES,
-  PAGE_SHOW_QUESTIONNAIRE,
-  PAGE_RESULT_QUESTIONNAIRE,
+  //questionnaire
+  PAGE_QUESTIONNAIRE_ANSWER,
+  PAGE_QUESTIONNAIRE_CREATE,
+  PAGE_QUESTIONNAIRES_READ,
+  PAGE_QUESTIONNAIRE_READ,
+  PAGE_QUESTIONNAIRE_RESULT,
+  // owner
+  PAGE_OWNER_CREATE,
+  PAGE_OWNER_UPDATE,
+  PAGE_OWNER_READ,
+  PAGE_OWNERS_READ,
+  // ownership
+  PAGE_OWNERSHIP_CREATE,
+  PAGE_OWNERSHIP_UPDATE,
+  PAGE_OWNERSHIP_READ,
+  PAGE_OWNERSHIPS_READ,
+  // entry
+  PAGE_ENTRY_CREATE,
+  PAGE_ENTRY_UPDATE,
+  PAGE_ENTRY_READ,
 } from "./apiRouter.js";
 
 const routes = [
-  // main
+  // /
   { path: PAGE_MAIN, component: PageMain },
+  { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwnersRead },
+  {
+    path: PAGE_REGISTRY_OWNERSHIPS,
+    component: PageRegistryOwnershipsRead,
+  },
   // ownership
-  { path: PAGE_EDIT_OWNERSHIP + "/:id", component: PageEditOwnership },
-  { path: PAGE_SHOW_OWNERSHIPS, component: PageReadOwnerships },
-  { path: PAGE_SHOW_OWNERSHIP + "/:id", component: PageReadOwnership },
-
+  { path: PAGE_OWNERSHIP_CREATE, component: PageOwnershipCreate },
+  { path: PAGE_OWNERSHIP_UPDATE + "/:id", component: PageOwnershipUpdate },
+  { path: PAGE_OWNERSHIPS_READ, component: PageOwnershipsRead },
+  { path: PAGE_OWNERSHIP_READ + "/:id", component: PageOwnershipRead },
   // owner
-  { path: PAGE_EDIT_OWNER + "/:id", component: PageEditOwner },
-  { path: PAGE_SHOW_OWNER + "/:id", component: PageReadOwner },
-  { path: PAGE_SHOW_OWNERS, component: PageReadOwners },
-
-  // registry
-  { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwners },
-  { path: PAGE_REGISTRY_OWNERSHIPS, component: PageRegistryOwnerships },
-
-  // entry ownership
-  { path: PAGE_CREATE_ENTRY_OWNERSHIP, component: PageCreateEntryOwnership },
+  { path: PAGE_OWNER_CREATE, component: PageOwnerCreate },
+  { path: PAGE_OWNER_UPDATE + "/:id", component: PageOwnerUpdate },
+  { path: PAGE_OWNER_READ + "/:id", component: PageOwnerRead },
+  { path: PAGE_OWNERS_READ, component: PageOwnersRead },
+  //entry
+  { path: PAGE_ENTRY_CREATE, component: PageEntryCreate },
   {
-    path: PAGE_UPDATE_ENTRY_OWNERSHIP + "/:id",
-    component: PageUpdateEntryOwnership,
+    path: PAGE_ENTRY_UPDATE + "/:id",
+    component: PageEntryUpdate,
   },
   {
-    path: PAGE_SHOW_ENTRY_OWNERSHIP + "/:id",
-    component: PageShowEntryOwnership,
+    path: PAGE_ENTRY_READ + "/:id",
+    component: PageEntryRead,
   },
-
   // questionnaire
-  { path: PAGE_SHOW_QUESTIONNAIRES, component: PageShowQuestionnaires },
+  { path: PAGE_QUESTIONNAIRES_READ, component: PageQuestionnairesRead },
   {
-    path: PAGE_SHOW_QUESTIONNAIRES,
-    component: PageShowQuestionnaires,
+    path: PAGE_QUESTIONNAIRE_READ,
+    component: PageQuestionnaireRead + "/:id",
+  },
+  // ------------- start слияние 3 в 1 --------------------
+  {
+    path: PAGE_QUESTIONNAIRES_READ,
+    component: PageQuestionnairesRead,
   },
   {
-    path: PAGE_SHOW_QUESTIONNAIRES + "/:title",
-    component: PageShowQuestionnairesByTitle,
+    path: PAGE_QUESTIONNAIRES_READ + "/:title",
+    component: PageQuestionnairesRead,
   },
   {
-    path: PAGE_SHOW_QUESTIONNAIRES + "/:title" + "/:apartment",
-    component: PageShowQuestionnairesByTitleAndByApartment,
+    path: PAGE_QUESTIONNAIRES_READ + "/:title" + "/:apartment",
+    component: PageQuestionnairesRead,
+  },
+  //--------------------------------------------------------------------
+  // {
+  //   path: PAGE_QUESTIONNAIRES_READ,
+  //   component: PageQuestionnairesRead,
+  // },
+  // {
+  //   path: PAGE_QUESTIONNAIRES_READ + "/:title",
+  //   component: PageQuestionnairesReadByTitle,
+  // },
+  // {
+  //   path: PAGE_QUESTIONNAIRES_READ + "/:title" + "/:apartment",
+  //   component: PageQuestionnairesReadByTitleAndByApartment,
+  // },
+  //***************** end **************** */
+  {
+    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullname",
+    component: PageQuestionnaireAnswer,
   },
   {
-    path: PAGE_ANSWER_FOR_QUESTIONNAIRE + "/:title" + "/:fullname",
-    component: PageAnswerForQuestionnaire,
+    path: PAGE_QUESTIONNAIRE_RESULT + "/:title",
+    component: PageQuestionnaireResult,
   },
   {
-    path: PAGE_RESULT_QUESTIONNAIRE + "/:title",
-    component: PageResultQuestionnaire,
-  },
-  {
-    path: PAGE_CREATE_QUESTIONNAIRE,
-    component: PageCreateQuestionnaire,
+    path: PAGE_QUESTIONNAIRE_CREATE,
+    component: PageQuestionnaireCreate,
   },
 ];
 const router = createRouter({

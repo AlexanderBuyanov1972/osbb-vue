@@ -3,7 +3,7 @@
     <p
       @click="
         () =>
-          this.$router.push(PAGE_SHOW_OWNER + '/' + one.fullNameOwner.ownerId)
+          this.$router.push(PAGE_OWNER_READ + '/' + one.fullNameOwner.ownerId)
       "
     >
       {{ one.fullNameOwner.fullNameOwner }}
@@ -14,7 +14,7 @@
       :ownership="two"
       :key="two.id"
       :count="index + 1"
-      @click="() => this.$router.push(PAGE_SHOW_OWNERSHIP + '/' + two.id)"
+      @click="() => this.$router.push(PAGE_OWNERSHIP_READ + '/' + two.id)"
       :flag="true"
     />
   </div>
@@ -23,12 +23,12 @@
 <script>
 import OwnershipList from "@/itemsAndLists/OwnershipList.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
-import { PAGE_SHOW_OWNER, PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
+import { PAGE_OWNER_READ, PAGE_OWNERSHIP_READ } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      PAGE_SHOW_OWNER,
-      PAGE_SHOW_OWNERSHIP,
+      PAGE_OWNER_READ,
+      PAGE_OWNERSHIP_READ,
     };
   },
   components: {

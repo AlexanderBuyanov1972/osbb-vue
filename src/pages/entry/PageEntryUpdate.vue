@@ -1,5 +1,5 @@
 <template>
-  <header-data></header-data>
+  <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages
@@ -13,14 +13,14 @@
     <line-header text="Редактирование записи о собственности." />
     <div class="blocks">
       <div class="block1">
-        <block-edit-ownership
+        <block-update-ownership
           @ownership="(data) => (ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
         />
       </div>
 
       <div class="block3">
-        <block-edit-address
+        <block-update-address
           @address="(data) => (address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
         />
@@ -29,14 +29,14 @@
       <div class="column">
         <div class="list" v-for="one in owners" :key="one.id">
           <div class="block4">
-            <block-edit-owner
+            <block-update-owner
               @owner="(data) => (one.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
               :id="flag ? 0 : one.id"
             />
           </div>
           <div class="block2">
-            <block-edit-passport
+            <block-update-passport
               @passport="(data) => (one.passport = data)"
               @isValidPassport="(value) => (isValidPassport = value)"
               :id="flag ? 0 : one.id"
@@ -53,12 +53,12 @@
     <vue-hr />
     <button-back
       @click="
-        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + '/' + this.ownership.id)
+        this.$router.push(PAGE_ENTRY_READ + '/' + this.ownership.id)
       "
     />
 
-    <button-create @click="plusOwner">{{ CREATE_OWNER }}</button-create>
-    <button-delete @click="minusOwner">{{ DELETE_OWNER }}</button-delete>
+    <button-create @click="plusOwner">{{ OWNER_CREATE }}</button-create>
+    <button-delete @click="minusOwner">{{ OWNER_DELETE }}</button-delete>
     <button-simple
       @click="sendOwnership"
       :hidden="
@@ -69,16 +69,16 @@
   </div>
 </template>
 <script>
-import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions/functions";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/_functions/functions";
+import { mapActions, mapGetters } from "vuex";
 import {
   DELETE,
   BACK,
-  DELETE_OWNER,
-  CREATE_OWNER,
+  OWNER_DELETE,
+  OWNER_CREATE,
   SEND_TO_SERVER,
 } from "@/ui/namesButton";
-import { PAGE_SHOW_ENTRY_OWNERSHIP } from "@/router/apiRouter";
+import { PAGE_ENTRY_READ } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -94,10 +94,10 @@ export default {
       mergingTwoArraysAndRemovingIdenticalMessages,
       DELETE,
       BACK,
-      DELETE_OWNER,
       SEND_TO_SERVER,
-      CREATE_OWNER,
-      PAGE_SHOW_ENTRY_OWNERSHIP,
+      PAGE_ENTRY_READ,
+      OWNER_DELETE,
+      OWNER_CREATE,
     };
   },
   methods: {
@@ -112,12 +112,9 @@ export default {
       this.ownership.address = this.address;
       this.ownership.owners = this.mapListOwners();
       this.updateOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.ownership.id);
+        this.$router.push(PAGE_ENTRY_READ + "/" + this.ownership.id);
       });
-      this.updateOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_SHOW_ENTRY_OWNERSHIP + "/" + this.ownership.id);
-      });
-    },
+     },
     plusOwner() {
       this.flag = true;
       this.owners.push({ owner: { id: 0, password: { id: 0 } } });

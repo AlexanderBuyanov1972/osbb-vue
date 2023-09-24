@@ -1,5 +1,5 @@
 <template>
-  <header-data></header-data>
+  <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessagesOwnership" />
@@ -17,7 +17,6 @@
           @isValidAddress="(value) => (isValidAddress = value)"
         />
       </div>
-      <!-- ------------------------------------------------------------------------ -->
       <div class="column">
         <div class="list" v-for="one in owners" :key="one.id">
           <div class="block4">
@@ -43,15 +42,15 @@
       "
       >{{ SEND_TO_SERVER }}</button-simple
     >
-    <button-create @click="plusOwnership">{{ CREATE_OWNER }}</button-create>
-    <button-delete @click="minusOwnership">{{ DELETE_OWNER }}</button-delete>
+    <button-create @click="plusOwnership">{{ OWNER_CREATE }}</button-create>
+    <button-delete @click="minusOwnership">{{ OWNER_DELETE }}</button-delete>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/functions/functions";
-import { SEND_TO_SERVER, CREATE_OWNER, DELETE_OWNER } from "@/ui/namesButton";
-import { PAGE_SHOW_OWNERSHIP } from "@/router/apiRouter";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/_functions/functions";
+import { SEND_TO_SERVER, OWNER_CREATE, OWNER_DELETE } from "@/ui/namesButton";
+import { PAGE_OWNERSHIP_READ } from "@/router/apiRouter";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -63,11 +62,12 @@ export default {
       isValidOwner: false,
       isValidAddress: false,
       isValidPassport: false,
-
+      // buttons
       SEND_TO_SERVER,
-      CREATE_OWNER,
-      DELETE_OWNER,
-      PAGE_SHOW_OWNERSHIP,
+      OWNER_CREATE,
+      OWNER_DELETE,
+      //pages
+      PAGE_OWNERSHIP_READ,
 
       mergingTwoArraysAndRemovingIdenticalMessages,
     };
@@ -77,7 +77,7 @@ export default {
       this.ownership.address = this.address;
       this.ownership.owners = this.mapListOwners();
       this.createOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_SHOW_OWNERSHIP + "/" + this.getOwnership.id);
+        this.$router.push(PAGE_OWNERSHIP_READ + "/" + this.getOwnership.id);
       });
     },
     plusOwnership() {

@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import { showTypeRoom, showLoggia } from "@/pages/functions/functions";
+import { showTypeRoom, showLoggia } from "@/pages/_functions/functions";
 export default {
   props: {
     ownership: Object,
@@ -98,3 +98,4 @@ span {
 }
 </style>
 @/pages/functions/functions
+@/pages/_functions/functions

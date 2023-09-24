@@ -14,9 +14,10 @@ import VueLoader from "@/ui/elements/VueLoader.vue";
 import VueHr from "@/ui/elements/VueHr.vue";
 import LineRadio from "@/ui/elements/LineRadio.vue";
 // --------------- components -------------------
-import HeaderPolls from "@/components/HeaderPolls.vue";
-import HeaderData from "@/components/HeaderData.vue";
 import HeaderMessages from "@/components/HeaderMessages.vue";
+import HeaderPolls from "@/components/HeaderPolls.vue";
+import HeaderDataOwners from "@/components/HeaderDataOwners.vue";
+import HeaderDataOwnerships from "@/components/HeaderDataOwnerships.vue";
 import LineAddress from "@/components/LineAddress.vue";
 import LineHeader from "@/components/LineHeader.vue";
 // --------------- pages blocks -------------------
@@ -33,10 +34,10 @@ import BlockCreatePassport from "@/pages/blocks/create/BlockCreatePassport.vue";
 import BlockCreateOwnership from "@/pages/blocks/create/BlockCreateOwnership.vue";
 import BlockCreateAddress from "@/pages/blocks/create/BlockCreateAddress.vue";
 // --------------- pages blocks edit --------------------------------
-import BlockEditOwner from "@/pages/blocks/edit/BlockEditOwner.vue";
-import BlockEditPassport from "@/pages/blocks/edit/BlockEditPassport.vue";
-import BlockEditOwnership from "@/pages/blocks/edit/BlockEditOwnership.vue";
-import BlockEditAddress from "@/pages/blocks/edit/BlockEditAddress.vue";
+import BlockEditOwner from "@/pages/blocks/update/BlockUpdateOwner.vue";
+import BlockEditPassport from "@/pages/blocks/update/BlockUpdatePassport.vue";
+import BlockEditOwnership from "@/pages/blocks/update/BlockUpdateOwnership.vue";
+import BlockEditAddress from "@/pages/blocks/update/BlockUpdateAddress.vue";
 // --------------- pages blocks read --------------------------------
 import BlockReadOwner from "@/pages/blocks/read/BlockReadOwner.vue";
 import BlockReadPassport from "@/pages/blocks/read/BlockReadPassport.vue";
@@ -59,10 +60,11 @@ export default [
   VueLoader,
   VueHr,
   LineRadio,
-  HeaderData,
-  HeaderPolls,
-
+ 
   // ----------------
+  HeaderDataOwners,
+  HeaderDataOwnerships,
+  HeaderPolls,
   HeaderMessages,
   LineAddress,
   LineHeader,

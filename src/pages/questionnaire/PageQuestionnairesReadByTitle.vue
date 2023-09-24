@@ -3,14 +3,17 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
+    <line-header
+      text="Список непроголосованных опросов по теме"
+      :style="{ color: 'blueviolet' }"
+    />
     <questionnaire-item :questionnaire="header" count="№" />
-    <div v-for="one in array" :key="one.id">
+    <div v-for="one in getQuestionnaires" :key="one.id">
       <div
         @click="
           () =>
             this.$router.push(
-              PAGE_ANSWER_FOR_QUESTIONNAIRE +
+              PAGE_QUESTIONNAIRE_ANSWER +
                 '/' +
                 one.title +
                 '/' +
@@ -25,7 +28,7 @@
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_ANSWER_FOR_QUESTIONNAIRE } from "@/router/apiRouter";
+import { PAGE_QUESTIONNAIRE_ANSWER } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -33,7 +36,6 @@ export default {
   },
   data() {
     return {
-      array: [],
       header: {
         title: "Тема опроса",
         byWhom: "Кем инициализирован",
@@ -42,12 +44,13 @@ export default {
         apartment: "Квартира №",
         fullname: "Ф.И.О.",
       },
-      PAGE_ANSWER_FOR_QUESTIONNAIRE,
+      PAGE_QUESTIONNAIRE_ANSWER,
     };
   },
   methods: {
     ...mapActions({
-      fetchAllQuestionnaire: "questionnaire/fetchAllQuestionnaire",
+      fetchAllQuestionnaireByTitle:
+        "questionnaire/fetchAllQuestionnaireByTitle",
     }),
   },
   computed: {
@@ -56,11 +59,15 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
+    check() {
+      return this.fetchAllQuestionnaireByTitle(this.$route.params.title);
+    },
   },
   mounted() {
-    this.fetchAllQuestionnaire().then(() => {
-      this.array = this.getQuestionnaires;
-    });
+    this.check;
+  },
+  updated() {
+    this.check;
   },
 };
 </script>
