@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @mousemove="emitPassport">
+  <div class="main">
     <line-header text="Паспорт собственника" :style="{ color: 'brown' }" />
     <div class="passport">
       <div class="numberPassport">
@@ -7,7 +7,7 @@
           :field="passport.numberPassport"
           messageFalse="Укажите номер паспорта (XXXXXXXXX)."
           messageTrue="Номер паспорт (XXXXXXXXX)."
-          @valid="(value) => (validNumberPassport = value)"
+          @valid="(value) => handlerValidNumberPassport(value)"
         />
         <input-simple
           v-model.trim="passport.numberPassport"
@@ -20,7 +20,7 @@
           :field="passport.numberEntry"
           messageFalse="Укажите номер записи YYYYMMDD-XXXXX."
           messageTrue="Номер записи (YYYYMMDD-XXXXX)."
-          @valid="(value) => (validNumberEntry = value)"
+          @valid="(value) => handlerValidNumberEntry(value)"
         />
         <input-simple
           v-model.trim="passport.numberEntry"
@@ -33,7 +33,7 @@
           :field="passport.dateIssue"
           messageFalse="Укажите дату выдачи (YYYY-MM-DD)."
           messageTrue="Дата выдачи (YYYY-MM-DD)."
-          @valid="(value) => (validDateIssue = value)"
+          @valid="(value) => handlerValidDateIssue(value)"
         />
         <input-simple
           v-model.trim="passport.dateIssue"
@@ -46,7 +46,7 @@
           :field="passport.issuingAuthority"
           messageFalse="Укажите кем выдан (XXXX)."
           messageTrue="Орган выдачи (XXXX)."
-          @valid="(value) => (validIssuingAuthority = value)"
+          @valid="(value) => handlerValidIssuingAuthority(value)"
         />
         <input-simple
           v-model.trim="passport.issuingAuthority"
@@ -59,7 +59,9 @@
           :field="passport.registrationNumberCardPayerTaxes"
           messageFalse="Укажите ИНН (XXXXXXXXXX)."
           messageTrue="ИНН (XXXXXXXXXX)."
-          @valid="(value) => (validRegistrationNumberCardPayerTaxes = value)"
+          @valid="
+            (value) => handlerValidRegistrationNumberCardPayerTaxes(value)
+          "
         />
         <input-simple
           v-model.trim="passport.registrationNumberCardPayerTaxes"
@@ -67,17 +69,15 @@
         />
       </div>
     </div>
-    <button-reset @click="reset" :hidden="!isValidPassport"
-      >Очистить</button-reset
-    >
   </div>
 </template>
 <script>
+import { generatePassport } from "@/pages/_functions/generate";
 export default {
   name: "block-create-passport",
   data() {
     return {
-      passport: {},
+      passport: generatePassport(),
       validNumberPassport: false,
       validNumberEntry: false,
       validDateIssue: false,
@@ -92,12 +92,25 @@ export default {
         this.passport.dateIssue = "1900-01-01";
       this.$emit("passport", this.passport);
     },
-    reset() {
-      this.passport.numberPassport = "";
-      this.passport.numberEntry = "";
-      this.passport.dateIssue = "";
-      this.passport.issuingAuthority = "";
-      this.passport.registrationNumberCardPayerTaxes = "";
+    handlerValidNumberPassport(value) {
+      this.validNumberPassport = value;
+      this.emitPassport();
+    },
+    handlerValidNumberEntry(value) {
+      this.validNumberEntry = value;
+      this.emitPassport();
+    },
+    handlerValidDateIssue(value) {
+      this.validDateIssue = value;
+      this.emitPassport();
+    },
+    handlerValidIssuingAuthority(value) {
+      this.validIssuingAuthority = value;
+      this.emitPassport();
+    },
+    handlerValidRegistrationNumberCardPayerTaxes(value) {
+      this.validRegistrationNumberCardPayerTaxes = value;
+      this.emitPassport();
     },
   },
   computed: {
@@ -121,3 +134,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/bills/_functions/generate

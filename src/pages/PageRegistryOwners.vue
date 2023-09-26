@@ -1,31 +1,32 @@
 <template>
-  <header-data-ownerships></header-data-ownerships>
+  <header-data-owners></header-data-owners>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Реестр недвижимости" />
+    <line-header text="Реестр собственников" />
     <block-information-about-house :info="getBuildingCharacteristics" />
-    <ownership-list-registry :list="getRegistryOwnerships" />
+    <owner-list-registry :map="getRegistryOwners" />
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
-import OwnershipListRegistry from "@/itemsAndLists/OwnershipListRegistry.vue";
+import { mapActions, mapGetters} from "vuex";
+import OwnerListRegistry from "@/itemsAndLists/OwnerListRegistry.vue";
+
 export default {
   components: {
-    OwnershipListRegistry,
+    OwnerListRegistry,
   },
   methods: {
     ...mapActions({
-      fetchRegistryOwnerships: "registry/fetchRegistryOwnerships",
+      fetchRegistryOwners: "registry/fetchRegistryOwners",
     }),
   },
   mounted() {
-    this.fetchRegistryOwnerships();
+    this.fetchRegistryOwners();
   },
   computed: {
     ...mapGetters({
-      getRegistryOwnerships: "registry/getRegistryOwnerships",
+      getRegistryOwners: "registry/getRegistryOwners",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
       getMessages: "registry/getMessages",
       getIsLoading: "registry/getIsLoading",

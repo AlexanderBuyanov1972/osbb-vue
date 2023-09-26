@@ -22,7 +22,6 @@ export default {
     },
     startName: String,
   },
-
   data() {
     return {
       selectName: "",

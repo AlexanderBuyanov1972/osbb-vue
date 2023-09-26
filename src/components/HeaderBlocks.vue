@@ -1,25 +1,30 @@
 <template>
   <div class="main">
     <button-delete @click="$router.push(PAGE_MAIN)">{{ MAIN }}</button-delete>
-    <button-delete @click="$router.push(PAGE_OWNERSHIPS_READ)"
+    <button-simple @click="$router.push(PAGE_OWNERSHIPS_GET)"
       >{{ BLOCK_OWNERSHIP }}
-    </button-delete>
-    <button-delete @click="$router.push(PAGE_OWNERS_READ)"
+    </button-simple>
+    <button-edit @click="$router.push(PAGE_OWNERS_GET)"
       >{{ BLOCK_OWNER }}
-    </button-delete>
-    <button-delete @click="$router.push(PAGE_QUESTIONNAIRES_READ)"
+    </button-edit>
+    <button-create @click="$router.push(PAGE_QUESTIONNAIRES_GET)"
       >{{ BLOCK_QUESTIONNAIRE }}
-    </button-delete>
+    </button-create>
+    <button-bills @click="$router.push(PAGE_BILLS_GET)"
+      >{{ BLOCK_PAYMENT_BILLS }}
+    </button-bills>
   </div>
 </template>
 <script>
 import {
   PAGE_MAIN,
-  PAGE_QUESTIONNAIRES_READ,
-  PAGE_OWNERSHIPS_READ,
-  PAGE_OWNERS_READ,
+  PAGE_QUESTIONNAIRES_GET,
+  PAGE_OWNERSHIPS_GET,
+  PAGE_OWNERS_GET,
+  PAGE_BILLS_GET,
 } from "@/router/apiRouter";
 import {
+  BLOCK_PAYMENT_BILLS,
   BLOCK_OWNER,
   BLOCK_OWNERSHIP,
   BLOCK_QUESTIONNAIRE,
@@ -28,14 +33,16 @@ import {
 export default {
   data() {
     return {
+      BLOCK_PAYMENT_BILLS,
       BLOCK_OWNER,
       BLOCK_OWNERSHIP,
       BLOCK_QUESTIONNAIRE,
       MAIN,
       PAGE_MAIN,
-      PAGE_QUESTIONNAIRES_READ,
-      PAGE_OWNERSHIPS_READ,
-      PAGE_OWNERS_READ,
+      PAGE_QUESTIONNAIRES_GET,
+      PAGE_OWNERSHIPS_GET,
+      PAGE_OWNERS_GET,
+      PAGE_BILLS_GET,
     };
   },
   updated() {

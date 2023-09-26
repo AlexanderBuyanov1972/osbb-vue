@@ -126,4 +126,4 @@ span {
   border: 3px solid blueviolet;
 }
 </style>
-@/pages/_functions/arraysOfData@/pages/_functions/functions
+@/pages/_functions/arraysOfData@/pages/_functions/functions@/pages/bills/_functions/arraysOfData@/pages/bills/_functions/functions

@@ -14,7 +14,7 @@ button {
   margin: 5px 5px 5px 0px;
   font-weight: 600;
   letter-spacing: 1px;
-  background-color: whitesmoke;
+  background-color: white;
   /*  */
   text-transform: uppercase;
   border-radius: 0;

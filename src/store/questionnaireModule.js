@@ -8,6 +8,7 @@ import {
   getAllQuestionnaire,
   deleteAllQuestionnaire,
   generateListQuestionnaire,
+  getResultQuestionnaire,
 } from "@/http/questionnaire";
 import {
   getAllQuestionnaireByTitleAndFullname,
@@ -32,6 +33,7 @@ export default {
     messages: [],
     titles: [],
     isLoading: false,
+    result: {},
   }),
   mutations: {
     setIsLoading(state, bool) {
@@ -49,6 +51,9 @@ export default {
     setTitles(state, array) {
       state.titles = array;
     },
+    setResult(state, object) {
+      state.resultDouble = object;
+    },
   },
   getters: {
     getIsLoading(state) {
@@ -65,6 +70,9 @@ export default {
     },
     getTitles(state) {
       return state.titles;
+    },
+    getResult(state) {
+      return state.resultDouble;
     },
   },
   actions: {
@@ -271,6 +279,23 @@ export default {
         }
       } catch (error) {
         commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchResultQuestionnaire({ commit }, title) {
+      let response = null;
+      try {
+        commit("setIsLoading", true);
+        response = await getResultQuestionnaire(title);
+        if (response != undefined && response.data != undefined) {
+          commit("setResult", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }

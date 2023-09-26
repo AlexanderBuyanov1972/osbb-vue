@@ -1,14 +1,7 @@
 <template>
   <div class="main">
     <div class="img">
-      <img
-        :src="
-          owner.gender === 'FEMALE'
-            ? require(`@/photos/owners/female.jpg`)
-            : require(`@/photos/owners/male.jpg`)
-        "
-        alt="Not found"
-      />
+      <img :src="getImage" alt="Not found" />
     </div>
     <div class="spans">
       <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
@@ -30,23 +23,37 @@
       <div class="item">
         <span>Доля в собственности : </span>{{ owner.shareInRealEstate }}
       </div>
+      <div class="item">
+        <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { showGender, showFamilyStatus } from "@/pages/_functions/functions";
+import {
+  showGender,
+  showFamilyStatus,
+  showTypeBeneficiary,
+} from "@/pages/_functions/functions";
 export default {
-  name: "block-read-owner",
+  name: "block-get-owner",
   props: {
-    owner: {
-      Type: Object,
-    },
+    owner: Object,
   },
   data() {
     return {
       showGender,
       showFamilyStatus,
+      showTypeBeneficiary,
     };
+  },
+  computed: {
+    getImage() {
+      if (!this.owner || !this.owner.photo) {
+        return;
+      }
+      return require(`@/assets/owners/${this.owner.photo.name}.png`);
+    },
   },
 };
 </script>
@@ -64,7 +71,7 @@ export default {
   border: 1px solid blueviolet;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
 }
 
 span {
@@ -75,12 +82,13 @@ span {
   font-size: 20px;
 }
 img {
-  width: 25wh;
+  width: 25vw;
   height: 35vh;
   padding: 10px;
+  margin-left: 40%;
 }
 .spans {
   padding: 10px;
+  margin-left: 30%;
 }
-</style>
-@/pages/functions/functions @/pages/_functions/functions
+</style>@/pages/bills/_functions/functions

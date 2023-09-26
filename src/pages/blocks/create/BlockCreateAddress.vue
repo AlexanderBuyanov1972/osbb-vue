@@ -1,6 +1,6 @@
 <template>
-  <div class="main" @mousemove="emitAddress">
-    <line-header text="Адресс собственности" :style="{'color':'brown'}" />
+  <div class="main">
+    <line-header text="Адресс собственности" :style="{ color: 'brown' }" />
 
     <div class="address">
       <div class="zipCode">
@@ -92,7 +92,7 @@
           :field="address.entrance"
           messageFalse="Укажите номер подъезда."
           messageTrue="Подъезд."
-          @valid="(value) => (validEntrance = value)"
+          @valid="(value) => handlerValidEntrance(value)"
         />
         <input-simple v-model.trim="address.entrance" placeholder="Подъезд" />
       </div>
@@ -102,7 +102,7 @@
           :field="address.floor"
           messageFalse="Укажите этаж."
           messageTrue="Этаж."
-          @valid="(value) => (validFloor = value)"
+          @valid="(value) => handlerValidFloor(value)"
         />
         <input-simple v-model.trim="address.floor" placeholder="Этаж" />
       </div>
@@ -112,15 +112,11 @@
           :field="address.apartment"
           messageFalse="Укажите номер квартиры."
           messageTrue="Квартира."
-          @valid="(value) => (validApartment = value)"
+          @valid="(value) => handlerValidApartment(value)"
         />
         <input-simple v-model.trim="address.apartment" placeholder="Квартира" />
       </div>
     </div>
-
-    <button-reset @click="reset" :hidden="!isValidAddress"
-      >Очистить</button-reset
-    >
   </div>
 </template>
 <script>
@@ -154,10 +150,17 @@ export default {
       this.$emit("isValidAddress", this.isValidAddress);
       this.$emit("address", this.address);
     },
-    reset() {
-      this.address.entrance = "";
-      this.address.floor = "";
-      this.address.apartment = "";
+    handlerValidEntrance(value) {
+      this.validEntrance = value;
+      this.emitAddress();
+    },
+    handlerValidFloor(value) {
+      this.validFloor = value;
+      this.emitAddress();
+    },
+    handlerValidApartment(value) {
+      this.validApartment = value;
+      this.emitAddress();
     },
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <div class="block1">
-    <button-simple @click="$router.push(PAGE_OWNERSHIPS_READ)"
-      >{{ OWNERSHIPS_READ }}
+    <button-simple @click="$router.push(PAGE_OWNERSHIPS_GET)"
+      >{{ OWNERSHIPS_GET }}
     </button-simple>
     <button-simple @click="$router.push(PAGE_REGISTRY_OWNERSHIPS)"
       >{{ REGISTRY_OWNERSHIPS }}
@@ -26,13 +26,13 @@
 </template>
 <script>
 import {
-  PAGE_OWNERSHIPS_READ,
+  PAGE_OWNERSHIPS_GET,
   PAGE_REGISTRY_OWNERSHIPS,
   PAGE_ENTRY_CREATE,
-  PAGE_OWNERSHIP_READ,
+  PAGE_OWNERSHIP_GET,
 } from "@/router/apiRouter";
 import {
-  OWNERSHIPS_READ,
+  OWNERSHIPS_GET,
   REGISTRY_OWNERSHIPS,
   ENTRY_CREATE,
   GET,
@@ -44,15 +44,15 @@ export default {
     return {
       apartment: "1",
       // buttons
-      OWNERSHIPS_READ,
+      OWNERSHIPS_GET,
       REGISTRY_OWNERSHIPS,
       ENTRY_CREATE,
       GET,
       // pages
-      PAGE_OWNERSHIPS_READ,
+      PAGE_OWNERSHIPS_GET,
       PAGE_REGISTRY_OWNERSHIPS,
       PAGE_ENTRY_CREATE,
-      PAGE_OWNERSHIP_READ,
+      PAGE_OWNERSHIP_GET,
     };
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
     goToPageOwnershipRead() {
       this.fetchIdOwnershipByIdApartment(this.apartment).then(() => {
         this.$emit('id', this.getIdOwnership)
-        this.$router.push(PAGE_OWNERSHIP_READ + "/" + this.getIdOwnership);
+        this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getIdOwnership);
       });
     },
     plus() {

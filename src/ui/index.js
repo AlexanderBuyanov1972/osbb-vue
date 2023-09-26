@@ -1,4 +1,5 @@
 // --------------- ui elements --------------------------------
+import ButtonBills from "@/ui/elements/ButtonBills.vue";
 import ButtonEdit from "@/ui/elements/ButtonEdit.vue";
 import ButtonCreate from "@/ui/elements/ButtonCreate.vue";
 import ButtonBack from "@/ui/elements/ButtonBack.vue";
@@ -15,6 +16,7 @@ import VueHr from "@/ui/elements/VueHr.vue";
 import LineRadio from "@/ui/elements/LineRadio.vue";
 // --------------- components -------------------
 import HeaderMessages from "@/components/HeaderMessages.vue";
+import HeaderBills from "@/components/HeaderBills.vue";
 import HeaderPolls from "@/components/HeaderPolls.vue";
 import HeaderDataOwners from "@/components/HeaderDataOwners.vue";
 import HeaderDataOwnerships from "@/components/HeaderDataOwnerships.vue";
@@ -29,23 +31,30 @@ import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 // --------------- pages blocks create --------------------------------
+import BlockCreateVehicle from "@/pages/blocks/create/BlockCreateVehicle.vue";
+import BlockCreatePlaceWork from "@/pages/blocks/create/BlockCreatePlaceWork.vue";
 import BlockCreateOwner from "@/pages/blocks/create/BlockCreateOwner.vue";
 import BlockCreatePassport from "@/pages/blocks/create/BlockCreatePassport.vue";
 import BlockCreateOwnership from "@/pages/blocks/create/BlockCreateOwnership.vue";
 import BlockCreateAddress from "@/pages/blocks/create/BlockCreateAddress.vue";
 // --------------- pages blocks edit --------------------------------
-import BlockEditOwner from "@/pages/blocks/update/BlockUpdateOwner.vue";
-import BlockEditPassport from "@/pages/blocks/update/BlockUpdatePassport.vue";
-import BlockEditOwnership from "@/pages/blocks/update/BlockUpdateOwnership.vue";
-import BlockEditAddress from "@/pages/blocks/update/BlockUpdateAddress.vue";
+import BlockUpdateVehicle from "@/pages/blocks/update/BlockUpdateVehicle.vue";
+import BlockUpdatePlaceWork from "@/pages/blocks/update/BlockUpdatePlaceWork.vue";
+import BlockUpdateOwner from "@/pages/blocks/update/BlockUpdateOwner.vue";
+import BlockUpdatePassport from "@/pages/blocks/update/BlockUpdatePassport.vue";
+import BlockUpdateOwnership from "@/pages/blocks/update/BlockUpdateOwnership.vue";
+import BlockUpdateAddress from "@/pages/blocks/update/BlockUpdateAddress.vue";
 // --------------- pages blocks read --------------------------------
-import BlockReadOwner from "@/pages/blocks/read/BlockReadOwner.vue";
-import BlockReadPassport from "@/pages/blocks/read/BlockReadPassport.vue";
-import BlockReadOwnership from "@/pages/blocks/read/BlockReadOwnership.vue";
-import BlockReadAddress from "@/pages/blocks/read/BlockReadAddress.vue";
+import BlockGetVehicle from "@/pages/blocks/get/BlockGetVehicle.vue";
+import BlockGetPlaceWork from "@/pages/blocks/get/BlockGetPlaceWork.vue";
+import BlockGetOwner from "@/pages/blocks/get/BlockGetOwner.vue";
+import BlockGetPassport from "@/pages/blocks/get/BlockGetPassport.vue";
+import BlockGetOwnership from "@/pages/blocks/get/BlockGetOwnership.vue";
+import BlockGetAddress from "@/pages/blocks/get/BlockGetAddress.vue";
 
 export default [
   // ---- elements -----
+  ButtonBills,
   InputSimple,
   ButtonEdit,
   ButtonCreate,
@@ -60,8 +69,9 @@ export default [
   VueLoader,
   VueHr,
   LineRadio,
- 
+
   // ----------------
+  HeaderBills,
   HeaderDataOwners,
   HeaderDataOwnerships,
   HeaderPolls,
@@ -76,18 +86,24 @@ export default [
   OwnershipItem,
   QuestionnaireItem,
   // ---- create -----
+  BlockCreatePlaceWork,
   BlockCreateAddress,
   BlockCreateOwnership,
   BlockCreateOwner,
   BlockCreatePassport,
   // ---- edit -----
-  BlockEditAddress,
-  BlockEditOwnership,
-  BlockEditOwner,
-  BlockEditPassport,
+  BlockCreateVehicle,
+  BlockUpdateVehicle,
+  BlockUpdatePlaceWork,
+  BlockUpdateAddress,
+  BlockUpdateOwnership,
+  BlockUpdateOwner,
+  BlockUpdatePassport,
   // ---- read -----
-  BlockReadAddress,
-  BlockReadOwnership,
-  BlockReadOwner,
-  BlockReadPassport,
+  BlockGetVehicle,
+  BlockGetPlaceWork,
+  BlockGetAddress,
+  BlockGetOwnership,
+  BlockGetOwner,
+  BlockGetPassport,
 ];

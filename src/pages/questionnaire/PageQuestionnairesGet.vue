@@ -3,21 +3,14 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header
-      text="Список непроголосованных опросов по теме"
-      :style="{ color: 'blueviolet' }"
-    />
+    <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
     <questionnaire-item :questionnaire="header" count="№" />
     <div v-for="one in getQuestionnaires" :key="one.id">
       <div
         @click="
           () =>
             this.$router.push(
-              PAGE_QUESTIONNAIRE_ANSWER +
-                '/' +
-                one.title +
-                '/' +
-                one.fullname
+              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullname
             )
         "
       >
@@ -49,8 +42,11 @@ export default {
   },
   methods: {
     ...mapActions({
+      fetchAllQuestionnaire: "questionnaire/fetchAllQuestionnaire",
       fetchAllQuestionnaireByTitle:
         "questionnaire/fetchAllQuestionnaireByTitle",
+      fetchAllQuestionnaireByTitleAndByApartment:
+        "questionnaire/fetchAllQuestionnaireByTitleAndByApartment",
     }),
   },
   computed: {
@@ -59,15 +55,26 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
-    check() {
-      return this.fetchAllQuestionnaireByTitle(this.$route.params.title);
+    changeParams() {
+      let title = this.$route.params.title;
+      let apartment = this.$route.params.apartment;
+      if (title == undefined) {
+        this.fetchAllQuestionnaire();
+      }
+      if (title != undefined && apartment == undefined) {
+        this.fetchAllQuestionnaireByTitle(title);
+      }
+      if (title != undefined && apartment != undefined) {
+        this.fetchAllQuestionnaireByTitleAndByApartment({ title, apartment });
+      }
     },
   },
-  mounted() {
-    this.check;
-  },
+
   updated() {
-    this.check;
+    this.changeParams
+  },
+  mounted() {
+    this.changeParams
   },
 };
 </script>

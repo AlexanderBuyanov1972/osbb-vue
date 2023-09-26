@@ -1,7 +1,7 @@
 <template>
   <div class="block1">
     <button-create @click="goToPageQuestionnaires"
-      >{{ QUESTIONNAIRES_READ }}
+      >{{ QUESTIONNAIRES_GET }}
     </button-create>
     <button-create @click="goToPageQuestionnairesByTitle"
       >{{ GET_POLLS_BY_TITLE }}
@@ -16,14 +16,12 @@
       >{{ QUESTIONNAIRE_CREATE }}
     </button-create>
   </div>
-  <div class="block2" @mousemove="emitTitleAndApartment">
+  <div class="block2">
     <div class="main">
       <div class="title">Введите тему опроса :</div>
       <select-title
         :style="{ margin: '10px 10px 10px 0px' }"
-        :array="array"
         @select="(value) => (title = value)"
-        :flagReset="flagReset"
       />
     </div>
 
@@ -50,74 +48,68 @@
 </template>
 <script>
 import {
-  QUESTIONNAIRES_READ,
+  QUESTIONNAIRES_GET,
   QUESTIONNAIRE_CREATE,
   GET_RESULT_POLL,
   GET_POLLS_BY_TITLE,
   GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
 } from "@/ui/namesButton";
 import {
-  PAGE_QUESTIONNAIRES_READ,
+  PAGE_QUESTIONNAIRES_GET,
   PAGE_QUESTIONNAIRE_CREATE,
   PAGE_QUESTIONNAIRE_RESULT,
 } from "@/router/apiRouter";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "header-polls",
   data() {
     return {
-      array: [],
       title: "",
       apartment: "1",
       // buttons
-      QUESTIONNAIRES_READ,
+      QUESTIONNAIRES_GET,
       QUESTIONNAIRE_CREATE,
       GET_RESULT_POLL,
       GET_POLLS_BY_TITLE,
       GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
       // pages
-      PAGE_QUESTIONNAIRES_READ,
+      PAGE_QUESTIONNAIRES_GET,
       PAGE_QUESTIONNAIRE_CREATE,
       PAGE_QUESTIONNAIRE_RESULT,
     };
   },
   methods: {
     goToPageQuestionnaires() {
-      this.$router.push(PAGE_QUESTIONNAIRES_READ + "/" + "");
+      this.$router.push(PAGE_QUESTIONNAIRES_GET);
     },
     goToPageCreateQuestionnaire() {
       this.$router.push(PAGE_QUESTIONNAIRE_CREATE);
     },
     goToPageResultQuestionnaire() {
-      if (this.title == "" || this.title == undefined) {
+      if (this.title == undefined) {
         this.setMessages(["Выберите тему опроса"]);
       } else {
         this.$router.push(PAGE_QUESTIONNAIRE_RESULT + "/" + this.title);
       }
     },
     goToPageQuestionnairesByTitle() {
-      if (this.title == "" || this.title == undefined) {
+      if (this.title == undefined) {
         this.setMessages(["Выберите тему опроса"]);
       } else {
-        this.$router.push(PAGE_QUESTIONNAIRES_READ + "/" + this.title);
+        this.$router.push(PAGE_QUESTIONNAIRES_GET + "/" + this.title);
       }
-      
     },
     goToPageQuestionnairesByTitleAndByApartment() {
-      if (this.title == "" || this.title == undefined) {
+      if (this.title == undefined) {
         this.setMessages(["Выберите тему опроса"]);
-      } else if (this.apartment == "" || this.apartment == undefined) {
+      } else if (this.apartment == undefined) {
         this.setMessages(["Выберите № помещения"]);
       } else {
         this.$router.push(
-          PAGE_QUESTIONNAIRES_READ + "/" + this.title + "/" + this.apartment
+          PAGE_QUESTIONNAIRES_GET + "/" + this.title + "/" + this.apartment
         );
       }
     },
-    ...mapActions({
-      fetchAllTitleOfQuestionnaire:
-        "questionnaire/fetchAllTitleOfQuestionnaire",
-    }),
     ...mapMutations({
       setMessages: "questionnaire/setMessages",
     }),
@@ -127,15 +119,6 @@ export default {
     minus() {
       if (this.apartment > 1) this.apartment = this.apartment * 1 - 1;
     },
-    emitTitleAndApartment() {
-      this.$emit("title", this.title);
-      this.$emit("apartment", this.apartment);
-    },
-  },
-  mounted() {
-    this.fetchAllTitleOfQuestionnaire().then(() => {
-      this.array = this.getTitles;
-    });
   },
   computed: {
     ...mapGetters({

@@ -1,35 +1,28 @@
 <template>
   <div class="wrapper">
     <div class="item" :style="{ color: 'brown', 'font-size': '25px' }">
-      Паспорт :
+      Место работы :
     </div>
     <div class="item">
-      <span>Серийный номер : </span>{{ passport.numberPassport }}
+      <span>Наименование предприятия : </span>{{ placeWork.businessName }}
+    </div>
+    <div class="item"><span>Адресс : </span>{{ placeWork.address }}</div>
+    <div class="item">
+      <span>Номер телефона : </span>{{ placeWork.numberPhone }}
     </div>
     <div class="item">
-      <span>Номер записи : </span>{{ passport.numberEntry }}
+      <span>Должность : </span>{{ placeWork.position }}
     </div>
     <div class="item">
-      <span>Дата выдачи : </span
-      >{{
-        this.passport.dateIssue == "1900-01-01"
-          ? "нет"
-          : this.passport.dateIssue
-      }}
-    </div>
-    <div class="item">
-      <span>Орган выдачи : </span>{{ passport.issuingAuthority }}
-    </div>
-    <div class="item">
-      <span>ИНН : </span>{{ passport.registrationNumberCardPayerTaxes }}
+      <span>Дополнение : </span>{{ placeWork.addition }}
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "block-read-passport",
+  name: "block-get-place-work",
   props: {
-    passport: Object,
+    placeWork: Object,
   },
 };
 </script>

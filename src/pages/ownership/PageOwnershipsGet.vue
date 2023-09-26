@@ -6,7 +6,7 @@
     <line-header text="Список недвижимости" />
     <ownership-item :ownership="header" count="№" />
     <div v-for="(one, index) in getOwnerships" :key="one.id">
-      <div @click="() => this.$router.push(PAGE_OWNERSHIP_READ + '/' + one.id)">
+      <div @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)">
         <ownership-item :ownership="one" :count="index + 1" />
       </div>
     </div>
@@ -15,14 +15,14 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
-import { PAGE_OWNERSHIP_READ } from "@/router/apiRouter";
+import { PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
 export default {
   components: {
     OwnershipItem,
   },
   data() {
     return {
-      PAGE_OWNERSHIP_READ,
+      PAGE_OWNERSHIP_GET,
       header: {
         typeRoom: "Тип помещения",
         totalArea: "Общая площадь, м2",

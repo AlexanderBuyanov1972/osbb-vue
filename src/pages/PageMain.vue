@@ -23,12 +23,14 @@ import {
   generateJsonEntries,
   generateJsonQuestionnaires,
 } from "@/pages/_functions/generate";
+import {generateSvobody51} from "@/pages/_functions/generateRealDB"
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
       generateJsonEntries,
       generateJsonQuestionnaires,
+      generateSvobody51,
     };
   },
   methods: {
@@ -39,6 +41,7 @@ export default {
     }),
     sendJsonEntriesToServer() {
       let list = this.generateJsonEntries();
+      // let list = this.generateSvobody51();
       list.forEach((el) => {
         setTimeout(() => {
           this.createOwnership(el);
@@ -78,3 +81,4 @@ export default {
 }
 </style>
 @/pages/_functions/generate
+@/pages/bills/_functions/generate@/pages/bills/_functions/generateRealDB

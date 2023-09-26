@@ -64,11 +64,11 @@ export default {
         const response = await getRegistryOwners();
         commit(
           "setRegistryOwners",
-          response.data.setFullNameOwnerAndListOwnership
+          response.data[0]
         );
         commit(
           "setBuildingCharacteristics",
-          response.data.buildingCharacteristics
+          response.data[1]
         );
         commit("setMessages", response.messages);
       } catch (error) {
@@ -83,11 +83,11 @@ export default {
         const response = await getRegistryOwnerships();
         commit(
           "setRegistryOwnerships",
-          response.data.setOwnershipAndListFullNameOwners
+          response.data[0]
         );
         commit(
           "setBuildingCharacteristics",
-          response.data.buildingCharacteristics
+          response.data[1]
         );
         commit("setMessages", response.messages);
       } catch (error) {

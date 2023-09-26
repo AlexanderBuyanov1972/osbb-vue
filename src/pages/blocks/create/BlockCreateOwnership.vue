@@ -1,18 +1,18 @@
 <template>
-  <div class="main" @mousemove="emitOwnership">
-    <line-header text="Собственность" :style="{'color':'brown'}"/>
+  <div class="main">
+    <line-header text="Собственность" :style="{ color: 'brown' }" />
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
           :field="ownership.typeRoom"
           messageFalse="Укажите тип помещения."
           messageTrue="Тип помещения."
-          @valid="(value) => (validTypeRoom = value)"
+          @valid="(value) => handlerValidTypeRoom(value)"
         />
-        <select-simple
+        <select-edit
           :array="arrayTypeRoom"
-          @select="(value) => changeSelectTypeRoom(value)"
-          :flagReset="flagReset"
+          @select="(value) => (ownership.typeRoom = value)"
+          :startName="ownership.typeRoom"
         />
       </div>
 
@@ -21,7 +21,7 @@
           :field="ownership.totalArea"
           messageFalse="Укажите общую площадь помещения."
           messageTrue="Общая площадь помещения, м2."
-          @valid="(value) => (validTotalArea = value)"
+          @valid="(value) => handlerValidTotalArea(value)"
         />
         <input-simple
           v-model.number="ownership.totalArea"
@@ -34,7 +34,7 @@
           :field="ownership.livingArea"
           messageFalse="Укажите жилую площадь помещения."
           messageTrue="Жилая площадь помещения, м2."
-          @valid="(value) => (validLivingArea = value)"
+          @valid="(value) => handlerValidLivingArea(value)"
         />
         <input-simple
           v-model.number="ownership.livingArea"
@@ -47,7 +47,7 @@
           :field="ownership.documentConfirmsRightOwn"
           messageFalse="Укажите документ о праве собственности."
           messageTrue="Документ о праве собственности."
-          @valid="(value) => (validDocumentConfirmsRightOwn = value)"
+          @valid="(value) => handlerValidDocumentConfirmsRightOwn(value)"
         />
         <input-simple
           v-model.trim="ownership.documentConfirmsRightOwn"
@@ -60,12 +60,12 @@
           :field="ownership.numberRooms"
           messageFalse="Укажите кол-во комнат."
           messageTrue="Количество комнат."
-          @valid="(value) => (validNumberRooms = value)"
+          @valid="(value) => handlerValidNumberRooms(value)"
         />
         <select-simple
           :array="arrayNumberRooms"
-          @select="(value) => changeSelectNumberRooms(value)"
-          :flagReset="flagReset"
+          @select="(value) => (ownership.numberRooms = value)"
+          :startName="ownership.numberRooms"
         />
       </div>
 
@@ -74,18 +74,15 @@
           :field="ownership.loggia"
           messageFalse="Укажите есть ли балкон."
           messageTrue="Есть ли балкон."
-          @valid="(value) => (validLoggia = value)"
+          @valid="(value) => handlerValidLoggia(value)"
         />
         <select-simple
           :array="arrayLoggia"
-          @select="(value) => changeSelectLoggia(value)"
-          :flagReset="flagReset"
+          @select="(value) => (ownership.loggia = value)"
+          :startName="ownership.loggia"
         />
       </div>
     </div>
-    <button-reset @click="reset" :hidden="!isValidOwnership"
-      >Очистить</button-reset
-    >
   </div>
 </template>
 <script>
@@ -99,7 +96,6 @@ export default {
   data() {
     return {
       ownership: {},
-      flagReset: false,
       validTypeRoom: false,
       validTotalArea: false,
       validLivingArea: false,
@@ -117,26 +113,29 @@ export default {
       this.$emit("isValidOwnership", this.isValidOwnership);
       this.$emit("ownership", this.ownership);
     },
-    changeSelectTypeRoom(value) {
-      this.ownership.typeRoom = value;
-      this.flagReset = false;
+    handlerValidTypeRoom(value) {
+      this.validTypeRoom = value;
+      this.emitOwnership();
     },
-    changeSelectLoggia(value) {
-      this.ownership.loggia = value;
-      this.flagReset = false;
+    handlerValidTotalArea(value) {
+      this.validTotalArea = value;
+      this.emitOwnership();
     },
-    changeSelectNumberRooms(value) {
-      this.ownership.numberRooms = value;
-      this.flagReset = false;
+    handlerValidLivingArea(value) {
+      this.validLivingArea = value;
+      this.emitOwnership();
     },
-    reset() {
-      this.ownership.typeRoom = "";
-      this.ownership.totalArea = "";
-      this.ownership.livingArea = "";
-      this.ownership.documentConfirmsRightOwn = "";
-      this.ownership.numberRooms = "";
-      this.ownership.loggia = false;
-      this.flagReset = true;
+    handlerValidDocumentConfirmsRightOwn(value) {
+      this.validDocumentConfirmsRightOwn = value;
+      this.emitOwnership();
+    },
+    handlerValidNumberRooms(value) {
+      this.validNumberRooms = value;
+      this.emitOwnership();
+    },
+    handlerValidLoggia(value) {
+      this.validLoggia = value;
+      this.emitOwnership();
     },
   },
   computed: {
@@ -161,5 +160,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
-@/pages/functions/arraysOfData
-@/pages/_functions/arraysOfData

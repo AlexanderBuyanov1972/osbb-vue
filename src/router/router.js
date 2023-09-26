@@ -1,29 +1,25 @@
 // /
 import PageMain from "@/pages/PageMain.vue";
-import PageRegistryOwnersRead from "@/pages/PageRegistryOwnersRead.vue";
-import PageRegistryOwnershipsRead from "@/pages/PageRegistryOwnershipsRead.vue";
+import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
+import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
 // questionnaire
 import PageQuestionnaireCreate from "@/pages/questionnaire/PageQuestionnaireCreate.vue";
-import PageQuestionnaireRead from "@/pages/questionnaire/PageQuestionnaireRead.vue";
-import PageQuestionnairesReadByTitleAndByApartment from "@/pages/questionnaire/PageQuestionnairesReadByTitleAndByApartment.vue";
-import PageQuestionnairesReadByTitle from "@/pages/questionnaire/PageQuestionnairesReadByTitle.vue";
-import PageQuestionnairesRead from "@/pages/questionnaire/PageQuestionnairesRead.vue";
+import PageQuestionnaireGet from "@/pages/questionnaire/PageQuestionnaireGet.vue";
+import PageQuestionnairesGet from "@/pages/questionnaire/PageQuestionnairesGet.vue";
 import PageQuestionnaireAnswer from "@/pages/questionnaire/PageQuestionnaireAnswer.vue";
 import PageQuestionnaireResult from "@/pages/questionnaire/PageQuestionnaireResult.vue";
 // owner
-import PageOwnerCreate from "@/pages/owner/PageOwnerCreate.vue";
-import PageOwnerUpdate from "@/pages/owner/PageOwnerUpdate.vue";
-import PageOwnerRead from "@/pages/owner/PageOwnerRead.vue";
-import PageOwnersRead from "@/pages/owner/PageOwnersRead.vue";
+import PageOwnerGet from "@/pages/owner/PageOwnerGet.vue";
+import PageOwnersGet from "@/pages/owner/PageOwnersGet.vue";
 // ownership
-import PageOwnershipCreate from "@/pages/ownership/PageOwnershipCreate.vue";
-import PageOwnershipUpdate from "@/pages/ownership/PageOwnershipUpdate.vue";
-import PageOwnershipRead from "@/pages/ownership/PageOwnershipRead.vue";
-import PageOwnershipsRead from "@/pages/ownership/PageOwnershipsRead.vue";
+import PageOwnershipGet from "@/pages/ownership/PageOwnershipGet.vue";
+import PageOwnershipsGet from "@/pages/ownership/PageOwnershipsGet.vue";
 // entry
 import PageEntryCreate from "@/pages/entry/PageEntryCreate.vue";
 import PageEntryUpdate from "@/pages/entry/PageEntryUpdate.vue";
-import PageEntryRead from "@/pages/entry/PageEntryRead.vue";
+import PageEntryGet from "@/pages/entry/PageEntryGet.vue";
+// bills
+import PageBillsGet from "@/pages/bills/PageBillsGet.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import {
@@ -34,43 +30,37 @@ import {
   //questionnaire
   PAGE_QUESTIONNAIRE_ANSWER,
   PAGE_QUESTIONNAIRE_CREATE,
-  PAGE_QUESTIONNAIRES_READ,
-  PAGE_QUESTIONNAIRE_READ,
+  PAGE_QUESTIONNAIRES_GET,
+  PAGE_QUESTIONNAIRE_GET,
   PAGE_QUESTIONNAIRE_RESULT,
   // owner
-  PAGE_OWNER_CREATE,
-  PAGE_OWNER_UPDATE,
-  PAGE_OWNER_READ,
-  PAGE_OWNERS_READ,
+  PAGE_OWNER_GET,
+  PAGE_OWNERS_GET,
   // ownership
-  PAGE_OWNERSHIP_CREATE,
-  PAGE_OWNERSHIP_UPDATE,
-  PAGE_OWNERSHIP_READ,
-  PAGE_OWNERSHIPS_READ,
+  PAGE_OWNERSHIP_GET,
+  PAGE_OWNERSHIPS_GET,
   // entry
   PAGE_ENTRY_CREATE,
   PAGE_ENTRY_UPDATE,
-  PAGE_ENTRY_READ,
+  PAGE_ENTRY_GET,
+  //bills
+  PAGE_BILLS_GET,
 } from "./apiRouter.js";
 
 const routes = [
   // /
   { path: PAGE_MAIN, component: PageMain },
-  { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwnersRead },
+  { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwners },
   {
     path: PAGE_REGISTRY_OWNERSHIPS,
-    component: PageRegistryOwnershipsRead,
+    component: PageRegistryOwnerships,
   },
   // ownership
-  { path: PAGE_OWNERSHIP_CREATE, component: PageOwnershipCreate },
-  { path: PAGE_OWNERSHIP_UPDATE + "/:id", component: PageOwnershipUpdate },
-  { path: PAGE_OWNERSHIPS_READ, component: PageOwnershipsRead },
-  { path: PAGE_OWNERSHIP_READ + "/:id", component: PageOwnershipRead },
+  { path: PAGE_OWNERSHIPS_GET, component: PageOwnershipsGet },
+  { path: PAGE_OWNERSHIP_GET + "/:id", component: PageOwnershipGet },
   // owner
-  { path: PAGE_OWNER_CREATE, component: PageOwnerCreate },
-  { path: PAGE_OWNER_UPDATE + "/:id", component: PageOwnerUpdate },
-  { path: PAGE_OWNER_READ + "/:id", component: PageOwnerRead },
-  { path: PAGE_OWNERS_READ, component: PageOwnersRead },
+  { path: PAGE_OWNER_GET + "/:id", component: PageOwnerGet },
+  { path: PAGE_OWNERS_GET, component: PageOwnersGet },
   //entry
   { path: PAGE_ENTRY_CREATE, component: PageEntryCreate },
   {
@@ -78,42 +68,29 @@ const routes = [
     component: PageEntryUpdate,
   },
   {
-    path: PAGE_ENTRY_READ + "/:id",
-    component: PageEntryRead,
+    path: PAGE_ENTRY_GET + "/:id",
+    component: PageEntryGet,
   },
   // questionnaire
-  { path: PAGE_QUESTIONNAIRES_READ, component: PageQuestionnairesRead },
+  { path: PAGE_QUESTIONNAIRES_GET, component: PageQuestionnairesGet },
   {
-    path: PAGE_QUESTIONNAIRE_READ,
-    component: PageQuestionnaireRead + "/:id",
+    path: PAGE_QUESTIONNAIRE_GET,
+    component: PageQuestionnaireGet + "/:id",
   },
   // ------------- start слияние 3 в 1 --------------------
   {
-    path: PAGE_QUESTIONNAIRES_READ,
-    component: PageQuestionnairesRead,
+    path: PAGE_QUESTIONNAIRES_GET,
+    component: PageQuestionnairesGet,
   },
   {
-    path: PAGE_QUESTIONNAIRES_READ + "/:title",
-    component: PageQuestionnairesRead,
+    path: PAGE_QUESTIONNAIRES_GET + "/:title",
+    component: PageQuestionnairesGet,
   },
   {
-    path: PAGE_QUESTIONNAIRES_READ + "/:title" + "/:apartment",
-    component: PageQuestionnairesRead,
+    path: PAGE_QUESTIONNAIRES_GET + "/:title/:apartment",
+    component: PageQuestionnairesGet,
   },
-  //--------------------------------------------------------------------
-  // {
-  //   path: PAGE_QUESTIONNAIRES_READ,
-  //   component: PageQuestionnairesRead,
-  // },
-  // {
-  //   path: PAGE_QUESTIONNAIRES_READ + "/:title",
-  //   component: PageQuestionnairesReadByTitle,
-  // },
-  // {
-  //   path: PAGE_QUESTIONNAIRES_READ + "/:title" + "/:apartment",
-  //   component: PageQuestionnairesReadByTitleAndByApartment,
-  // },
-  //***************** end **************** */
+  // ----------------------------------------------------------
   {
     path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullname",
     component: PageQuestionnaireAnswer,
@@ -125,6 +102,11 @@ const routes = [
   {
     path: PAGE_QUESTIONNAIRE_CREATE,
     component: PageQuestionnaireCreate,
+  },
+  // bills----------------------------------------
+  {
+    path: PAGE_BILLS_GET,
+    component: PageBillsGet,
   },
 ];
 const router = createRouter({

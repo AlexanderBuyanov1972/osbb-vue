@@ -2,7 +2,7 @@
   <div :class="!show ? 'blocks' : ['blocks', 'active']">
     <div class="block_1">
       <div class="item" @click="show = !show">
-        {{ flagReset ? array[0] : name }}
+        {{ name }}
       </div>
     </div>
     <div class="block_2" v-if="show">
@@ -13,19 +13,13 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "select-title",
-  props: {
-    array: {
-      type: Array,
-      default: () => [],
-    },
-    flagReset: Boolean,
-  },
-
   data() {
     return {
       show: false,
+      array: [],
       name: "",
     };
   },
@@ -35,9 +29,23 @@ export default {
       this.$emit("select", this.name);
       this.show = false;
     },
+    ...mapActions({
+      fetchAllTitleOfQuestionnaire:
+        "questionnaire/fetchAllTitleOfQuestionnaire",
+    }),
+  },
+
+  computed: {
+    ...mapGetters({
+      getTitles: "questionnaire/getTitles",
+    }),
   },
   mounted() {
-    this.select(this.array[0]);
+    this.fetchAllTitleOfQuestionnaire().then(() => {
+      this.array = this.getTitles;
+      this.name = this.array[0];
+      this.$emit("select", this.name);
+    });
   },
 };
 </script>

@@ -13,9 +13,7 @@
 export default {
   name: "questionnaire-item",
   props: {
-    questionnaire: {
-      Type: Object,
-    },
+    questionnaire: Object,
     count: Number,
   },
 };

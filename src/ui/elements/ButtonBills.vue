@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "button-edit",
+  name: "button-bills",
 };
 </script>
 <template>
@@ -19,7 +19,7 @@ button {
   text-transform: uppercase;
   border-radius: 0;
   cursor: pointer;
-  color: darkgoldenrod;
-  border: 1px solid darkgoldenrod;
+  color: crimson;
+  border: 1px solid crimson;
 }
 </style>

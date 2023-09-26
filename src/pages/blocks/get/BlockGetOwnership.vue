@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="img">
-      <img :src="require(`@/photos/rooms/1_1.png`)" alt="Not Found" />
+      <img :src="require(`@/assets/rooms/1_1.png`)" alt="Not Found" />
     </div>
     <div class="spans">
       <div class="item">
@@ -34,11 +34,9 @@ import {
   showNumberRooms,
 } from "@/pages/_functions/functions";
 export default {
-  name: "block-read-ownership",
+  name: "block-get-ownership",
   props: {
-    ownership: {
-      Type: Object,
-    },
+    ownership: Object,
   },
   data() {
     return {
@@ -85,5 +83,5 @@ span {
   color: blueviolet;
 }
 </style>
-@/pages/functions/functions
-@/pages/_functions/functions
+@/pages/functions/functions @/pages/_functions/functions
+@/pages/bills/_functions/functions

@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "block-read-address",
+  name: "block-get-address",
   props: {
     address: {
       Type: Object,

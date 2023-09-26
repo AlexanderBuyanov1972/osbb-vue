@@ -6,6 +6,41 @@ export const getShareInRealEstate = (value) => {
   return 0.33333;
 };
 
+export const generatePassport = () => {
+  return {
+    numberPassport: "нет",
+    numberEntry: "нет",
+    dateIssue: "1900-01-01",
+    issuingAuthority: "нет",
+    registrationNumberCardPayerTaxes: "нет",
+  };
+};
+
+export const generatePlaceWork = () => {
+  return {
+    businessName: "нет",
+    address: "нет",
+    numberPhone: "нет",
+    position: "нет",
+    addition: "нет",
+  };
+};
+
+export const generateVehicle = () => {
+  return {
+    typeVehicle: "NO",
+    numberVehicle: "нет",
+    yearOfIssue: "нет",
+    typeColor: "NO",
+    typeManufacturer: "NO",
+  };
+};
+
+export const generatePhoto = () => {
+  return { name: "avatar", url: "@/photos/owners/avatar.png" };
+};
+
+// generate Json ---------------
 export const generateJsonEntries = () => {
   // общее количество квартир вдоме
   const countApartment = 84;
@@ -25,47 +60,26 @@ export const generateJsonEntries = () => {
     currentApartment <= countApartment;
     currentApartment++
   ) {
-    let owners = [];
-    for (let j = 0; j < (currentApartment % 3) + 1; j++) {
-      let owner = {
-        firstName: faker.person.lastName() + "",
-        secondName: faker.person.lastName() + "",
-        lastName: faker.person.lastName() + "",
-        gender: faker.helpers.arrayElement(["MALE", "FEMALE"]),
-        email: faker.internet.email(),
-        phoneNumber: faker.phone.number("+38 (097) ### ## ##"),
-        dateBirth:
-          faker.date
-            .birthdate({ min: 16, max: 85, mode: "age" })
-            .toISOString()
-            .substring(0, 10) + "",
-
-        // shareInRealEstate: faker.number.float({ precision: 0.1 }),
-
-        shareInRealEstate: getShareInRealEstate(currentApartment),
-
-        familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
-        passport: {
-          numberPassport: faker.finance.accountNumber(9) + "",
-          numberEntry:
-            faker.number.int({ min: 10000000, max: 50000000 }) +
-            "-" +
-            faker.finance.accountNumber(4),
-          dateIssue: faker.date
-            .birthdate({
-              min: 1960,
-              max: 2022,
-              mode: "year",
-            })
-            .toISOString()
-            .substring(0, 10),
-          issuingAuthority: faker.number.int({ min: 1000, max: 1500 }) + "",
-          registrationNumberCardPayerTaxes:
-            faker.finance.accountNumber(10) + "",
-        },
-      };
-      owners.push(owner);
-    }
+    let owner = {
+      firstName: faker.person.lastName() + "",
+      secondName: faker.person.lastName() + "",
+      lastName: faker.person.lastName() + "",
+      gender: faker.helpers.arrayElement(["MALE", "FEMALE"]),
+      email: faker.internet.email(),
+      phoneNumber: faker.phone.number("+38 (097) ### ## ##"),
+      dateBirth:
+        faker.date
+          .birthdate({ min: 16, max: 85, mode: "age" })
+          .toISOString()
+          .substring(0, 10) + "",
+      shareInRealEstate: getShareInRealEstate(currentApartment),
+      familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
+      beneficiary: "NO",
+      passport: generatePassport(),
+      vehicle: generateVehicle(),
+      placeWork: generatePlaceWork(),
+      photo: generatePhoto(),
+    };
 
     let ownership = {
       typeRoom: faker.helpers.arrayElement([
@@ -96,7 +110,7 @@ export const generateJsonEntries = () => {
         apartment: currentApartment + "",
       },
     };
-    ownership.owners = owners;
+    ownership.owner = owner;
     result.push(ownership);
 
     if (currentApartment % countFloor == 0) {

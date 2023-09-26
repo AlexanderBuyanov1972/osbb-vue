@@ -90,6 +90,7 @@
         />
         <input-simple v-model="owner.phoneNumber" placeholder="Телефон." />
       </div>
+
       <div class="shareInRealEstate">
         <block-error-message
           :field="owner.shareInRealEstate"
@@ -98,8 +99,22 @@
           @valid="(value) => handlerShareInRealEstate(value)"
         />
         <input-simple
-          v-model="owner.shareInRealEstate"
+          v-model.number="owner.shareInRealEstate"
           placeholder="Доля в собственности (от 0 до 1, три знака после точки)."
+        />
+      </div>
+
+      <div class="beneficiary">
+        <block-error-message
+          :field="owner.beneficiary"
+          messageFalse="Укажите льготы"
+          messageTrue="Льготы"
+          @valid="(value) => handlerBeneficiary(value)"
+        />
+        <select-edit
+          :array="arrayTypeBeneficiary"
+          :startName="getNameByValue(arrayTypeBeneficiary, owner.beneficiary)"
+          @select="(value) => (owner.beneficiary = value)"
         />
       </div>
     </div>
@@ -109,6 +124,7 @@
 import {
   arrayGender,
   arrayFamilyStatus,
+  arrayTypeBeneficiary,
 } from "@/pages/_functions/arraysOfData";
 import {
   getElementByValue,
@@ -128,7 +144,7 @@ export default {
       getElementByName,
       getNameByValue,
       arrayGender,
-
+      arrayTypeBeneficiary,
       arrayFamilyStatus,
       validLastName: false,
       validFirstName: false,
@@ -139,6 +155,7 @@ export default {
       validEmail: false,
       validPhoneNumber: false,
       validShareInRealEstate: false,
+      validBeneficiary: false,
     };
   },
 
@@ -187,6 +204,10 @@ export default {
       this.validShareInRealEstate = value;
       this.emitOwner();
     },
+    handlerBeneficiary(value) {
+      this.validBeneficiary = value;
+      this.emitOwner();
+    },
   },
   computed: {
     ...mapGetters({
@@ -202,7 +223,8 @@ export default {
         this.validFamilyStatus &&
         this.validEmail &&
         this.validPhoneNumber &&
-        this.validShareInRealEstate
+        this.validShareInRealEstate &&
+        this.validBeneficiary
       );
     },
   },
@@ -227,3 +249,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+@/pages/bills/_functions/arraysOfData@/pages/bills/_functions/functions

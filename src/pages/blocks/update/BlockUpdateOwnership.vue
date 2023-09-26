@@ -7,12 +7,12 @@
           :field="ownership.typeRoom"
           messageFalse="Укажите тип помещения."
           messageTrue="Тип помещения."
-          @valid="(value) => (validTypeRoom = value)"
+          @valid="(value) => handlerTypeRoom(value)"
         />
         <select-edit
           :array="arrayTypeRoom"
           :startName="getNameByValue(arrayTypeRoom, ownership.typeRoom)"
-          @select="(value) => handlerTypeRoom(value)"
+          @select="(value) => (ownership.typeRoom = value)"
         />
       </div>
 
@@ -24,7 +24,7 @@
           @valid="(value) => handlerTotalArea(value)"
         />
         <input-simple
-          v-model="ownership.totalArea"
+          v-model.number="ownership.totalArea"
           placeholder="Общая площадь помещения"
         />
       </div>
@@ -37,7 +37,7 @@
           @valid="(value) => handlerLivingArea(value)"
         />
         <input-simple
-          v-model="ownership.livingArea"
+          v-model.number="ownership.livingArea"
           placeholder="Жилая площадь помещения."
         />
       </div>
@@ -174,4 +174,4 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-</style>
+</style>@/pages/bills/_functions/functions@/pages/bills/_functions/arraysOfData

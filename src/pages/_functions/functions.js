@@ -6,9 +6,14 @@ import {
   arrayFamilyStatus,
   arrayQuestionnaire,
   arrayAnswer,
+  arrayTypeBeneficiary,
+  arrayTypeColor,
+  arrayTypeManufacturer,
+  arrayTypeVehicle,
 } from "@/pages/_functions/arraysOfData";
 
 // ------------ show fields objects  arrays ---------------
+// owner -------------------------
 
 export const showGender = (value) => {
   try {
@@ -24,6 +29,37 @@ export const showFamilyStatus = (value) => {
     return "";
   }
 };
+export const showTypeBeneficiary = (value) => {
+  try {
+    return arrayTypeBeneficiary.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
+// vehicle -------------------------------------
+export const showTypeVehicle = (value) => {
+  try {
+    return arrayTypeVehicle.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showTypeColor = (value) => {
+  try {
+    return arrayTypeColor.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showTypeManufacturer = (value) => {
+  try {
+    return arrayTypeManufacturer.find((el) => el.value === value).name;
+  } catch (error) {
+    return "";
+  }
+};
+
+// ownership -----------------------------------
 export const showLoggia = (value) => {
   try {
     return arrayLoggia.find((el) => el.value === value).name;
@@ -45,6 +81,7 @@ export const showTypeRoom = (value) => {
     return "";
   }
 };
+// questionnaire -------------------------------------
 export const showTypeAnswer = (value) => {
   try {
     return arrayAnswer.find((el) => el.value == value).name;

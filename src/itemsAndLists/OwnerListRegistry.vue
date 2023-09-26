@@ -1,49 +1,25 @@
 <template>
-  <div class="list" v-for="one in list" :key="one.id">
-    <p
-      @click="
-        () =>
-          this.$router.push(PAGE_OWNER_READ + '/' + one.fullNameOwner.ownerId)
-      "
-    >
-      {{ one.fullNameOwner.fullNameOwner }}
+  <div class="list" v-for="key in Object.keys(map)" :key="key">
+    <div class="item">{{ key }}</div>
+    <p v-for="(one, index) in map[key]" :key="key">
+      {{ index + 1 }}. Квартира №  {{ one }}
     </p>
-
-    <ownership-item
-      v-for="(two, index) in one.listOwnership"
-      :ownership="two"
-      :key="two.id"
-      :count="index + 1"
-      @click="() => this.$router.push(PAGE_OWNERSHIP_READ + '/' + two.id)"
-      :flag="true"
-    />
   </div>
 </template>
-
 <script>
-import OwnershipList from "@/itemsAndLists/OwnershipList.vue";
-import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
-import { PAGE_OWNER_READ, PAGE_OWNERSHIP_READ } from "@/router/apiRouter";
+import { PAGE_OWNER_GET, PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      PAGE_OWNER_READ,
-      PAGE_OWNERSHIP_READ,
+      PAGE_OWNER_GET,
+      PAGE_OWNERSHIP_GET,
     };
   },
-  components: {
-    OwnershipList,
-    OwnershipItem,
-  },
   props: {
-    list: {
-      type: Array,
-      default: () => [],
-    },
+    map: Object,
   },
 };
 </script>
-
 <style scoped>
 * {
   padding: 0;
@@ -55,9 +31,16 @@ export default {
   padding: 0px 5px;
   margin: 5px 0px;
 }
+
 p {
   color: brown;
-  font-size: 17px;
-  margin: 5px 0px;
+  font-size: 20px;
+  margin: 10px 0px;
+}
+.item {
+  font-size: 22px;
+  color: blueviolet;
 }
 </style>
+<!-- @click="() =>this.$router.push(PAGE_OWNER_GET + '/' + one.fullNameOwner.ownerId)" -->
+<!-- @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)" -->

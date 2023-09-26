@@ -5,6 +5,7 @@ import {
   deleteOwner,
   getAllOwner,
   countOwners,
+  getOwnersByApartment,
 } from "@/http/owner";
 
 export default {
@@ -20,7 +21,10 @@ export default {
       email: "",
       phoneNumber: "",
       shareInRealEstate: 0,
-      photos: [],
+      beneficiary: "",
+      photo: {},
+      vehicle: {},
+      placeWork: {},
       passport: {
         id: 0,
         passportId: "",
@@ -73,6 +77,7 @@ export default {
   },
 
   actions: {
+    // one
     async createOwner({ commit }, object) {
       try {
         commit("setIsLoading", true);
@@ -133,6 +138,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // all
     async getAllOwner({ commit }) {
       try {
         commit("setIsLoading", true);
@@ -149,12 +155,25 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // count
     async fetchCountOwners({ commit }) {
       try {
         commit("setIsLoading", true);
         const response = await countOwners();
         commit("setCountOwners", response.data);
         commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    // list owner by apartment
+    async fetchOwnersByApartment({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getOwnersByApartment(apartment);
+        commit("setMessages", response.data);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

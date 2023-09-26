@@ -12,35 +12,27 @@
       "
     />
     <line-address :address="this.getOwnership.address" />
-    <block-read-ownership :ownership="ownership" />
+    <block-get-ownership :ownership="ownership" />
     <vue-hr />
-    <div class="btns">
-      <button-edit
-        @click="
-          this.$router.push(PAGE_ENTRY_UPDATE + '/' + this.getOwnership.id)
-        "
-        >{{ ENTRY_UPDATE }}</button-edit
-      >
-      <button-simple
-        @click="this.$router.push(PAGE_ENTRY_READ + '/' + this.getOwnership.id)"
-        >{{ ENTRY_READ }}</button-simple
-      >
-    </div>
+    <button-back />
+
+    <button-simple
+      @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.getOwnership.id)"
+      >{{ ENTRY_GET }}</button-simple
+    >
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { ENTRY_UPDATE, ENTRY_READ } from "@/ui/namesButton";
-import { PAGE_ENTRY_UPDATE, PAGE_ENTRY_READ } from "@/router/apiRouter";
+import { ENTRY_GET } from "@/ui/namesButton";
+import { PAGE_ENTRY_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
       id: 0,
       ownership: {},
-      ENTRY_UPDATE,
-      ENTRY_READ,
-      PAGE_ENTRY_UPDATE,
-      PAGE_ENTRY_READ,
+      ENTRY_GET,
+      PAGE_ENTRY_GET,
     };
   },
   methods: {
@@ -77,10 +69,5 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-.btns {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
 </style>

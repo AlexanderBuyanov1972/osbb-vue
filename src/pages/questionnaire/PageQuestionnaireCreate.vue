@@ -28,7 +28,7 @@
         <input-simple v-model="byWhom" placeholder="Инициатор опроса." />
       </div>
 
-      <div class="selects" v-for="one in selects" :key="one.question">
+      <div class="selects" v-for="(one, index) in selects" :key="index">
         <div class="question">
           <block-error-message
             :field="one.question"
@@ -47,7 +47,9 @@
       >Удалить последний вопрос</button-delete
     >
     <button-simple
-      :hidden="!(validTitle && validByWhom && validQuestion)"
+      :hidden="
+        !(checkHidden)
+      "
       @click="sendToServer"
       >SEND_TO_SERVER</button-simple
     >
@@ -55,7 +57,7 @@
 </template>
 <script>
 import { SEND_TO_SERVER } from "@/ui/namesButton";
-import { PAGE_SHOW_QUESTIONNAIRES } from "@/router/apiRouter";
+import { PAGE_QUESTIONNAIRES_GET } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -63,9 +65,8 @@ export default {
       validTitle: false,
       validByWhom: false,
       validQuestion: false,
-      questionnaire: {},
       SEND_TO_SERVER,
-      PAGE_SHOW_QUESTIONNAIRES,
+      PAGE_QUESTIONNAIRES_GET,
       title: "",
       byWhom: "",
       selects: [],
@@ -78,10 +79,10 @@ export default {
         "questionnaire/fetchAllTitleOfQuestionnaire",
     }),
     addQuestion() {
-      this.selects.push({ question: "" });
+      this.selects.push({});
     },
     removeQuestion() {
-      if (this.selects.length > 1) {
+      if (this.selects.length > 0) {
         this.selects.length -= 1;
       }
     },
@@ -95,7 +96,7 @@ export default {
         });
       });
       this.generateListQuestionnaire(body).then(() => {
-        this.fetchAllTitleOfQuestionnaire;
+        this.fetchAllTitleOfQuestionnaire().then(()=> this.$router.push(PAGE_QUESTIONNAIRES_GET))
       });
     },
   },
@@ -104,6 +105,9 @@ export default {
       getMessages: "questionnaire/getMessages",
       getIsLoading: "questionnaire/getIsLoading",
     }),
+    checkHidden() {
+      return this.validTitle && this.validByWhom && this.validQuestion && this.selects.length != 0;
+    },
   },
 };
 </script>

@@ -23,9 +23,7 @@ import {
 export default {
   name: "questionnaire-item",
   props: {
-    owner: {
-      Type: Object,
-    },
+    owner: Object,
     count: Number,
   },
   data() {
@@ -77,3 +75,4 @@ export default {
 }
 </style>
 @/pages/_functions/functions
+@/pages/bills/_functions/functions

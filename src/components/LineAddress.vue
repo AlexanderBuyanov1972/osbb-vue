@@ -32,4 +32,4 @@ export default {
 }
 </style>
 @/pages/functions/functions
-@/pages/_functions/functions
+@/pages/_functions/functions@/pages/bills/_functions/functions

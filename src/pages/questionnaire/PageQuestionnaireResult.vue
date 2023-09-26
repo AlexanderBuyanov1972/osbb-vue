@@ -3,86 +3,36 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Результаты опроса в голосах" />
-    <div
-      class="block"
-      v-for="key in Object.keys(this.getResultOwner)"
-      :key="key"
-    >
-      <div class="question">{{ key }}</div>
-      <div class="item">
-        За :
-        {{
-          this.getResultOwner[key]["BEHIND"] == null
-            ? 0
-            : this.getResultOwner[key]["BEHIND"].toFixed(2)
-        }}
-      </div>
-      <div class="item">
-        Против :
-        {{
-          this.getResultOwner[key]["AGAINST"] == null
-            ? 0
-            : this.getResultOwner[key]["AGAINST"].toFixed(2)
-        }}
-      </div>
-      <div class="item">
-        Воздержался :
-        {{
-          this.getResultOwner[key]["ABSTAINED"] == null
-            ? 0
-            : this.getResultOwner[key]["ABSTAINED"].toFixed(2)
-        }}
-      </div>
-      <vue-hr />
-      <div class="item">
-        Всего проголосовало :
-        {{
-          this.getResultOwner[key]["BEHIND"].toFixed(2) * 1 +
-          this.getResultOwner[key]["AGAINST"].toFixed(2) * 1 +
-          this.getResultOwner[key]["ABSTAINED"].toFixed(2) * 1
-        }}
-      </div>
-    </div>
-    <line-header text="Результаты опроса в квадратных метрах" />
-    <div
-      class="block"
-      v-for="key in Object.keys(this.getResultDouble)"
-      :key="key"
-    >
-      <div class="question">{{ key }}</div>
-      <div class="item">
-        За :
-        {{
-          this.getResultDouble[key]["BEHIND"] == null
-            ? 0
-            : this.getResultDouble[key]["BEHIND"].toFixed(2)
-        }}
-      </div>
-      <div class="item">
-        Против :
-        {{
-          this.getResultDouble[key]["AGAINST"] == null
-            ? 0
-            : this.getResultDouble[key]["AGAINST"].toFixed(2)
-        }}
-      </div>
-      <div class="item">
-        Воздержался :
-        {{
-          this.getResultDouble[key]["ABSTAINED"] == null
-            ? 0
-            : this.getResultDouble[key]["ABSTAINED"].toFixed(2)
-        }}
-      </div>
-      <vue-hr />
-      <div class="item">
-        Всего проголосовало :
-        {{
-          this.getResultDouble[key]["BEHIND"].toFixed(2) * 1 +
-          this.getResultDouble[key]["AGAINST"].toFixed(2) * 1 +
-          this.getResultDouble[key]["ABSTAINED"].toFixed(2) * 1
-        }}
+
+    <div class="" v-for="(item, index) in getResult">
+      <line-header v-if="index == 0" text="Результаты опроса в голосах" />
+      <line-header
+        v-if="index == 1"
+        text="Результаты опроса в квадратных метрах"
+      />
+      <div class="block" v-for="key in Object.keys(item)" :key="key">
+        <div class="question">{{ key }}</div>
+        <div class="item">
+          За :
+          {{ result(item, key, "BEHIND") }}
+        </div>
+        <div class="item">
+          Против :
+          {{ result(item, key, "AGAINST") }}
+        </div>
+        <div class="item">
+          Воздержался :
+          {{ result(item, key, "ABSTAINED") }}
+        </div>
+        <vue-hr />
+        <div class="item">
+          Всего проголосовало :
+          {{
+            result(item, key, "BEHIND") +
+            result(item, key, "AGAINST") +
+            result(item, key, "ABSTAINED")
+          }}
+        </div>
       </div>
     </div>
   </div>
@@ -95,23 +45,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchResultQuestionnaire: "result/fetchResultQuestionnaire",
+      fetchResultQuestionnaire: "questionnaire/fetchResultQuestionnaire",
     }),
-    summa(key) {
-      const sum = 0.0;
-      const names = ["BEHIND", "AGAINST", "ABSTAINED"];
-      names.forEach((el) => {
-        sum = sum + this.getResultOwner[key][el].toFixed(2);
-      });
-      return sum;
+    result(item, key, str) {
+      return item[key][str] == null ? 0 : item[key][str];
     },
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "result/getIsLoading",
-      getMessages: "result/getMessages",
-      getResultDouble: "result/getResultDouble",
-      getResultOwner: "result/getResultOwner",
+      getIsLoading: "questionnaire/getIsLoading",
+      getMessages: "questionnaire/getMessages",
+      getResult: "questionnaire/getResult",
     }),
     check() {
       return this.fetchResultQuestionnaire(this.$route.params.title);

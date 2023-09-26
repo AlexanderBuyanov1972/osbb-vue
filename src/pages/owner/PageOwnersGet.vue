@@ -5,14 +5,14 @@
   <line-header text="Список собственников" />
   <owner-item :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
-    <div @click="() => this.$router.push(PAGE_OWNER_READ + '/' + one.id)">
+    <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
       <owner-item :owner="one" :count="index + 1" />
     </div>
   </div>
 </template>
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_OWNER_READ } from "@/router/apiRouter";
+import { PAGE_OWNER_GET } from "@/router/apiRouter";
 import { mapActions, mapGetters} from "vuex";
 export default {
   components: {
@@ -32,7 +32,7 @@ export default {
         phoneNumber: "Номер телефона",
         shareInRealEstate: "Доля в собственности",
       },
-      PAGE_OWNER_READ,
+      PAGE_OWNER_GET,
     };
   },
   methods: {

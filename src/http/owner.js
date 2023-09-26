@@ -1,7 +1,14 @@
 import axios from "axios";
-import { API_BASE, OWNER, ALL, COUNT } from "@/http/apiHttp";
+import {
+  API_BASE,
+  OWNER,
+  ALL,
+  COUNT,
+  APARTMENT,
+  OWNERSHIP,
+} from "@/http/apiHttp";
 
-// ------------- one --------------------
+// one
 
 export const createOwner = async (one) => {
   const response = await axios.post(API_BASE + OWNER, one);
@@ -23,7 +30,7 @@ export const deleteOwner = async (id) => {
   return response.data;
 };
 
-// -------------- all ------------------
+// all
 
 export const createAllOwner = async (list) => {
   const response = await axios.post(API_BASE + OWNER + ALL, list);
@@ -43,9 +50,18 @@ export const deleteAllOwner = async () => {
   return response.data;
 };
 
-// -------------- size -------------
+// count
 
 export const countOwners = async () => {
   const response = await axios.get(API_BASE + OWNER + COUNT);
+  return response.data;
+};
+
+// list owners by apartment
+
+export const getOwnersByApartment = async (apartment) => {
+  const response = await axios.get(
+    API_BASE + OWNERSHIP + OWNER + APARTMENT + "/" + apartment
+  );
   return response.data;
 };

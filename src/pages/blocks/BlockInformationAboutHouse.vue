@@ -13,7 +13,10 @@
     </p>
     <p><span>Общая площадь помещений : </span>{{ info.summaAreaRooms }} м2</p>
     <p><span>Общая площадь квартир : </span>{{ info.summaAreaApartment }} м2</p>
-    <p><span>Общая жилая площадь квартир : </span>{{ info.summaAreaLivingApartment }} м2</p>
+    <p>
+      <span>Общая жилая площадь квартир : </span
+      >{{ info.summaAreaLivingApartment }} м2
+    </p>
     <p>
       <span>Общая площадь нежилых помещений : </span
       >{{ info.summaAreaNonResidentialRoom }} м2
@@ -22,11 +25,9 @@
 </template>
 <script>
 export default {
-  name:"block-information-about-house",
+  name: "block-information-about-house",
   props: {
-    info: {
-      Type: Object,
-    },
+    info: Object,
   },
 };
 </script>
