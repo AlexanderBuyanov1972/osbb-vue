@@ -82,8 +82,8 @@ span {
   font-size: 20px;
 }
 img {
-  width: 25vw;
-  height: 35vh;
+  width: 20vw;
+  height: 30vh;
   padding: 10px;
   margin-left: 40%;
 }

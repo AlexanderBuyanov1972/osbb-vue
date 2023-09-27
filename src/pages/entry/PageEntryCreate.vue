@@ -59,7 +59,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { SEND_TO_SERVER } from "@/ui/namesButton";
-import { PAGE_ENTRY_GET } from "@/router/apiRouter";
+import { PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
 import {
   generatePassport,
   generatePlaceWork,
@@ -72,7 +72,6 @@ export default {
       ownership: {
         owner: {
           passport: generatePassport(),
-          photo: generatePhoto(),
           placeWork: generatePlaceWork(),
           vehicle: generateVehicle(),
         },
@@ -84,7 +83,7 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       SEND_TO_SERVER,
-      PAGE_ENTRY_GET,
+      PAGE_OWNERSHIPS_GET,
     };
   },
   methods: {
@@ -92,16 +91,17 @@ export default {
       createOwnership: "ownership/createOwnership",
     }),
     sendOwnership() {
-      console.log(this.ownership);
-      // this.createOwnership(this.ownership).then(() => {
-      //   this.$router.push(PAGE_ENTRY_GET + "/" + this.ownership.id);
-      // });
+      this.ownership.owner.photo = generatePhoto();
+      this.createOwnership(this.ownership).then(() => {
+        this.$router.push(PAGE_OWNERSHIPS_GET);
+      });
     },
   },
   computed: {
     ...mapGetters({
       getIsLoading: "ownership/getIsLoading",
       getMessages: "ownership/getMessages",
+      getOwnership: "ownership/getOwnership",
     }),
     isValid() {
       return (

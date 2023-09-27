@@ -7,7 +7,7 @@
     <line-address :address="getOwnership.address" />
     <div class="blocks">
       <block-get-ownership :ownership="getOwnership" />
-      <div class="" @click="this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
+      <div class="" @click="this.$router.push(PAGE_OWNER_GET + '/' + getOwnership.owner.id)">
         <block-get-owner :owner="getOwnership.owner" />
       </div>
     </div>

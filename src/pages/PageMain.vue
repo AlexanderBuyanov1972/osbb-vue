@@ -9,11 +9,7 @@
       />
     </div>
     <div class="">
-      <button-create @click="sendJsonEntriesToServer"
-        >Json Ownerships</button-create
-      >
-      <button-create @click="sendJsonQuestionnaireToServer"
-        >Json Questionnaire</button-create
+      <button-create @click="sendToServer">FullDataBase</button-create>
       >
     </div>
   </div>
@@ -23,7 +19,7 @@ import {
   generateJsonEntries,
   generateJsonQuestionnaires,
 } from "@/pages/_functions/generate";
-import {generateSvobody51} from "@/pages/_functions/generateRealDB"
+import { generateSvobody51 } from "@/pages/_functions/generateRealDB";
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -39,16 +35,8 @@ export default {
       createOwnership: "ownership/createOwnership",
       generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
     }),
-    sendJsonEntriesToServer() {
-      let list = this.generateJsonEntries();
-      // let list = this.generateSvobody51();
-      list.forEach((el) => {
-        setTimeout(() => {
-          this.createOwnership(el);
-        }, 1000);
-      });
-    },
-    sendJsonQuestionnaireToServer() {
+    sendToServer() {
+      this.createJsonForDB(this.generateJsonEntries());
       this.generateListQuestionnaire(this.generateJsonQuestionnaires());
     },
   },
@@ -80,5 +68,3 @@ export default {
   font-size: 25px;
 }
 </style>
-@/pages/_functions/generate
-@/pages/bills/_functions/generate@/pages/bills/_functions/generateRealDB
