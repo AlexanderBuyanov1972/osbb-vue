@@ -10,7 +10,7 @@
           messageTrue="Фамилия."
           @valid="(value) => handlerLastName(value)"
         />
-        <input-simple v-focus v-model="owner.lastName" placeholder="Фамилия" />
+        <input-simple v-focus v-model.trim="owner.lastName" placeholder="Фамилия" />
       </div>
 
       <div class="firstName">
@@ -20,7 +20,7 @@
           messageTrue="Имя."
           @valid="(value) => handlerFirstName(value)"
         />
-        <input-simple v-model="owner.firstName" placeholder="Имя" />
+        <input-simple v-model.trim="owner.firstName" placeholder="Имя" />
       </div>
 
       <div class="secondName">
@@ -30,7 +30,7 @@
           messageTrue="Отчество."
           @valid="(value) => handlerSecondName(value)"
         />
-        <input-simple v-model="owner.secondName" placeholder="Отчество" />
+        <input-simple v-model.trim="owner.secondName" placeholder="Отчество" />
       </div>
 
       <div class="dateBirth">
@@ -40,7 +40,7 @@
           messageTrue="Дата рождения (YYYY-MM-DD)."
           @valid="(value) => handlerDateBirth(value)"
         />
-        <input-simple v-model="owner.dateBirth" placeholder="Дата рождения." />
+        <input-simple v-model.trim="owner.dateBirth" placeholder="Дата рождения." />
       </div>
 
       <div class="gender">
@@ -78,7 +78,7 @@
           messageTrue="E-mail."
           @valid="(value) => handlerEmail(value)"
         />
-        <input-simple v-model="owner.email" placeholder="E-mail." />
+        <input-simple v-model.trim="owner.email" placeholder="E-mail." />
       </div>
 
       <div class="phoneNumber">
@@ -88,7 +88,7 @@
           messageTrue="Телефон  +38(0XX)XXXXXXX."
           @valid="(value) => handlerPhoneNumber(value)"
         />
-        <input-simple v-model="owner.phoneNumber" placeholder="Телефон." />
+        <input-simple v-model.trim="owner.phoneNumber" placeholder="Телефон." />
       </div>
 
       <div class="shareInRealEstate">
