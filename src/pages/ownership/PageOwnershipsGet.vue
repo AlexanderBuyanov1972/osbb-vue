@@ -6,7 +6,11 @@
     <line-header text="Список помещений" :style="{ color: 'blueviolet' }" />
     <ownership-item :style="{ color: 'brown' }" :ownership="header" count="№" />
     <div v-for="(one, index) in getOwnerships" :key="one.id">
-      <div @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)">
+      <div
+        @click="
+          () => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.apartment)
+        "
+      >
         <ownership-item :ownership="one" :count="index + 1" />
       </div>
     </div>

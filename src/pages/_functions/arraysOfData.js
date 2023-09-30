@@ -68,6 +68,7 @@ export const arrayLoggia = [
   { id: 1, name: "Выбрать", value: "SELECT" },
   { id: 2, name: "Есть", value: true },
   { id: 3, name: "Нет", value: false },
+  { id: 4, name: "Балкон", value: "Балкон" },
 ];
 // polls --------------------------------------
 export const arrayAnswer = [
