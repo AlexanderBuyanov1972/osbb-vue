@@ -1,12 +1,5 @@
 import axios from "axios";
-import {
-  API_BASE,
-  OWNER,
-  ALL,
-  COUNT,
-  APARTMENT,
-  OWNERSHIP,
-} from "@/http/apiHttp";
+import { API_BASE, OWNER, ALL, COUNT, FULLNAME } from "@/http/apiHttp";
 
 // one
 
@@ -57,11 +50,11 @@ export const countOwners = async () => {
   return response.data;
 };
 
-// list owners by apartment
+// list owners by full name
 
-export const getOwnersByApartment = async (apartment) => {
+export const getOwnerByFullName = async (fullName) => {
   const response = await axios.get(
-    API_BASE + OWNERSHIP + OWNER + APARTMENT + "/" + apartment
+    API_BASE + OWNER + FULLNAME + "/" + fullName
   );
   return response.data;
 };

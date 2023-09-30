@@ -1,11 +1,5 @@
 import { faker } from "@faker-js/faker";
 
-export const getShareInRealEstate = (value) => {
-  if (value % 3 == 0) return 1;
-  if (value % 3 == 1) return 0.5;
-  return 0.33333;
-};
-
 export const generatePassport = () => {
   return {
     numberPassport: "нет",
@@ -72,7 +66,7 @@ export const generateJsonEntries = () => {
           .birthdate({ min: 16, max: 85, mode: "age" })
           .toISOString()
           .substring(0, 10) + "",
-      shareInRealEstate: getShareInRealEstate(currentApartment),
+      shareInRealEstate: 1.0,
       familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
       beneficiary: "NO",
       passport: generatePassport(),
@@ -96,6 +90,15 @@ export const generateJsonEntries = () => {
       ]),
       numberRooms: faker.number.int({ min: 1, max: 5 }),
       loggia: faker.helpers.arrayElement([true, false]),
+      //-------------
+      gasSupply: "централизованное",
+      gasMeter: "счётчик №",
+      waterSupply: "централизованное",
+      waterMeter: "счётчик №",
+      sewerage: "централизованная",
+      heatSupply: "автономное",
+      heatМeter: "нет",
+      // адресс
       address: {
         zipCode: "51931",
         country: "Украина",
@@ -110,8 +113,11 @@ export const generateJsonEntries = () => {
         apartment: currentApartment + "",
       },
     };
-    ownership.owner = owner;
-    result.push(ownership);
+
+    let record = {};
+    record.owner = owner;
+    record.ownership = ownership;
+    result.push(record);
 
     if (currentApartment % countFloor == 0) {
       currentFloor++;

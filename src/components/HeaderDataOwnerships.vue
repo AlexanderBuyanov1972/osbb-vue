@@ -57,12 +57,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchIdOwnershipByIdApartment: "ownership/fetchIdOwnershipByIdApartment",
+      fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
     }),
     goToPageOwnershipRead() {
-      this.fetchIdOwnershipByIdApartment(this.apartment).then(() => {
-        this.$emit('id', this.getIdOwnership)
-        this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getIdOwnership);
+      this.fetchOwnershipByApartment(this.apartment).then(() => {
+        this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getOwnership.id);
       });
     },
     plus() {
@@ -80,7 +79,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIdOwnership: "ownership/getIdOwnership",
+      getOwnership: "ownership/getOwnership",
     }),
     checkApartment() {
       return this.apartment > 0 && this.apartment < 85;

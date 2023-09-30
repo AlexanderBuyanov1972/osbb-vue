@@ -24,6 +24,28 @@
       <div class="item">
         <span>Наличие балкона : </span>{{ showLoggia(ownership.loggia) }}
       </div>
+      <!-- ***************************************************** -->
+      <div class="item">
+        <span>Газоснабжение : </span>{{ ownership.gasSupply }}
+      </div>
+      <div class="item">
+        <span>Газовый счётчик : </span>{{ ownership.gasMeter }}
+      </div>
+      <div class="item">
+        <span>Водоснабжение : </span>{{ ownership.waterSupply }}
+      </div>
+      <div class="item">
+        <span>Водяной счётчик : </span>{{ ownership.waterMeter }}
+      </div>
+      <div class="item">
+        <span>Канализация : </span>{{ ownership.sewerage }}
+      </div>
+      <div class="item">
+        <span>Теплоснабжение : </span>{{ ownership.heatSupply }}
+      </div>
+      <div class="item">
+        <span>Тепловой счётчик : </span>{{ ownership.heatМeter }}
+      </div>
     </div>
   </div>
 </template>

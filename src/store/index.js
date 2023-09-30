@@ -8,6 +8,7 @@ import ownership from "@/store/ownershipModule";
 import registry from "@/store/registryModule";
 import photo from "@/store/photoModule";
 import questionnaire from "@/store/questionnaireModule";
+import record from "@/store/recordModule";
 
 export default createStore({
   modules: {
@@ -20,5 +21,6 @@ export default createStore({
     registry,
     photo,
     questionnaire,
+    record,
   },
 });

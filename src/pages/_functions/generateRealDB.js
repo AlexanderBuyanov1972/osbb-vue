@@ -36,6 +36,7 @@ export const generateSvobody51 = () => {
   let result = [];
 
   for (let curAp = 1; curAp <= 84; curAp++) {
+    // owner ----------------------
     let owner = {
       firstName: "нет",
       secondName: "нет",
@@ -53,6 +54,7 @@ export const generateSvobody51 = () => {
       placeWork: generatePlaceWork(),
       photo: generatePhoto(),
     };
+    // ownership ------------------
     let ownership = {
       typeRoom: "NO",
       totalArea: 0.01,
@@ -60,6 +62,14 @@ export const generateSvobody51 = () => {
       documentConfirmsRightOwn: "нет",
       numberRooms: 0,
       loggia: false,
+      gasSupply: "централизованное",
+      gasMeter: "счётчик №",
+      waterSupply: "централизованное",
+      waterMeter: "счётчик №",
+      sewerage: "централизованная",
+      heatSupply: "автономное",
+      heatМeter: "нет",
+      // address -------------
       address: {
         zipCode: "51931",
         country: "Украина",
@@ -72,8 +82,10 @@ export const generateSvobody51 = () => {
         apartment: curAp + "",
       },
     };
-    ownership.owner = owner;
-    result.push(ownership);
+    let record = {};
+    record.owner = owner;
+    record.ownership = ownership;
+    result.push(record);
   }
 
   return result;

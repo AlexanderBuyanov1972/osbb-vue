@@ -1,16 +1,21 @@
 <template>
   <div class="main">
-    <div class="count">{{ count }}.</div>
-    <div class="name">{{ mapOwnerToLineFullNamesOwner(owner) }}</div>
-    <div class="phone">{{ owner.phoneNumber }}</div>
-    <div class="birth">{{ owner.dateBirth }}</div>
-    <div class="family">
-      {{ showFamilyStatus(owner.familyStatus) }}
+    <div class="count"><span v-show="flag">№ : </span>{{ count }}.</div>
+    <div class="name">
+      <span v-show="flag">Ф.И.О. : </span
+      >{{ mapOwnerToLineFullNamesOwner(owner) }}
     </div>
-    <div class="email">{{ owner.email }}</div>
-    <div class="share">{{ owner.shareInRealEstate }}</div>
-    <div class="family">
-      {{ showGender(owner.gender) }}
+    <div class="phone">
+      <span v-show="flag">Номер телефона : </span>{{ owner.phoneNumber }}
+    </div>
+    <div class="birth">
+      <span v-show="flag">Дата рождения : </span>{{ owner.dateBirth }}
+    </div>
+    <div class="email">
+      <span v-show="flag">Email : </span>{{ owner.email }}
+    </div>
+    <div class="share">
+      <span v-show="flag">Доля : </span>{{ owner.shareInRealEstate }}
     </div>
   </div>
 </template>
@@ -21,10 +26,11 @@ import {
   showGender,
 } from "@/pages/_functions/functions";
 export default {
-  name: "questionnaire-item",
+  name: "owner-item",
   props: {
     owner: Object,
     count: Number,
+    flag: Boolean,
   },
   data() {
     return {
@@ -45,34 +51,34 @@ export default {
 .main {
   margin: 5px 0px;
   padding: 5px;
-  border: 1px solid blueviolet;
-  color: teal;
+  border: 1px solid teal;
+  color: blueviolet;
   font-size: 17px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .count {
-  width: 2%;
+  width: 3%;
 }
 .name {
-  width: 22%;
+  width: 25%;
 }
 .phone {
-  width: 13%;
+  width: 20%;
 }
 .birth {
-  width: 10%;
+  width: 15%;
 }
 .email {
   width: 20%;
 }
-.family {
-  width: 10%;
-}
+
 .share {
-  width: 10%;
+  width: 20%;
+}
+span {
+  color: teal;
 }
 </style>
-@/pages/_functions/functions
-@/pages/bills/_functions/functions
+@/pages/_functions/functions @/pages/bills/_functions/functions

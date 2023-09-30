@@ -3,9 +3,9 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Реестр недвижимости" />
+    <line-header text="Реестр недвижимости" :style="{ color: 'blueviolet' }" />
     <block-information-about-house :info="getBuildingCharacteristics" />
-    <ownership-list-registry :map="getRegistryOwnerships" />
+    <ownership-list-registry :list="getRegistryOwnerships" />
   </div>
 </template>
 <script>
@@ -18,10 +18,13 @@ export default {
   methods: {
     ...mapActions({
       fetchRegistryOwnerships: "registry/fetchRegistryOwnerships",
+      fetchBuildingCharacteristics: "registry/fetchBuildingCharacteristics",
     }),
   },
   mounted() {
-    this.fetchRegistryOwnerships();
+    this.fetchBuildingCharacteristics().then(() =>
+      this.fetchRegistryOwnerships()
+    );
   },
   computed: {
     ...mapGetters({

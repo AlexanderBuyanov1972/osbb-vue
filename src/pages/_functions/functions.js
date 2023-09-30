@@ -4,7 +4,6 @@ import {
   arrayLoggia,
   arrayGender,
   arrayFamilyStatus,
-  arrayQuestionnaire,
   arrayAnswer,
   arrayTypeBeneficiary,
   arrayTypeColor,

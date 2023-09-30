@@ -35,7 +35,7 @@ export const QUESTIONNAIRE_ANSWER = "Проголосовать опросный
 export const QUESTIONNAIRE_UPDATE = "Редактировать опросный лист";
 export const QUESTIONNAIRE_GET = "Смотреть опросный лист";
 export const QUESTIONNAIRE_DELETE = "Удалить опросный лист";
-export const QUESTIONNAIRES_GET= "Список опросов";
+export const QUESTIONNAIRES_GET = "Список опросов";
 // ----------- crud -------------------
 export const CREATE = "Создать";
 export const UPDATE = "Редактировать";
@@ -58,12 +58,9 @@ export const GET_RESULT_POLL = "Получить результаты опрос
 export const GET_POLLS_BY_TITLE = "Получить опросы по теме";
 
 // bills
-export const BLOCK_PAYMENT_BILLS ="Оплата счетов";
-export const BILLS_GET ="Список счетов";
-export const BILL_CREATE ="Создать счёт";
-export const BILL_UPDATE ="Обновить счёт";
-export const BILL_DELETE ="Удалить счёт";
-export const BILL_GET ="Смотреть счёт";
-
-
-
+export const BLOCK_PAYMENT_BILLS = "Оплата счетов";
+export const BILLS_GET = "Список счетов";
+export const BILL_CREATE = "Создать счёт";
+export const BILL_UPDATE = "Обновить счёт";
+export const BILL_DELETE = "Удалить счёт";
+export const BILL_GET = "Смотреть счёт";

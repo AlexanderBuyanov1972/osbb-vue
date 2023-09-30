@@ -7,14 +7,17 @@
     <line-address :address="getOwnership.address" />
     <div class="blocks">
       <block-get-ownership :ownership="getOwnership" />
-      <div class="" @click="this.$router.push(PAGE_OWNER_GET + '/' + getOwnership.owner.id)">
+      <div
+        class=""
+        @click="this.$router.push(PAGE_OWNER_GET + '/' + getOwnership.owner.id)"
+      >
         <block-get-owner :owner="getOwnership.owner" />
       </div>
     </div>
     <vue-hr />
     <button-back />
     <button-edit
-      @click="this.$router.push(PAGE_ENTRY_UPDATE + '/' + this.getOwnership.id)"
+      @click="this.$router.push(PAGE_ENTRY_UPDATE + '/' + getOwnership.id)"
       >{{ ENTRY_UPDATE }}</button-edit
     >
     <!-- для отрисовки старницы при обновлении ID - перезагрузка -->
@@ -28,7 +31,6 @@ import { PAGE_ENTRY_UPDATE, PAGE_OWNER_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      ownership: {},
       ENTRY_UPDATE,
       PAGE_ENTRY_UPDATE,
       PAGE_OWNER_GET,
@@ -40,6 +42,9 @@ export default {
     }),
   },
   mounted() {
+    this.start;
+  },
+  updated() {
     this.start;
   },
   computed: {

@@ -1,60 +1,32 @@
 import {
-  createOwner,
-  updateOwner,
-  getOwner,
-  deleteOwner,
-  getAllOwner,
-  countOwners,
-  getOwnerByFullName,
-} from "@/http/owner";
+  createRecord,
+  updateRecord,
+  getRecord,
+  deleteRecord,
+  createAllRecord,
+  getAllRecord,
+} from "@/http/record";
 
 export default {
   state: () => ({
-    owner: {
-      id: 0,
-      firstName: "",
-      secondName: "",
-      lastName: "",
-      dateBirth: "",
-      gender: "",
-      familyStatus: "",
-      email: "",
-      phoneNumber: "",
-      shareInRealEstate: 0,
-      beneficiary: "",
-      photo: {},
-      vehicle: {},
-      placeWork: {},
-      passport: {
-        id: 0,
-        passportId: "",
-        numberEntry: "",
-        dateIssue: "",
-        issuingAuthority: "",
-        registrationNumberCardPayerTaxes: "",
-      },
-    },
-    owners: [],
+    record: {},
+    records: [],
     messages: [],
     isLoading: false,
-    countOwners: 0,
   }),
 
   mutations: {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setOwner(state, object) {
-      state.owner = object;
+    setRecord(state, object) {
+      state.record = object;
     },
-    setOwners(state, object) {
-      state.owners = object;
+    setRecords(state, array) {
+      state.records = array;
     },
     setMessages(state, messages) {
       state.messages = messages;
-    },
-    setCountOwners(state, number) {
-      state.countOwners = number;
     },
   },
 
@@ -62,28 +34,24 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getOwner(state) {
-      return state.owner;
+    getRecord(state) {
+      return state.record;
     },
-    getOwners(state) {
-      return state.owners;
+    getRecords(state) {
+      return state.records;
     },
     getMessages(state) {
       return state.messages;
     },
-    getCountOwners(state) {
-      return state.countOwners;
-    },
   },
 
   actions: {
-    // one
-    async createOwner({ commit }, object) {
+    async createRecord({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await createOwner(object);
+        const response = await createRecord(object);
         if (response != undefined && response.data != undefined) {
-          commit("setOwner", response.data);
+          commit("setRecord", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -94,12 +62,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async updateOwner({ commit }, object) {
+    async updateRecord({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updateOwner(object);
+        const response = await updateRecord(object);
         if (response != undefined && response.data != undefined) {
-          commit("setOwner", response.data);
+          commit("setRecord", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -110,12 +78,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchOwner({ commit }, id) {
+    async fetchRecord({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getOwner(id);
+        const response = await getRecord(id);
         if (response != undefined && response.data != undefined) {
-          commit("setOwner", response.data);
+          commit("setRecord", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -126,25 +94,24 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async deleteOwner({ commit }, id) {
+    async deleteRecord({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await deleteOwner(id);
+        const response = await deleteRecord(id);
         commit("setMessages", response.messages);
-        commit("setOwner", {});
+        commit("setRecord", {});
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    // all
-    async getAllOwner({ commit }) {
+    async getAllRecord({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllOwner();
+        const response = await getAllRecord();
         if (response != undefined && response.data != undefined) {
-          commit("setOwners", response.data);
+          commit("setRecords", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -155,26 +122,16 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    // count
-    async fetchCountOwners({ commit }) {
+    async createAllRecord({ commit }, list) {
       try {
         commit("setIsLoading", true);
-        const response = await countOwners();
-        commit("setCountOwners", response.data);
-        commit("setMessages", response.messages);
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    // list owner by fullName
-    async fetchOwnerByFullName({ commit }, fullName) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getOwnerByFullName(fullName);
-        commit("setOwner", response.data);
-        commit("setMessages", response.messages);
+        const response = await createAllRecord(list);
+        if (response != undefined && response.data != undefined) {
+          commit("setRecords", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -182,5 +139,6 @@ export default {
       }
     },
   },
+
   namespaced: true,
 };

@@ -7,6 +7,9 @@ export const ROLE = "/role";
 
 export const OWNER = "/owner";
 export const OWNERSHIP = "/ownership";
+export const ROOM = "/room";
+export const RECORD = "/record";
+export const CHARACTERISTICS = "/characteristics";
 export const ADDRESS = "/address";
 export const APARTMENT = "/apartment";
 export const PASSPORT = "/passport";

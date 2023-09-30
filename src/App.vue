@@ -19,6 +19,12 @@ export default {
 <style scoped>
 .app {
   margin: 0px 150px;
+
+  color: darkgoldenrod;
+  color: brown;
+  color: red;
+  color: blueviolet;
+  color: teal;
 }
 </style>
 

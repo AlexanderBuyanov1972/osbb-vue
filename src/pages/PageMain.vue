@@ -9,7 +9,11 @@
       />
     </div>
     <div class="">
-      <button-create @click="sendToServer">FullDataBase</button-create>
+      <button-create @click="sendToServerDataBase">FullDataBase</button-create>
+    </div>
+    <div class="">
+      <button-create @click="sendToServerQuestionnaire"
+        >FullQuestionnaire</button-create
       >
     </div>
   </div>
@@ -31,12 +35,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      createJsonForDB: "ownership/createJsonForDB",
+      createAllRecord: "record/createAllRecord",
       createOwnership: "ownership/createOwnership",
       generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
     }),
-    sendToServer() {
-      this.createJsonForDB(this.generateJsonEntries());
+    sendToServerDataBase() {
+      this.createAllRecord(this.generateJsonEntries());
+    },
+    sendToServerQuestionnaire() {
       this.generateListQuestionnaire(this.generateJsonQuestionnaires());
     },
   },

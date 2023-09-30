@@ -3,13 +3,16 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Реестр собственников" />
+    <line-header
+      text="Реестр собственников"
+      :style="{ color: 'darkgoldenrod' }"
+    />
     <block-information-about-house :info="getBuildingCharacteristics" />
-    <owner-list-registry :map="getRegistryOwners" />
+    <owner-list-registry :list="getRegistryOwners" />
   </div>
 </template>
 <script>
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import OwnerListRegistry from "@/itemsAndLists/OwnerListRegistry.vue";
 
 export default {
@@ -19,10 +22,11 @@ export default {
   methods: {
     ...mapActions({
       fetchRegistryOwners: "registry/fetchRegistryOwners",
+      fetchBuildingCharacteristics: "registry/fetchBuildingCharacteristics",
     }),
   },
   mounted() {
-    this.fetchRegistryOwners();
+    this.fetchBuildingCharacteristics().then(() => this.fetchRegistryOwners());
   },
   computed: {
     ...mapGetters({

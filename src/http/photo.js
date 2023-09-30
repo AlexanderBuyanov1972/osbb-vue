@@ -26,7 +26,7 @@ export const deletePhoto = async (id) => {
 // -------------- all ------------------
 
 export const createAllPhoto = async (list) => {
-  const response = await axios.post(API_BASE + PHOTO + ApiAll, list);
+  const response = await axios.post(API_BASE + PHOTO + ALL, list);
   return response.data;
 };
 

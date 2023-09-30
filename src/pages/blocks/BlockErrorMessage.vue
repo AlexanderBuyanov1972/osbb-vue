@@ -17,6 +17,9 @@ export default {
       if (value == undefined) {
         return false;
       }
+      if (value == "SELECT") {
+        return false;
+      }
       if (typeof value == "boolean") {
         return true;
       }

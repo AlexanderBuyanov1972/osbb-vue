@@ -1,22 +1,40 @@
 <template>
-  <div class="list" v-for="key in Object.keys(map)" :key="key">
-    <div class="item">{{ key }}</div>
-    <p v-for="(one, index) in map[key]" :key="key">
-      {{ index + 1 }}. Квартира №  {{ one }}
-    </p>
+  <div class="list" v-for="(one, ind) in list" :key="ind">
+    <div
+      class="item"
+      @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.client.id)"
+    >
+      <span>Ф.И.О. : </span>{{ mapOwnerToLineFullNamesOwner(one.client) }}
+      <span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Номер телефона :</span
+      >
+      {{ one.client.phoneNumber }}
+    </div>
+    <div v-for="(two, index) in one.rooms" :key="index">
+      <ownership-item
+        class="ownership"
+        :ownership="two"
+        :count="index + 1"
+        @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)"
+        :flag="true"
+      />
+    </div>
   </div>
 </template>
 <script>
 import { PAGE_OWNER_GET, PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
+import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
       PAGE_OWNER_GET,
       PAGE_OWNERSHIP_GET,
+      mapOwnerToLineFullNamesOwner,
     };
   },
   props: {
-    map: Object,
+    list: Object,
   },
 };
 </script>
@@ -28,19 +46,15 @@ export default {
 }
 .list {
   border: 1px solid teal;
-  padding: 0px 5px;
-  margin: 5px 0px;
-}
-
-p {
-  color: brown;
-  font-size: 20px;
+  padding: 10px 5px;
   margin: 10px 0px;
 }
-.item {
-  font-size: 22px;
+span {
   color: blueviolet;
 }
+
+.item {
+  font-size: 18px;
+  color: teal;
+}
 </style>
-<!-- @click="() =>this.$router.push(PAGE_OWNER_GET + '/' + one.fullNameOwner.ownerId)" -->
-<!-- @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)" -->

@@ -4,7 +4,7 @@
       <img :src="getImage" alt="Not found" />
     </div>
     <div class="spans">
-      <div class="item"><span>Фамилия : </span>{{ owner.lastName }}</div>
+      <div class="item"><span>Фамилия : </span>{{ owner.lastName || "" }}</div>
       <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
       <div class="item"><span>Отчество : </span>{{ owner.secondName }}</div>
       <div class="item">
@@ -91,4 +91,5 @@ img {
   padding: 10px;
   margin-left: 30%;
 }
-</style>@/pages/bills/_functions/functions
+</style>
+@/pages/bills/_functions/functions

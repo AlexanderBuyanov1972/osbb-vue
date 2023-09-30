@@ -2,8 +2,11 @@
   <header-data-owners></header-data-owners>
   <vue-loader :isLoader="this.getIsLoading" />
   <header-messages :messages="getMessages" />
-  <line-header text="Список собственников" />
-  <owner-item :owner="header" count="№" />
+  <line-header
+    text="Список собственников"
+    :style="{ color: 'darkgoldenrod' }"
+  />
+  <owner-item :style="{ color: 'brown' }" :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
     <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
       <owner-item :owner="one" :count="index + 1" />
@@ -13,7 +16,7 @@
 <script>
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import { PAGE_OWNER_GET } from "@/router/apiRouter";
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     OwnerItem,
@@ -26,8 +29,6 @@ export default {
         secondName: "О.",
         lastName: "Ф.",
         dateBirth: "Дата рождения",
-        gender: "Пол",
-        familyStatus: "Семейное положение",
         email: "E-mail",
         phoneNumber: "Номер телефона",
         shareInRealEstate: "Доля в собственности",

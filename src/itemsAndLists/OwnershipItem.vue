@@ -7,7 +7,7 @@
     </div>
     <div class="apartment">
       <span v-show="flag">Квартира № : </span>
-      {{ ownership.address.apartment }}
+      {{ ownership.apartment }}
     </div>
     <div class="total_area">
       <span v-show="flag">Общая площадь : </span>
@@ -23,11 +23,11 @@
     </div>
     <div class="entrance">
       <span v-show="flag">Подъезд : </span>
-      {{ ownership.address.entrance }}
+      {{ ownership.entrance }}
     </div>
     <div class="floor">
       <span v-show="flag">Этаж : </span>
-      {{ ownership.address.floor }}
+      {{ ownership.floor }}
     </div>
     <div class="loggia">
       <span v-show="flag">Балкон : </span>
@@ -38,16 +38,16 @@
 <script>
 import { showTypeRoom, showLoggia } from "@/pages/_functions/functions";
 export default {
+  name: "ownership-item",
   props: {
     ownership: Object,
-    flag: false,
     count: Number,
+    flag: Boolean,
   },
   data() {
     return {
       showTypeRoom,
       showLoggia,
-      flag: this.flag,
     };
   },
 };

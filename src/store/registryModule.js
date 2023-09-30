@@ -1,16 +1,23 @@
-import { getRegistryOwners, getRegistryOwnerships } from "@/http/registry";
+import {
+  getRegistryOwners,
+  getRegistryOwnerships,
+  getBuildingCharacteristics,
+} from "@/http/registry";
 
 export default {
   state: () => ({
     registryOwnerships: [],
     registryOwners: [],
     buildingCharacteristics: {
-      countRooms: "",
-      countApartment: "",
-      countNonResidentialRoom: "",
-      summaAreaRooms: "",
-      summaAreaApartment: "",
-      summaAreaNonResidentialRoom: "",
+      countOwners: 0,
+      countRooms: 0,
+      countApartment: 0,
+      countNonResidentialRoom: 0,
+      summaTotalArea: 0.0,
+      summaTotalAreaApartment: 0.0,
+      summaLivingAreaApartment: 0.0,
+      summaTotalAreaNonResidentialRoom: 0.0,
+
       addressDto: {
         city: "",
         street: "",
@@ -62,14 +69,7 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getRegistryOwners();
-        commit(
-          "setRegistryOwners",
-          response.data[0]
-        );
-        commit(
-          "setBuildingCharacteristics",
-          response.data[1]
-        );
+        commit("setRegistryOwners", response.data);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -81,15 +81,19 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getRegistryOwnerships();
-        commit(
-          "setRegistryOwnerships",
-          response.data[0]
-        );
-        commit(
-          "setBuildingCharacteristics",
-          response.data[1]
-        );
+        commit("setRegistryOwnerships", response.data);
         commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchBuildingCharacteristics({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getBuildingCharacteristics();
+        commit("setBuildingCharacteristics", response);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

@@ -37,7 +37,7 @@ export const getAddressByStreetHouseApartment = async (
 // -------------- all ------------------
 
 export const createAllAddress = async (list) => {
-  const response = await axios.post(API_BASE + ADDRESS + ApiAll, list);
+  const response = await axios.post(API_BASE + ADDRESS + ALL, list);
   return response.data;
 };
 

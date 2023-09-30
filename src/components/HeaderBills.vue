@@ -74,12 +74,12 @@ export default {
 }
 .title {
   font-size: 17px;
-  color: darkgoldenrod;
+  color: red;
   margin-right: 5px;
 }
 .input {
   margin: 5px 5px 5px 0px;
-  border-color: darkgoldenrod;
-  color: darkgoldenrod;
+  border-color: red;
+  color: red;
 }
 </style>

@@ -13,7 +13,7 @@
         <select-edit
           :array="arrayTypeVehicle"
           @select="(value) => (vehicle.typeVehicle = value)"
-          :startName="vehicle.typeVehicle"
+          :startName="showTypeVehicle(vehicle.typeVehicle)"
         />
       </div>
 
@@ -50,7 +50,7 @@
         <select-edit
           :array="arrayTypeColor"
           @select="(value) => (vehicle.typeColor = value)"
-          :startName="vehicle.typeColor"
+          :startName="showTypeColor(vehicle.typeColor)"
         />
       </div>
 
@@ -64,7 +64,7 @@
         <select-edit
           :array="arrayTypeManufacturer"
           @select="(value) => (vehicle.typeManufacturer = value)"
-          :startName="vehicle.typeManufacturer"
+          :startName="showTypeManufacturer(vehicle.typeManufacturer)"
         />
       </div>
     </div>
@@ -76,6 +76,11 @@ import {
   arrayTypeColor,
   arrayTypeManufacturer,
 } from "@/pages/_functions/arraysOfData";
+import {
+  showTypeVehicle,
+  showTypeManufacturer,
+  showTypeColor,
+} from "@/pages/_functions/functions";
 import { generateVehicle } from "@/pages/_functions/generate";
 export default {
   name: "block-create-vehicle",
@@ -84,6 +89,9 @@ export default {
       vehicle: generateVehicle(),
       arrayTypeVehicle,
       arrayTypeColor,
+      showTypeColor,
+      showTypeVehicle,
+      showTypeManufacturer,
       arrayTypeManufacturer,
       validTypeVehicle: false,
       validNumberVehicle: false,

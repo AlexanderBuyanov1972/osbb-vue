@@ -122,6 +122,9 @@
 <script>
 export default {
   name: "block-create-address",
+  props: {
+    room: Object,
+  },
   data() {
     return {
       address: {
@@ -131,6 +134,7 @@ export default {
         city: "Каменское",
         street: "Свободы",
         house: "51",
+        entrance: "",
         floor: "",
         apartment: "",
       },
@@ -177,6 +181,16 @@ export default {
         this.validApartment
       );
     },
+  },
+  updated() {
+    this.address.entrance = this.room.entrance;
+    this.address.floor = this.room.floor;
+    this.address.apartment = this.room.apartment;
+  },
+  mounted() {
+    this.address.entrance = this.room.entrance;
+    this.address.floor = this.room.floor;
+    this.address.apartment = this.room.apartment;
   },
 };
 </script>

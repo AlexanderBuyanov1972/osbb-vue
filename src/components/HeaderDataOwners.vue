@@ -11,17 +11,14 @@
     </button-edit>
   </div>
   <div class="block2">
-    <div class="title">Введите № помещения :</div>
-    <button-edit @click="minus">-</button-edit>
+    <div class="title">Введите Ф.И.О. :</div>
     <input-simple
       class="input"
-      v-model="apartment"
-      :style="{ width: '65px' }"
+      v-model.trim="fullName"
+      :style="{ width: '300px' }"
     />
-    <button-edit @click="plus">+</button-edit>
-    <button-edit :hidden="!this.checkApartment" @click="getOwnersByApartment"
-      >{{ OWNERS_GET }}
-    </button-edit>
+
+    <button-edit @click="getOwnerByFullName">{{ GET }} </button-edit>
   </div>
 </template>
 <script>
@@ -29,52 +26,45 @@ import {
   PAGE_OWNERS_GET,
   PAGE_REGISTRY_OWNERS,
   PAGE_ENTRY_CREATE,
-  PAGE_ENTRY_GET,
+  PAGE_OWNER_GET,
 } from "@/router/apiRouter";
-import { OWNERS_GET, REGISTRY_OWNERS, ENTRY_CREATE } from "@/ui/namesButton";
+import {
+  GET,
+  REGISTRY_OWNERS,
+  ENTRY_CREATE,
+  OWNERS_GET,
+} from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "header-data-owners",
   data() {
     return {
-      apartment: "1",
+      fullName: "",
       // pages
       PAGE_OWNERS_GET,
       PAGE_REGISTRY_OWNERS,
       PAGE_ENTRY_CREATE,
-      PAGE_ENTRY_GET,
+      PAGE_OWNER_GET,
       // buttons
       ENTRY_CREATE,
+      GET,
       OWNERS_GET,
       REGISTRY_OWNERS,
     };
   },
   methods: {
     ...mapActions({
-      fetchOwnersByApartment: "owner/fetchOwnersByApartment",
-      fetchIdOwnershipByIdApartment: "ownership/fetchIdOwnershipByIdApartment",
+      fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
-    getOwnersByApartment() {
-      this.fetchOwnersByApartment(this.apartment).then(() => {
-        this.fetchIdOwnershipByIdApartment(this.apartment).then(() => {
-          this.$router.push(PAGE_ENTRY_GET + "/" + this.getIdOwnership);
-        });
+    getOwnerByFullName() {
+      this.fetchOwnerByFullName(this.fullName).then(() => {
+        this.$router.push(PAGE_OWNER_GET + "/" + this.getOwner.id);
       });
-    },
-
-    plus() {
-      if (this.apartment < 84) this.apartment = this.apartment * 1 + 1;
-    },
-    minus() {
-      if (this.apartment > 1) this.apartment = this.apartment * 1 - 1;
     },
   },
   computed: {
-    checkApartment() {
-      return this.apartment > 0 && this.apartment < 85;
-    },
     ...mapGetters({
-      getIdOwnership: "ownership/getIdOwnership",
+      getOwner: "owner/getOwner",
     }),
   },
 };

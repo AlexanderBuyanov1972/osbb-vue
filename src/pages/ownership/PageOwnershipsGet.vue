@@ -3,8 +3,8 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header text="Список недвижимости" />
-    <ownership-item :ownership="header" count="№" />
+    <line-header text="Список помещений" :style="{ color: 'blueviolet' }" />
+    <ownership-item :style="{ color: 'brown' }" :ownership="header" count="№" />
     <div v-for="(one, index) in getOwnerships" :key="one.id">
       <div @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)">
         <ownership-item :ownership="one" :count="index + 1" />
@@ -28,11 +28,9 @@ export default {
         totalArea: "Общая площадь, м2",
         livingArea: "Жилая площадь, м2",
         numberRooms: "Количество комнат",
-        address: {
-          entrance: "Подъезд",
-          floor: "Этаж",
-          apartment: "Квартира №",
-        },
+        entrance: "Подъезд",
+        floor: "Этаж",
+        apartment: "Квартира №",
         loggia: "Балкон",
       },
     };

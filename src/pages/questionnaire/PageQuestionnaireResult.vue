@@ -4,34 +4,41 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
 
-    <div class="" v-for="(item, index) in getResult">
-      <line-header v-if="index == 0" text="Результаты опроса в голосах" />
+    <div class="" v-for="(map, index) in getResult" :key="index">
       <line-header
-        v-if="index == 1"
-        text="Результаты опроса в квадратных метрах"
+        :text="
+          index == 0
+            ? 'Результаты опроса в голосах'
+            : 'Результаты опроса в квадратных метрах'
+        "
       />
-      <div class="block" v-for="key in Object.keys(item)" :key="key">
+      <line-header
+        :style="{ color: 'brown' }"
+        :text="index == 0 ? compute : computeDouble"
+      />
+      <div class="block" v-for="key in Object.keys(map)" :key="key">
         <div class="question">{{ key }}</div>
         <div class="item">
           За :
-          {{ result(item, key, "BEHIND") }}
+          {{ result(map, key, "BEHIND") }}
         </div>
         <div class="item">
           Против :
-          {{ result(item, key, "AGAINST") }}
+          {{ result(map, key, "AGAINST") }}
         </div>
         <div class="item">
           Воздержался :
-          {{ result(item, key, "ABSTAINED") }}
+          {{ result(map, key, "ABSTAINED") }}
         </div>
         <vue-hr />
         <div class="item">
           Всего проголосовало :
           {{
-            result(item, key, "BEHIND") +
-            result(item, key, "AGAINST") +
-            result(item, key, "ABSTAINED")
+            result(map, key, "BEHIND") +
+            result(map, key, "AGAINST") +
+            result(map, key, "ABSTAINED")
           }}
+          из {{ index == 1 ? summaTotalArea : countOwners }}
         </div>
       </div>
     </div>
@@ -41,14 +48,22 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      countOwners: 0,
+      summaTotalArea: 0,
+    };
   },
   methods: {
     ...mapActions({
       fetchResultQuestionnaire: "questionnaire/fetchResultQuestionnaire",
+      fetchBuildingCharacteristics: "registry/fetchBuildingCharacteristics",
     }),
-    result(item, key, str) {
-      return item[key][str] == null ? 0 : item[key][str];
+    result(map, key, str) {
+      return map[key][str] == null ? 0 : map[key][str];
+    },
+    aroundString(value) {
+      let str = value + "";
+      return str.substring(str.indexOf("." + 2));
     },
   },
   computed: {
@@ -56,13 +71,38 @@ export default {
       getIsLoading: "questionnaire/getIsLoading",
       getMessages: "questionnaire/getMessages",
       getResult: "questionnaire/getResult",
+      getBuildingCharacteristics: "registry/getBuildingCharacteristics",
     }),
     check() {
       return this.fetchResultQuestionnaire(this.$route.params.title);
     },
+    compute() {
+      const keys = Object.keys(this.getResult[0]);
+      let summa =
+        this.result(this.getResult[0], keys[0], "BEHIND") +
+        this.result(this.getResult[0], keys[0], "AGAINST") +
+        this.result(this.getResult[0], keys[0], "ABSTAINED");
+      return `Обработано ${((summa / this.countOwners) * 100).toFixed(
+        2
+      )} % листов опроса`;
+    },
+    computeDouble() {
+      const keys = Object.keys(this.getResult[0]);
+      let summa =
+        this.result(this.getResult[1], keys[1], "BEHIND") +
+        this.result(this.getResult[1], keys[1], "AGAINST") +
+        this.result(this.getResult[1], keys[1], "ABSTAINED");
+      return `Обработано ${((summa / this.summaTotalArea) * 100).toFixed(
+        2
+      )} % листов опроса`;
+    },
   },
   mounted() {
     this.check;
+    this.fetchBuildingCharacteristics().then(() => {
+      this.countOwners = this.getBuildingCharacteristics.countOwners;
+      this.summaTotalArea = this.getBuildingCharacteristics.summaTotalArea;
+    });
   },
   updated() {
     this.check;
