@@ -128,9 +128,13 @@ export default {
       this.fetchRecordByApartmentAndFullName({
         apartment: this.apartment,
         fullName: this.fullName,
-      }).then(() => {
-        this.record = this.getRecord;
-      });
+      })
+        .then(() => {
+          this.record = this.getRecord;
+        })
+        .catch(() => {
+          this.record.ownership.address = {};
+        });
     },
   },
   update() {

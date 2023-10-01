@@ -3,42 +3,43 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-
-    <div class="" v-for="(map, index) in getResult" :key="index">
-      <line-header
-        :text="
-          index == 0
-            ? 'Результаты опроса в голосах'
-            : 'Результаты опроса в квадратных метрах'
-        "
-      />
-      <line-header
-        :style="{ color: 'brown' }"
-        :text="index == 0 ? compute : computeDouble"
-      />
-      <div class="block" v-for="key in Object.keys(map)" :key="key">
-        <div class="question">{{ key }}</div>
-        <div class="item">
-          За :
-          {{ result(map, key, "BEHIND") }}
-        </div>
-        <div class="item">
-          Против :
-          {{ result(map, key, "AGAINST") }}
-        </div>
-        <div class="item">
-          Воздержался :
-          {{ result(map, key, "ABSTAINED") }}
-        </div>
-        <vue-hr />
-        <div class="item">
-          Всего проголосовало :
-          {{
-            result(map, key, "BEHIND") +
-            result(map, key, "AGAINST") +
-            result(map, key, "ABSTAINED")
-          }}
-          из {{ index == 1 ? summaTotalArea : countOwners }}
+    <div class="blocks">
+      <div class="" v-for="(map, index) in getResult" :key="index">
+        <line-header
+          :text="
+            index == 0
+              ? 'Результаты опроса в голосах'
+              : 'Результаты опроса в квадратных метрах'
+          "
+        />
+        <line-header
+          :style="{ color: 'brown' }"
+          :text="index == 0 ? compute : computeDouble"
+        />
+        <div class="block" v-for="key in Object.keys(map)" :key="key">
+          <div class="question">{{ key }}</div>
+          <div class="item">
+            За :
+            {{ result(map, key, "BEHIND") }}
+          </div>
+          <div class="item">
+            Против :
+            {{ result(map, key, "AGAINST") }}
+          </div>
+          <div class="item">
+            Воздержался :
+            {{ result(map, key, "ABSTAINED") }}
+          </div>
+          <vue-hr />
+          <div class="item">
+            Всего проголосовало :
+            {{
+              result(map, key, "BEHIND") +
+              result(map, key, "AGAINST") +
+              result(map, key, "ABSTAINED")
+            }}
+            из {{ index == 1 ? summaTotalArea : countOwners }}
+          </div>
         </div>
       </div>
     </div>
@@ -115,6 +116,11 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+.blocks{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .item {
   color: brown;
