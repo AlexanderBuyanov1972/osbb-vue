@@ -10,30 +10,7 @@ import {
 
 export default {
   state: () => ({
-    owner: {
-      id: 0,
-      firstName: "",
-      secondName: "",
-      lastName: "",
-      dateBirth: "",
-      gender: "",
-      familyStatus: "",
-      email: "",
-      phoneNumber: "",
-      shareInRealEstate: 0,
-      beneficiary: "",
-      photo: {},
-      vehicle: {},
-      placeWork: {},
-      passport: {
-        id: 0,
-        passportId: "",
-        numberEntry: "",
-        dateIssue: "",
-        issuingAuthority: "",
-        registrationNumberCardPayerTaxes: "",
-      },
-    },
+    owner: {},
     owners: [],
     messages: [],
     isLoading: false,
@@ -56,7 +33,7 @@ export default {
     setCountOwners(state, number) {
       state.countOwners = number;
     },
-  },
+    },
 
   getters: {
     getIsLoading(state) {

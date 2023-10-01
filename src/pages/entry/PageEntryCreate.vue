@@ -4,17 +4,27 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Создание записи." />
-    <div class="search">
+    <div class="">
       <div class="title">Введите № помещения :</div>
       <input-simple
         class="input"
         v-model="apartment"
         :style="{ width: '65px' }"
       />
-      <button-delete :hidden="!this.checkApartment" @click="fetchRoom"
+      <button-delete v-show="this.checkApartment" @click="fetchRoom"
+        >{{ GET }}
+      </button-delete>
+      <div class="title">Введите Ф.И.О. :</div>
+      <input-simple
+        class="input"
+        v-model="fullName"
+        :style="{ width: '350px' }"
+      />
+      <button-delete v-show="this.checkFullName" @click="fetchClient"
         >{{ GET }}
       </button-delete>
     </div>
+
     <div class="blocks">
       <div class="ownership">
         <block-create-ownership
@@ -37,12 +47,14 @@
             <block-create-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
+              :client="client"
             />
           </div>
           <div class="passport">
             <block-create-passport
               @passport="(data) => (record.owner.passport = data)"
               @isValidPassport="(value) => (isValidPassport = value)"
+              :client="client"
             />
           </div>
         </div>
@@ -51,12 +63,14 @@
             <block-create-place-work
               @placeWork="(data) => (record.owner.placeWork = data)"
               @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
+              :client="client"
             />
           </div>
           <div class="vehicle">
             <block-create-vehicle
               @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
+              :client="client"
             />
           </div>
         </div>
@@ -83,7 +97,9 @@ export default {
   data() {
     return {
       apartment: "",
+      fullName: "",
       room: {},
+      client: {},
       record: {
         ownership: {
           address: {},
@@ -109,10 +125,10 @@ export default {
     ...mapActions({
       createRecord: "record/createRecord",
       fetchRoomByApartment: "ownership/fetchRoomByApartment",
+      fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
     sendOwnership() {
       this.record.owner.photo = generatePhoto();
-      this.record.ownership.id=undefined;
       this.createRecord(this.record).then(() => {
         // this.$router.push(PAGE_ENTRY_GET + "/" + this.room.id);
       });
@@ -120,6 +136,11 @@ export default {
     fetchRoom() {
       this.fetchRoomByApartment(this.apartment).then(() => {
         this.room = this.getRoom;
+      });
+    },
+    fetchClient() {
+      this.fetchOwnerByFullName(this.fullName).then(() => {
+        this.client = this.getOwner;
       });
     },
   },
@@ -132,6 +153,7 @@ export default {
       getMessages: "ownership/getMessages",
       getOwnership: "ownership/getOwnership",
       getRoom: "ownership/getRoom",
+      getOwner: "owner/getOwner",
     }),
     isValid() {
       return (
@@ -145,6 +167,9 @@ export default {
     },
     checkApartment() {
       return this.apartment > 0 && this.apartment < 85;
+    },
+    checkFullName() {
+      return this.fullName.length > 3;
     },
   },
 };

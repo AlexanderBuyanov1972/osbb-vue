@@ -134,6 +134,9 @@ import {
 } from "@/pages/_functions/arraysOfData";
 export default {
   name: "block-create-owner",
+  props: {
+    client: Object,
+  },
   data() {
     return {
       owner: {},
@@ -215,6 +218,12 @@ export default {
         this.validBeneficiary
       );
     },
+  },
+  updated() {
+    this.owner = this.client;
+  },
+  mounted() {
+    this.owner = this.client;
   },
 };
 </script>

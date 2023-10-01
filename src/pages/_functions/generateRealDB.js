@@ -68,7 +68,7 @@ export const generateSvobody51 = () => {
       waterMeter: "счётчик №",
       sewerage: "централизованная",
       heatSupply: "автономное",
-      heatМeter: "нет",
+      heatMeter: "нет",
       // address -------------
       address: {
         zipCode: "51931",

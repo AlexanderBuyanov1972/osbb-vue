@@ -84,6 +84,9 @@ import {
 import { generateVehicle } from "@/pages/_functions/generate";
 export default {
   name: "block-create-vehicle",
+  props:{
+    client:Object
+  },
   data() {
     return {
       vehicle: generateVehicle(),
@@ -137,6 +140,9 @@ export default {
         this.validTypeManufacturer
       );
     },
+  },
+  updated() {
+    this.vehicle = this.client.vehicle;
   },
 };
 </script>

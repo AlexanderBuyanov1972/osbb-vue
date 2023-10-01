@@ -15,7 +15,6 @@
           @select="(value) => (ownership.typeRoom = value)"
         />
       </div>
-
       <div class="totalArea">
         <block-error-message
           :field="ownership.totalArea"
@@ -28,7 +27,6 @@
           placeholder="Общая площадь помещения"
         />
       </div>
-
       <div class="livingArea">
         <block-error-message
           :field="ownership.livingArea"
@@ -41,7 +39,6 @@
           placeholder="Жилая площадь помещения."
         />
       </div>
-
       <div class="documentConfirmsRightOwn">
         <block-error-message
           :field="ownership.documentConfirmsRightOwn"
@@ -54,7 +51,6 @@
           placeholder="Документ о праве собственности."
         />
       </div>
-
       <div class="numberRooms">
         <block-error-message
           :field="ownership.numberRooms"
@@ -68,7 +64,6 @@
           @select="(value) => (ownership.numberRooms = value)"
         />
       </div>
-
       <div class="loggia">
         <block-error-message
           :field="ownership.loggia"
@@ -201,11 +196,9 @@ export default {
       validSewerage: false,
       validHeatSupply: false,
       validHeatMeter: false,
-
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
-
       showTypeRoom,
       showNumberRooms,
       showLoggia,
@@ -270,7 +263,7 @@ export default {
     },
   },
   computed: {
-     isValidOwnership() {
+    isValidOwnership() {
       return (
         this.validTypeRoom &&
         this.validTotalArea &&

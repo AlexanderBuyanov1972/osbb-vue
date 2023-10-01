@@ -97,7 +97,7 @@ export const generateJsonEntries = () => {
       waterMeter: "счётчик №",
       sewerage: "централизованная",
       heatSupply: "автономное",
-      heatМeter: "нет",
+      heatMeter: "нет",
       // адресс
       address: {
         zipCode: "51931",

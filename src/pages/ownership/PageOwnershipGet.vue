@@ -7,11 +7,10 @@
     <header-messages :messages="getMessages" />
     <line-header
       :text="
-        'Объект недвижимости - квартира № ' +
-        this.getOwnership.address.apartment
+        'Объект недвижимости - квартира № ' + this.ownership.address.apartment
       "
     />
-    <line-address :address="this.getOwnership.address" />
+    <line-address :address="this.ownership.address" />
     <block-get-ownership :ownership="ownership" />
     <vue-hr />
     <button-back />
@@ -29,8 +28,11 @@ import { PAGE_ENTRY_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      id: 0,
-      ownership: {},
+      ownership: {
+        address: {
+          apartment: "",
+        },
+      },
       ENTRY_GET,
       PAGE_ENTRY_GET,
     };
@@ -39,6 +41,7 @@ export default {
     ...mapActions({
       fetchOwnership: "ownership/fetchOwnership",
     }),
+    
   },
 
   updated() {
@@ -54,9 +57,7 @@ export default {
       getIsLoading: "ownership/getIsLoading",
     }),
     change() {
-      let id =
-        this.id == undefined || this.id == 0 ? this.$route.params.id : this.id;
-      return this.fetchOwnership(id).then(() => {
+      this.fetchOwnership(this.$route.params.id).then(() => {
         this.ownership = this.getOwnership;
       });
     },

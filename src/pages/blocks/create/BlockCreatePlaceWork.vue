@@ -73,6 +73,9 @@
 import { generatePlaceWork } from "@/pages/_functions/generate";
 export default {
   name: "block-create-place-work",
+  props:{
+    client:Object
+  },
   data() {
     return {
       placeWork: generatePlaceWork(),
@@ -119,6 +122,9 @@ export default {
         this.validAddition
       );
     },
+  },
+  updated() {
+    this.placeWork = this.client.placeWork;
   },
 };
 </script>
