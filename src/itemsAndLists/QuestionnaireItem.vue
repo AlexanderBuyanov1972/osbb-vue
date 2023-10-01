@@ -5,7 +5,7 @@
     <div class="date_dispatch">{{ questionnaire.dateDispatch }}</div>
     <div class="date_receiving">{{ questionnaire.dateReceiving }}</div>
     <div class="apartment">{{ questionnaire.apartment }}</div>
-    <div class="fio">{{ questionnaire.fullname }}</div>
+    <div class="fio">{{ questionnaire.fullName }}</div>
     <div class="by_whom">{{ questionnaire.byWhom }}</div>
   </div>
 </template>

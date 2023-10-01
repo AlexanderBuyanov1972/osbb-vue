@@ -1,9 +1,7 @@
 import axios from "axios";
 import {
   API_BASE,
-  QUESTIONNAIRE,
   ALL,
-  GENERATION,
   APARTMENT,
   SELECT,
   TITLE,
@@ -11,12 +9,12 @@ import {
 } from "@/http/apiHttp";
 
 // select *****************************
-export const getAllQuestionnaireByTitleAndFullname = async (
+export const getAllQuestionnaireByTitleAndFullName = async (
   title,
-  fullname
+  fullName
 ) => {
   const response = await axios.get(
-    API_BASE + SELECT + TITLE + FULLNAME + "/" + title + "/" + fullname
+    API_BASE + SELECT + TITLE + FULLNAME + "/" + title + "/" + fullName
   );
   return response.data;
 };

@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "select-title",
   data() {
@@ -21,7 +21,7 @@ export default {
       show: false,
       array: [],
       name: "",
-    };
+     };
   },
   methods: {
     select(str) {

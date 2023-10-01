@@ -65,7 +65,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-update-place-work",
   props: {
-    id: Number,
+    placeWorkProps: Object,
   },
   data() {
     return {
@@ -122,17 +122,10 @@ export default {
     },
   },
   mounted() {
-    if (this.id != 0) {
-      if (this.id != undefined) {
-        this.fetchOwner(this.id).then(
-          () => (this.placeWork = this.getOwner.placeWork)
-        );
-      } else {
-        this.fetchOwner(this.$route.params.id).then(
-          () => (this.placeWork = this.getOwner.placeWork)
-        );
-      }
-    }
+    this.placeWork = this.placeWorkProps;
+  },
+  updated() {
+    this.placeWork = this.placeWorkProps;
   },
 };
 </script>

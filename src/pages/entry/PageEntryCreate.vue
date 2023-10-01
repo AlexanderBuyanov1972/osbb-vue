@@ -18,14 +18,14 @@
     <div class="blocks">
       <div class="ownership">
         <block-create-ownership
-          @ownership="(data) => (ownership = data)"
+          @ownership="(data) => (record.ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
           :room="room"
         />
       </div>
       <div class="address">
         <block-create-address
-          @address="(data) => (ownership.address = data)"
+          @address="(data) => (record.ownership.address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
           :room="room"
         />
@@ -35,13 +35,13 @@
         <div class="block1">
           <div class="owner">
             <block-create-owner
-              @owner="(data) => (ownership.owner = data)"
+              @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
             />
           </div>
           <div class="passport">
             <block-create-passport
-              @passport="(data) => (ownership.owner.passport = data)"
+              @passport="(data) => (record.owner.passport = data)"
               @isValidPassport="(value) => (isValidPassport = value)"
             />
           </div>
@@ -49,13 +49,13 @@
         <div class="block2">
           <div class="placeWork">
             <block-create-place-work
-              @placeWork="(data) => (ownership.owner.placeWork = data)"
+              @placeWork="(data) => (record.owner.placeWork = data)"
               @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
             />
           </div>
           <div class="vehicle">
             <block-create-vehicle
-              @vehicle="(data) => (ownership.owner.vehicle = data)"
+              @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
             />
           </div>
@@ -72,7 +72,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
-import { PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
+import { PAGE_ENTRY_GET } from "@/router/apiRouter";
 import {
   generatePassport,
   generatePlaceWork,
@@ -84,7 +84,10 @@ export default {
     return {
       apartment: "",
       room: {},
-      ownership: {
+      record: {
+        ownership: {
+          address: {},
+        },
         owner: {
           passport: generatePassport(),
           placeWork: generatePlaceWork(),
@@ -99,18 +102,19 @@ export default {
       isValidVehicle: false,
       SEND_TO_SERVER,
       GET,
-      PAGE_OWNERSHIPS_GET,
+      PAGE_ENTRY_GET,
     };
   },
   methods: {
     ...mapActions({
-      createOwnership: "ownership/createOwnership",
+      createRecord: "record/createRecord",
       fetchRoomByApartment: "ownership/fetchRoomByApartment",
     }),
     sendOwnership() {
-      this.ownership.owner.photo = generatePhoto();
-      this.createOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_OWNERSHIPS_GET);
+      this.record.owner.photo = generatePhoto();
+      this.record.ownership.id=undefined;
+      this.createRecord(this.record).then(() => {
+        // this.$router.push(PAGE_ENTRY_GET + "/" + this.room.id);
       });
     },
     fetchRoom() {

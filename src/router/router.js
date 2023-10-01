@@ -63,8 +63,14 @@ const routes = [
   { path: PAGE_OWNERS_GET, component: PageOwnersGet },
   //entry
   { path: PAGE_ENTRY_CREATE, component: PageEntryCreate },
+  // update
   {
     path: PAGE_ENTRY_UPDATE + "/:id",
+    component: PageEntryUpdate,
+  },
+  // слияние 2 в 1 --------------------
+  {
+    path: PAGE_ENTRY_UPDATE,
     component: PageEntryUpdate,
   },
   {
@@ -77,7 +83,7 @@ const routes = [
     path: PAGE_QUESTIONNAIRE_GET,
     component: PageQuestionnaireGet + "/:id",
   },
-  // ------------- start слияние 3 в 1 --------------------
+  // слияние 3 в 1 --------------------
   {
     path: PAGE_QUESTIONNAIRES_GET,
     component: PageQuestionnairesGet,
@@ -92,7 +98,7 @@ const routes = [
   },
   // ----------------------------------------------------------
   {
-    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullname",
+    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullName",
     component: PageQuestionnaireAnswer,
   },
   {

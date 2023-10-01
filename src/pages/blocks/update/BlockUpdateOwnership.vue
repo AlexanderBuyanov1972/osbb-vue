@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header text="Собственность" :style="{'color':'brown'}"/>
+    <line-header text="Собственность" :style="{ color: 'brown' }" />
     <div class="blocks">
       <div class="typeRoom">
         <block-error-message
@@ -11,7 +11,7 @@
         />
         <select-edit
           :array="arrayTypeRoom"
-          :startName="getNameByValue(arrayTypeRoom, ownership.typeRoom)"
+          :startName="showTypeRoom(ownership.typeRoom)"
           @select="(value) => (ownership.typeRoom = value)"
         />
       </div>
@@ -64,7 +64,7 @@
         />
         <select-edit
           :array="arrayNumberRooms"
-          :startName="getNameByValue(arrayNumberRooms, ownership.numberRooms)"
+          :startName="showNumberRooms(ownership.numberRooms)"
           @select="(value) => (ownership.numberRooms = value)"
         />
       </div>
@@ -78,44 +78,140 @@
         />
         <select-edit
           :array="arrayLoggia"
-          :startName="getNameByValue(arrayLoggia, ownership.loggia)"
+          :startName="showLoggia(ownership.loggia)"
           @select="(value) => (ownership.loggia = value)"
+        />
+      </div>
+      <div class="gasSupply">
+        <block-error-message
+          :field="ownership.gasSupply"
+          messageFalse="Газоснабжение"
+          messageTrue="Газоснабжение"
+          @valid="(value) => handlerGasSupply(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.gasSupply"
+          placeholder="Газоснабжение"
+        />
+      </div>
+      <div class="gasMeter">
+        <block-error-message
+          :field="ownership.gasMeter"
+          messageFalse="Газовый счётчик"
+          messageTrue="Газовый счётчик"
+          @valid="(value) => handlerGasMeter(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.gasMeter"
+          placeholder="Газовый счётчик"
+        />
+      </div>
+      <div class="waterSupply">
+        <block-error-message
+          :field="ownership.waterSupply"
+          messageFalse="Водоснабжение"
+          messageTrue="Водоснабжение"
+          @valid="(value) => handlerWaterSupply(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.waterSupply"
+          placeholder="Водоснабжение"
+        />
+      </div>
+      <div class="waterMeter">
+        <block-error-message
+          :field="ownership.waterMeter"
+          messageFalse="Водяной счётчик"
+          messageTrue="Водяной счётчик"
+          @valid="(value) => handlerWaterMeter(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.waterMeter"
+          placeholder="Водяной счётчик"
+        />
+      </div>
+      <div class="sewerage">
+        <block-error-message
+          :field="ownership.sewerage"
+          messageFalse="Канализация"
+          messageTrue="Канализация"
+          @valid="(value) => handlerSewerage(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.sewerage"
+          placeholder="Канализация"
+        />
+      </div>
+      <div class="heatSupply">
+        <block-error-message
+          :field="ownership.heatSupply"
+          messageFalse="Теплоснабжение"
+          messageTrue="Теплоснабжение"
+          @valid="(value) => handlerHeatSupply(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.heatSupply"
+          placeholder="Теплоснабжение"
+        />
+      </div>
+      <div class="heatMeter">
+        <block-error-message
+          :field="ownership.heatMeter"
+          messageFalse="Теплоснабжение"
+          messageTrue="Теплоснабжение"
+          @valid="(value) => handlerHeatMeter(value)"
+        />
+        <input-simple
+          v-model.trim="ownership.heatMeter"
+          placeholder="Теплоснабжение"
         />
       </div>
     </div>
   </div>
 </template>
 <script>
-import { getNameByValue } from "@/pages/_functions/functions";
+import {
+  showTypeRoom,
+  showNumberRooms,
+  showLoggia,
+} from "@/pages/_functions/functions";
 import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
 } from "@/pages/_functions/arraysOfData";
-import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "block-update-ownership",
+  props: {
+    ownershipProps: Object,
+  },
   data() {
     return {
       ownership: {},
-      getNameByValue,
       validTypeRoom: false,
       validTotalArea: false,
       validLivingArea: false,
       validDocumentConfirmsRightOwn: false,
       validNumberRooms: false,
       validLoggia: false,
+      validGasSupply: false,
+      validGasMeter: false,
+      validWaterSupply: false,
+      validWaterMeter: false,
+      validSewerage: false,
+      validHeatSupply: false,
+      validHeatMeter: false,
 
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
+
+      showTypeRoom,
+      showNumberRooms,
+      showLoggia,
     };
   },
-
   methods: {
-    ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
-    }),
     emitOwnership() {
       this.$emit("isValidOwnership", this.isValidOwnership);
       this.$emit("ownership", this.ownership);
@@ -144,26 +240,59 @@ export default {
       this.validLoggia = value;
       this.emitOwnership();
     },
+    handlerGasSupply(value) {
+      this.validGasSupply = value;
+      this.emitOwnership();
+    },
+    handlerGasMeter(value) {
+      this.validGasMeter = value;
+      this.emitOwnership();
+    },
+    handlerWaterSupply(value) {
+      this.validWaterSupply = value;
+      this.emitOwnership();
+    },
+    handlerWaterMeter(value) {
+      this.validWaterMeter = value;
+      this.emitOwnership();
+    },
+    handlerSewerage(value) {
+      this.validSewerage = value;
+      this.emitOwnership();
+    },
+    handlerHeatSupply(value) {
+      this.validHeatSupply = value;
+      this.emitOwnership();
+    },
+    handlerHeatMeter(value) {
+      this.validHeatMeter = value;
+      this.emitOwnership();
+    },
   },
   computed: {
-    ...mapGetters({
-      getOwnership: "ownership/getOwnership",
-    }),
-    isValidOwnership() {
+     isValidOwnership() {
       return (
         this.validTypeRoom &&
         this.validTotalArea &&
         this.validLivingArea &&
         this.validDocumentConfirmsRightOwn &&
         this.validNumberRooms &&
-        this.validLoggia
+        this.validLoggia &&
+        this.validGasSupply &&
+        this.validGasMeter &&
+        this.validWaterSupply &&
+        this.validWaterMeter &&
+        this.validSewerage &&
+        this.validHeatSupply &&
+        this.validHeatMeter
       );
     },
   },
+  updated() {
+    this.ownership = this.ownershipProps;
+  },
   mounted() {
-    this.fetchOwnership(this.$route.params.id).then(
-      () => (this.ownership = this.getOwnership)
-    );
+    this.ownership = this.ownershipProps;
   },
 };
 </script>
@@ -174,4 +303,4 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-</style>@/pages/bills/_functions/functions@/pages/bills/_functions/arraysOfData
+</style>

@@ -6,9 +6,6 @@
     <button-create @click="goToPageQuestionnairesByTitle"
       >{{ GET_POLLS_BY_TITLE }}
     </button-create>
-    <button-create @click="goToPageQuestionnairesByTitleAndByApartment"
-      >{{ GET_POLLS_BY_TITLE_AND_BY_APARTMENT }}
-    </button-create>
     <button-create @click="goToPageResultQuestionnaire"
       >{{ GET_RESULT_POLL }}
     </button-create>
@@ -24,7 +21,6 @@
         @select="(value) => (title = value)"
       />
     </div>
-
     <div class="main">
       <div class="title">Введите № помещения :</div>
       <button-simple
@@ -43,6 +39,9 @@
         @click="plus"
         >+</button-simple
       >
+      <button-create @click="goToPageQuestionnairesByTitleAndByApartment"
+        >{{ GET_POLLS_BY_TITLE_AND_BY_APARTMENT }}
+      </button-create>
     </div>
   </div>
 </template>
@@ -66,6 +65,7 @@ export default {
     return {
       title: "",
       apartment: "1",
+      message: "Выберите тему опроса",
       // buttons
       QUESTIONNAIRES_GET,
       QUESTIONNAIRE_CREATE,
@@ -86,24 +86,24 @@ export default {
       this.$router.push(PAGE_QUESTIONNAIRE_CREATE);
     },
     goToPageResultQuestionnaire() {
-      if (this.title == undefined) {
-        this.setMessages(["Выберите тему опроса"]);
+      if (this.title == undefined || this.title == this.message) {
+        this.setMessages([this.message]);
       } else {
         this.$router.push(PAGE_QUESTIONNAIRE_RESULT + "/" + this.title);
       }
     },
     goToPageQuestionnairesByTitle() {
-      if (this.title == undefined) {
-        this.setMessages(["Выберите тему опроса"]);
+      if (this.title == undefined || this.title == this.message) {
+        this.setMessages([this.message]);
       } else {
         this.$router.push(PAGE_QUESTIONNAIRES_GET + "/" + this.title);
       }
     },
     goToPageQuestionnairesByTitleAndByApartment() {
-      if (this.title == undefined) {
-        this.setMessages(["Выберите тему опроса"]);
-      } else if (this.apartment == undefined) {
-        this.setMessages(["Выберите № помещения"]);
+      if (this.title == undefined || this.title == this.message) {
+        this.setMessages([this.message]);
+      } else if (this.apartment == undefined || this.apartment <= 0) {
+        this.setMessages(["Выберите номер квартиры"]);
       } else {
         this.$router.push(
           PAGE_QUESTIONNAIRES_GET + "/" + this.title + "/" + this.apartment
@@ -137,7 +137,7 @@ export default {
 .block1 {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
 }
 .main {
   display: flex;

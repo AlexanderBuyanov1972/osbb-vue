@@ -9,6 +9,10 @@
     <button-edit @click="$router.push(PAGE_ENTRY_CREATE)"
       >{{ ENTRY_CREATE }}
     </button-edit>
+    <button-edit
+      @click="this.$router.push(PAGE_ENTRY_UPDATE)"
+      >{{ ENTRY_UPDATE }}</button-edit
+    >
   </div>
   <div class="block2">
     <div class="title">Введите Ф.И.О. :</div>
@@ -27,12 +31,14 @@ import {
   PAGE_REGISTRY_OWNERS,
   PAGE_ENTRY_CREATE,
   PAGE_OWNER_GET,
+  PAGE_ENTRY_UPDATE,
 } from "@/router/apiRouter";
 import {
   GET,
   REGISTRY_OWNERS,
   ENTRY_CREATE,
   OWNERS_GET,
+  ENTRY_UPDATE,
 } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -45,11 +51,13 @@ export default {
       PAGE_REGISTRY_OWNERS,
       PAGE_ENTRY_CREATE,
       PAGE_OWNER_GET,
+      PAGE_ENTRY_UPDATE,
       // buttons
       ENTRY_CREATE,
       GET,
       OWNERS_GET,
       REGISTRY_OWNERS,
+      ENTRY_UPDATE,
     };
   },
   methods: {

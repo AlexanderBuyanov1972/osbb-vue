@@ -36,14 +36,13 @@ export default {
   methods: {
     ...mapActions({
       createAllRecord: "record/createAllRecord",
-      createOwnership: "ownership/createOwnership",
-      generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
+      createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
     }),
     sendToServerDataBase() {
       this.createAllRecord(this.generateJsonEntries());
     },
     sendToServerQuestionnaire() {
-      this.generateListQuestionnaire(this.generateJsonQuestionnaires());
+      this.createAllQuestionnaire(this.generateJsonQuestionnaires());
     },
   },
 };

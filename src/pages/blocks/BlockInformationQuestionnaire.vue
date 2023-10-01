@@ -6,7 +6,7 @@
     <div class="by_whom">
       <span>Кем инициализирован : </span>{{ info.byWhom }}
     </div>
-    <div class="fullname"><span>Уважаемый </span>{{ info.fullname }}</div>
+    <div class="fullname"><span>Уважаемый </span>{{ info.fullName }}</div>
     <div class="owner">
       <span>Собственник квартиры № </span>{{ info.apartment }}
     </div>

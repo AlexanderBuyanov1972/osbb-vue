@@ -9,6 +9,10 @@
     <button-simple @click="$router.push(PAGE_ENTRY_CREATE)"
       >{{ ENTRY_CREATE }}
     </button-simple>
+    <button-simple
+      @click="this.$router.push(PAGE_ENTRY_UPDATE)"
+      >{{ ENTRY_UPDATE }}</button-simple
+    >
   </div>
   <div class="block2">
     <div class="title">Введите № помещения :</div>
@@ -30,11 +34,13 @@ import {
   PAGE_REGISTRY_OWNERSHIPS,
   PAGE_ENTRY_CREATE,
   PAGE_OWNERSHIP_GET,
+  PAGE_ENTRY_UPDATE
 } from "@/router/apiRouter";
 import {
   OWNERSHIPS_GET,
   REGISTRY_OWNERSHIPS,
   ENTRY_CREATE,
+  ENTRY_UPDATE,
   GET,
 } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
@@ -47,12 +53,14 @@ export default {
       OWNERSHIPS_GET,
       REGISTRY_OWNERSHIPS,
       ENTRY_CREATE,
+      ENTRY_UPDATE,
       GET,
       // pages
       PAGE_OWNERSHIPS_GET,
       PAGE_REGISTRY_OWNERSHIPS,
       PAGE_ENTRY_CREATE,
       PAGE_OWNERSHIP_GET,
+      PAGE_ENTRY_UPDATE
     };
   },
   methods: {

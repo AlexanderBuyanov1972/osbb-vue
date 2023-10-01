@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <line-header text="Адресс собственности" :style="{'color':'brown'}"/>
+    <line-header text="Адресс собственности" :style="{ color: 'brown' }" />
 
     <div class="address">
       <div class="zipCode">
@@ -118,9 +118,12 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "block-update-address",
+  props: {
+    addressProps: Object,
+  },
   data() {
     return {
       address: {},
@@ -136,9 +139,6 @@ export default {
     };
   },
   methods: {
-    ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
-    }),
     emitAddress() {
       this.$emit("isValidAddress", this.isValidAddress);
       this.$emit("address", this.address);
@@ -199,10 +199,11 @@ export default {
       );
     },
   },
+  updated() {
+    this.address = this.addressProps;
+  },
   mounted() {
-    this.fetchOwnership(this.$route.params.id).then(
-      () => (this.address = this.getOwnership.address)
-    );
+    this.address = this.addressProps;
   },
 };
 </script>

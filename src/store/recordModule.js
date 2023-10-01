@@ -5,6 +5,9 @@ import {
   deleteRecord,
   createAllRecord,
   getAllRecord,
+  getRoomsAndClientsByOwnershipId,
+  getRoomsAndClientsByOwnerId,
+  getRecordByApartmentAndFullName,
 } from "@/http/record";
 
 export default {
@@ -128,6 +131,54 @@ export default {
         const response = await createAllRecord(list);
         if (response != undefined && response.data != undefined) {
           commit("setRecords", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchRoomsAndClientsByOwnershipId({ commit }, id) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getRoomsAndClientsByOwnershipId(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setRecord", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchRoomsAndClientsByOwnerId({ commit }, id) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getRoomsAndClientsByOwnerId(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setRecord", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchRecordByApartmentAndFullName({ commit }, payload) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getRecordByApartmentAndFullName(payload.apartment, payload.fullName);
+        if (response != undefined && response.data != undefined) {
+          commit("setRecord", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

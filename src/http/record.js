@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, RECORD, ALL } from "@/http/apiHttp";
+import { API_BASE, RECORD, ALL , OWNERSHIP, OWNER} from "@/http/apiHttp";
 
 // ------------- one --------------------
 
@@ -42,5 +42,18 @@ export const getAllRecord = async () => {
 
 export const deleteAllRecord = async () => {
   const response = await axios.delete(API_BASE + RECORD + ALL);
+  return response.data;
+};
+
+// other -------------------------
+
+export const getRoomsAndClientsByOwnershipId = async (id) => {
+  const response = await axios.get(API_BASE + RECORD + OWNERSHIP + "/" + id);
+  return response.data;
+};
+
+
+export const getRecordByApartmentAndFullName = async (apartment, fullName) => {
+  const response = await axios.get(API_BASE + RECORD +  "/" + apartment + "/" + fullName);
   return response.data;
 };

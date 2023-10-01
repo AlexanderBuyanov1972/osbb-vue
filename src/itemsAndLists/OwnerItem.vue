@@ -8,9 +8,6 @@
     <div class="phone">
       <span v-show="flag">Номер телефона : </span>{{ owner.phoneNumber }}
     </div>
-    <div class="birth">
-      <span v-show="flag">Дата рождения : </span>{{ owner.dateBirth }}
-    </div>
     <div class="email">
       <span v-show="flag">Email : </span>{{ owner.email }}
     </div>
@@ -59,19 +56,17 @@ export default {
   justify-content: flex-start;
 }
 .count {
-  width: 3%;
+  width: 5%;
 }
 .name {
   width: 25%;
 }
 .phone {
-  width: 20%;
+  width: 25%;
 }
-.birth {
-  width: 15%;
-}
+
 .email {
-  width: 20%;
+  width: 30%;
 }
 
 .share {

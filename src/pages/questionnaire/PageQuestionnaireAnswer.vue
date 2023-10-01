@@ -34,12 +34,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
-      fetchAllQuestionnaireByTitleAndFullname:
-        "questionnaire/fetchAllQuestionnaireByTitleAndFullname",
+      updateAllQuestionnaire: "questionnaire/updateAllQuestionnaire",
+      fetchAllQuestionnaireByTitleAndFullName:
+        "questionnaire/fetchAllQuestionnaireByTitleAndFullName",
     }),
     sendToServer() {
-      this.createAllQuestionnaire(this.list).then(() => this.$router.back());
+      this.updateAllQuestionnaire(this.list).then(() => this.$router.back());
     },
   },
   computed: {
@@ -63,13 +63,13 @@ export default {
   mounted() {
     const payload = {
       title: this.$route.params.title,
-      fullname: this.$route.params.fullname,
+      fullName: this.$route.params.fullName,
     };
-    this.fetchAllQuestionnaireByTitleAndFullname(payload).then(() => {
+    this.fetchAllQuestionnaireByTitleAndFullName(payload).then(() => {
       this.list = this.getQuestionnaires;
       this.info.dateDispatch = this.list[0].dateDispatch;
       this.info.byWhom = this.list[0].byWhom;
-      this.info.fullname = this.list[0].fullname;
+      this.info.fullName = this.list[0].fullName;
       this.info.apartment = this.list[0].apartment;
       this.info.title = this.list[0].title;
     });

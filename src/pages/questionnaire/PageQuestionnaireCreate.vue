@@ -51,7 +51,7 @@
         !(checkHidden)
       "
       @click="sendToServer"
-      >SEND_TO_SERVER</button-simple
+      >{{SEND_TO_SERVER}}</button-simple
     >
   </div>
 </template>
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      generateListQuestionnaire: "questionnaire/generateListQuestionnaire",
+      createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
       fetchAllTitleOfQuestionnaire:
         "questionnaire/fetchAllTitleOfQuestionnaire",
     }),
@@ -95,8 +95,8 @@ export default {
           question: el.question,
         });
       });
-      this.generateListQuestionnaire(body).then(() => {
-        this.fetchAllTitleOfQuestionnaire().then(()=> this.$router.push(PAGE_QUESTIONNAIRES_GET))
+      this.createAllQuestionnaire(body).then(() => {
+        // this.fetchAllTitleOfQuestionnaire().then(()=> this.$router.push(PAGE_QUESTIONNAIRES_GET))
       });
     },
   },

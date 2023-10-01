@@ -17,10 +17,9 @@ export const PHOTO = "/photo";
 
 export const SELECT = "/select";
 export const TITLE = "/title";
-export const FULLNAME = "/fullname";
+export const FULLNAME = "/full_name";
 
 export const QUESTIONNAIRE = "/questionnaire";
-export const GENERATION = "/generation";
 // ---------------- summa -------------------
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
 export const SUMMA_AREA_APARTMENT = "/summa_area_apartment";

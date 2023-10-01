@@ -2,43 +2,61 @@
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessagesOwnership" />
+    <header-messages :messages="getMessages" />
     <line-header text="Просмотр записи о собственности." />
-    <line-address :address="getOwnership.address" />
+    <line-address :address="address" />
     <div class="blocks">
-      <block-get-ownership :ownership="getOwnership" />
-      <div
-        class=""
-        @click="this.$router.push(PAGE_OWNER_GET + '/' + getOwnership.owner.id)"
-      >
-        <block-get-owner :owner="getOwnership.owner" />
+      <div class="rooms">
+        <div
+          class="room"
+          v-for="one in rooms"
+          @click="this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)"
+          :key="one.id"
+        >
+          <block-get-ownership :ownership="one" />
+        </div>
+      </div>
+      <div class="clients">
+        <div
+          v-for="one in clients"
+          class="client"
+          @click="this.$router.push(PAGE_OWNER_GET + '/' + one.id)"
+          :key="one.id"
+        >
+          <block-get-owner :owner="one" />
+        </div>
       </div>
     </div>
     <vue-hr />
     <button-back />
-    <button-edit
-      @click="this.$router.push(PAGE_ENTRY_UPDATE + '/' + getOwnership.id)"
-      >{{ ENTRY_UPDATE }}</button-edit
-    >
-    <!-- для отрисовки старницы при обновлении ID - перезагрузка -->
     <button-simple :hidden="true" @click="start">reset</button-simple>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { ENTRY_UPDATE } from "@/ui/namesButton";
-import { PAGE_ENTRY_UPDATE, PAGE_OWNER_GET } from "@/router/apiRouter";
+import {
+  PAGE_ENTRY_UPDATE,
+  PAGE_OWNER_GET,
+  PAGE_OWNERSHIP_GET,
+} from "@/router/apiRouter";
 export default {
   data() {
     return {
       ENTRY_UPDATE,
       PAGE_ENTRY_UPDATE,
       PAGE_OWNER_GET,
+      PAGE_OWNERSHIP_GET,
+      rooms: [],
+      clients: [],
+      address: {},
     };
   },
   methods: {
     ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
+      fetchRoomsAndClientsByOwnershipId:
+        "record/fetchRoomsAndClientsByOwnershipId",
+      fetchAddress: "address/fetchAddress",
     }),
   },
   mounted() {
@@ -49,12 +67,21 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
-      getMessagesOwnership: "ownership/getMessages",
+      getRecord: "record/getRecord",
+      getAddress: "address/getAddress",
+      getMessages: "record/getMessages",
       getIsLoading: "ownership/getIsLoading",
     }),
     start() {
-      this.fetchOwnership(this.$route.params.id);
+      this.fetchAddress(this.$route.params.id).then(()=> {
+        this.address = this.getAddress;
+      });
+      this.fetchRoomsAndClientsByOwnershipId(this.$route.params.id).then(
+        () => {
+          this.rooms = this.getRecord.rooms;
+          this.clients = this.getRecord.clients;
+        }
+      );
     },
   },
 };

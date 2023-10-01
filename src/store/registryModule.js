@@ -6,8 +6,7 @@ import {
 
 export default {
   state: () => ({
-    registryOwnerships: [],
-    registryOwners: [],
+    registry: [],
     buildingCharacteristics: {
       countOwners: 0,
       countRooms: 0,
@@ -35,13 +34,10 @@ export default {
     setBuildingCharacteristics(state, object) {
       state.buildingCharacteristics = object;
     },
-    setRegistryOwners(state, object) {
-      state.registryOwners = object;
+    setRegistry(state, object) {
+      state.registry = object;
     },
-    setRegistryOwnerships(state, object) {
-      state.registryOwnerships = object;
-    },
-    setMessages(state, messages) {
+     setMessages(state, messages) {
       state.messages = messages;
     },
   },
@@ -53,11 +49,8 @@ export default {
     getBuildingCharacteristics(state) {
       return state.buildingCharacteristics;
     },
-    getRegistryOwners(state) {
-      return state.registryOwners;
-    },
-    getRegistryOwnerships(state) {
-      return state.registryOwnerships;
+    getRegistry(state) {
+      return state.registry;
     },
     getMessages(state) {
       return state.messages;
@@ -69,7 +62,7 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getRegistryOwners();
-        commit("setRegistryOwners", response.data);
+        commit("setRegistry", response.data);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -81,7 +74,7 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getRegistryOwnerships();
-        commit("setRegistryOwnerships", response.data);
+        commit("setRegistry", response.data);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);

@@ -10,7 +10,7 @@
         @click="
           () =>
             this.$router.push(
-              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullname
+              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullName
             )
         "
       >
@@ -35,7 +35,7 @@ export default {
         dateDispatch: "Дата инициализации",
         dateReceiving: "Дата завершения",
         apartment: "Квартира №",
-        fullname: "Ф.И.О.",
+        fullName: "Ф.И.О.",
       },
       PAGE_QUESTIONNAIRE_ANSWER,
     };

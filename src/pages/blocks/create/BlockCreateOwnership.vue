@@ -149,15 +149,15 @@
           placeholder="Теплоснабжение"
         />
       </div>
-      <div class="heatМeter">
+      <div class="heatMeter">
         <block-error-message
-          :field="ownership.heatМeter"
+          :field="ownership.heatMeter"
           messageFalse="Теплоснабжение"
           messageTrue="Теплоснабжение"
-          @valid="(value) => handlerHeatМeter(value)"
+          @valid="(value) => handlerHeatMeter(value)"
         />
         <input-simple
-          v-model.trim="ownership.heatМeter"
+          v-model.trim="ownership.heatMeter"
           placeholder="Теплоснабжение"
         />
       </div>
@@ -201,6 +201,7 @@ export default {
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
+      
       showTypeRoom,
       showNumberRooms,
       showLoggia,
@@ -259,7 +260,7 @@ export default {
       this.validHeatSupply = value;
       this.emitOwnership();
     },
-    handlerHeatМeter(value) {
+    handlerHeatMeter(value) {
       this.validHeatMeter = value;
       this.emitOwnership();
     },

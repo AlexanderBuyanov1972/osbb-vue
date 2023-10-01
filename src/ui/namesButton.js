@@ -51,7 +51,7 @@ export const BLOCK_QUESTIONNAIRE = "Блок опросов";
 export const GET_POLLS_BY_TITLE_AND_BY_APARTMENT =
   "Получить опросы по теме и № помещения";
 export const MAIN = "На главную";
-export const SEND_TO_SERVER = "Послать на сервер";
+export const SEND_TO_SERVER = "Послать";
 export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";
 
 export const GET_RESULT_POLL = "Получить результаты опроса";

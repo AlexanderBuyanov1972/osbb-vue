@@ -8,7 +8,7 @@
     <div v-for="(one, index) in getOwnerships" :key="one.id">
       <div
         @click="
-          () => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.apartment)
+          () => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)
         "
       >
         <ownership-item :ownership="one" :count="index + 1" />

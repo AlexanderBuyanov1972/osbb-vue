@@ -8,7 +8,7 @@
       :style="{ color: 'darkgoldenrod' }"
     />
     <block-information-about-house :info="getBuildingCharacteristics" />
-    <owner-list-registry :list="getRegistryOwners" />
+    <owner-list-registry :list="getRegistry" />
   </div>
 </template>
 <script>
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getRegistryOwners: "registry/getRegistryOwners",
+      getRegistry: "registry/getRegistry",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
       getMessages: "registry/getMessages",
       getIsLoading: "registry/getIsLoading",

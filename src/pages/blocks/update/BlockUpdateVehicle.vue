@@ -8,12 +8,12 @@
           :field="vehicle.typeVehicle"
           messageFalse="Укажите тип транспортного средства"
           messageTrue="Тип транспортного средства"
-          @valid="(value) =>  handlerTypeVehicle(value)"
+          @valid="(value) => handlerTypeVehicle(value)"
         />
         <select-edit
           :array="arrayTypeVehicle"
           :startName="getNameByValue(arrayTypeVehicle, vehicle.typeVehicle)"
-          @select="(value) =>(vehicle.typeVehicle = value)"
+          @select="(value) => (vehicle.typeVehicle = value)"
         />
       </div>
 
@@ -79,21 +79,15 @@ import {
   arrayTypeManufacturer,
 } from "@/pages/_functions/arraysOfData";
 import { getNameByValue } from "@/pages/_functions/functions";
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-update-vehicle",
   props: {
-    id: Number,
+    vehicleProps: Object,
   },
   data() {
     return {
-      vehicle: {
-        typeVehicle: "",
-        numberVehicle: "",
-        yearOfIssue: "",
-        typeColor: "",
-        typeManufacturer: "",
-      },
+      vehicle: {},
       getNameByValue,
       arrayTypeVehicle,
       arrayTypeColor,
@@ -149,17 +143,10 @@ export default {
     },
   },
   mounted() {
-    if (this.id != 0) {
-      if (this.id != undefined) {
-        this.fetchOwner(this.id).then(
-          () => (this.vehicle = this.getOwner.vehicle)
-        );
-      } else {
-        this.fetchOwner(this.$route.params.id).then(
-          () => (this.vehicle = this.getOwner.vehicle)
-        );
-      }
-    }
+    this.vehicle = this.vehicleProps;
+  },
+  updated() {
+    this.vehicle = this.vehicleProps;
   },
 };
 </script>
@@ -171,4 +158,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
-@/pages/bills/_functions/arraysOfData@/pages/bills/_functions/functions

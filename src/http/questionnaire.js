@@ -3,7 +3,6 @@ import {
   API_BASE,
   QUESTIONNAIRE,
   ALL,
-  GENERATION,
   RESULT,
 } from "@/http/apiHttp";
 
@@ -47,13 +46,6 @@ export const getAllQuestionnaire = async () => {
 
 export const deleteAllQuestionnaire = async () => {
   const response = await axios.delete(API_BASE + QUESTIONNAIRE + ALL);
-  return response.data;
-};
-
-// generate
-
-export const generateListQuestionnaire = async (one) => {
-  const response = await axios.post(API_BASE + QUESTIONNAIRE + GENERATION, one);
   return response.data;
 };
 

@@ -7,11 +7,10 @@ import {
   updateAllQuestionnaire,
   getAllQuestionnaire,
   deleteAllQuestionnaire,
-  generateListQuestionnaire,
   getResultQuestionnaire,
 } from "@/http/questionnaire";
 import {
-  getAllQuestionnaireByTitleAndFullname,
+  getAllQuestionnaireByTitleAndFullName,
   getAllQuestionnaireByTitleAndByApartment,
   getAllQuestionnaireByTitle,
   getAllTitleOfQuestionnaire,
@@ -24,7 +23,7 @@ export default {
       dateDispatch: null,
       dateReceiving: null,
       apartment: "",
-      fullname: "",
+      fullName: "",
       byWhom: "",
       question: "",
       answer: null,
@@ -137,10 +136,10 @@ export default {
       }
     },
 
-    async createAllQuestionnaire({ commit }, object) {
+    async createAllQuestionnaire({ commit }, list) {
       try {
         commit("setIsLoading", true);
-        const response = await createAllQuestionnaire(object);
+        const response = await createAllQuestionnaire(list);
         if (response != undefined && response.data != undefined) {
           commit("setQuestionnaires", response.data);
           commit("setMessages", response.messages);
@@ -197,28 +196,13 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async generateListQuestionnaire({ commit }, object) {
+
+    async fetchAllQuestionnaireByTitleAndFullName({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await generateListQuestionnaire(object);
-        if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async fetchAllQuestionnaireByTitleAndFullname({ commit }, payload) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getAllQuestionnaireByTitleAndFullname(
+        const response = await getAllQuestionnaireByTitleAndFullName(
           payload.title,
-          payload.fullname
+          payload.fullName
         );
         if (response != undefined && response.data != undefined) {
           commit("setQuestionnaires", response.data);
@@ -272,7 +256,7 @@ export default {
         commit("setIsLoading", true);
         const response = await getAllTitleOfQuestionnaire();
         if (response != undefined && response.data != undefined) {
-          commit("setTitles", response.data);
+          commit("setTitles", ['Выберите тему опроса', ...response.data]);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

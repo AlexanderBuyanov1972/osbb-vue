@@ -70,7 +70,7 @@ export default {
   justify-content: start;
 }
 .count {
-  width: 3%;
+  width: 5%;
 }
 .type_room {
   width: 25%;

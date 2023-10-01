@@ -1,22 +1,25 @@
 <template>
-  <div class="list" v-for="(one, ind) in list" :key="ind">
+  <div class="list"  v-for="item in list">
+    <!-- rooms -->
     <div
       class="item"
-      @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.room.id)"
+      v-for="one in item.rooms"
+      :key="one.id"
+      @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)"
     >
       <span>Квартира № </span
       >{{
-        one.room.apartment
+        one.apartment
       }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
         общая площадь :</span
       >
-      {{ one.room.totalArea }} м2
+      {{ one.totalArea }} м2
     </div>
 
-    <p v-for="(two, index) in one.clients" :key="two.id">
+    <p v-for="two in item.clients" :key="two.id">
       <owner-item
         :owner="two"
-        :count="index + 1"
+        :count="two.id"
         @click="() => this.$router.push(PAGE_OWNER_GET + '/' + two.id)"
         :flag="true"
       />

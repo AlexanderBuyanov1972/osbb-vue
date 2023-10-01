@@ -71,7 +71,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-update-passport",
   props: {
-    id: Number,
+    passportProps: Object,
   },
   data() {
     return {
@@ -129,18 +129,11 @@ export default {
       );
     },
   },
+  updated() {
+    this.passport = this.passportProps;
+  },
   mounted() {
-    if (this.id != 0) {
-      if (this.id != undefined) {
-        this.fetchOwner(this.id).then(
-          () => (this.passport = this.getOwner.passport)
-        );
-      } else {
-        this.fetchOwner(this.$route.params.id).then(
-          () => (this.passport = this.getOwner.passport)
-        );
-      }
-    }
+    this.passport = this.passportProps;
   },
 };
 </script>

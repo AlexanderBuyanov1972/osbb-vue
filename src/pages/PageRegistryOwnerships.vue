@@ -5,7 +5,7 @@
     <header-messages :messages="getMessages" />
     <line-header text="Реестр недвижимости" :style="{ color: 'blueviolet' }" />
     <block-information-about-house :info="getBuildingCharacteristics" />
-    <ownership-list-registry :list="getRegistryOwnerships" />
+    <ownership-list-registry :list="getRegistry" />
   </div>
 </template>
 <script>
@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getRegistryOwnerships: "registry/getRegistryOwnerships",
+      getRegistry: "registry/getRegistry",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
       getMessages: "registry/getMessages",
       getIsLoading: "registry/getIsLoading",

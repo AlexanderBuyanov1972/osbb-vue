@@ -4,18 +4,39 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование записи о собственности." />
+    <!-- search -------------->
+    <div class="search">
+      <div class="title">Введите № помещения :</div>
+      <input-simple
+        class="input"
+        v-model="apartment"
+        :style="{ width: '65px' }"
+      />
+      <div class="title">Введите Ф.И.О. :</div>
+      <input-simple
+        class="input"
+        v-model="fullName"
+        :style="{ width: '350px' }"
+      />
+      <button-delete :hidden="!this.checkInputs" @click="fetchRecord"
+        >{{ GET }}
+      </button-delete>
+    </div>
+
     <div class="blocks">
       <div class="ownership">
         <block-update-ownership
-          @ownership="(data) => (ownership = data)"
+          @ownership="(data) => (record.ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
+          :ownershipProps="record.ownership"
         />
       </div>
 
       <div class="address">
         <block-update-address
-          @address="(data) => (ownership.address = data)"
+          @address="(data) => (record.ownership.address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
+          :addressProps="record.ownership.address"
         />
       </div>
 
@@ -23,32 +44,32 @@
         <div class="block1">
           <div class="owner">
             <block-update-owner
-              @owner="(data) => (ownership.owner = data)"
+              @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
-              :id="flag ? 0 : $route.params.id"
+              :ownerProps="record.owner"
             />
           </div>
           <div class="passport">
             <block-update-passport
-              @passport="(data) => (ownership.owner.passport = data)"
+              @passport="(data) => (record.owner.passport = data)"
               @isValidPassport="(value) => (isValidPassport = value)"
-              :id="flag ? 0 : $route.params.id"
+              :passportProps="record.owner.passport"
             />
           </div>
         </div>
         <div class="block2">
           <div class="placeWork">
             <block-update-place-work
-              @placeWork="(data) => (ownership.owner.placeWork = data)"
+              @placeWork="(data) => (record.owner.placeWork = data)"
               @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
-              :id="flag ? 0 : $route.params.id"
+              :placeWorkProps="record.owner.placeWork"
             />
           </div>
           <div class="vehicle">
             <block-update-vehicle
-              @vehicle="(data) => (ownership.owner.vehicle = data)"
+              @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
-              :id="flag ? 0 : $route.params.id"
+              :vehicleProps="record.owner.vehicle"
             />
           </div>
         </div>
@@ -63,14 +84,24 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
 import { PAGE_ENTRY_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
       flag: false,
-      ownership: {},
-      owners: [],
+      record: {
+        owner: {
+          passport: {},
+          placeWork: {},
+          vehicle: {},
+        },
+        ownership: {
+          address: {},
+        },
+      },
+      apartment: "",
+      fullName: "",
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
@@ -78,30 +109,38 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       SEND_TO_SERVER,
+      GET,
       PAGE_ENTRY_GET,
     };
   },
   methods: {
     ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
-      updateOwnership: "ownership/updateOwnership",
+      fetchRecordByApartmentAndFullName:
+        "record/fetchRecordByApartmentAndFullName",
+      updateRecord: "record/updateRecord",
     }),
     sendOwnership() {
-      this.updateOwnership(this.ownership).then(() => {
-        this.$router.push(PAGE_ENTRY_GET + "/" + this.ownership.id);
+      this.updateRecord(this.record).then(() => {
+        this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+      });
+    },
+    fetchRecord() {
+      this.fetchRecordByApartmentAndFullName({
+        apartment: this.apartment,
+        fullName: this.fullName,
+      }).then(() => {
+        this.record = this.getRecord;
       });
     },
   },
-  mounted() {
-    this.fetchOwnership(this.$route.params.id).then(() => {
-      this.ownership = this.getOwnership;
-    });
+  update() {
+    this.fetchRecord();
   },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
-      getIsLoading: "ownership/getIsLoading",
-      getMessages: "ownership/getMessages",
+      getRecord: "record/getRecord",
+      getIsLoading: "record/getIsLoading",
+      getMessages: "record/getMessages",
     }),
     isValid() {
       return (
@@ -111,6 +150,11 @@ export default {
         this.isValidPassport &&
         this.isValidPlaceWork &&
         this.isValidVehicle
+      );
+    },
+    checkInputs() {
+      return (
+        this.apartment > 0 && this.apartment < 85 && this.fullName.length > 3
       );
     },
   },
@@ -160,5 +204,15 @@ export default {
 hr {
   margin: 25px 0px;
   color: teal;
+}
+.search {
+  display: flex;
+  align-items: center;
+}
+.title,
+.input {
+  margin: 5px 25px 5px 0px;
+  border-color: brown;
+  color: brown;
 }
 </style>

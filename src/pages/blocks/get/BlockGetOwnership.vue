@@ -44,7 +44,7 @@
         <span>Теплоснабжение : </span>{{ ownership.heatSupply }}
       </div>
       <div class="item">
-        <span>Тепловой счётчик : </span>{{ ownership.heatМeter }}
+        <span>Тепловой счётчик : </span>{{ ownership.heatMeter }}
       </div>
     </div>
   </div>

@@ -10,7 +10,11 @@
           messageTrue="Фамилия."
           @valid="(value) => handlerLastName(value)"
         />
-        <input-simple v-focus v-model.trim="owner.lastName" placeholder="Фамилия" />
+        <input-simple
+          v-focus
+          v-model.trim="owner.lastName"
+          placeholder="Фамилия"
+        />
       </div>
 
       <div class="firstName">
@@ -40,7 +44,10 @@
           messageTrue="Дата рождения (YYYY-MM-DD)."
           @valid="(value) => handlerDateBirth(value)"
         />
-        <input-simple v-model.trim="owner.dateBirth" placeholder="Дата рождения." />
+        <input-simple
+          v-model.trim="owner.dateBirth"
+          placeholder="Дата рождения."
+        />
       </div>
 
       <div class="gender">
@@ -131,11 +138,11 @@ import {
   getElementByName,
   getNameByValue,
 } from "@/pages/_functions/functions";
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-update-owner",
   props: {
-    id: Number,
+    ownerProps: Object,
   },
   data() {
     return {
@@ -229,15 +236,10 @@ export default {
     },
   },
   mounted() {
-    if (this.id != 0) {
-      if (this.id != undefined) {
-        this.fetchOwner(this.id).then(() => (this.owner = this.getOwner));
-      } else {
-        this.fetchOwner(this.$route.params.id).then(
-          () => (this.owner = this.getOwner)
-        );
-      }
-    }
+    this.owner = this.ownerProps;
+  },
+  updated() {
+    this.owner = this.ownerProps;
   },
 };
 </script>
@@ -249,4 +251,3 @@ export default {
   box-sizing: border-box;
 }
 </style>
-@/pages/bills/_functions/arraysOfData@/pages/bills/_functions/functions
