@@ -47,7 +47,7 @@
             <block-create-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
-              :client="client"
+              :ownerProps="client"
             />
           </div>
           <div class="passport">
@@ -123,14 +123,18 @@ export default {
   },
   methods: {
     ...mapActions({
+      createOwner: "owner/createOwner",
       createRecord: "record/createRecord",
       fetchRoomByApartment: "ownership/fetchRoomByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
     sendOwnership() {
       this.record.owner.photo = generatePhoto();
-      this.createRecord(this.record).then(() => {
-        // this.$router.push(PAGE_ENTRY_GET + "/" + this.room.id);
+      this.createOwner(this.record.owner).then(() => {
+        this.record.owner = this.getOwner;
+        this.createRecord(this.record).then(() => {
+          this.$router.push(PAGE_ENTRY_GET + "/" + this.room.id);
+        });
       });
     },
     fetchRoom() {
@@ -151,7 +155,6 @@ export default {
     ...mapGetters({
       getIsLoading: "ownership/getIsLoading",
       getMessages: "ownership/getMessages",
-      getOwnership: "ownership/getOwnership",
       getRoom: "ownership/getRoom",
       getOwner: "owner/getOwner",
     }),

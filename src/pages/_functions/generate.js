@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 export const generatePassport = () => {
   return {
-    numberPassport: "нет",
+    numberPassport: "SELECT",
     numberEntry: "нет",
     dateIssue: "1900-01-01",
     issuingAuthority: "нет",
@@ -12,7 +12,7 @@ export const generatePassport = () => {
 
 export const generatePlaceWork = () => {
   return {
-    businessName: "нет",
+    businessName: "SELECT",
     address: "нет",
     numberPhone: "нет",
     position: "нет",
@@ -22,7 +22,7 @@ export const generatePlaceWork = () => {
 
 export const generateVehicle = () => {
   return {
-    typeVehicle: "NO",
+    typeVehicle: "SELECT",
     numberVehicle: "нет",
     yearOfIssue: "нет",
     typeColor: "NO",

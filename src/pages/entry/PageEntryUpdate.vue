@@ -25,12 +25,24 @@
 
     <div class="blocks">
       <div class="ownership">
+        <!-- <block-create-ownership
+          @ownership="(data) => (record.ownership = data)"
+          @isValidOwnership="(value) => (isValidOwnership = value)"
+          :ownershipProps="record.ownership"
+        /> -->
         <block-update-ownership
           @ownership="(data) => (record.ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
           :ownershipProps="record.ownership"
         />
       </div>
+      <!-- <div class="address">
+        <block-create-address
+          @address="(data) => (record.ownership.address = data)"
+          @isValidAddress="(value) => (isValidAddress = value)"
+          :addressProps="record.ownership.address"
+        />
+      </div> -->
 
       <div class="address">
         <block-update-address
@@ -42,13 +54,28 @@
 
       <div class="list">
         <div class="block1">
-          <div class="owner">
+      <!-- <div class="owner">
             <block-update-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
               :ownerProps="record.owner"
             />
+          </div> -->    
+          <div class="owner">
+            <block-create-owner
+              @owner="(data) => (record.owner = data)"
+              @isValidOwner="(value) => (isValidOwner = value)"
+              :ownerProps="record.owner"
+            />
           </div>
+          <!-- <div class="passport">
+            <block-create-passport
+              @passport="(data) => (record.owner.passport = data)"
+              @isValidPassport="(value) => (isValidPassport = value)"
+              :passportProps="record.owner.passport"
+            />
+          </div> -->
+
           <div class="passport">
             <block-update-passport
               @passport="(data) => (record.owner.passport = data)"
@@ -58,6 +85,15 @@
           </div>
         </div>
         <div class="block2">
+
+          <!-- <div class="placeWork">
+            <block-create-place-work
+              @placeWork="(data) => (record.owner.placeWork = data)"
+              @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
+               :placeWorkProps="record.owner.placeWork"
+            />
+          </div> -->
+
           <div class="placeWork">
             <block-update-place-work
               @placeWork="(data) => (record.owner.placeWork = data)"
@@ -66,6 +102,15 @@
             />
           </div>
           <div class="vehicle">
+            
+            <!-- <div class="vehicle">
+            <block-create-vehicle
+              @vehicle="(data) => (record.owner.vehicle = data)"
+              @isValidVehicle="(value) => (isValidVehicle = value)"
+              :client="client"
+            />
+          </div> -->
+
             <block-update-vehicle
               @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
@@ -89,19 +134,19 @@ import { PAGE_ENTRY_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      flag: false,
+      apartment: "",
+      fullName: "",
       record: {
+        ownership: {
+          address: {},
+        },
         owner: {
           passport: {},
           placeWork: {},
           vehicle: {},
         },
-        ownership: {
-          address: {},
-        },
       },
-      apartment: "",
-      fullName: "",
+
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
@@ -117,24 +162,23 @@ export default {
     ...mapActions({
       fetchRecordByApartmentAndFullName:
         "record/fetchRecordByApartmentAndFullName",
-      updateRecord: "record/updateRecord",
+      updateOwner: "owner/updateOwner",
+      updateOwnership: "ownership/updateOwnership",
     }),
     sendOwnership() {
-      this.updateRecord(this.record).then(() => {
-        this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+      this.updateOwner(this.record.owner).then(() => {
+        this.updateOwnership(this.record.ownership).then(() => {
+          this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+        });
       });
     },
     fetchRecord() {
       this.fetchRecordByApartmentAndFullName({
         apartment: this.apartment,
         fullName: this.fullName,
-      })
-        .then(() => {
-          this.record = this.getRecord;
-        })
-        .catch(() => {
-          this.record.ownership.address = {};
-        });
+      }).then(() => {
+        this.record = this.getRecord;
+      });
     },
   },
   update() {
@@ -142,9 +186,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getRecord: "record/getRecord",
       getIsLoading: "record/getIsLoading",
       getMessages: "record/getMessages",
+      getRecord: "record/getRecord",
     }),
     isValid() {
       return (

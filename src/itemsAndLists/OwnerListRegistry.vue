@@ -17,11 +17,11 @@
     </div>
 
     <!-- rooms -->
-    <div v-for="two in item.rooms" :key="two.id">
+    <div v-for="(two, index) in item.rooms" :key="two.id">
       <ownership-item
         class="ownership"
         :ownership="two"
-        :count="two.id"
+        :count="index +1"
         @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)"
         :flag="true"
       />

@@ -135,11 +135,14 @@ import {
 export default {
   name: "block-create-owner",
   props: {
-    client: Object,
+    ownerProps: Object,
   },
   data() {
     return {
       owner: {},
+      arrayGender,
+      arrayFamilyStatus,
+      arrayTypeBeneficiary,
       validLastName: false,
       validFirstName: false,
       validSecondName: false,
@@ -150,10 +153,6 @@ export default {
       validPhoneNumber: false,
       validShareInRealEstate: false,
       validBeneficiary: false,
-
-      arrayGender,
-      arrayFamilyStatus,
-      arrayTypeBeneficiary,
     };
   },
   methods: {
@@ -220,10 +219,10 @@ export default {
     },
   },
   updated() {
-    this.owner = this.client;
+    this.owner = this.ownerProps;
   },
   mounted() {
-    this.owner = this.client;
+    this.owner = this.ownerProps;
   },
 };
 </script>

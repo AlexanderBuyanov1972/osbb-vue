@@ -16,10 +16,10 @@
       {{ one.totalArea }} м2
     </div>
 
-    <p v-for="two in item.clients" :key="two.id">
+    <p v-for="(two, index) in item.clients" :key="two.id">
       <owner-item
         :owner="two"
-        :count="two.id"
+        :count="index + 1"
         @click="() => this.$router.push(PAGE_OWNER_GET + '/' + two.id)"
         :flag="true"
       />

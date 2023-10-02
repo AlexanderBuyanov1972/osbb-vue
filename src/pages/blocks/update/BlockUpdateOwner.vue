@@ -6,8 +6,8 @@
       <div class="lastName">
         <block-error-message
           :field="owner.lastName"
-          messageFalse="Укажите фамилию."
-          messageTrue="Фамилия."
+          messageFalse="Укажите фамилию"
+          messageTrue="Фамилия"
           @valid="(value) => handlerLastName(value)"
         />
         <input-simple
@@ -20,8 +20,8 @@
       <div class="firstName">
         <block-error-message
           :field="owner.firstName"
-          messageFalse="Укажите имя."
-          messageTrue="Имя."
+          messageFalse="Укажите имя"
+          messageTrue="Имя"
           @valid="(value) => handlerFirstName(value)"
         />
         <input-simple v-model.trim="owner.firstName" placeholder="Имя" />
@@ -30,8 +30,8 @@
       <div class="secondName">
         <block-error-message
           :field="owner.secondName"
-          messageFalse="Укажите отчество."
-          messageTrue="Отчество."
+          messageFalse="Укажите отчество"
+          messageTrue="Отчество"
           @valid="(value) => handlerSecondName(value)"
         />
         <input-simple v-model.trim="owner.secondName" placeholder="Отчество" />
@@ -40,26 +40,26 @@
       <div class="dateBirth">
         <block-error-message
           :field="owner.dateBirth"
-          messageFalse="Укажите дату рождения (YYYY-MM-DD)."
-          messageTrue="Дата рождения (YYYY-MM-DD)."
+          messageFalse="Укажите дату рождения (YYYY-MM-DD)"
+          messageTrue="Дата рождения (YYYY-MM-DD)"
           @valid="(value) => handlerDateBirth(value)"
         />
         <input-simple
           v-model.trim="owner.dateBirth"
-          placeholder="Дата рождения."
+          placeholder="Дата рождения"
         />
       </div>
 
       <div class="gender">
         <block-error-message
           :field="owner.gender"
-          messageFalse="Укажите пол."
-          messageTrue="Пол."
+          messageFalse="Укажите пол"
+          messageTrue="Пол"
           @valid="(value) => handlerGender(value)"
         />
         <select-edit
           :array="arrayGender"
-          :startName="getNameByValue(arrayGender, owner.gender)"
+          :startName="showGender(owner.gender)"
           @select="(value) => (owner.gender = value)"
         />
       </div>
@@ -67,13 +67,13 @@
       <div class="familyStatus">
         <block-error-message
           :field="owner.familyStatus"
-          messageFalse="Укажите семейное положение."
-          messageTrue="Семейное положение."
+          messageFalse="Укажите семейное положение"
+          messageTrue="Семейное положение"
           @valid="(value) => handlerFamilyStatus(value)"
         />
         <select-edit
           :array="arrayFamilyStatus"
-          :startName="getNameByValue(arrayFamilyStatus, owner.familyStatus)"
+          :startName="showFamilyStatus(owner.familyStatus)"
           @select="(value) => (owner.familyStatus = value)"
         />
       </div>
@@ -81,33 +81,33 @@
       <div class="email">
         <block-error-message
           :field="owner.email"
-          messageFalse="Укажите электронный адресс."
-          messageTrue="E-mail."
+          messageFalse="Укажите электронный адресс"
+          messageTrue="E-mail"
           @valid="(value) => handlerEmail(value)"
         />
-        <input-simple v-model.trim="owner.email" placeholder="E-mail." />
+        <input-simple v-model.trim="owner.email" placeholder="E-mail" />
       </div>
 
       <div class="phoneNumber">
         <block-error-message
           :field="owner.phoneNumber"
-          messageFalse="Укажите номер телефона +38(0XX)XXXXXXX."
-          messageTrue="Телефон  +38(0XX)XXXXXXX."
+          messageFalse="Укажите номер телефона +38(0XX)XXXXXXX"
+          messageTrue="Телефон  +38(0XX)XXXXXXX"
           @valid="(value) => handlerPhoneNumber(value)"
         />
-        <input-simple v-model.trim="owner.phoneNumber" placeholder="Телефон." />
+        <input-simple v-model.trim="owner.phoneNumber" placeholder="Телефон" />
       </div>
 
       <div class="shareInRealEstate">
         <block-error-message
           :field="owner.shareInRealEstate"
-          messageFalse="Укажите долю в собственности (от 0 до 1, три знака после точки)."
-          messageTrue="Доля в собственности (от 0 до 1, три знака после точки)."
+          messageFalse="Укажите долю в собственности (от 0 до 1, три знака после точки)"
+          messageTrue="Доля в собственности (от 0 до 1, три знака после точки)"
           @valid="(value) => handlerShareInRealEstate(value)"
         />
         <input-simple
           v-model.number="owner.shareInRealEstate"
-          placeholder="Доля в собственности (от 0 до 1, три знака после точки)."
+          placeholder="Доля в собственности (от 0 до 1, три знака после точки)"
         />
       </div>
 
@@ -120,8 +120,8 @@
         />
         <select-edit
           :array="arrayTypeBeneficiary"
-          :startName="getNameByValue(arrayTypeBeneficiary, owner.beneficiary)"
           @select="(value) => (owner.beneficiary = value)"
+          :startName="showTypeBeneficiary(owner.beneficiary)"
         />
       </div>
     </div>
@@ -134,11 +134,10 @@ import {
   arrayTypeBeneficiary,
 } from "@/pages/_functions/arraysOfData";
 import {
-  getElementByValue,
-  getElementByName,
-  getNameByValue,
+  showTypeBeneficiary,
+  showGender,
+  showFamilyStatus,
 } from "@/pages/_functions/functions";
-import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-update-owner",
   props: {
@@ -147,9 +146,9 @@ export default {
   data() {
     return {
       owner: {},
-      getElementByValue,
-      getElementByName,
-      getNameByValue,
+      showTypeBeneficiary,
+      showGender,
+      showFamilyStatus,
       arrayGender,
       arrayTypeBeneficiary,
       arrayFamilyStatus,
@@ -165,12 +164,9 @@ export default {
       validBeneficiary: false,
     };
   },
-
   methods: {
-    ...mapActions({
-      fetchOwner: "owner/fetchOwner",
-    }),
     emitOwner() {
+      this.count += 1;
       this.$emit("isValidOwner", this.isValidOwner);
       if (this.owner.dateBirth == "нет") this.owner.dateBirth = "1900-01-01";
       this.$emit("owner", this.owner);
@@ -217,9 +213,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      getOwner: "owner/getOwner",
-    }),
     isValidOwner() {
       return (
         this.validLastName &&
@@ -235,11 +228,11 @@ export default {
       );
     },
   },
-  mounted() {
-    this.owner = this.ownerProps;
-  },
   updated() {
-    this.owner = this.ownerProps;
+   this.owner = this.ownerProps;
+  },
+  mounted() {
+   this.owner = this.ownerProps;
   },
 };
 </script>

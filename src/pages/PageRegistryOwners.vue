@@ -7,6 +7,7 @@
       text="Реестр собственников"
       :style="{ color: 'darkgoldenrod' }"
     />
+    <button-back/>
     <block-information-about-house :info="getBuildingCharacteristics" />
     <owner-list-registry :list="getRegistry" />
   </div>
