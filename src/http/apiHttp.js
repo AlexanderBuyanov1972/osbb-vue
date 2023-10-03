@@ -14,6 +14,7 @@ export const ADDRESS = "/address";
 export const APARTMENT = "/apartment";
 export const PASSPORT = "/passport";
 export const PHOTO = "/photo";
+export const SHARE = "/share";
 
 export const SELECT = "/select";
 export const TITLE = "/title";

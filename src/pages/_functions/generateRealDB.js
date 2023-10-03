@@ -1,6 +1,6 @@
 export const generatePassport = () => {
   return {
-    numberPassport: "нет",
+    numberPassport: "SELECT",
     numberEntry: "нет",
     dateIssue: "1900-01-01",
     issuingAuthority: "нет",
@@ -10,7 +10,7 @@ export const generatePassport = () => {
 
 export const generatePlaceWork = () => {
   return {
-    businessName: "нет",
+    businessName: "SELECT",
     address: "нет",
     numberPhone: "нет",
     position: "нет",
@@ -20,7 +20,7 @@ export const generatePlaceWork = () => {
 
 export const generateVehicle = () => {
   return {
-    typeVehicle: "NO",
+    typeVehicle: "SELECT",
     numberVehicle: "нет",
     yearOfIssue: "нет",
     typeColor: "NO",
@@ -32,9 +32,7 @@ export const generatePhotos = () => {
   return { name: "avatar", url: "@/photos/owners/avatar.png" };
 };
 
-export const generateSvobody51 = () => {
-  let result = [];
-
+export const generateSvobody51 = async () => {
   for (let curAp = 1; curAp <= 84; curAp++) {
     // owner ----------------------
     let owner = {
@@ -45,10 +43,8 @@ export const generateSvobody51 = () => {
       email: "нет",
       phoneNumber: "нет",
       dateBirth: "1900-01-01",
-      shareInRealEstate: 1.0,
       familyStatus: "NO",
       beneficiary: "NO",
-
       passport: generatePassport(),
       vehicle: generateVehicle(),
       placeWork: generatePlaceWork(),
@@ -82,11 +78,21 @@ export const generateSvobody51 = () => {
         apartment: curAp + "",
       },
     };
-    let record = {};
-    record.owner = owner;
-    record.ownership = ownership;
-    result.push(record);
+
+    let share = {
+      value: 1.0,
+      owner: responseOwner.data,
+      ownership: responseOwnership.data,
+    };
+    await createShare(share);
+
+    let record = {
+      owner: responseOwner.data,
+      ownership: responseOwnership.data,
+    };
+
+    await createRecord(record);
+
   }
 
-  return result;
 };

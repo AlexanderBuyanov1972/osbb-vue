@@ -14,10 +14,10 @@ import PageOwnersGet from "@/pages/owner/PageOwnersGet.vue";
 // ownership
 import PageOwnershipGet from "@/pages/ownership/PageOwnershipGet.vue";
 import PageOwnershipsGet from "@/pages/ownership/PageOwnershipsGet.vue";
-// entry
-import PageEntryCreate from "@/pages/entry/PageEntryCreate.vue";
-import PageEntryUpdate from "@/pages/entry/PageEntryUpdate.vue";
-import PageEntryGet from "@/pages/entry/PageEntryGet.vue";
+// record
+import PageRecordCreate from "@/pages/record/PageRecordCreate.vue";
+import PageRecordUpdate from "@/pages/record/PageRecordUpdate.vue";
+import PageRecordGet from "@/pages/record/PageRecordGet.vue";
 // bills
 import PageBillsGet from "@/pages/bills/PageBillsGet.vue";
 
@@ -62,20 +62,20 @@ const routes = [
   { path: PAGE_OWNER_GET + "/:id", component: PageOwnerGet },
   { path: PAGE_OWNERS_GET, component: PageOwnersGet },
   //entry
-  { path: PAGE_ENTRY_CREATE, component: PageEntryCreate },
+  { path: PAGE_ENTRY_CREATE, component: PageRecordCreate },
   // update
   {
     path: PAGE_ENTRY_UPDATE + "/:id",
-    component: PageEntryUpdate,
+    component: PageRecordUpdate,
   },
   // слияние 2 в 1 --------------------
   {
     path: PAGE_ENTRY_UPDATE,
-    component: PageEntryUpdate,
+    component: PageRecordUpdate,
   },
   {
     path: PAGE_ENTRY_GET + "/:id",
-    component: PageEntryGet,
+    component: PageRecordGet,
   },
   // questionnaire
   { path: PAGE_QUESTIONNAIRES_GET, component: PageQuestionnairesGet },

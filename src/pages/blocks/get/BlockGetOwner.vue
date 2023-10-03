@@ -21,9 +21,6 @@
       </div>
       <div class="item"><span>Электронная почта : </span>{{ owner.email }}</div>
       <div class="item">
-        <span>Доля в собственности : </span>{{ owner.shareInRealEstate }}
-      </div>
-      <div class="item">
         <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
       </div>
     </div>
@@ -55,13 +52,6 @@ export default {
       if (this.owner.photoName) {
         return require(`@/assets/owners/${this.owner.photoName}.png`);
       }
-      // if (!this.owner || !this.owner.photo || !this.owner.photoUrl) {
-      //   return;
-      // } ifelse(this.owner.photo) {
-      //   return require(`@/assets/owners/${this.owner.photo.name}.png`);
-      // }ifelse(this.owner.photoUrl){
-      //   return require(`@/assets/owners/${this.owner.photoUrl}.png`);
-      // }
     },
   },
 };

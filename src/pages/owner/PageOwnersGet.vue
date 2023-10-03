@@ -9,7 +9,7 @@
   <owner-item :style="{ color: 'brown' }" :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
     <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
-      <owner-item :owner="one" :count="index + 1" />
+      <owner-item :owner="one" :count="index + 1" :flagShare="false"/>
     </div>
   </div>
 </template>
@@ -31,7 +31,6 @@ export default {
         dateBirth: "Дата рождения",
         email: "E-mail",
         phoneNumber: "Номер телефона",
-        shareInRealEstate: "Доля в собственности",
       },
       PAGE_OWNER_GET,
     };

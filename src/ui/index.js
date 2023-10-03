@@ -31,6 +31,7 @@ import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 // --------------- pages blocks create --------------------------------
+import BlockCreateShare from "@/pages/blocks/create/BlockCreateShare.vue";
 import BlockCreateVehicle from "@/pages/blocks/create/BlockCreateVehicle.vue";
 import BlockCreatePlaceWork from "@/pages/blocks/create/BlockCreatePlaceWork.vue";
 import BlockCreateOwner from "@/pages/blocks/create/BlockCreateOwner.vue";
@@ -38,6 +39,7 @@ import BlockCreatePassport from "@/pages/blocks/create/BlockCreatePassport.vue";
 import BlockCreateOwnership from "@/pages/blocks/create/BlockCreateOwnership.vue";
 import BlockCreateAddress from "@/pages/blocks/create/BlockCreateAddress.vue";
 // --------------- pages blocks edit --------------------------------
+import BlockUpdateShare from "@/pages/blocks/update/BlockUpdateShare.vue";
 import BlockUpdateVehicle from "@/pages/blocks/update/BlockUpdateVehicle.vue";
 import BlockUpdatePlaceWork from "@/pages/blocks/update/BlockUpdatePlaceWork.vue";
 import BlockUpdateOwner from "@/pages/blocks/update/BlockUpdateOwner.vue";
@@ -86,19 +88,21 @@ export default [
   OwnershipItem,
   QuestionnaireItem,
   // ---- create -----
+  BlockCreateShare,
   BlockCreatePlaceWork,
   BlockCreateAddress,
   BlockCreateOwnership,
   BlockCreateOwner,
   BlockCreatePassport,
-  // ---- edit -----
   BlockCreateVehicle,
+  // ---- update -----
   BlockUpdateVehicle,
   BlockUpdatePlaceWork,
   BlockUpdateAddress,
   BlockUpdateOwnership,
   BlockUpdateOwner,
   BlockUpdatePassport,
+  BlockUpdateShare,
   // ---- read -----
   BlockGetVehicle,
   BlockGetPlaceWork,

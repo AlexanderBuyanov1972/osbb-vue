@@ -85,7 +85,7 @@ import { generateVehicle } from "@/pages/_functions/generate";
 export default {
   name: "block-create-vehicle",
   props:{
-    client:Object
+    vehicleProps:Object
   },
   data() {
     return {
@@ -108,7 +108,6 @@ export default {
       this.$emit("isValidVehicle", this.isValidVehicle);
       this.$emit("vehicle", this.vehicle);
     },
-
     handlerTypeVehicle(value) {
       this.validTypeVehicle = value;
       this.emitVehicle();
@@ -142,7 +141,10 @@ export default {
     },
   },
   updated() {
-    this.vehicle = this.client.vehicle;
+    this.vehicle = this.vehicleProps;
+  },
+  mounted() {
+    this.vehicle = this.vehicleProps;
   },
 };
 </script>

@@ -22,6 +22,7 @@
         :count="index + 1"
         @click="() => this.$router.push(PAGE_OWNER_GET + '/' + two.id)"
         :flag="true"
+        :flagShare="true"
       />
     </p>
   </div>

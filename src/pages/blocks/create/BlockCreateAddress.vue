@@ -1,17 +1,16 @@
 <template>
   <div class="main">
     <line-header text="Адресс собственности" :style="{ color: 'brown' }" />
-
     <div class="address">
       <div class="zipCode">
         <block-error-message
           :field="address.zipCode"
-          messageFalse="Укажите индекс."
-          messageTrue="Индекс (XXXXX)."
+          messageFalse="Укажите индекс"
+          messageTrue="Индекс (XXXXX)"
           @valid="(value) => (validZipCode = value)"
         />
         <input-simple
-          v-model="address.zipCode"
+          v-model.trim="address.zipCode"
           placeholder="Индекс"
           :readonly="true"
         />
@@ -20,12 +19,12 @@
       <div class="country">
         <block-error-message
           :field="address.country"
-          messageFalse="Укажите страну."
-          messageTrue="Страна."
+          messageFalse="Укажите страну"
+          messageTrue="Страна"
           @valid="(value) => (validCountry = value)"
         />
         <input-simple
-          v-model="address.country"
+          v-model.trim="address.country"
           placeholder="Страна"
           :readonly="true"
         />
@@ -34,12 +33,12 @@
       <div class="region">
         <block-error-message
           :field="address.region"
-          messageFalse="Укажите регион."
-          messageTrue="Регион."
+          messageFalse="Укажите регион"
+          messageTrue="Регион"
           @valid="(value) => (validRegion = value)"
         />
         <input-simple
-          v-model="address.region"
+          v-model.trim="address.region"
           placeholder="Регион"
           :readonly="true"
         />
@@ -48,12 +47,12 @@
       <div class="city">
         <block-error-message
           :field="address.city"
-          messageFalse="Укажите город."
-          messageTrue="Город."
+          messageFalse="Укажите город"
+          messageTrue="Город"
           @valid="(value) => (validCity = value)"
         />
         <input-simple
-          v-model="address.city"
+          v-model.trim="address.city"
           placeholder="Город"
           :readonly="true"
         />
@@ -62,12 +61,12 @@
       <div class="street">
         <block-error-message
           :field="address.street"
-          messageFalse="Укажите название улицы."
-          messageTrue="Улица."
+          messageFalse="Укажите название улицы"
+          messageTrue="Улица"
           @valid="(value) => (validStreet = value)"
         />
         <input-simple
-          v-model="address.street"
+          v-model.trim="address.street"
           placeholder="Улица"
           :readonly="true"
         />
@@ -76,12 +75,12 @@
       <div class="house">
         <block-error-message
           :field="address.house"
-          messageFalse="Укажите номер дома."
-          messageTrue="Дом."
+          messageFalse="Укажите номер дома"
+          messageTrue="Дом"
           @valid="(value) => (validHouse = value)"
         />
         <input-simple
-          v-model="address.house"
+          v-model.trim="address.house"
           placeholder="Дом"
           :readonly="true"
         />
@@ -90,8 +89,8 @@
       <div class="entrance">
         <block-error-message
           :field="address.entrance"
-          messageFalse="Укажите номер подъезда."
-          messageTrue="Подъезд."
+          messageFalse="Укажите номер подъезда"
+          messageTrue="Подъезд"
           @valid="(value) => handlerValidEntrance(value)"
         />
         <input-simple v-model.trim="address.entrance" placeholder="Подъезд" />
@@ -100,8 +99,8 @@
       <div class="floor">
         <block-error-message
           :field="address.floor"
-          messageFalse="Укажите этаж."
-          messageTrue="Этаж."
+          messageFalse="Укажите этаж"
+          messageTrue="Этаж"
           @valid="(value) => handlerValidFloor(value)"
         />
         <input-simple v-model.trim="address.floor" placeholder="Этаж" />
@@ -110,8 +109,8 @@
       <div class="apartment">
         <block-error-message
           :field="address.apartment"
-          messageFalse="Укажите номер квартиры."
-          messageTrue="Квартира."
+          messageFalse="Укажите номер квартиры"
+          messageTrue="Квартира"
           @valid="(value) => handlerValidApartment(value)"
         />
         <input-simple v-model.trim="address.apartment" placeholder="Квартира" />
@@ -123,21 +122,11 @@
 export default {
   name: "block-create-address",
   props: {
-    room: Object,
+    addressProps: Object,
   },
   data() {
     return {
-      address: {
-        zipCode: "51931",
-        country: "Украина",
-        region: "Днепропетровская область",
-        city: "Каменское",
-        street: "Свободы",
-        house: "51",
-        entrance: "",
-        floor: "",
-        apartment: "",
-      },
+      address: {},
       validZipCode: false,
       validCountry: false,
       validRegion: false,
@@ -183,14 +172,10 @@ export default {
     },
   },
   updated() {
-    this.address.entrance = this.room.entrance;
-    this.address.floor = this.room.floor;
-    this.address.apartment = this.room.apartment;
+    this.address = this.addressProps;
   },
   mounted() {
-    this.address.entrance = this.room.entrance;
-    this.address.floor = this.room.floor;
-    this.address.apartment = this.room.apartment;
+    this.address = this.addressProps;
   },
 };
 </script>

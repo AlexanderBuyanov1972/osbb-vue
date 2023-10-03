@@ -98,19 +98,6 @@
         <input-simple v-model.trim="owner.phoneNumber" placeholder="Телефон" />
       </div>
 
-      <div class="shareInRealEstate">
-        <block-error-message
-          :field="owner.shareInRealEstate"
-          messageFalse="Укажите долю в собственности (от 0 до 1, три знака после точки)"
-          messageTrue="Доля в собственности (от 0 до 1, три знака после точки)"
-          @valid="(value) => handlerShareInRealEstate(value)"
-        />
-        <input-simple
-          v-model.number="owner.shareInRealEstate"
-          placeholder="Доля в собственности (от 0 до 1, три знака после точки)"
-        />
-      </div>
-
       <div class="beneficiary">
         <block-error-message
           :field="owner.beneficiary"
@@ -160,7 +147,6 @@ export default {
       validFamilyStatus: false,
       validEmail: false,
       validPhoneNumber: false,
-      validShareInRealEstate: false,
       validBeneficiary: false,
     };
   },
@@ -203,10 +189,6 @@ export default {
       this.validPhoneNumber = value;
       this.emitOwner();
     },
-    handlerShareInRealEstate(value) {
-      this.validShareInRealEstate = value;
-      this.emitOwner();
-    },
     handlerBeneficiary(value) {
       this.validBeneficiary = value;
       this.emitOwner();
@@ -223,7 +205,6 @@ export default {
         this.validFamilyStatus &&
         this.validEmail &&
         this.validPhoneNumber &&
-        this.validShareInRealEstate &&
         this.validBeneficiary
       );
     },

@@ -76,7 +76,7 @@ import { generatePassport } from "@/pages/_functions/generate";
 export default {
   name: "block-create-passport",
   props:{
-    client:Object
+    passportProps:Object
   },
   data() {
     return {
@@ -128,7 +128,10 @@ export default {
     },
   },
   updated() {
-    this.passport = this.client.passport;
+    this.passport = this.passportProps
+  },
+  mounted() {
+    this.passport = this.passportProps
   },
 };
 </script>

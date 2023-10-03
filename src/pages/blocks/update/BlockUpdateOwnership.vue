@@ -152,13 +152,13 @@
       <div class="heatMeter">
         <block-error-message
           :field="ownership.heatMeter"
-          messageFalse="Теплоснабжение"
-          messageTrue="Теплоснабжение"
+          messageFalse="Тепловой счётчик"
+          messageTrue="Тепловой счётчик"
           @valid="(value) => handlerHeatMeter(value)"
         />
         <input-simple
           v-model.trim="ownership.heatMeter"
-          placeholder="Теплоснабжение"
+          placeholder="Тепловой счётчик"
         />
       </div>
     </div>

@@ -11,7 +11,7 @@
         v-model="apartment"
         :style="{ width: '65px' }"
       />
-      <button-delete v-show="this.checkApartment" @click="fetchRoom"
+      <button-delete v-show="this.checkApartment" @click="fetchOwnership"
         >{{ GET }}
       </button-delete>
       <div class="title">Введите Ф.И.О. :</div>
@@ -20,57 +20,68 @@
         v-model="fullName"
         :style="{ width: '350px' }"
       />
-      <button-delete v-show="this.checkFullName" @click="fetchClient"
+      <button-delete v-show="this.checkFullName" @click="fetchOwner"
         >{{ GET }}
       </button-delete>
     </div>
 
     <div class="blocks">
-      <div class="ownership">
-        <block-create-ownership
-          @ownership="(data) => (record.ownership = data)"
-          @isValidOwnership="(value) => (isValidOwnership = value)"
-          :room="room"
-        />
-      </div>
-      <div class="address">
-        <block-create-address
-          @address="(data) => (record.ownership.address = data)"
-          @isValidAddress="(value) => (isValidAddress = value)"
-          :room="room"
-        />
+      <div class="ownership_address">
+        <div class="ownership">
+          <block-create-ownership
+            @ownership="(data) => (record.ownership = data)"
+            @isValidOwnership="(value) => (isValidOwnership = value)"
+            :ownershipProps="record.ownership"
+          />
+        </div>
+        <div class="address">
+          <block-create-address
+            @address="(data) => (record.ownership.address = data)"
+            @isValidAddress="(value) => (isValidAddress = value)"
+            :addressProps="record.ownership.address"
+          />
+        </div>
       </div>
 
-      <div class="list">
-        <div class="block1">
+      <div class="owner_other">
+        <div class="owner_passport_share">
           <div class="owner">
             <block-create-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
-              :ownerProps="client"
+              :ownerProps="record.owner"
             />
           </div>
-          <div class="passport">
-            <block-create-passport
-              @passport="(data) => (record.owner.passport = data)"
-              @isValidPassport="(value) => (isValidPassport = value)"
-              :client="client"
-            />
+          <div class="passport_share">
+            <div class="passport">
+              <block-create-passport
+                @passport="(data) => (record.owner.passport = data)"
+                @isValidPassport="(value) => (isValidPassport = value)"
+                :passportProps="record.owner.passport"
+              />
+            </div>
+            <div class="share">
+              <block-update-share
+                @share="(data) => (share.value = data)"
+                @isValidShare="(value) => (isValidShare = value)"
+                :shareProps="share.value"
+              />
+            </div>
           </div>
         </div>
-        <div class="block2">
+        <div class="placeWork_vehicle">
           <div class="placeWork">
             <block-create-place-work
               @placeWork="(data) => (record.owner.placeWork = data)"
               @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
-              :client="client"
+              :placeWorkProps="record.owner.placeWork"
             />
           </div>
           <div class="vehicle">
             <block-create-vehicle
               @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
-              :client="client"
+              :vehicleProps="record.owner.vehicle"
             />
           </div>
         </div>
@@ -98,8 +109,6 @@ export default {
     return {
       apartment: "",
       fullName: "",
-      room: {},
-      client: {},
       record: {
         ownership: {
           address: {},
@@ -110,12 +119,14 @@ export default {
           vehicle: generateVehicle(),
         },
       },
+      share: {},
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
       isValidPassport: false,
       isValidPlaceWork: false,
       isValidVehicle: false,
+      isValidShare: false,
       SEND_TO_SERVER,
       GET,
       PAGE_ENTRY_GET,
@@ -123,28 +134,33 @@ export default {
   },
   methods: {
     ...mapActions({
+      createShare: "share/createShare",
       createOwner: "owner/createOwner",
       createRecord: "record/createRecord",
-      fetchRoomByApartment: "ownership/fetchRoomByApartment",
+      fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
     sendOwnership() {
       this.record.owner.photo = generatePhoto();
       this.createOwner(this.record.owner).then(() => {
         this.record.owner = this.getOwner;
-        this.createRecord(this.record).then(() => {
-          this.$router.push(PAGE_ENTRY_GET + "/" + this.room.id);
+        this.share.owner = this.getOwner;
+        this.share.ownership = this.getOwnership;
+        this.createShare(this.share).then(() => {
+          this.createRecord(this.record).then(() => {
+            this.$router.push(PAGE_ENTRY_GET + "/" + this.getOwnership.id);
+          });
         });
       });
     },
-    fetchRoom() {
-      this.fetchRoomByApartment(this.apartment).then(() => {
-        this.room = this.getRoom;
+    fetchOwnership() {
+      this.fetchOwnershipByApartment(this.apartment).then(() => {
+        this.record.ownership = this.getOwnership;
       });
     },
-    fetchClient() {
+    fetchOwner() {
       this.fetchOwnerByFullName(this.fullName).then(() => {
-        this.client = this.getOwner;
+        this.record.owner = this.getOwner;
       });
     },
   },
@@ -155,7 +171,7 @@ export default {
     ...mapGetters({
       getIsLoading: "ownership/getIsLoading",
       getMessages: "ownership/getMessages",
-      getRoom: "ownership/getRoom",
+      getOwnership: "ownership/getOwnership",
       getOwner: "owner/getOwner",
     }),
     isValid() {
@@ -165,7 +181,8 @@ export default {
         this.isValidOwner &&
         this.isValidPassport &&
         this.isValidPlaceWork &&
-        this.isValidVehicle
+        this.isValidVehicle &&
+        this.isValidShare
       );
     },
     checkApartment() {
@@ -190,33 +207,33 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 }
-.list {
+.ownership_address,
+.owner_other {
+  width: 48%;
+}
+.ownership_address,
+.owner_passport_share {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
-}
-
-.block1,
-.block2 {
-  display: flex;
-  justify-content: space-around;
-  align-items: start;
-  margin: 0px 0px 10px 0px;
-  width: 97%;
-}
-.passport,
-.owner {
-  margin: 5px;
-  width: 45%;
 }
 .ownership,
 .address,
 .vehicle,
-.placeWork {
-  margin: 5px;
-  width: 40%;
+.owner,
+.ownership_address,
+.placeWork,
+.passport_share {
+  width: 48%;
+}
+.owner_other {
+  display: flex;
+  flex-direction: column;
+}
+.placeWork_vehicle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 hr {
   margin: 25px 0px;

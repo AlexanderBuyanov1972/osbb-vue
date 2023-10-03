@@ -6,12 +6,12 @@
       <div class="zipCode">
         <block-error-message
           :field="address.zipCode"
-          messageFalse="Укажите индекс."
-          messageTrue="Индекс (XXXXX)."
-          @valid="(value) => handlerZipCode(value)"
+          messageFalse="Укажите индекс"
+          messageTrue="Индекс (XXXXX)"
+          @valid="(value) => (validZipCode = value)"
         />
         <input-simple
-          v-model="address.zipCode"
+          v-model.trim="address.zipCode"
           placeholder="Индекс"
           :readonly="true"
         />
@@ -20,12 +20,12 @@
       <div class="country">
         <block-error-message
           :field="address.country"
-          messageFalse="Укажите страну."
-          messageTrue="Страна."
-          @valid="(value) => handlerCountry(value)"
+          messageFalse="Укажите страну"
+          messageTrue="Страна"
+          @valid="(value) => (validCountry = value)"
         />
         <input-simple
-          v-model="address.country"
+          v-model.trim="address.country"
           placeholder="Страна"
           :readonly="true"
         />
@@ -34,12 +34,12 @@
       <div class="region">
         <block-error-message
           :field="address.region"
-          messageFalse="Укажите регион."
-          messageTrue="Регион."
-          @valid="(value) => handlerRegion(value)"
+          messageFalse="Укажите регион"
+          messageTrue="Регион"
+          @valid="(value) => (validRegion = value)"
         />
         <input-simple
-          v-model="address.region"
+          v-model.trim="address.region"
           placeholder="Регион"
           :readonly="true"
         />
@@ -48,12 +48,12 @@
       <div class="city">
         <block-error-message
           :field="address.city"
-          messageFalse="Укажите город."
-          messageTrue="Город."
-          @valid="(value) => handlerCity(value)"
+          messageFalse="Укажите город"
+          messageTrue="Город"
+          @valid="(value) => (validCity = value)"
         />
         <input-simple
-          v-model="address.city"
+          v-model.trim="address.city"
           placeholder="Город"
           :readonly="true"
         />
@@ -62,12 +62,12 @@
       <div class="street">
         <block-error-message
           :field="address.street"
-          messageFalse="Укажите название улицы."
-          messageTrue="Улица."
-          @valid="(value) => handlerStreet(value)"
+          messageFalse="Укажите название улицы"
+          messageTrue="Улица"
+          @valid="(value) => (validStreet = value)"
         />
         <input-simple
-          v-model="address.street"
+          v-model.trim="address.street"
           placeholder="Улица"
           :readonly="true"
         />
@@ -76,13 +76,13 @@
       <div class="house">
         <block-error-message
           :field="address.house"
-          messageFalse="Укажите номер дома."
-          messageTrue="Дом."
-          @valid="(value) => handlerHouse(value)"
+          messageFalse="Укажите номер дома"
+          messageTrue="Дом"
+          @valid="(value) => (validHouse = value)"
         />
         <input-simple
-          v-model="address.house"
-          placeholder="Дом."
+          v-model.trim="address.house"
+          placeholder="Дом"
           :readonly="true"
         />
       </div>
@@ -90,35 +90,34 @@
       <div class="entrance">
         <block-error-message
           :field="address.entrance"
-          messageFalse="Укажите номер подъезда."
-          messageTrue="Подъезд."
+          messageFalse="Укажите номер подъезда"
+          messageTrue="Подъезд"
           @valid="(value) => handlerEntrance(value)"
         />
-        <input-simple v-model="address.entrance" placeholder="Подъезд." />
+        <input-simple v-model.trim="address.entrance" placeholder="Подъезд" />
       </div>
 
       <div class="floor">
         <block-error-message
           :field="address.floor"
-          messageFalse="Укажите этаж."
-          messageTrue="Этаж."
+          messageFalse="Укажите этаж"
+          messageTrue="Этаж"
           @valid="(value) => handlerFloor(value)"
         />
-        <input-simple v-model="address.floor" placeholder="Этаж." />
+        <input-simple v-model.trim="address.floor" placeholder="Этаж" />
       </div>
 
       <block-error-message
         :field="address.apartment"
-        messageFalse="Укажите номер квартиры."
-        messageTrue="Квартира."
+        messageFalse="Укажите номер квартиры"
+        messageTrue="Квартира"
         @valid="(value) => handlerApartment(value)"
       />
-      <input-simple v-model="address.apartment" placeholder="Квартира." />
+      <input-simple v-model.trim="address.apartment" placeholder="Квартира" />
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "block-update-address",
   props: {
@@ -143,30 +142,6 @@ export default {
       this.$emit("isValidAddress", this.isValidAddress);
       this.$emit("address", this.address);
     },
-    handlerZipCode(value) {
-      this.validZipCode = value;
-      this.emitAddress();
-    },
-    handlerCountry(value) {
-      this.validCountry = value;
-      this.emitAddress();
-    },
-    handlerRegion(value) {
-      this.validRegion = value;
-      this.emitAddress();
-    },
-    handlerCity(value) {
-      this.validCity = value;
-      this.emitAddress();
-    },
-    handlerStreet(value) {
-      this.validStreet = value;
-      this.emitAddress();
-    },
-    handlerHouse(value) {
-      this.validHouse = value;
-      this.emitAddress();
-    },
     handlerEntrance(value) {
       this.validEntrance = value;
       this.emitAddress();
@@ -180,11 +155,7 @@ export default {
       this.emitAddress();
     },
   },
-
   computed: {
-    ...mapGetters({
-      getOwnership: "ownership/getOwnership",
-    }),
     isValidAddress() {
       return (
         this.validZipCode &&

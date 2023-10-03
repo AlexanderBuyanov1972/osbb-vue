@@ -24,19 +24,20 @@
     </div>
 
     <div class="blocks">
-      <div class="ownership">
-        <!-- <block-create-ownership
+      <div class="ownership_address">
+        <div class="ownership">
+          <!-- <block-create-ownership
           @ownership="(data) => (record.ownership = data)"
           @isValidOwnership="(value) => (isValidOwnership = value)"
           :ownershipProps="record.ownership"
         /> -->
-        <block-update-ownership
-          @ownership="(data) => (record.ownership = data)"
-          @isValidOwnership="(value) => (isValidOwnership = value)"
-          :ownershipProps="record.ownership"
-        />
-      </div>
-      <!-- <div class="address">
+          <block-update-ownership
+            @ownership="(data) => (record.ownership = data)"
+            @isValidOwnership="(value) => (isValidOwnership = value)"
+            :ownershipProps="record.ownership"
+          />
+        </div>
+        <!-- <div class="address">
         <block-create-address
           @address="(data) => (record.ownership.address = data)"
           @isValidAddress="(value) => (isValidAddress = value)"
@@ -44,23 +45,24 @@
         />
       </div> -->
 
-      <div class="address">
-        <block-update-address
-          @address="(data) => (record.ownership.address = data)"
-          @isValidAddress="(value) => (isValidAddress = value)"
-          :addressProps="record.ownership.address"
-        />
+        <div class="address">
+          <block-update-address
+            @address="(data) => (record.ownership.address = data)"
+            @isValidAddress="(value) => (isValidAddress = value)"
+            :addressProps="record.ownership.address"
+          />
+        </div>
       </div>
 
-      <div class="list">
-        <div class="block1">
-      <!-- <div class="owner">
+      <div class="owner_other">
+        <div class="owner_passport_share">
+          <!-- <div class="owner">
             <block-update-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
               :ownerProps="record.owner"
             />
-          </div> -->    
+          </div> -->
           <div class="owner">
             <block-create-owner
               @owner="(data) => (record.owner = data)"
@@ -75,17 +77,24 @@
               :passportProps="record.owner.passport"
             />
           </div> -->
-
-          <div class="passport">
-            <block-update-passport
-              @passport="(data) => (record.owner.passport = data)"
-              @isValidPassport="(value) => (isValidPassport = value)"
-              :passportProps="record.owner.passport"
-            />
+          <div class="passport_share">
+            <div class="passport">
+              <block-update-passport
+                @passport="(data) => (record.owner.passport = data)"
+                @isValidPassport="(value) => (isValidPassport = value)"
+                :passportProps="record.owner.passport"
+              />
+            </div>
+            <div class="share">
+              <block-update-share
+                @share="(data) => (share.value = data)"
+                @isValidShare="(value) => (isValidShare = value)"
+                :shareProps="share.value"
+              />
+            </div>
           </div>
         </div>
-        <div class="block2">
-
+        <div class="placeWork_vehicle">
           <!-- <div class="placeWork">
             <block-create-place-work
               @placeWork="(data) => (record.owner.placeWork = data)"
@@ -102,7 +111,6 @@
             />
           </div>
           <div class="vehicle">
-            
             <!-- <div class="vehicle">
             <block-create-vehicle
               @vehicle="(data) => (record.owner.vehicle = data)"
@@ -146,6 +154,7 @@ export default {
           vehicle: {},
         },
       },
+      share: { value: 0 },
 
       isValidOwnership: false,
       isValidAddress: false,
@@ -153,6 +162,7 @@ export default {
       isValidPassport: false,
       isValidPlaceWork: false,
       isValidVehicle: false,
+      isValidShare: false,
       SEND_TO_SERVER,
       GET,
       PAGE_ENTRY_GET,
@@ -162,13 +172,20 @@ export default {
     ...mapActions({
       fetchRecordByApartmentAndFullName:
         "record/fetchRecordByApartmentAndFullName",
+      fecthShareByApartmentAndFullName:
+        "share/fecthShareByApartmentAndFullName",
       updateOwner: "owner/updateOwner",
       updateOwnership: "ownership/updateOwnership",
+      updateRecord: "record/updateRecord",
+      updateShare: "share/updateShare",
     }),
     sendOwnership() {
+      this.updateShare(this.share);
       this.updateOwner(this.record.owner).then(() => {
         this.updateOwnership(this.record.ownership).then(() => {
-          this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+          this.updateRecord(this.record).then(() => {
+            this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+          });
         });
       });
     },
@@ -178,6 +195,12 @@ export default {
         fullName: this.fullName,
       }).then(() => {
         this.record = this.getRecord;
+        this.fecthShareByApartmentAndFullName({
+          apartment: this.apartment,
+          fullName: this.fullName,
+        }).then(() => {
+          this.share = this.getShare;
+        });
       });
     },
   },
@@ -189,6 +212,7 @@ export default {
       getIsLoading: "record/getIsLoading",
       getMessages: "record/getMessages",
       getRecord: "record/getRecord",
+      getShare: "share/getShare",
     }),
     isValid() {
       return (
@@ -197,7 +221,8 @@ export default {
         this.isValidOwner &&
         this.isValidPassport &&
         this.isValidPlaceWork &&
-        this.isValidVehicle
+        this.isValidVehicle &&
+        this.isValidShare
       );
     },
     checkInputs() {
@@ -221,34 +246,35 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 }
-.list {
+.ownership_address,
+.owner_other {
+  width: 48%;
+}
+.ownership_address,
+.owner_passport_share {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
-}
-
-.block1,
-.block2 {
-  display: flex;
-  justify-content: space-around;
-  align-items: start;
-  margin: 0px 0px 10px 0px;
-  width: 97%;
-}
-.passport,
-.owner {
-  margin: 5px;
-  width: 45%;
 }
 .ownership,
 .address,
 .vehicle,
-.placeWork {
-  margin: 5px;
-  width: 40%;
+.owner,
+.ownership_address,
+.placeWork,
+.passport_share {
+  width: 48%;
 }
+.owner_other {
+  display: flex;
+  flex-direction: column;
+}
+.placeWork_vehicle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
 hr {
   margin: 25px 0px;
   color: teal;

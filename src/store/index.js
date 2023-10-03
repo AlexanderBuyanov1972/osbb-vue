@@ -9,6 +9,7 @@ import registry from "@/store/registryModule";
 import photo from "@/store/photoModule";
 import questionnaire from "@/store/questionnaireModule";
 import record from "@/store/recordModule";
+import share from "@/store/shareModule";
 
 export default createStore({
   modules: {
@@ -22,5 +23,6 @@ export default createStore({
     photo,
     questionnaire,
     record,
+    share,
   },
 });

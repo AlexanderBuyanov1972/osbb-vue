@@ -73,8 +73,8 @@
 import { generatePlaceWork } from "@/pages/_functions/generate";
 export default {
   name: "block-create-place-work",
-  props:{
-    client:Object
+  props: {
+    placeWorkProps: Object,
   },
   data() {
     return {
@@ -124,7 +124,10 @@ export default {
     },
   },
   updated() {
-    this.placeWork = this.client.placeWork;
+    this.placeWork = this.placeWorkProps;
+  },
+  mounted() {
+    this.placeWork = this.placeWorkProps;
   },
 };
 </script>

@@ -1,4 +1,8 @@
 import { faker } from "@faker-js/faker";
+import { createOwner } from "@/http/owner";
+import { createOwnership } from "@/http/ownership";
+import { createShare } from "@/http/share";
+import { createRecord } from "@/http/record";
 
 export const generatePassport = () => {
   return {
@@ -35,7 +39,7 @@ export const generatePhoto = () => {
 };
 
 // generate Json ---------------
-export const generateJsonEntries = () => {
+export const generateJsonEntries = async () => {
   // общее количество квартир вдоме
   const countApartment = 84;
   // общее количество квартир в подъезде
@@ -54,6 +58,7 @@ export const generateJsonEntries = () => {
     currentApartment <= countApartment;
     currentApartment++
   ) {
+    // create owner ------------------------
     let owner = {
       firstName: faker.person.lastName() + "",
       secondName: faker.person.lastName() + "",
@@ -66,7 +71,6 @@ export const generateJsonEntries = () => {
           .birthdate({ min: 16, max: 85, mode: "age" })
           .toISOString()
           .substring(0, 10) + "",
-      shareInRealEstate: 1.0,
       familyStatus: faker.helpers.arrayElement(["MARRIED", "SINGLE"]),
       beneficiary: "NO",
       passport: generatePassport(),
@@ -74,7 +78,7 @@ export const generateJsonEntries = () => {
       placeWork: generatePlaceWork(),
       photo: generatePhoto(),
     };
-
+    // create ownership -------------------------
     let ownership = {
       typeRoom: faker.helpers.arrayElement([
         "APARTMENT",
@@ -90,7 +94,6 @@ export const generateJsonEntries = () => {
       ]),
       numberRooms: faker.number.int({ min: 1, max: 5 }),
       loggia: faker.helpers.arrayElement([true, false]),
-      //-------------
       gasSupply: "централизованное",
       gasMeter: "счётчик №",
       waterSupply: "централизованное",
@@ -107,17 +110,26 @@ export const generateJsonEntries = () => {
         street: "Свободы",
         house: "51",
         entrance: currentEntrance + "",
-
         floor: currentFloor + "",
-
         apartment: currentApartment + "",
       },
     };
 
-    let record = {};
-    record.owner = owner;
-    record.ownership = ownership;
-    result.push(record);
+    let responseOwner = await createOwner(owner);
+    let responseOwnership = await createOwnership(ownership);
+    // create share --------------------
+    let share = {
+      value: 1.0,
+      owner: responseOwner.data,
+      ownership: responseOwnership.data,
+    };
+    await createShare(share);
+    // create record ---------------------------
+    let record = {
+      owner: responseOwner.data,
+      ownership: responseOwnership.data,
+    };
+    await createRecord(record);
 
     if (currentApartment % countFloor == 0) {
       currentFloor++;
@@ -128,14 +140,12 @@ export const generateJsonEntries = () => {
       currentFloor = 1;
     }
   }
-
-  return result;
 };
 
 export const generateJsonQuestionnaires = () => {
   const list = [];
   const title = "Вопрос о создании ОСББ";
-  const byWhom = "Гриценко Елена Дмитриевна";
+  const byWhom = "Горбунков Семён Дмитриевна";
   let questions = [
     "Согласны ли вы утвердить состав инициативной группы",
     "Согласны ли вы утвердить Иванова С.С. секретарём сборов",

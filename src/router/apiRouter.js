@@ -1,10 +1,10 @@
 export const PAGE_MAIN = "/";
 // --------- entry ----------------
-export const PAGE_ENTRY_CREATE = "/entry/create";
-export const PAGE_ENTRY_UPDATE = "/entry/update";
-export const PAGE_ENTRY_GET = "/entry/get";
-export const PAGE_ENTRY_DELETE = "/entry/delete";
-export const PAGE_ENTRIES_GET = "/entry/get";
+export const PAGE_ENTRY_CREATE = "/record/create";
+export const PAGE_ENTRY_UPDATE = "/record/update";
+export const PAGE_ENTRY_GET = "/record/get";
+export const PAGE_ENTRY_DELETE = "/record/delete";
+export const PAGE_ENTRIES_GET = "/record/get";
 // --------- owner ----------------
 export const PAGE_OWNER_GET = "/owner/get";
 export const PAGE_OWNER_UPDATE = "/owner/update";

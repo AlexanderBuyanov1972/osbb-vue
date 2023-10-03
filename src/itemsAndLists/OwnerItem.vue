@@ -11,10 +11,10 @@
     <div class="email">
       <span v-show="flag">Email : </span>{{ owner.email }}
     </div>
-    <div class="share">
-      <span v-show="flag">Доля : </span>{{ owner.shareInRealEstate }}
+    <div class="share" v-show="flagShare">
+      <span v-show="flag">Доля : </span>{{ owner.share }}
     </div>
-  </div>
+    </div>
 </template>
 <script>
 import {
@@ -28,6 +28,7 @@ export default {
     owner: Object,
     count: Number,
     flag: Boolean,
+    flagShare: Boolean,
   },
   data() {
     return {
@@ -59,19 +60,16 @@ export default {
   width: 5%;
 }
 .name {
-  width: 25%;
+  width: 30%;
 }
 .phone {
   width: 25%;
 }
 
 .email {
-  width: 30%;
+  width: 25%;
 }
 
-.share {
-  width: 20%;
-}
 span {
   color: teal;
 }

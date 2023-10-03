@@ -39,7 +39,8 @@ export default {
       createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
     }),
     sendToServerDataBase() {
-      this.createAllRecord(this.generateJsonEntries());
+      // this.createAllRecord(this.generateJsonEntries());
+      this.generateJsonEntries();
     },
     sendToServerQuestionnaire() {
       this.createAllQuestionnaire(this.generateJsonQuestionnaires());

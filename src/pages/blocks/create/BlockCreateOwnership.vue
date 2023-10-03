@@ -152,13 +152,13 @@
       <div class="heatMeter">
         <block-error-message
           :field="ownership.heatMeter"
-          messageFalse="Теплоснабжение"
-          messageTrue="Теплоснабжение"
+          messageFalse="Тепловой счётчик"
+          messageTrue="Тепловой счётчик"
           @valid="(value) => handlerHeatMeter(value)"
         />
         <input-simple
           v-model.trim="ownership.heatMeter"
-          placeholder="Теплоснабжение"
+          placeholder="Тепловой счётчик"
         />
       </div>
     </div>
@@ -179,7 +179,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "block-create-ownership",
   props: {
-    room: Object,
+    ownershipProps: Object,
   },
   data() {
     return {
@@ -285,10 +285,10 @@ export default {
     },
   },
   updated() {
-    this.ownership = this.room;
+    this.ownership = this.ownershipProps;
   },
   mounted() {
-    this.ownership = this.room;
+    this.ownership = this.ownershipProps;
   },
 };
 </script>
