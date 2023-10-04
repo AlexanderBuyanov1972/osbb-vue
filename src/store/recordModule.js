@@ -8,6 +8,7 @@ import {
   getRoomsAndClientsByOwnershipId,
   getRoomsAndClientsByOwnerId,
   getRecordByApartmentAndFullName,
+  deleteRecordByOwnerIdAndOwnershipId,
 } from "@/http/record";
 
 export default {
@@ -176,7 +177,29 @@ export default {
     async fetchRecordByApartmentAndFullName({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await getRecordByApartmentAndFullName(payload.apartment, payload.fullName);
+        const response = await getRecordByApartmentAndFullName(
+          payload.apartment,
+          payload.fullName
+        );
+        if (response != undefined && response.data != undefined) {
+          commit("setRecord", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async deleteRecordByOwnerIdAndOwnershipId({ commit }, payload) {
+      try {
+        commit("setIsLoading", true);
+        const response = await deleteRecordByOwnerIdAndOwnershipId(
+          payload.ownerId,
+          payload.ownershipId
+        );
         if (response != undefined && response.data != undefined) {
           commit("setRecord", response.data);
           commit("setMessages", response.messages);

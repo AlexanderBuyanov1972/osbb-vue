@@ -4,7 +4,7 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <div class="blocks">
-      <div class="" v-for="(map, index) in getResult" :key="index">
+      <div class="" v-for="(map, index) in list" :key="index">
         <line-header
           :text="
             index == 0
@@ -12,32 +12,37 @@
               : 'Результаты опроса в квадратных метрах'
           "
         />
-        <line-header
-          :style="{ color: 'brown' }"
-          :text="index == 0 ? compute : computeDouble"
-        />
+        <line-header :style="{ color: 'brown' }" :text="compute(index)" />
         <div class="block" v-for="key in Object.keys(map)" :key="key">
           <div class="question">{{ key }}</div>
           <div class="item">
             За :
-            {{ result(map, key, "BEHIND") }}
+            {{
+              index == 0
+                ? Object.keys(result(map, key, "BEHIND")).length
+                : result(map, key, "BEHIND")
+            }}
           </div>
           <div class="item">
             Против :
-            {{ result(map, key, "AGAINST") }}
+            {{
+              index == 0
+                ? Object.keys(result(map, key, "AGAINST")).length
+                : result(map, key, "AGAINST")
+            }}
           </div>
           <div class="item">
             Воздержался :
-            {{ result(map, key, "ABSTAINED") }}
+            {{
+              index == 0
+                ? Object.keys(result(map, key, "ABSTAINED")).length
+                : result(map, key, "ABSTAINED")
+            }}
           </div>
           <vue-hr />
           <div class="item">
             Всего проголосовало :
-            {{
-              result(map, key, "BEHIND") +
-              result(map, key, "AGAINST") +
-              result(map, key, "ABSTAINED")
-            }}
+            {{ summa(index) }}
             из {{ index == 1 ? summaTotalArea : countOwners }}
           </div>
         </div>
@@ -50,8 +55,9 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      list: [],
       countOwners: 0,
-      summaTotalArea: 0,
+      summaTotalArea: 0.0,
     };
   },
   methods: {
@@ -59,12 +65,45 @@ export default {
       fetchResultQuestionnaire: "questionnaire/fetchResultQuestionnaire",
       fetchBuildingCharacteristics: "registry/fetchBuildingCharacteristics",
     }),
-    result(map, key, str) {
-      return map[key][str] == null ? 0 : map[key][str];
+    result(map, key, answer) {
+      return map[key][answer] == null ? 0 : map[key][answer];
     },
     aroundString(value) {
       let str = value + "";
       return str.substring(str.indexOf("." + 2));
+    },
+    compute(ind) {
+      let itog = ind === 0 ? this.countOwners : this.summaTotalArea;
+      return `Обработано ${((this.summa(ind) / itog) * 100).toFixed(
+        2
+      )} % листов опроса`;
+    },
+    summa(ind) {
+      let question = Object.keys(this.list[0])[0];
+      let result = 0;
+      //--------------------------------------
+      // const answers = ["BEHIND", "AGAINST", "ABSTAINED"];
+      // for (let answer in answers) {
+      //   let line = this.result(this.list[0], question, answer);
+      // result = ind === 0 ? (result + line) : (result + Object.keys(line).length);
+      // }
+      // return result;
+      //---------------------------------------
+
+      if (ind === 0) {
+        //list[0] - data question:answer:{fullName:number}
+        result =
+          Object.keys(this.result(this.list[0], question, "BEHIND")).length +
+          Object.keys(this.result(this.list[0], question, "AGAINST")).length +
+          Object.keys(this.result(this.list[0], question, "ABSTAINED")).length;
+      } else {
+        //list[1] - data question:answer:double
+        result =
+          this.result(this.list[1], question, "BEHIND") +
+          this.result(this.list[1], question, "AGAINST") +
+          this.result(this.list[1], question, "ABSTAINED");
+      }
+      return result;
     },
   },
   computed: {
@@ -75,27 +114,9 @@ export default {
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
     }),
     check() {
-      return this.fetchResultQuestionnaire(this.$route.params.title);
-    },
-    compute() {
-      const keys = Object.keys(this.getResult[0]);
-      let summa =
-        this.result(this.getResult[0], keys[0], "BEHIND") +
-        this.result(this.getResult[0], keys[0], "AGAINST") +
-        this.result(this.getResult[0], keys[0], "ABSTAINED");
-      return `Обработано ${((summa / this.countOwners) * 100).toFixed(
-        2
-      )} % листов опроса`;
-    },
-    computeDouble() {
-      const keys = Object.keys(this.getResult[0]);
-      let summa =
-        this.result(this.getResult[1], keys[1], "BEHIND") +
-        this.result(this.getResult[1], keys[1], "AGAINST") +
-        this.result(this.getResult[1], keys[1], "ABSTAINED");
-      return `Обработано ${((summa / this.summaTotalArea) * 100).toFixed(
-        2
-      )} % листов опроса`;
+      this.fetchResultQuestionnaire(this.$route.params.title).then(() => {
+        this.list = this.getResult;
+      });
     },
   },
   mounted() {
@@ -117,7 +138,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.blocks{
+.blocks {
   display: flex;
   align-items: center;
   justify-content: space-between;

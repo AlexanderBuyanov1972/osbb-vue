@@ -35,8 +35,8 @@ export default {
   methods: {
     ...mapActions({
       updateAllQuestionnaire: "questionnaire/updateAllQuestionnaire",
-      fetchAllQuestionnaireByTitleAndFullName:
-        "questionnaire/fetchAllQuestionnaireByTitleAndFullName",
+      fetchAllQuestionnaireByTitleAndFullNameAndApartment:
+        "questionnaire/fetchAllQuestionnaireByTitleAndFullNameAndApartment",
     }),
     sendToServer() {
       this.updateAllQuestionnaire(this.list).then(() => this.$router.back());
@@ -64,8 +64,9 @@ export default {
     const payload = {
       title: this.$route.params.title,
       fullName: this.$route.params.fullName,
+      apartment: this.$route.params.apartment,
     };
-    this.fetchAllQuestionnaireByTitleAndFullName(payload).then(() => {
+    this.fetchAllQuestionnaireByTitleAndFullNameAndApartment(payload).then(() => {
       this.list = this.getQuestionnaires;
       this.info.dateDispatch = this.list[0].dateDispatch;
       this.info.byWhom = this.list[0].byWhom;

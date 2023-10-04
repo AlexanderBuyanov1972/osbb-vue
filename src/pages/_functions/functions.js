@@ -150,8 +150,8 @@ export const mapAddressToLineAddress = (address) => {
   );
 };
 // получение строки ФИО из объекта
-export const mapOwnerToLineFullNamesOwner = (fio) => {
-  return fio.lastName + " " + fio.firstName + " " + fio.secondName;
+export const mapOwnerToLineFullNamesOwner = (owner) => {
+  return owner.lastName + " " + owner.firstName + " " + owner.secondName;
 };
 
 // слияние двух массивов и удаление одинаковых сообщений.

@@ -4,7 +4,7 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Создание записи." />
-    <div class="">
+    <div class="search">
       <div class="title">Введите № помещения :</div>
       <input-simple
         class="input"
@@ -24,18 +24,17 @@
         >{{ GET }}
       </button-delete>
     </div>
-
     <div class="blocks">
       <div class="ownership_address">
         <div class="ownership">
-          <block-create-ownership
+          <block-update-ownership
             @ownership="(data) => (record.ownership = data)"
             @isValidOwnership="(value) => (isValidOwnership = value)"
             :ownershipProps="record.ownership"
           />
         </div>
         <div class="address">
-          <block-create-address
+          <block-update-address
             @address="(data) => (record.ownership.address = data)"
             @isValidAddress="(value) => (isValidAddress = value)"
             :addressProps="record.ownership.address"
@@ -46,7 +45,7 @@
       <div class="owner_other">
         <div class="owner_passport_share">
           <div class="owner">
-            <block-create-owner
+            <block-update-owner
               @owner="(data) => (record.owner = data)"
               @isValidOwner="(value) => (isValidOwner = value)"
               :ownerProps="record.owner"
@@ -54,7 +53,7 @@
           </div>
           <div class="passport_share">
             <div class="passport">
-              <block-create-passport
+              <block-update-passport
                 @passport="(data) => (record.owner.passport = data)"
                 @isValidPassport="(value) => (isValidPassport = value)"
                 :passportProps="record.owner.passport"
@@ -71,14 +70,14 @@
         </div>
         <div class="placeWork_vehicle">
           <div class="placeWork">
-            <block-create-place-work
+            <block-update-place-work
               @placeWork="(data) => (record.owner.placeWork = data)"
               @isValidPlaceWork="(value) => (isValidPlaceWork = value)"
               :placeWorkProps="record.owner.placeWork"
             />
           </div>
           <div class="vehicle">
-            <block-create-vehicle
+            <block-update-vehicle
               @vehicle="(data) => (record.owner.vehicle = data)"
               @isValidVehicle="(value) => (isValidVehicle = value)"
               :vehicleProps="record.owner.vehicle"

@@ -10,7 +10,7 @@
         @click="
           () =>
             this.$router.push(
-              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullName
+              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullName + '/' + one.apartment
             )
         "
       >

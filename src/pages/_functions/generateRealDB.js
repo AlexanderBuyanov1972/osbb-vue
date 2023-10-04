@@ -79,6 +79,9 @@ export const generateSvobody51 = async () => {
       },
     };
 
+    let responseOwner = await createOwner(owner);
+    let responseOwnership = await createOwnership(ownership);
+
     let share = {
       value: 1.0,
       owner: responseOwner.data,

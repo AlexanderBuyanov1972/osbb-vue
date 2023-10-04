@@ -98,7 +98,7 @@ const routes = [
   },
   // ----------------------------------------------------------
   {
-    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullName",
+    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullName" + "/:apartment",
     component: PageQuestionnaireAnswer,
   },
   {

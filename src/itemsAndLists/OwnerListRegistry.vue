@@ -1,7 +1,5 @@
 <template>
   <div class="list"  v-for="item in list">
-
-    <!-- clients -->
     <div
       class="item"
       v-for="one in item.clients"
@@ -16,7 +14,6 @@
       {{ one.phoneNumber }}
     </div>
 
-    <!-- rooms -->
     <div v-for="(two, index) in item.rooms" :key="two.id">
       <ownership-item
         class="ownership"
@@ -26,7 +23,6 @@
         :flag="true"
       />
     </div>
-
   </div>
 </template>
 <script>

@@ -9,7 +9,8 @@
   <owner-item :style="{ color: 'brown' }" :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
     <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
-      <owner-item :owner="one" :count="index + 1" :flagShare="false"/>
+      <owner-item :owner="one" :count="index + 1" 
+      :class="!one.active? ['active'] : []" />
     </div>
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
   methods: {
     ...mapActions({
       fetchAllOwner: "owner/getAllOwner",
+      getListApartmentsByFullName: "ownership/getListApartmentsByFullName",
     }),
   },
   computed: {
@@ -60,5 +62,8 @@ export default {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+.active{
+  background-color: hotpink;
 }
 </style>

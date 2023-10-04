@@ -10,6 +10,7 @@ import {
   getResultQuestionnaire,
 } from "@/http/questionnaire";
 import {
+  getAllQuestionnaireByTitleAndFullNameAndApartment,
   getAllQuestionnaireByTitleAndFullName,
   getAllQuestionnaireByTitleAndByApartment,
   getAllQuestionnaireByTitle,
@@ -216,6 +217,30 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    async fetchAllQuestionnaireByTitleAndFullNameAndApartment(
+      { commit },
+      payload
+    ) {
+      try {
+        commit("setIsLoading", true);
+        const response =
+          await getAllQuestionnaireByTitleAndFullNameAndApartment(
+            payload.title,
+            payload.fullName,
+            payload.apartment
+          );
+        if (response != undefined && response.data != undefined) {
+          commit("setQuestionnaires", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
     async fetchAllQuestionnaireByTitle({ commit }, title) {
       try {
         commit("setIsLoading", true);
@@ -256,7 +281,7 @@ export default {
         commit("setIsLoading", true);
         const response = await getAllTitleOfQuestionnaire();
         if (response != undefined && response.data != undefined) {
-          commit("setTitles", ['Выберите тему опроса', ...response.data]);
+          commit("setTitles", ["Выберите тему опроса", ...response.data]);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -268,10 +293,9 @@ export default {
       }
     },
     async fetchResultQuestionnaire({ commit }, title) {
-      let response = null;
       try {
         commit("setIsLoading", true);
-        response = await getResultQuestionnaire(title);
+        const response = await getResultQuestionnaire(title);
         if (response != undefined && response.data != undefined) {
           commit("setResult", response.data);
           commit("setMessages", response.messages);

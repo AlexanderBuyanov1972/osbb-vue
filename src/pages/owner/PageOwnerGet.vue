@@ -1,10 +1,20 @@
 <template>
   <header-data-owners></header-data-owners>
   <vue-loader :isLoader="this.getIsLoading" />
-  <header-messages :messages="this.getMessages" />
+  <header-messages :messages="messages" />
+  <block-search-apartment
+    @messages="(value) => (messages = value)"
+    :owner="getOwner"
+  />
   <line-header
     :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(this.getOwner)}`"
   />
+  <button-delete
+    :style="{ color: 'red', 'border-color': 'red' }"
+    v-show="!owner.active"
+    @click="removeOwner"
+    >Удалить из базы данных</button-delete
+  >
   <block-get-owner :owner="owner" />
   <div class="items">
     <block-get-passport :passport="passport" />
@@ -17,6 +27,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
+import { PAGE_OWNERS_GET } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -25,12 +36,20 @@ export default {
       passport: {},
       placeWork: {},
       vehicle: {},
+      messages: [],
+      PAGE_OWNERS_GET,
     };
   },
   methods: {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
+      deleteOwner: "owner/deleteOwner",
     }),
+    removeOwner() {
+      this.deleteOwner(this.owner.id).then(() => {
+        this.$router.push(PAGE_OWNERS_GET);
+      });
+    },
   },
   mounted() {
     this.fetchOwner(this.$route.params.id).then(() => {
@@ -43,7 +62,6 @@ export default {
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
-      getMessages: "owner/getMessages",
       getIsLoading: "owner/getIsLoading",
     }),
   },
@@ -62,4 +80,3 @@ export default {
   justify-content: space-between;
 }
 </style>
-@/pages/functions/functions @/pages/bills/_functions/functions

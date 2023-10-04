@@ -1,6 +1,5 @@
 <template>
-  <div class="list"  v-for="item in list">
-    <!-- rooms -->
+  <div class="list" v-for="item in list">
     <div
       class="item"
       v-for="one in item.rooms"
@@ -15,34 +14,60 @@
       >
       {{ one.totalArea }} м2
     </div>
-
     <p v-for="(two, index) in item.clients" :key="two.id">
-      <owner-item
+      <div >
+        <owner-item
         :owner="two"
         :count="index + 1"
-        @click="() => this.$router.push(PAGE_OWNER_GET + '/' + two.id)"
         :flag="true"
-        :flagShare="true"
-      />
-    </p>
+        />
+        <button-delete :style="{'color':'red'}" v-show="two.share === 0"
+         @click="()=>removeOwner(two.id, item.rooms[0].id)" >Деактивировать</button-delete>
+      </div>
+     </p>
   </div>
 </template>
 <script>
-import { PAGE_OWNERSHIP_GET, PAGE_OWNER_GET } from "@/router/apiRouter";
+import { PAGE_OWNERSHIP_GET, PAGE_OWNER_GET,PAGE_OWNERS_GET } from "@/router/apiRouter";
 import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
 import OwnerItem from "./OwnerItem.vue";
+import { mapActions } from "vuex";
 export default {
   components: { OwnerItem },
   data() {
     return {
       PAGE_OWNERSHIP_GET,
+      PAGE_OWNERS_GET,
       PAGE_OWNER_GET,
       mapOwnerToLineFullNamesOwner,
+     
     };
   },
   props: {
     list: Object,
   },
+
+  methods:{
+    ...mapActions({
+      deleteShareByOwnerIdAndOwnershipId:
+        "share/deleteShareByOwnerIdAndOwnershipId",
+      deleteRecordByOwnerIdAndOwnershipId:
+        "record/deleteRecordByOwnerIdAndOwnershipId",
+    }),
+    removeOwner(ownerId, ownershipId) {
+          const payload = { 
+            ownerId,
+            ownershipId,
+        };
+        this.deleteShareByOwnerIdAndOwnershipId(payload).then(() => {
+          this.deleteRecordByOwnerIdAndOwnershipId(payload).then(() => {
+            this.$router.push(PAGE_OWNERS_GET);
+          });
+        });
+      
+    },
+  },
+
 };
 </script>
 <style scoped>
@@ -63,5 +88,8 @@ export default {
 }
 span {
   color: teal;
+}
+.danger{
+  background-color: lightcoral;
 }
 </style>

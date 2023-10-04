@@ -18,6 +18,28 @@ export const getAllQuestionnaireByTitleAndFullName = async (
   );
   return response.data;
 };
+
+export const getAllQuestionnaireByTitleAndFullNameAndApartment = async (
+  title,
+  fullName,
+  apartment
+) => {
+  const response = await axios.get(
+    API_BASE +
+      SELECT +
+      TITLE +
+      FULLNAME +
+      APARTMENT +
+      "/" +
+      title +
+      "/" +
+      fullName +
+      "/" +
+      apartment
+  );
+  return response.data;
+};
+
 export const getAllQuestionnaireByTitleAndByApartment = async (
   title,
   apartment

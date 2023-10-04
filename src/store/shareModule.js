@@ -8,6 +8,7 @@ import {
   getAllShare,
   deleteAllShare,
   getShareByApartmentAndFullName,
+  deleteShareByOwnerIdAndOwnershipId,
 } from "@/http/share";
 
 export default {
@@ -185,6 +186,25 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await deleteAllShare();
+        if (response != undefined && response.data != undefined) {
+          commit("setShares", []);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async deleteShareByOwnerIdAndOwnershipId({ commit }, payload) {
+      try {
+        commit("setIsLoading", true);
+        const response = await deleteShareByOwnerIdAndOwnershipId(
+          payload.ownerId,
+          payload.ownershipId
+        );
         if (response != undefined && response.data != undefined) {
           commit("setShares", []);
           commit("setMessages", response.messages);

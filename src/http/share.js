@@ -50,3 +50,13 @@ export const deleteAllShare = async () => {
   const response = await axios.delete(API_BASE + SHARE + ALL);
   return response.data;
 };
+// deleteShareByOwnerIdAndOwnershipId ------
+export const deleteShareByOwnerIdAndOwnershipId = async (
+  ownerId,
+  ownershipId
+) => {
+  const response = await axios.delete(
+    API_BASE + SHARE  + "/" + ownerId + "/" + ownershipId
+  );
+  return response.data;
+};

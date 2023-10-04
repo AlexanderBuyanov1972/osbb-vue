@@ -8,6 +8,7 @@ import {
   createAllOwnership,
   getOwnershipByApartment,
   getRoomByApartment,
+  getListApartmentsByFullName,
 } from "@/http/ownership";
 
 export default {
@@ -190,6 +191,22 @@ export default {
         if (response != undefined && response.data != undefined) {
           commit("setRoom", response.data);
           commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async getListApartmentsByFullName({ commit }, fullName) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getListApartmentsByFullName(fullName);
+        if (response != undefined && response.data != undefined) {
+         commit("setOwnership", response.data);
+         commit("setMessages", response.message);
         } else {
           commit("setMessages", response.messages);
         }

@@ -26,26 +26,19 @@ import LineHeader from "@/components/LineHeader.vue";
 import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
 import BlockInformationQuestionnaire from "@/pages/blocks/BlockInformationQuestionnaire.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
+import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 // --------------- items and lists -------------------
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
-// --------------- pages blocks create --------------------------------
-import BlockCreateShare from "@/pages/blocks/create/BlockCreateShare.vue";
-import BlockCreateVehicle from "@/pages/blocks/create/BlockCreateVehicle.vue";
-import BlockCreatePlaceWork from "@/pages/blocks/create/BlockCreatePlaceWork.vue";
-import BlockCreateOwner from "@/pages/blocks/create/BlockCreateOwner.vue";
-import BlockCreatePassport from "@/pages/blocks/create/BlockCreatePassport.vue";
-import BlockCreateOwnership from "@/pages/blocks/create/BlockCreateOwnership.vue";
-import BlockCreateAddress from "@/pages/blocks/create/BlockCreateAddress.vue";
 // --------------- pages blocks edit --------------------------------
-import BlockUpdateShare from "@/pages/blocks/update/BlockUpdateShare.vue";
-import BlockUpdateVehicle from "@/pages/blocks/update/BlockUpdateVehicle.vue";
-import BlockUpdatePlaceWork from "@/pages/blocks/update/BlockUpdatePlaceWork.vue";
-import BlockUpdateOwner from "@/pages/blocks/update/BlockUpdateOwner.vue";
-import BlockUpdatePassport from "@/pages/blocks/update/BlockUpdatePassport.vue";
-import BlockUpdateOwnership from "@/pages/blocks/update/BlockUpdateOwnership.vue";
-import BlockUpdateAddress from "@/pages/blocks/update/BlockUpdateAddress.vue";
+import BlockEditShare from "@/pages/blocks/edit/BlockEditShare.vue";
+import BlockEditVehicle from "@/pages/blocks/edit/BlockEditVehicle.vue";
+import BlockEditPlaceWork from "@/pages/blocks/edit/BlockEditPlaceWork.vue";
+import BlockEditOwner from "@/pages/blocks/edit/BlockEditOwner.vue";
+import BlockEditPassport from "@/pages/blocks/edit/BlockEditPassport.vue";
+import BlockEditOwnership from "@/pages/blocks/edit/BlockEditOwnership.vue";
+import BlockEditAddress from "@/pages/blocks/edit/BlockEditAddress.vue";
 // --------------- pages blocks read --------------------------------
 import BlockGetVehicle from "@/pages/blocks/get/BlockGetVehicle.vue";
 import BlockGetPlaceWork from "@/pages/blocks/get/BlockGetPlaceWork.vue";
@@ -83,26 +76,19 @@ export default [
   BlockErrorMessage,
   BlockInformationAboutHouse,
   BlockInformationQuestionnaire,
+  BlockSearchApartment,
   // ---- items ---------
   OwnerItem,
   OwnershipItem,
   QuestionnaireItem,
-  // ---- create -----
-  BlockCreateShare,
-  BlockCreatePlaceWork,
-  BlockCreateAddress,
-  BlockCreateOwnership,
-  BlockCreateOwner,
-  BlockCreatePassport,
-  BlockCreateVehicle,
   // ---- update -----
-  BlockUpdateVehicle,
-  BlockUpdatePlaceWork,
-  BlockUpdateAddress,
-  BlockUpdateOwnership,
-  BlockUpdateOwner,
-  BlockUpdatePassport,
-  BlockUpdateShare,
+  BlockEditVehicle,
+  BlockEditPlaceWork,
+  BlockEditAddress,
+  BlockEditOwnership,
+  BlockEditOwner,
+  BlockEditPassport,
+  BlockEditShare,
   // ---- read -----
   BlockGetVehicle,
   BlockGetPlaceWork,
