@@ -1,4 +1,5 @@
 // /
+import PageNotFound from "@/pages/PageNotFound.vue";
 import PageMain from "@/pages/PageMain.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
@@ -11,7 +12,9 @@ import PageQuestionnaireResult from "@/pages/questionnaire/PageQuestionnaireResu
 // owner
 import PageOwnerGet from "@/pages/owner/PageOwnerGet.vue";
 import PageOwnersGet from "@/pages/owner/PageOwnersGet.vue";
+import PageOwnerUpdate from "@/pages/owner/PageOwnerUpdate.vue";
 // ownership
+import PageOwnershipUpdate from "@/pages/ownership/PageOwnershipUpdate.vue";
 import PageOwnershipGet from "@/pages/ownership/PageOwnershipGet.vue";
 import PageOwnershipsGet from "@/pages/ownership/PageOwnershipsGet.vue";
 // record
@@ -24,6 +27,7 @@ import PageBillsGet from "@/pages/bills/PageBillsGet.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import {
   //
+  PAGE_NOT_FOUND,
   PAGE_MAIN,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
@@ -36,9 +40,11 @@ import {
   // owner
   PAGE_OWNER_GET,
   PAGE_OWNERS_GET,
+  PAGE_OWNER_UPDATE,
   // ownership
   PAGE_OWNERSHIP_GET,
   PAGE_OWNERSHIPS_GET,
+  PAGE_OWNERSHIP_UPDATE,
   // entry
   PAGE_ENTRY_CREATE,
   PAGE_ENTRY_UPDATE,
@@ -50,6 +56,7 @@ import {
 const routes = [
   // /
   { path: PAGE_MAIN, component: PageMain },
+  { path: PAGE_NOT_FOUND, component: PageNotFound },
   { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwners },
   {
     path: PAGE_REGISTRY_OWNERSHIPS,
@@ -58,7 +65,9 @@ const routes = [
   // ownership
   { path: PAGE_OWNERSHIPS_GET, component: PageOwnershipsGet },
   { path: PAGE_OWNERSHIP_GET + "/:id", component: PageOwnershipGet },
+  { path: PAGE_OWNERSHIP_UPDATE + "/:id", component: PageOwnershipUpdate },
   // owner
+  { path: PAGE_OWNER_UPDATE + "/:id", component: PageOwnerUpdate },
   { path: PAGE_OWNER_GET + "/:id", component: PageOwnerGet },
   { path: PAGE_OWNERS_GET, component: PageOwnersGet },
   //entry

@@ -9,14 +9,16 @@
       <span v-show="flag">Квартира № : </span>
       {{ ownership.apartment }}
     </div>
+    <div class="personal_area">
+      <span v-show="flag">Лицевой счёт : </span>
+      {{ ownership.personalAccount }}
+    </div>
+
     <div class="total_area">
       <span v-show="flag">Общая площадь : </span>
       {{ ownership.totalArea }}
     </div>
-    <div class="living_area">
-      <span v-show="flag">Жилая площадь : </span>
-      {{ ownership.livingArea }}
-    </div>
+
     <div class="number_rooms">
       <span v-show="flag">Кол-во комнат : </span>
       {{ ownership.numberRooms }}
@@ -79,7 +81,7 @@ export default {
   width: 15%;
 }
 .total_area,
-.living_area {
+.personal_area {
   width: 20%;
 }
 .loggia,

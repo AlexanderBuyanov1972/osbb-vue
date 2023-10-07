@@ -6,7 +6,7 @@ import { createRecord } from "@/http/record";
 
 export const generatePassport = () => {
   return {
-    numberPassport: "SELECT",
+    numberPassport: "нет",
     numberEntry: "нет",
     dateIssue: "1900-01-01",
     issuingAuthority: "нет",
@@ -16,7 +16,7 @@ export const generatePassport = () => {
 
 export const generatePlaceWork = () => {
   return {
-    businessName: "SELECT",
+    businessName: "нет",
     address: "нет",
     numberPhone: "нет",
     position: "нет",
@@ -26,7 +26,7 @@ export const generatePlaceWork = () => {
 
 export const generateVehicle = () => {
   return {
-    typeVehicle: "SELECT",
+    typeVehicle: "NO",
     numberVehicle: "нет",
     yearOfIssue: "нет",
     typeColor: "NO",
@@ -80,6 +80,7 @@ export const generateJsonEntries = async () => {
     };
     // create ownership -------------------------
     let ownership = {
+      personalAccount: "62001904" + currentApartment,
       typeRoom: faker.helpers.arrayElement([
         "APARTMENT",
         "NON_RESIDENTIAL_ROOM",

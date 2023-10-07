@@ -23,7 +23,7 @@
           @click="this.$router.push(PAGE_OWNER_GET + '/' + one.id)"
           :key="one.id"
         >
-          <block-get-owner :owner="one" />
+          <block-get-owner :owner="one" :ownershipId="rooms[0].id" />
         </div>
       </div>
     </div>
@@ -34,17 +34,15 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { ENTRY_UPDATE } from "@/ui/namesButton";
 import {
-  PAGE_ENTRY_UPDATE,
+  PAGE_RECORD_UPDATE,
   PAGE_OWNER_GET,
   PAGE_OWNERSHIP_GET,
 } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      ENTRY_UPDATE,
-      PAGE_ENTRY_UPDATE,
+      PAGE_RECORD_UPDATE,
       PAGE_OWNER_GET,
       PAGE_OWNERSHIP_GET,
       rooms: [],
@@ -73,15 +71,13 @@ export default {
       getIsLoading: "ownership/getIsLoading",
     }),
     start() {
-      this.fetchAddress(this.$route.params.id).then(()=> {
+      this.fetchAddress(this.$route.params.id).then(() => {
         this.address = this.getAddress;
       });
-      this.fetchRoomsAndClientsByOwnershipId(this.$route.params.id).then(
-        () => {
-          this.rooms = this.getRecord.rooms;
-          this.clients = this.getRecord.clients;
-        }
-      );
+      this.fetchRoomsAndClientsByOwnershipId(this.$route.params.id).then(() => {
+        this.rooms = this.getRecord.rooms;
+        this.clients = this.getRecord.clients;
+      });
     },
   },
 };

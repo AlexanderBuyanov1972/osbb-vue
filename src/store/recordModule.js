@@ -10,7 +10,6 @@ import {
   getRecordByApartmentAndFullName,
   deleteRecordByOwnerIdAndOwnershipId,
 } from "@/http/record";
-
 export default {
   state: () => ({
     record: {},

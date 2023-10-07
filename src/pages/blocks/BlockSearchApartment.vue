@@ -15,7 +15,7 @@
 import { mapActions, mapGetters } from "vuex";
 import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
 export default {
-    name:"block-search-apartment",
+  name: "block-search-apartment",
   data() {
     return {
       fullName: "",
@@ -35,6 +35,9 @@ export default {
           this.$emit("messages", this.getOwnership);
         });
     },
+    fillFullName() {
+      this.fullName = this.mapOwnerToLineFullNamesOwner(this.owner);
+    },
   },
   computed: {
     ...mapGetters({
@@ -42,7 +45,10 @@ export default {
     }),
   },
   mounted() {
-    this.fullName = this.mapOwnerToLineFullNamesOwner(this.owner);
+    this.fillFullName();
+  },
+  updated() {
+    this.fillFullName();
   },
 };
 </script>

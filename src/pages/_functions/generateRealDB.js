@@ -1,6 +1,11 @@
+import { createOwnership } from "@/http/ownership";
+import { createOwner } from "@/http/owner";
+import { createShare } from "@/http/share";
+import { createRecord } from "@/http/record";
+
 export const generatePassport = () => {
   return {
-    numberPassport: "SELECT",
+    numberPassport: "нет",
     numberEntry: "нет",
     dateIssue: "1900-01-01",
     issuingAuthority: "нет",
@@ -10,7 +15,7 @@ export const generatePassport = () => {
 
 export const generatePlaceWork = () => {
   return {
-    businessName: "SELECT",
+    businessName: "нет",
     address: "нет",
     numberPhone: "нет",
     position: "нет",
@@ -20,7 +25,7 @@ export const generatePlaceWork = () => {
 
 export const generateVehicle = () => {
   return {
-    typeVehicle: "SELECT",
+    typeVehicle: "NO",
     numberVehicle: "нет",
     yearOfIssue: "нет",
     typeColor: "NO",
@@ -28,74 +33,74 @@ export const generateVehicle = () => {
   };
 };
 
-export const generatePhotos = () => {
+export const generatePhoto = () => {
   return { name: "avatar", url: "@/photos/owners/avatar.png" };
+};
+
+export const generateOwner = () => {
+  return {
+    firstName: "нет",
+    secondName: "нет",
+    lastName: "нет",
+    gender: "NO",
+    email: "нет",
+    phoneNumber: "нет",
+    dateBirth: "1900-01-01",
+    familyStatus: "NO",
+    beneficiary: "NO",
+    passport: generatePassport(),
+    vehicle: generateVehicle(),
+    placeWork: generatePlaceWork(),
+    photo: generatePhoto(),
+  };
+};
+
+export const generateOwnership = () => {
+  return {
+    personalAccount: "6200190000",
+    typeRoom: "APARTMENT",
+    totalArea: 10.01,
+    livingArea: 10.01,
+    documentConfirmsRightOwn: "нет",
+    numberRooms: 1,
+    loggia: false,
+    gasSupply: "централизованное",
+    gasMeter: "счётчик №",
+    waterSupply: "централизованное",
+    waterMeter: "счётчик №",
+    sewerage: "централизованная",
+    heatSupply: "централизованное",
+    heatMeter: "нет",
+    address: {
+      zipCode: "51931",
+      country: "Украина",
+      region: "Днепропетровская область",
+      city: "Каменское",
+      street: "Свободы",
+      house: "51",
+      entrance: "нет",
+      floor: "нет",
+      apartment: "",
+    },
+  };
 };
 
 export const generateSvobody51 = async () => {
   for (let curAp = 1; curAp <= 84; curAp++) {
-    // owner ----------------------
-    let owner = {
-      firstName: "нет",
-      secondName: "нет",
-      lastName: "нет",
-      gender: "NO",
-      email: "нет",
-      phoneNumber: "нет",
-      dateBirth: "1900-01-01",
-      familyStatus: "NO",
-      beneficiary: "NO",
-      passport: generatePassport(),
-      vehicle: generateVehicle(),
-      placeWork: generatePlaceWork(),
-      photo: generatePhoto(),
-    };
-    // ownership ------------------
-    let ownership = {
-      typeRoom: "NO",
-      totalArea: 0.01,
-      livingArea: 0.01,
-      documentConfirmsRightOwn: "нет",
-      numberRooms: 0,
-      loggia: false,
-      gasSupply: "централизованное",
-      gasMeter: "счётчик №",
-      waterSupply: "централизованное",
-      waterMeter: "счётчик №",
-      sewerage: "централизованная",
-      heatSupply: "автономное",
-      heatMeter: "нет",
-      // address -------------
-      address: {
-        zipCode: "51931",
-        country: "Украина",
-        region: "Днепропетровская область",
-        city: "Каменское",
-        street: "Свободы",
-        house: "51",
-        entrance: "нет",
-        floor: "нет",
-        apartment: curAp + "",
-      },
-    };
-
+    let owner = generateOwner();
+    let ownership = generateOwnership();
     let responseOwner = await createOwner(owner);
     let responseOwnership = await createOwnership(ownership);
-
     let share = {
       value: 1.0,
       owner: responseOwner.data,
       ownership: responseOwnership.data,
     };
     await createShare(share);
-
     let record = {
       owner: responseOwner.data,
       ownership: responseOwnership.data,
     };
-
     await createRecord(record);
-
   }
-
 };

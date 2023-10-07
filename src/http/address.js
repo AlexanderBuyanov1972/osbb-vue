@@ -17,6 +17,10 @@ export const getAddress = async (id) => {
   const response = await axios.get(API_BASE + ADDRESS + "/" + id);
   return response.data;
 };
+export const getAddressStart = async () => {
+  const response = await axios.get(API_BASE + ADDRESS);
+  return response.data;
+};
 
 export const deleteAddress = async (id) => {
   const response = await axios.delete(API_BASE + ADDRESS + "/" + id);

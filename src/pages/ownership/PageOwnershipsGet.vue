@@ -6,11 +6,7 @@
     <line-header text="Список помещений" :style="{ color: 'blueviolet' }" />
     <ownership-item :style="{ color: 'brown' }" :ownership="header" count="№" />
     <div v-for="(one, index) in getOwnerships" :key="one.id">
-      <div
-        @click="
-          () => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)
-        "
-      >
+      <div @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)">
         <ownership-item :ownership="one" :count="index + 1" />
       </div>
     </div>
@@ -29,8 +25,8 @@ export default {
       PAGE_OWNERSHIP_GET,
       header: {
         typeRoom: "Тип помещения",
+        personalAccount: "Лицевой счёт",
         totalArea: "Общая площадь, м2",
-        livingArea: "Жилая площадь, м2",
         numberRooms: "Количество комнат",
         entrance: "Подъезд",
         floor: "Этаж",

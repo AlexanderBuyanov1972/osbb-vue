@@ -1,4 +1,5 @@
 export const PAGE_MAIN = "/";
+export const PAGE_NOT_FOUND = "/**";
 // --------- entry ----------------
 export const PAGE_ENTRY_CREATE = "/record/create";
 export const PAGE_ENTRY_UPDATE = "/record/update";
@@ -29,4 +30,4 @@ export const PAGE_QUESTIONNAIRE_ANSWER = "/questionnaire/answer";
 export const PAGE_QUESTIONNAIRE_RESULT = "/questionnaire/result";
 export const PAGE_QUESTIONNAIRES_GET = "/questionnaires/get";
 // bills
-export const PAGE_BILLS_GET = '/bills/get'
+export const PAGE_BILLS_GET = "/bills/get";

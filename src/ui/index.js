@@ -1,4 +1,7 @@
 // --------------- ui elements --------------------------------
+import DialogWindow from "@/ui/elements/DialogWindow.vue";
+import ImageShow from "@/ui/elements/ImageShow.vue";
+import ButtonDeactivate from "@/ui/elements/ButtonDeactivate.vue";
 import ButtonBills from "@/ui/elements/ButtonBills.vue";
 import ButtonEdit from "@/ui/elements/ButtonEdit.vue";
 import ButtonCreate from "@/ui/elements/ButtonCreate.vue";
@@ -32,6 +35,7 @@ import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 // --------------- pages blocks edit --------------------------------
+import BlockEditPhoto from "@/pages/blocks/edit/BlockEditPhoto.vue";
 import BlockEditShare from "@/pages/blocks/edit/BlockEditShare.vue";
 import BlockEditVehicle from "@/pages/blocks/edit/BlockEditVehicle.vue";
 import BlockEditPlaceWork from "@/pages/blocks/edit/BlockEditPlaceWork.vue";
@@ -46,9 +50,14 @@ import BlockGetOwner from "@/pages/blocks/get/BlockGetOwner.vue";
 import BlockGetPassport from "@/pages/blocks/get/BlockGetPassport.vue";
 import BlockGetOwnership from "@/pages/blocks/get/BlockGetOwnership.vue";
 import BlockGetAddress from "@/pages/blocks/get/BlockGetAddress.vue";
+// modals -----------------------
+import ModalAction from "@/modals/ModalAction";
 
 export default [
   // ---- elements -----
+  DialogWindow,
+  ImageShow,
+  ButtonDeactivate,
   ButtonBills,
   InputSimple,
   ButtonEdit,
@@ -89,6 +98,7 @@ export default [
   BlockEditOwner,
   BlockEditPassport,
   BlockEditShare,
+  BlockEditPhoto,
   // ---- read -----
   BlockGetVehicle,
   BlockGetPlaceWork,
@@ -96,4 +106,6 @@ export default [
   BlockGetOwnership,
   BlockGetOwner,
   BlockGetPassport,
+  // modals -----------
+  ModalAction,
 ];

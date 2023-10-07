@@ -2,6 +2,18 @@
   <div class="main">
     <line-header text="Собственность" :style="{ color: 'brown' }" />
     <div class="blocks">
+      <div class="personalAccount">
+        <block-error-message
+          :field="ownership.personalAccount"
+          messageFalse="Укажите лицевой счёт"
+          messageTrue="Лицевой счёт"
+          @valid="(value) => handlerPersonalAccount(value)"
+        />
+        <input-simple
+          v-model="ownership.personalAccount"
+          placeholder="Лицевой счёт"
+        />
+      </div>
       <div class="typeRoom">
         <block-error-message
           :field="ownership.typeRoom"
@@ -196,6 +208,7 @@ export default {
       validSewerage: false,
       validHeatSupply: false,
       validHeatMeter: false,
+      validPersonalAccount: false,
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
@@ -208,6 +221,10 @@ export default {
     emitOwnership() {
       this.$emit("isValidOwnership", this.isValidOwnership);
       this.$emit("ownership", this.ownership);
+    },
+    handlerPersonalAccount(value) {
+      this.validPersonalAccount = value;
+      this.emitOwnership();
     },
     handlerTypeRoom(value) {
       this.validTypeRoom = value;
@@ -277,7 +294,8 @@ export default {
         this.validWaterMeter &&
         this.validSewerage &&
         this.validHeatSupply &&
-        this.validHeatMeter
+        this.validHeatMeter &&
+        this.validPersonalAccount
       );
     },
   },

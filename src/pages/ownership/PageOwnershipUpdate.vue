@@ -1,0 +1,115 @@
+<template>
+  <header-data-ownerships></header-data-ownerships>
+  <div class="main">
+    <vue-loader :isLoader="this.getIsLoading" />
+    <header-messages :messages="getMessages" />
+    <line-header text="Редактирование собственности." />
+    <div class="blocks">
+      <div class="ownership">
+        <block-update-ownership
+          @ownership="(data) => (ownership = data)"
+          @isValidOwnership="(value) => (isValidOwnership = value)"
+          :ownershipProps="ownership"
+        />
+      </div>
+      <div class="address">
+        <block-update-address
+          @address="(data) => (ownership.address = data)"
+          @isValidAddress="(value) => (isValidAddress = value)"
+          :addressProps="address"
+        />
+      </div>
+    </div>
+    <vue-hr />
+    <button-back />
+    <button-simple @click="sendToServer" :hidden="!isValid">{{
+      SEND_TO_SERVER
+    }}</button-simple>
+  </div>
+  <dialog-window :show="showModal">
+    <modal-action
+      message="Вы действительно хотите обновить помещение?"
+      @close="showModal = false"
+      @successfuly="successfulyAction"
+    ></modal-action>
+  </dialog-window>
+</template>
+<script>
+import { mapActions, mapGetters } from "vuex";
+import { SEND_TO_SERVER } from "@/ui/namesButton";
+import { PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
+export default {
+  data() {
+    return {
+      showModal: false,
+      ownership: {},
+      address: {},
+      isValidOwnership: false,
+      isValidAddress: false,
+      SEND_TO_SERVER,
+      PAGE_OWNERSHIP_GET,
+    };
+  },
+  methods: {
+    ...mapActions({
+      updateOwnership: "ownership/updateOwnership",
+      fetchOwnership: "ownership/fetchOwnership",
+    }),
+    sendToServer() {
+      this.showModal = true;
+    },
+    successfulyAction() {
+      this.updateOwnership(this.ownership).then(() => {
+        this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getOwnership.id);
+      });
+    },
+    getOwnershipForEdit() {
+      this.fetchOwnership(this.$route.params.id).then(() => {
+        this.ownership = this.getOwnership;
+        this.address = this.getOwnership.address;
+      });
+    },
+  },
+  update() {
+    this.fetchOwnership();
+  },
+  computed: {
+    ...mapGetters({
+      getIsLoading: "ownership/getIsLoading",
+      getMessages: "ownership/getMessages",
+      getOwnership: "ownership/getOwnership",
+    }),
+    isValid() {
+      return this.isValidOwnership && this.isValidAddress;
+    },
+  },
+  updated() {
+    this.ownership = this.getOwnership;
+  },
+  mounted() {
+    this.getOwnershipForEdit();
+  },
+};
+</script>
+
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.blocks {
+  font-size: 1.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ownership,
+.address {
+  width: 48%;
+}
+hr {
+  margin: 25px 0px;
+  color: teal;
+}
+</style>

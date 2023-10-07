@@ -7,7 +7,7 @@
     :owner="getOwner"
   />
   <line-header
-    :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(this.getOwner)}`"
+    :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(getOwner)}`"
   />
   <button-delete
     :style="{ color: 'red', 'border-color': 'red' }"
@@ -23,11 +23,14 @@
   </div>
   <vue-hr />
   <button-back />
+  <button-edit @click="$router.push(PAGE_OWNER_UPDATE + '/' + owner.id)"
+    >Редактировать собственника</button-edit
+  >
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
-import { PAGE_OWNERS_GET } from "@/router/apiRouter";
+import { PAGE_OWNERS_GET, PAGE_OWNER_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -38,6 +41,7 @@ export default {
       vehicle: {},
       messages: [],
       PAGE_OWNERS_GET,
+      PAGE_OWNER_UPDATE,
     };
   },
   methods: {
@@ -50,6 +54,14 @@ export default {
         this.$router.push(PAGE_OWNERS_GET);
       });
     },
+  },
+  update() {
+    this.fetchOwner(this.$route.params.id).then(() => {
+      this.owner = this.getOwner;
+      this.passport = this.getOwner.passport;
+      this.placeWork = this.getOwner.placeWork;
+      this.vehicle = this.getOwner.vehicle;
+    });
   },
   mounted() {
     this.fetchOwner(this.$route.params.id).then(() => {

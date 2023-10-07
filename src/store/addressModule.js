@@ -2,6 +2,7 @@ import {
   createAddress,
   updateAddress,
   getAddress,
+  getAddressStart,
   deleteAddress,
 } from "@/http/address";
 
@@ -19,6 +20,7 @@ export default {
       floor: "",
       apartment: "",
     },
+    addressStart: {},
     messages: [],
     isLoading: false,
   }),
@@ -29,6 +31,9 @@ export default {
     },
     setAddress(state, object) {
       state.address = object;
+    },
+    setAddressStart(state, object) {
+      state.addressStart = object;
     },
     setMessages(state, messages) {
       state.messages = messages;
@@ -41,6 +46,9 @@ export default {
     },
     getAddress(state) {
       return state.address;
+    },
+    getAddressStart(state) {
+      return state.addressStart;
     },
     getMessages(state) {
       return state.messages;
@@ -86,6 +94,22 @@ export default {
         const response = await getAddress(id);
         if (response != undefined && response.data != undefined) {
           commit("setAddress", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchAddressStart({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getAddressStart();
+        if (response != undefined && response.data != undefined) {
+          commit("setAddressStart", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

@@ -15,16 +15,22 @@
     <vue-hr />
     <button-back />
 
+    <button-edit
+      @click="
+        this.$router.push(PAGE_OWNERSHIP_UPDATE + '/' + this.getOwnership.id)
+      "
+      >{{ OWNERSHIP_UPDATE }}
+    </button-edit>
     <button-simple
       @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.getOwnership.id)"
-      >{{ ENTRY_GET }}</button-simple
+      >Смотреть все записи по помещению</button-simple
     >
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { ENTRY_GET } from "@/ui/namesButton";
-import { PAGE_ENTRY_GET } from "@/router/apiRouter";
+import { ENTRY_GET, OWNERSHIP_UPDATE } from "@/ui/namesButton";
+import { PAGE_ENTRY_GET, PAGE_OWNERSHIP_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
@@ -34,14 +40,15 @@ export default {
         },
       },
       ENTRY_GET,
+      OWNERSHIP_UPDATE,
       PAGE_ENTRY_GET,
+      PAGE_OWNERSHIP_UPDATE,
     };
   },
   methods: {
     ...mapActions({
       fetchOwnership: "ownership/fetchOwnership",
     }),
-    
   },
 
   updated() {

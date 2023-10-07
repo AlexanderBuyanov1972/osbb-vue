@@ -31,6 +31,7 @@ export default {
     },
     questionnaires: [],
     messages: [],
+    message: "",
     titles: [],
     isLoading: false,
     result: {},
@@ -47,6 +48,9 @@ export default {
     },
     setMessages(state, messages) {
       state.messages = messages;
+    },
+    setMessage(state, message) {
+      state.message = message;
     },
     setTitles(state, array) {
       state.titles = array;
@@ -67,6 +71,9 @@ export default {
     },
     getMessages(state) {
       return state.messages;
+    },
+    getMessage(state) {
+      return state.message;
     },
     getTitles(state) {
       return state.titles;
@@ -197,7 +204,6 @@ export default {
         commit("setIsLoading", false);
       }
     },
-
     async fetchAllQuestionnaireByTitleAndFullName({ commit }, payload) {
       try {
         commit("setIsLoading", true);
@@ -293,6 +299,7 @@ export default {
       }
     },
     async fetchResultQuestionnaire({ commit }, title) {
+      const response = {};
       try {
         commit("setIsLoading", true);
         const response = await getResultQuestionnaire(title);

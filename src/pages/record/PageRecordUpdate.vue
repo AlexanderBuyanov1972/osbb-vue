@@ -10,7 +10,7 @@
       <input-simple
         class="input"
         v-model="apartment"
-        :style="{ width: '65px' }"
+        :style="{ width: '70px' }"
       />
       <div class="title">Введите Ф.И.О. :</div>
       <input-simple
@@ -86,18 +86,26 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendOwnership" :hidden="!isValid">{{
+    <button-simple @click="sendToServer" :hidden="!isValid">{{
       SEND_TO_SERVER
     }}</button-simple>
   </div>
+  <dialog-window :show="showModal">
+    <modal-action
+      message="Вы действительно хотите обновить запись?"
+      @close="showModal = false"
+      @successfuly="successfulyAction"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
-import { PAGE_ENTRY_GET } from "@/router/apiRouter";
+import { PAGE_ENTRY_GET, PAGE_NOT_FOUND } from "@/router/apiRouter";
 export default {
   data() {
     return {
+      showModal: false,
       apartment: "",
       fullName: "",
       record: {
@@ -121,6 +129,7 @@ export default {
       SEND_TO_SERVER,
       GET,
       PAGE_ENTRY_GET,
+      PAGE_NOT_FOUND,
     };
   },
   methods: {
@@ -134,7 +143,7 @@ export default {
       updateRecord: "record/updateRecord",
       updateShare: "share/updateShare",
     }),
-    sendOwnership() {
+    successfulyAction() {
       this.updateShare(this.share);
       this.updateOwner(this.record.owner).then(() => {
         this.updateOwnership(this.record.ownership).then(() => {
@@ -144,19 +153,26 @@ export default {
         });
       });
     },
+    sendToServer() {
+      this.showModal = true;
+    },
     fetchRecord() {
       this.fetchRecordByApartmentAndFullName({
         apartment: this.apartment,
         fullName: this.fullName,
-      }).then(() => {
-        this.record = this.getRecord;
-        this.fecthShareByApartmentAndFullName({
-          apartment: this.apartment,
-          fullName: this.fullName,
-        }).then(() => {
-          this.share = this.getShare;
+      })
+        .then(() => {
+          this.record = this.getRecord;
+          this.fecthShareByApartmentAndFullName({
+            apartment: this.apartment,
+            fullName: this.fullName,
+          }).then(() => {
+            this.share = this.getShare;
+          });
+        })
+        .catch((err) => {
+          this.$router.push(PAGE_NOT_FOUND);
         });
-      });
     },
   },
   update() {

@@ -9,7 +9,7 @@
       <input-simple
         class="input"
         v-model="apartment"
-        :style="{ width: '65px' }"
+        :style="{ width: '70px' }"
       />
       <button-delete v-show="this.checkApartment" @click="fetchOwnership"
         >{{ GET }}
@@ -24,6 +24,10 @@
         >{{ GET }}
       </button-delete>
     </div>
+    <button-create @click="createTypeOwnership"
+      >Типовое помещение</button-create
+    >
+    <button-create @click="createTypeOwner">Типовой собственник</button-create>
     <div class="blocks">
       <div class="ownership_address">
         <div class="ownership">
@@ -88,24 +92,37 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendOwnership" :hidden="!isValid">{{
+    <button-simple @click="sendToServer" :hidden="!isValid">{{
       SEND_TO_SERVER
     }}</button-simple>
   </div>
+  <dialog-window :show="showModal">
+    <modal-action
+      message="Вы действительно хотите создать запись?"
+      @close="showModal = false"
+      @successfuly="successfulyAction"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
-import { PAGE_ENTRY_GET } from "@/router/apiRouter";
+import { PAGE_ENTRY_GET, PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
 import {
   generatePassport,
   generatePlaceWork,
   generatePhoto,
   generateVehicle,
 } from "../_functions/generate";
+import {
+  generateOwner,
+  generateOwnership,
+} from "@/pages/_functions/generateRealDB";
 export default {
   data() {
     return {
+      generateOwner,
+      generateOwnership,
       apartment: "",
       fullName: "",
       record: {
@@ -119,6 +136,7 @@ export default {
         },
       },
       share: {},
+      showModal: false,
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
@@ -129,29 +147,57 @@ export default {
       SEND_TO_SERVER,
       GET,
       PAGE_ENTRY_GET,
+      PAGE_OWNERSHIPS_GET,
     };
   },
   methods: {
     ...mapActions({
+      fetchAddressStart: "address/fetchAddressStart",
       createShare: "share/createShare",
       createOwner: "owner/createOwner",
+      createOwnership: "ownership/createOwnership",
       createRecord: "record/createRecord",
       fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
-    sendOwnership() {
+    sendToServer() {
+      this.showModal = true;
+    },
+    successfulyAction() {
+      // цепляем фото к собственнику
       this.record.owner.photo = generatePhoto();
+      // создаём собственника в базе данных
       this.createOwner(this.record.owner).then(() => {
+        // цепляем собственника к записи
         this.record.owner = this.getOwner;
-        this.share.owner = this.getOwner;
-        this.share.ownership = this.getOwnership;
-        this.createShare(this.share).then(() => {
-          this.createRecord(this.record).then(() => {
-            this.$router.push(PAGE_ENTRY_GET + "/" + this.getOwnership.id);
+        // создаём помещение в базе данных
+        this.createOwnership(this.record.ownership).then(() => {
+          // цепляем помещение на запись
+          this.record.ownership = this.getOwnership;
+          // цепляем собственника на долю
+          this.share.owner = this.getOwner;
+          // цепляем помещение на долю
+          this.share.ownership = this.getOwnership;
+          //создаём долю в базе данных
+          this.createShare(this.share).then(() => {
+            // создаём запись в базе данных
+            this.createRecord(this.record).then(() => {
+              // переход на страницу просмотра записи
+              // this.$router.push(PAGE_ENTRY_GET + "/" + this.getOwnership.id);
+              this.$router.push(PAGE_OWNERSHIPS_GET);
+            });
           });
         });
       });
     },
+    createTypeOwnership() {
+      this.record.ownership = this.generateOwnership();
+    },
+    createTypeOwner() {
+      this.record.owner = this.generateOwner();
+      this.share.value = 1;
+    },
+
     fetchOwnership() {
       this.fetchOwnershipByApartment(this.apartment).then(() => {
         this.record.ownership = this.getOwnership;
@@ -163,8 +209,11 @@ export default {
       });
     },
   },
-  update() {
-    this.fetchRoom();
+  update() {},
+  mounted() {
+    this.fetchAddressStart().then(() => {
+      this.record.ownership.address = this.getAddressStart;
+    });
   },
   computed: {
     ...mapGetters({
@@ -172,6 +221,7 @@ export default {
       getMessages: "ownership/getMessages",
       getOwnership: "ownership/getOwnership",
       getOwner: "owner/getOwner",
+      getAddressStart: "address/getAddressStart",
     }),
     isValid() {
       return (

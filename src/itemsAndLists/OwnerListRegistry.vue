@@ -1,5 +1,5 @@
 <template>
-  <div class="list"  v-for="item in list">
+  <div class="list" v-for="(item, index) in list" :key="index">
     <div
       class="item"
       v-for="one in item.clients"
@@ -18,7 +18,7 @@
       <ownership-item
         class="ownership"
         :ownership="two"
-        :count="index +1"
+        :count="index + 1"
         @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)"
         :flag="true"
       />

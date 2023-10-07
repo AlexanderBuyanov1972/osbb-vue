@@ -1,8 +1,14 @@
 <template>
   <div class="main">
-    <div class="img">
-      <img :src="getImage" alt="Not found" />
+    <div class="img_button">
+      <button-deactivate
+        :ownerId="owner.id"
+        :ownershipId="ownershipId"
+        :share="owner.share"
+      />
+      <image-show :photo="owner.photo" />
     </div>
+
     <div class="spans">
       <div class="item"><span>Фамилия : </span>{{ owner.lastName || "" }}</div>
       <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
@@ -32,10 +38,14 @@ import {
   showFamilyStatus,
   showTypeBeneficiary,
 } from "@/pages/_functions/functions";
+import ButtonDeactivate from "@/ui/elements/ButtonDeactivate.vue";
+import ImageShow from "@/ui/elements/ImageShow.vue";
 export default {
+  components: { ButtonDeactivate, ImageShow },
   name: "block-get-owner",
   props: {
     owner: Object,
+    ownershipId: Number,
   },
   data() {
     return {
@@ -43,16 +53,6 @@ export default {
       showFamilyStatus,
       showTypeBeneficiary,
     };
-  },
-  computed: {
-    getImage() {
-      if (this.owner.photo) {
-        return require(`@/assets/owners/${this.owner.photo.name}.png`);
-      }
-      if (this.owner.photoName) {
-        return require(`@/assets/owners/${this.owner.photoName}.png`);
-      }
-    },
   },
 };
 </script>
@@ -72,6 +72,13 @@ export default {
   align-items: center;
   justify-content: start;
 }
+.img_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20%;
+}
 
 span {
   color: teal;
@@ -80,15 +87,4 @@ span {
   margin: 5px 0px;
   font-size: 20px;
 }
-img {
-  width: 20vw;
-  height: 30vh;
-  padding: 10px;
-  margin-left: 40%;
-}
-.spans {
-  padding: 10px;
-  margin-left: 30%;
-}
 </style>
-@/pages/bills/_functions/functions
