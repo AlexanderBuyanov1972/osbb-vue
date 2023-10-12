@@ -1,0 +1,49 @@
+<template>
+  <header-payment />
+  <vue-loader :isLoader="getIsLoading" />
+  <header-messages :messages="getMessages" />
+  <payment-item :payment="header" />
+  <div class="list" v-for="(one, index) in list">
+    <payment-item :count="index + 1" :payment="one" />
+  </div>
+</template>
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      list: [],
+      header: {
+        personalAccount: "Лицевой счёт",
+        date: "Дата",
+        summa: "Сумма, грн",
+      },
+    };
+  },
+  methods: {
+    ...mapActions({
+      fetchAllPayment: "payment/fetchAllPayment",
+    }),
+  },
+  computed: {
+    ...mapGetters({
+      getPayments: "payment/getPayments",
+      getIsLoading: "payment/getIsLoading",
+      getMessages: "payment/getMessages",
+    }),
+  },
+  mounted() {
+    this.fetchAllPayment().then(() => {
+      this.list = this.getPayments;
+    });
+  },
+};
+</script>
+
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+</style>

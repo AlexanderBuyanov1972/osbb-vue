@@ -9,10 +9,12 @@ import {
   getOwnershipByApartment,
   getRoomByApartment,
   getListApartmentsByFullName,
-} from "@/http/ownership";
+  getPersonalAccountByApartment,
+} from "@/http/ownership/ownership";
 
 export default {
   state: () => ({
+    personalAccount: "",
     ownership: {},
     ownerships: [],
     messages: [],
@@ -24,6 +26,9 @@ export default {
   mutations: {
     setIsLoading(state, bool) {
       state.isLoading = bool;
+    },
+    setPersonalAccount(state, value) {
+      state.personalAccount = value;
     },
     setOwnership(state, object) {
       state.ownership = object;
@@ -48,6 +53,9 @@ export default {
     },
     getOwnership(state) {
       return state.ownership;
+    },
+    getPersonalAccount(state) {
+      return state.personalAccount;
     },
     getOwnerships(state) {
       return state.ownerships;
@@ -184,6 +192,22 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    async fetchPersonalAccountByApartment({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getPersonalAccountByApartment(apartment);
+        if (response != undefined && response.data != undefined) {
+          commit("setPersonalAccount", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
     async fetchRoomByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
@@ -205,8 +229,8 @@ export default {
         commit("setIsLoading", true);
         const response = await getListApartmentsByFullName(fullName);
         if (response != undefined && response.data != undefined) {
-         commit("setOwnership", response.data);
-         commit("setMessages", response.message);
+          commit("setOwnership", response.data);
+          commit("setMessages", response.message);
         } else {
           commit("setMessages", response.messages);
         }

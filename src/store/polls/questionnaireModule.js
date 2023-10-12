@@ -8,27 +8,17 @@ import {
   getAllQuestionnaire,
   deleteAllQuestionnaire,
   getResultQuestionnaire,
-} from "@/http/questionnaire";
+} from "@/http/polls/questionnaire";
 import {
   getAllQuestionnaireByTitleAndFullNameAndApartment,
   getAllQuestionnaireByTitleAndFullName,
   getAllQuestionnaireByTitleAndByApartment,
   getAllQuestionnaireByTitle,
   getAllTitleOfQuestionnaire,
-} from "@/http/selects";
+} from "@/http/polls/selects";
 export default {
   state: () => ({
-    questionnaire: {
-      id: 1,
-      title: "",
-      dateDispatch: null,
-      dateReceiving: null,
-      apartment: "",
-      fullName: "",
-      byWhom: "",
-      question: "",
-      answer: null,
-    },
+    questionnaire: {},
     questionnaires: [],
     messages: [],
     message: "",
@@ -83,6 +73,7 @@ export default {
     },
   },
   actions: {
+    // one -------------------------
     async createQuestionnaire({ commit }, object) {
       try {
         commit("setIsLoading", true);
@@ -143,7 +134,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-
+    // all -------------------------
     async createAllQuestionnaire({ commit }, list) {
       try {
         commit("setIsLoading", true);
@@ -204,6 +195,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // title and full name ------------------------
     async fetchAllQuestionnaireByTitleAndFullName({ commit }, payload) {
       try {
         commit("setIsLoading", true);
@@ -223,6 +215,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+     // title, full name and apartment ------------
     async fetchAllQuestionnaireByTitleAndFullNameAndApartment(
       { commit },
       payload
@@ -247,6 +240,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // title --------------------------------------
     async fetchAllQuestionnaireByTitle({ commit }, title) {
       try {
         commit("setIsLoading", true);
@@ -263,6 +257,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // title and apartment ------------------------
     async fetchAllQuestionnaireByTitleAndByApartment({ commit }, payload) {
       try {
         commit("setIsLoading", true);
@@ -282,6 +277,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // all titles ----------------------------------
     async fetchAllTitleOfQuestionnaire({ commit }) {
       try {
         commit("setIsLoading", true);
@@ -298,8 +294,8 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // result --------------------------------------
     async fetchResultQuestionnaire({ commit }, title) {
-      const response = {};
       try {
         commit("setIsLoading", true);
         const response = await getResultQuestionnaire(title);

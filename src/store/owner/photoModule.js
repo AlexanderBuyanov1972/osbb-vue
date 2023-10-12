@@ -1,20 +1,19 @@
 import {
-  createPassport,
-  updatePassport,
-  getPassport,
-  deletePassport,
-} from "@/http/passport";
+  createPhoto,
+  updatePhoto,
+  getPhoto,
+  deletePhoto,
+  getAllPhoto,
+} from "@/http/owner/photo";
 
 export default {
   state: () => ({
-    passport: {
+    photo: {
       id: 0,
-      numberPassport: "",
-      numberEntry: "",
-      dateIssue: "",
-      issuingAuthority: "",
-      registrationNumberCardPayerTaxes: "",
+      url: "",
+      name: "",
     },
+    photos: [],
     messages: [],
     isLoading: false,
   }),
@@ -23,8 +22,11 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setPassport(state, object) {
-      state.passport = object;
+    setPhoto(state, object) {
+      state.photo = object;
+    },
+    setPhotos(state, array) {
+      state.photos = array;
     },
     setMessages(state, messages) {
       state.messages = messages;
@@ -35,8 +37,11 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getPassport(state) {
-      return state.passport;
+    getPhoto(state) {
+      return state.photo;
+    },
+    getPhotos(state) {
+      return state.photos;
     },
     getMessages(state) {
       return state.messages;
@@ -44,63 +49,79 @@ export default {
   },
 
   actions: {
-    async createPassport({ commit }, object) {
+    async createPhoto({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await createPassport(object);
+        const response = await createPhoto(object);
         if (response != undefined && response.data != undefined) {
-          commit("setPassport", response.data);
+          commit("setPhoto", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", error.message);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
     },
 
-    async updatePassport({ commit }, object) {
+    async updatePhoto({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updatePassport(object);
+        const response = await updatePhoto(object);
         if (response != undefined && response.data != undefined) {
-          commit("setPassport", response.data);
+          commit("setPhoto", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", error.message);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    async fetchPassport({ commit }, id) {
+    async fetchPhoto({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getPassport(id);
+        const response = await getPhoto(id);
         if (response != undefined && response.data != undefined) {
-          commit("setPassport", response.data);
+          commit("setPhoto", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", error.message);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    async deletePassport({ commit }, id) {
+    async deletePhoto({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await deletePassport(id);
+        const response = await deletePhoto(id);
         commit("setMessages", response.messages);
-        commit("setPassport", {});
+        commit("setPhoto", {});
       } catch (error) {
-        commit("setMessages", error.message);
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async getAllPhoto({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getAllPhoto();
+        if (response != undefined && response.data != undefined) {
+          commit("setPhotos", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }

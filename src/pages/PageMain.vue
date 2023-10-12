@@ -16,20 +16,25 @@
         >FullQuestionnaire</button-create
       >
     </div>
+    <div class="">
+      <button-create @click="sendToServerRates">FullRates</button-create>
+    </div>
   </div>
 </template>
 <script>
 import {
-  generateJsonEntries,
+  generateJsonRecords,
   generateJsonQuestionnaires,
+  generateJsonRates,
 } from "@/pages/_functions/generate";
 import { generateSvobody51 } from "@/pages/_functions/generateRealDB";
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      generateJsonEntries,
+      generateJsonRecords,
       generateJsonQuestionnaires,
+      generateJsonRates,
       generateSvobody51,
     };
   },
@@ -37,13 +42,17 @@ export default {
     ...mapActions({
       createAllRecord: "record/createAllRecord",
       createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
+      createAllRate: "rate/createAllRate",
     }),
     sendToServerDataBase() {
       // this.createAllRecord(this.generateJsonEntries());
-      this.generateJsonEntries();
+      this.generateJsonRecords();
     },
     sendToServerQuestionnaire() {
       this.createAllQuestionnaire(this.generateJsonQuestionnaires());
+    },
+    sendToServerRates() {
+      this.createAllRate(this.generateJsonRates());
     },
   },
 };

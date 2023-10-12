@@ -5,7 +5,7 @@ import {
   APARTMENT,
   SELECT,
   TITLE,
-  FULLNAME,
+  FULL_NAME,
 } from "@/http/apiHttp";
 
 // select *****************************
@@ -14,7 +14,7 @@ export const getAllQuestionnaireByTitleAndFullName = async (
   fullName
 ) => {
   const response = await axios.get(
-    API_BASE + SELECT + TITLE + FULLNAME + "/" + title + "/" + fullName
+    API_BASE + SELECT + TITLE + FULL_NAME + "/" + title + "/" + fullName
   );
   return response.data;
 };
@@ -28,7 +28,7 @@ export const getAllQuestionnaireByTitleAndFullNameAndApartment = async (
     API_BASE +
       SELECT +
       TITLE +
-      FULLNAME +
+      FULL_NAME +
       APARTMENT +
       "/" +
       title +

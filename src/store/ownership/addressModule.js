@@ -1,19 +1,26 @@
 import {
-  createPhoto,
-  updatePhoto,
-  getPhoto,
-  deletePhoto,
-  getAllPhoto,
-} from "@/http/photo";
+  createAddress,
+  updateAddress,
+  getAddress,
+  getAddressStart,
+  deleteAddress,
+} from "@/http/ownership/address";
 
 export default {
   state: () => ({
-    photo: {
+    address: {
       id: 0,
-      url: "",
-      name: "",
+      zipCode: "",
+      country: "",
+      region: "",
+      city: "",
+      street: "",
+      house: "",
+      entrance: "",
+      floor: "",
+      apartment: "",
     },
-    photos: [],
+    addressStart: {},
     messages: [],
     isLoading: false,
   }),
@@ -22,11 +29,11 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setPhoto(state, object) {
-      state.photo = object;
+    setAddress(state, object) {
+      state.address = object;
     },
-    setPhotos(state, array) {
-      state.photos = array;
+    setAddressStart(state, object) {
+      state.addressStart = object;
     },
     setMessages(state, messages) {
       state.messages = messages;
@@ -37,11 +44,11 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getPhoto(state) {
-      return state.photo;
+    getAddress(state) {
+      return state.address;
     },
-    getPhotos(state) {
-      return state.photos;
+    getAddressStart(state) {
+      return state.addressStart;
     },
     getMessages(state) {
       return state.messages;
@@ -49,12 +56,12 @@ export default {
   },
 
   actions: {
-    async createPhoto({ commit }, object) {
+    async createAddress({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await createPhoto(object);
+        const response = await createAddress(object);
         if (response != undefined && response.data != undefined) {
-          commit("setPhoto", response.data);
+          commit("setAddress", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -65,13 +72,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-
-    async updatePhoto({ commit }, object) {
+    async updateAddress({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updatePhoto(object);
+        const response = await updateAddress(object);
         if (response != undefined && response.data != undefined) {
-          commit("setPhoto", response.data);
+          commit("setAddress", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -82,12 +88,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchPhoto({ commit }, id) {
+    async fetchAddress({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getPhoto(id);
+        const response = await getAddress(id);
         if (response != undefined && response.data != undefined) {
-          commit("setPhoto", response.data);
+          commit("setAddress", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -98,28 +104,28 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async deletePhoto({ commit }, id) {
+    async fetchAddressStart({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await deletePhoto(id);
+        const response = await getAddressStart();
+        if (response != undefined && response.data != undefined) {
+          commit("setAddressStart", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async deleteAddress({ commit }, id) {
+      try {
+        commit("setIsLoading", true);
+        const response = await deleteAddress(id);
         commit("setMessages", response.messages);
-        commit("setPhoto", {});
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async getAllPhoto({ commit }) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getAllPhoto();
-        if (response != undefined && response.data != undefined) {
-          commit("setPhotos", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setAddress", {});
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

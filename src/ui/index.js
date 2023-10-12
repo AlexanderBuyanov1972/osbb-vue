@@ -1,25 +1,28 @@
-// --------------- ui elements --------------------------------
+// ui elements --------------------------------------------------
+// buttons ------------------------------------------------------
+import ButtonDeactivate from "@/ui/elements/buttons/ButtonDeactivate.vue";
+import ButtonBills from "@/ui/elements/buttons/ButtonBills.vue";
+import ButtonEdit from "@/ui/elements/buttons/ButtonEdit.vue";
+import ButtonCreate from "@/ui/elements/buttons/ButtonCreate.vue";
+import ButtonBack from "@/ui/elements/buttons/ButtonBack.vue";
+import ButtonDelete from "@/ui/elements/buttons/ButtonDelete.vue";
+import ButtonSimple from "@/ui/elements/buttons/ButtonSimple.vue";
+import ButtonReset from "@/ui/elements/buttons/ButtonReset.vue";
+// select ---------------------------------------------------------
+import SelectTitle from "@/ui/elements/selects/SelectTitle.vue";
+import SelectSimple from "@/ui/elements/selects/SelectSimple.vue";
+import SelectEdit from "@/ui/elements/selects/SelectEdit.vue";
+// other ---------------------------------------------------------
 import DialogWindow from "@/ui/elements/DialogWindow.vue";
 import ImageShow from "@/ui/elements/ImageShow.vue";
-import ButtonDeactivate from "@/ui/elements/ButtonDeactivate.vue";
-import ButtonBills from "@/ui/elements/ButtonBills.vue";
-import ButtonEdit from "@/ui/elements/ButtonEdit.vue";
-import ButtonCreate from "@/ui/elements/ButtonCreate.vue";
-import ButtonBack from "@/ui/elements/ButtonBack.vue";
-import ButtonDelete from "@/ui/elements/ButtonDelete.vue";
-import ButtonSimple from "@/ui/elements/ButtonSimple.vue";
-import ButtonReset from "@/ui/elements/ButtonReset.vue";
 import InputSimple from "@/ui/elements/InputSimple.vue";
-import SelectTitle from "@/ui/elements/SelectTitle.vue";
-import SelectSimple from "@/ui/elements/SelectSimple.vue";
-import SelectEdit from "@/ui/elements/SelectEdit.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
 import VueLoader from "@/ui/elements/VueLoader.vue";
 import VueHr from "@/ui/elements/VueHr.vue";
 import LineRadio from "@/ui/elements/LineRadio.vue";
 // --------------- components -------------------
 import HeaderMessages from "@/components/HeaderMessages.vue";
-import HeaderBills from "@/components/HeaderBills.vue";
+import HeaderPayment from "@/components/HeaderPayment.vue";
 import HeaderPolls from "@/components/HeaderPolls.vue";
 import HeaderDataOwners from "@/components/HeaderDataOwners.vue";
 import HeaderDataOwnerships from "@/components/HeaderDataOwnerships.vue";
@@ -31,10 +34,13 @@ import BlockInformationQuestionnaire from "@/pages/blocks/BlockInformationQuesti
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 // --------------- items and lists -------------------
+import DebtItem from "@/itemsAndLists/DebtItem.vue";
+import PaymentItem from "@/itemsAndLists/PaymentItem.vue";
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 // --------------- pages blocks edit --------------------------------
+import BlockEditPayment from "@/pages/blocks/edit/BlockEditPayment.vue";
 import BlockEditPhoto from "@/pages/blocks/edit/BlockEditPhoto.vue";
 import BlockEditShare from "@/pages/blocks/edit/BlockEditShare.vue";
 import BlockEditVehicle from "@/pages/blocks/edit/BlockEditVehicle.vue";
@@ -75,7 +81,7 @@ export default [
   LineRadio,
 
   // ----------------
-  HeaderBills,
+  HeaderPayment,
   HeaderDataOwners,
   HeaderDataOwnerships,
   HeaderPolls,
@@ -87,10 +93,13 @@ export default [
   BlockInformationQuestionnaire,
   BlockSearchApartment,
   // ---- items ---------
+  DebtItem,
+  PaymentItem,
   OwnerItem,
   OwnershipItem,
   QuestionnaireItem,
   // ---- update -----
+  BlockEditPayment,
   BlockEditVehicle,
   BlockEditPlaceWork,
   BlockEditAddress,

@@ -1,10 +1,19 @@
-import { createRole, updateRole, getRole, deleteRole } from "@/http/role";
+import {
+  createPassport,
+  updatePassport,
+  getPassport,
+  deletePassport,
+} from "@/http/owner/passport";
 
 export default {
   state: () => ({
-    role: {
+    passport: {
       id: 0,
-      name: "",
+      numberPassport: "",
+      numberEntry: "",
+      dateIssue: "",
+      issuingAuthority: "",
+      registrationNumberCardPayerTaxes: "",
     },
     messages: [],
     isLoading: false,
@@ -14,8 +23,8 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setRole(state, object) {
-      state.role = object;
+    setPassport(state, object) {
+      state.passport = object;
     },
     setMessages(state, messages) {
       state.messages = messages;
@@ -26,8 +35,8 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getRole(state) {
-      return state.role;
+    getPassport(state) {
+      return state.passport;
     },
     getMessages(state) {
       return state.messages;
@@ -35,63 +44,63 @@ export default {
   },
 
   actions: {
-    async createRole({ commit }, object) {
+    async createPassport({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await createRole(object);
+        const response = await createPassport(object);
         if (response != undefined && response.data != undefined) {
-          commit("setRole", response.data);
+          commit("setPassport", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
     },
 
-    async updateRole({ commit }, object) {
+    async updatePassport({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updateRole(object);
+        const response = await updatePassport(object);
         if (response != undefined && response.data != undefined) {
-          commit("setRole", response.data);
+          commit("setPassport", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    async getRole({ commit }, id) {
+    async fetchPassport({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getRole(id);
+        const response = await getPassport(id);
         if (response != undefined && response.data != undefined) {
-          commit("setRole", response.data);
+          commit("setPassport", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }
     },
-    async deleteRole({ commit }, id) {
+    async deletePassport({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await deleteRole(id);
+        const response = await deletePassport(id);
         commit("setMessages", response.messages);
-        commit("setRole", {});
+        commit("setPassport", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        commit("setMessages", error.message);
       } finally {
         commit("setIsLoading", false);
       }

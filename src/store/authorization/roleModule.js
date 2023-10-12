@@ -1,26 +1,11 @@
-import {
-  createAddress,
-  updateAddress,
-  getAddress,
-  getAddressStart,
-  deleteAddress,
-} from "@/http/address";
+import { createRole, updateRole, getRole, deleteRole } from "@/http/authorization/role";
 
 export default {
   state: () => ({
-    address: {
+    role: {
       id: 0,
-      zipCode: "",
-      country: "",
-      region: "",
-      city: "",
-      street: "",
-      house: "",
-      entrance: "",
-      floor: "",
-      apartment: "",
+      name: "",
     },
-    addressStart: {},
     messages: [],
     isLoading: false,
   }),
@@ -29,11 +14,8 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setAddress(state, object) {
-      state.address = object;
-    },
-    setAddressStart(state, object) {
-      state.addressStart = object;
+    setRole(state, object) {
+      state.role = object;
     },
     setMessages(state, messages) {
       state.messages = messages;
@@ -44,11 +26,8 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getAddress(state) {
-      return state.address;
-    },
-    getAddressStart(state) {
-      return state.addressStart;
+    getRole(state) {
+      return state.role;
     },
     getMessages(state) {
       return state.messages;
@@ -56,12 +35,12 @@ export default {
   },
 
   actions: {
-    async createAddress({ commit }, object) {
+    async createRole({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await createAddress(object);
+        const response = await createRole(object);
         if (response != undefined && response.data != undefined) {
-          commit("setAddress", response.data);
+          commit("setRole", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -72,12 +51,13 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async updateAddress({ commit }, object) {
+
+    async updateRole({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updateAddress(object);
+        const response = await updateRole(object);
         if (response != undefined && response.data != undefined) {
-          commit("setAddress", response.data);
+          commit("setRole", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -88,12 +68,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchAddress({ commit }, id) {
+    async getRole({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getAddress(id);
+        const response = await getRole(id);
         if (response != undefined && response.data != undefined) {
-          commit("setAddress", response.data);
+          commit("setRole", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -104,28 +84,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchAddressStart({ commit }) {
+    async deleteRole({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getAddressStart();
-        if (response != undefined && response.data != undefined) {
-          commit("setAddressStart", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async deleteAddress({ commit }, id) {
-      try {
-        commit("setIsLoading", true);
-        const response = await deleteAddress(id);
+        const response = await deleteRole(id);
         commit("setMessages", response.messages);
-        commit("setAddress", {});
+        commit("setRole", {});
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

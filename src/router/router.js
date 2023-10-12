@@ -21,9 +21,13 @@ import PageOwnershipsGet from "@/pages/ownership/PageOwnershipsGet.vue";
 import PageRecordCreate from "@/pages/record/PageRecordCreate.vue";
 import PageRecordUpdate from "@/pages/record/PageRecordUpdate.vue";
 import PageRecordGet from "@/pages/record/PageRecordGet.vue";
-// bills
-import PageBillsGet from "@/pages/bills/PageBillsGet.vue";
+// payment -----------------------
+import PagePaymentCreate from "@/pages/payment/PagePaymentCreate.vue";
+import PagePaymentsGet from "@/pages/payment/PagePaymentsGet.vue";
+import PageDebtByApartment from "@/pages/payment/PageDebtByApartment.vue";
+import PageDebtDetailsByApartment from "@/pages/payment/PageDebtDetailsByApartment.vue";
 
+// ---------------------------------------------------------
 import { createRouter, createWebHistory } from "vue-router";
 import {
   //
@@ -49,8 +53,11 @@ import {
   PAGE_ENTRY_CREATE,
   PAGE_ENTRY_UPDATE,
   PAGE_ENTRY_GET,
-  //bills
-  PAGE_BILLS_GET,
+  // payment --------
+  PAGE_PAYMENT_CREATE,
+  PAGE_PAYMENTS_GET,
+  PAGE_DEBT_GET,
+  PAGE_DEBT_DETAILS_GET,
 } from "./apiRouter.js";
 
 const routes = [
@@ -118,10 +125,22 @@ const routes = [
     path: PAGE_QUESTIONNAIRE_CREATE,
     component: PageQuestionnaireCreate,
   },
-  // bills----------------------------------------
+  // payment ------------------------------------
   {
-    path: PAGE_BILLS_GET,
-    component: PageBillsGet,
+    path: PAGE_PAYMENT_CREATE,
+    component: PagePaymentCreate,
+  },
+  {
+    path: PAGE_DEBT_GET,
+    component: PageDebtByApartment,
+  },
+  {
+    path: PAGE_DEBT_DETAILS_GET + "/:apartment",
+    component: PageDebtDetailsByApartment,
+  },
+  {
+    path: PAGE_PAYMENTS_GET,
+    component: PagePaymentsGet,
   },
 ];
 const router = createRouter({

@@ -29,5 +29,9 @@ export const PAGE_QUESTIONNAIRE_DELETE = "/questionnaire/delete";
 export const PAGE_QUESTIONNAIRE_ANSWER = "/questionnaire/answer";
 export const PAGE_QUESTIONNAIRE_RESULT = "/questionnaire/result";
 export const PAGE_QUESTIONNAIRES_GET = "/questionnaires/get";
-// bills
-export const PAGE_BILLS_GET = "/bills/get";
+// payment ---------------------------------
+export const PAGE_PAYMENT_CREATE = "/payment/create";
+export const PAGE_PAYMENTS_GET = "/payments/get";
+export const PAGE_DEBT_GET = "/debt/get";
+export const PAGE_DEBT_DETAILS_GET = "/debt/details/get";
+

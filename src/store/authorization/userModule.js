@@ -1,4 +1,4 @@
-import { createUser, updateUser, getUser, deleteUser } from "@/http/user";
+import { createUser, updateUser, getUser, deleteUser } from "@/http/authorization/user";
 
 export default {
   state: () => ({

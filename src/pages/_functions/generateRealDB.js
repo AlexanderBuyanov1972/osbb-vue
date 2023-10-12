@@ -1,5 +1,5 @@
-import { createOwnership } from "@/http/ownership";
-import { createOwner } from "@/http/owner";
+import { createOwnership } from "@/http/ownership/ownership";
+import { createOwner } from "@/http/owner/owner";
 import { createShare } from "@/http/share";
 import { createRecord } from "@/http/record";
 

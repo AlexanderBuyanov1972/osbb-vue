@@ -1,3 +1,9 @@
+<template>
+  <dialog-window :show="isLoader">
+    <span v-show="isLoader" class="loader"></span>
+  </dialog-window>
+ 
+</template>
 <script>
 export default {
   name: "vue-loader",
@@ -6,9 +12,6 @@ export default {
   },
 };
 </script>
-<template>
-  <span v-show="isLoader" class="loader"></span>
-</template>
 <style scoped>
 .loader {
   width: 250px;

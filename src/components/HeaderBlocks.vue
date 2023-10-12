@@ -45,7 +45,7 @@ import {
   PAGE_QUESTIONNAIRES_GET,
   PAGE_OWNERSHIPS_GET,
   PAGE_OWNERS_GET,
-  PAGE_BILLS_GET,
+  PAGE_PAYMENTS_GET,
 } from "@/router/apiRouter";
 import {
   BLOCK_PAYMENT_BILLS,
@@ -66,7 +66,7 @@ export default {
       PAGE_QUESTIONNAIRES_GET,
       PAGE_OWNERSHIPS_GET,
       PAGE_OWNERS_GET,
-      PAGE_BILLS_GET,
+      PAGE_PAYMENTS_GET,
       currentButton: 0,
     };
   },
@@ -89,13 +89,10 @@ export default {
       this.currentButton = 4;
     },
     clickButton5() {
-      this.$router.push(PAGE_BILLS_GET);
+      this.$router.push(PAGE_PAYMENTS_GET);
       this.currentButton = 5;
     },
   },
-  // updated() {
-  //   this.$router.push(PAGE_MAIN);
-  // },
 };
 </script>
 

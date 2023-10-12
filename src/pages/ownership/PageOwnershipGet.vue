@@ -1,7 +1,5 @@
 <template>
-  <header-data-ownerships
-    @id="(value) => (id = value)"
-  ></header-data-ownerships>
+  <header-data-ownerships></header-data-ownerships>
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />

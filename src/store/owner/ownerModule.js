@@ -6,7 +6,7 @@ import {
   getAllOwner,
   countOwners,
   getOwnerByFullName,
-} from "@/http/owner";
+} from "@/http/owner/owner";
 
 export default {
   state: () => ({

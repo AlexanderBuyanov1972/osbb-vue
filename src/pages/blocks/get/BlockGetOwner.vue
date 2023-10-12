@@ -38,10 +38,9 @@ import {
   showFamilyStatus,
   showTypeBeneficiary,
 } from "@/pages/_functions/functions";
-import ButtonDeactivate from "@/ui/elements/ButtonDeactivate.vue";
 import ImageShow from "@/ui/elements/ImageShow.vue";
 export default {
-  components: { ButtonDeactivate, ImageShow },
+  components: { ImageShow },
   name: "block-get-owner",
   props: {
     owner: Object,

@@ -5,7 +5,14 @@ export const ALL = "/all";
 export const USER = "/user";
 export const ROLE = "/role";
 
+export const DETAILS = "/details";
+export const DEBT = "/debt";
+export const VEHICLE = "/vehicle";
+export const PLACE_WORK = "/place_work";
+export const RATE = "/rate";
+export const PAYMENT = "/payment";
 export const OWNER = "/owner";
+export const PERSONAL_ACCOUNT = "/personal_account";
 export const OWNERSHIP = "/ownership";
 export const ROOM = "/room";
 export const RECORD = "/record";
@@ -18,10 +25,11 @@ export const SHARE = "/share";
 
 export const SELECT = "/select";
 export const TITLE = "/title";
-export const FULLNAME = "/full_name";
+export const FULL_NAME = "/full_name";
 
 export const QUESTIONNAIRE = "/questionnaire";
 // ---------------- summa -------------------
+export const SUMMA = "/summa";
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
 export const SUMMA_AREA_APARTMENT = "/summa_area_apartment";
 export const SUMMA_AREA_NON_RESIDENTIAL_ROOM =

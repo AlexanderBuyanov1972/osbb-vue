@@ -1,8 +1,9 @@
 import { faker } from "@faker-js/faker";
-import { createOwner } from "@/http/owner";
-import { createOwnership } from "@/http/ownership";
+import { createOwner } from "@/http/owner/owner";
+import { createOwnership } from "@/http/ownership/ownership";
 import { createShare } from "@/http/share";
 import { createRecord } from "@/http/record";
+import { createRate } from "@/http/payment/rate";
 
 export const generatePassport = () => {
   return {
@@ -37,9 +38,34 @@ export const generateVehicle = () => {
 export const generatePhoto = () => {
   return { name: "avatar", url: "@/photos/owners/avatar.png" };
 };
+export const generatePersonalAccount = (arg) => {
+  let substr = "6200190400";
+  return substr.substring(0, substr.length - (arg + "").length) + arg;
+};
+
+export const generateJsonRates = () => {
+  let list = [];
+  let value = 0;
+  let count = 1;
+
+  for (let j = 1; j <= 3; j++) {
+    if (j == 1) value = 3.0;
+    if (j == 2) value = 4.0;
+    if (j == 3) value = 5.0;
+    for (let i = 1; i <= 12; i++) {
+      if (i <= 9) {
+        list.push({ id: count, date: "202" + j + "-0" + i + "-01", value });
+      } else {
+        list.push({ id: count, date: "202" + j + "-" + i + "-01", value });
+      }
+      count++;
+    }
+  }
+  return list;
+};
 
 // generate Json ---------------
-export const generateJsonEntries = async () => {
+export const generateJsonRecords = async () => {
   // общее количество квартир вдоме
   const countApartment = 84;
   // общее количество квартир в подъезде
@@ -50,9 +76,6 @@ export const generateJsonEntries = async () => {
   let currentApartment = 1;
   let currentEntrance = 1;
   let currentFloor = 1;
-  // array result
-  let result = [];
-
   for (
     currentApartment = 1;
     currentApartment <= countApartment;
@@ -80,7 +103,7 @@ export const generateJsonEntries = async () => {
     };
     // create ownership -------------------------
     let ownership = {
-      personalAccount: "62001904" + currentApartment,
+      personalAccount: generatePersonalAccount(currentApartment),
       typeRoom: faker.helpers.arrayElement([
         "APARTMENT",
         "NON_RESIDENTIAL_ROOM",
