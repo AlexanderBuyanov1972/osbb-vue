@@ -1,13 +1,10 @@
 import {
-  createQuestionnaire,
-  updateQuestionnaire,
-  getQuestionnaire,
-  deleteQuestionnaire,
   createAllQuestionnaire,
   updateAllQuestionnaire,
   getAllQuestionnaire,
-  deleteAllQuestionnaire,
+  deleteAllQuestionnaireByTitle,
   getResultQuestionnaire,
+  deleteAllQuestionnaireByOwnerIdAndOwnershipId,
 } from "@/http/polls/questionnaire";
 import {
   getAllQuestionnaireByTitleAndFullNameAndApartment,
@@ -18,7 +15,6 @@ import {
 } from "@/http/polls/selects";
 export default {
   state: () => ({
-    questionnaire: {},
     questionnaires: [],
     messages: [],
     message: "",
@@ -29,9 +25,6 @@ export default {
   mutations: {
     setIsLoading(state, bool) {
       state.isLoading = bool;
-    },
-    setQuestionnaire(state, object) {
-      state.questionnaire = object;
     },
     setQuestionnaires(state, array) {
       state.questionnaires = array;
@@ -53,9 +46,6 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getQuestionnaire(state) {
-      return state.questionnaire;
-    },
     getQuestionnaires(state) {
       return state.questionnaires;
     },
@@ -73,67 +63,6 @@ export default {
     },
   },
   actions: {
-    // one -------------------------
-    async createQuestionnaire({ commit }, object) {
-      try {
-        commit("setIsLoading", true);
-        const response = await createQuestionnaire(object);
-        if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaire", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async updateQuestionnaire({ commit }, object) {
-      try {
-        commit("setIsLoading", true);
-        const response = await updateQuestionnaire(object);
-        if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaire", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async fetchQuestionnaire({ commit }, id) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getQuestionnaire(id);
-        if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaire", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async deleteQuestionnaire({ commit }, id) {
-      try {
-        commit("setIsLoading", true);
-        const response = await deleteQuestionnaire(id);
-        commit("setMessages", response.messages);
-        commit("setQuestionnaire", {});
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
     // all -------------------------
     async createAllQuestionnaire({ commit }, list) {
       try {
@@ -183,10 +112,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async deleteAllQuestionnaire({ commit }) {
+    async deleteAllQuestionnaireByTitle({ commit }, title) {
       try {
         commit("setIsLoading", true);
-        const response = await deleteAllQuestionnaire();
+        const response = await deleteAllQuestionnaireByTitle(title);
         commit("setMessages", response.messages);
         commit("setQuestionnaires", {});
       } catch (error) {
@@ -215,7 +144,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-     // title, full name and apartment ------------
+    // title, full name and apartment ------------
     async fetchAllQuestionnaireByTitleAndFullNameAndApartment(
       { commit },
       payload
@@ -294,6 +223,26 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // delete all by owner id and ownership id ------------
+    async deleteAllQuestionnaireByOwnerIdAndOwnershipId({ commit }, payload) {
+      try {
+        commit("setIsLoading", true);
+        const response = await deleteAllQuestionnaireByOwnerIdAndOwnershipId(
+          payload.ownerId,
+          payload.ownershipId
+        );
+        if (response != undefined && response.data != undefined) {
+          commit("setTitles", ["Выберите тему опроса", ...response.data]);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
     // result --------------------------------------
     async fetchResultQuestionnaire({ commit }, title) {
       try {
@@ -306,7 +255,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", error.message);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }

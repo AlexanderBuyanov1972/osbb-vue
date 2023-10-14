@@ -34,7 +34,8 @@ export const QUESTIONNAIRE_CREATE = "Создать опросный лист";
 export const QUESTIONNAIRE_ANSWER = "Проголосовать опросный лист";
 export const QUESTIONNAIRE_UPDATE = "Редактировать опросный лист";
 export const QUESTIONNAIRE_GET = "Смотреть опросный лист";
-export const QUESTIONNAIRE_DELETE = "Удалить опросный лист";
+export const QUESTIONNAIRE_DELETE_BY_TITLE =
+  "Удалить опросный лист по наименованию";
 export const QUESTIONNAIRES_GET = "Список опросов";
 // ----------- crud -------------------
 export const CREATE = "Создать";

@@ -1,33 +1,33 @@
 <template>
   <div class="block">
-    <div class="item_1">
+    <div class="beginningPeriod">
       <span>{{ body.beginningPeriod }}</span>
     </div>
-    <div class="item">
+    <div class="debtAtBeginningPeriod">
       <span>{{ body.debtAtBeginningPeriod }}</span>
     </div>
-    <div class="item">
+    <div class="rate">
       <span>{{ body.rate }}</span>
     </div>
-    <div class="item">
+    <div class="accrued">
       <span>{{ body.accrued }}</span>
     </div>
-    <div class="item">
+    <div class="recalculationForServicesNotReceived">
       <span>{{ body.recalculationForServicesNotReceived }}</span>
     </div>
-    <div class="item">
+    <div class="subsidyMonetization">
       <span>{{ body.subsidyMonetization }}</span>
     </div>
-    <div class="item">
+    <div class="monetizationBenefits">
       <span>{{ body.monetizationBenefits }}</span>
     </div>
-    <div class="item">
+    <div class="paid">
       <span>{{ body.paid }}</span>
     </div>
-    <div class="item">
+    <div class="debtAtFinalizingPeriod">
       <span>{{ body.debtAtFinalizingPeriod }}</span>
     </div>
-    <div class="item">
+    <div class="finalizingPeriod">
       <span>{{ body.finalizingPeriod }}</span>
     </div>
   </div>
@@ -57,9 +57,46 @@ export default {
   align-items: center;
   border: 1px solid teal;
   margin: 1% 0%;
-  color:blueviolet
+  color: blueviolet;
 }
-.item{
+.beginningPeriod {
   width: 10%;
+  text-align: center;
+}
+.debtAtBeginningPeriod {
+  width: 10%;
+  text-align: center;
+}
+.rate {
+  width: 10%;
+  text-align: center;
+}
+.accrued {
+  width: 10%;
+  text-align: center;
+}
+.recalculationForServicesNotReceived {
+  width: 10%;
+  text-align: center;
+}
+.subsidyMonetization {
+  width: 10%;
+  text-align: center;
+}
+.monetizationBenefits {
+  width: 10%;
+  text-align: center;
+}
+.paid {
+  width: 10%;
+  text-align: center;
+}
+.debtAtFinalizingPeriod {
+  width: 10%;
+  text-align: center;
+}
+.finalizingPeriod {
+  width: 10%;
+  text-align: center;
 }
 </style>

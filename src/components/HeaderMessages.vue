@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-    <h4>Сообщения с сервера :</h4>
-    <p v-for="(one, index) in messages" :key="one.id">
+    <div>Сообщения с сервера :</div>
+    <div v-for="(one, index) in messages" :key="one.id">
       {{ index + 1 }}. {{ one }}
-    </p>
+    </div>
   </div>
 </template>
 <script>
@@ -24,16 +24,15 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-
-p,
-h4 {
+.main {
+  margin: 10px 0px;
+  padding: 10px 20px;
+  border: 1px solid brown;
   color: brown;
   font-size: 20px;
-  margin: 5px 0px;
-}
-.main{
-  margin: 10px 0px;
-  border: 1px solid brown;
-  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
 }
 </style>

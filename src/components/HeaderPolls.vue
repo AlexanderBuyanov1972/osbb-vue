@@ -12,6 +12,9 @@
     <button-create @click="goToPageCreateQuestionnaire"
       >{{ QUESTIONNAIRE_CREATE }}
     </button-create>
+    <button-create @click="removeByTitle"
+      >{{ QUESTIONNAIRE_DELETE_BY_TITLE }}
+    </button-create>
   </div>
   <div class="block2">
     <div class="main">
@@ -47,6 +50,7 @@
 </template>
 <script>
 import {
+  QUESTIONNAIRE_DELETE_BY_TITLE,
   QUESTIONNAIRES_GET,
   QUESTIONNAIRE_CREATE,
   GET_RESULT_POLL,
@@ -58,7 +62,7 @@ import {
   PAGE_QUESTIONNAIRE_CREATE,
   PAGE_QUESTIONNAIRE_RESULT,
 } from "@/router/apiRouter";
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "header-polls",
   data() {
@@ -67,6 +71,7 @@ export default {
       apartment: "1",
       message: "Выберите тему опроса",
       // buttons
+      QUESTIONNAIRE_DELETE_BY_TITLE,
       QUESTIONNAIRES_GET,
       QUESTIONNAIRE_CREATE,
       GET_RESULT_POLL,
@@ -110,8 +115,20 @@ export default {
         );
       }
     },
+    removeByTitle() {
+      if (this.title == undefined || this.title == this.message) {
+        this.setMessages([this.message]);
+      } else {
+        this.deleteAllQuestionnaireByTitle(this.title);
+      }
+    },
+
     ...mapMutations({
       setMessages: "questionnaire/setMessages",
+    }),
+    ...mapActions({
+      deleteAllQuestionnaireByTitle:
+        "questionnaire/deleteAllQuestionnaireByTitle",
     }),
     plus() {
       if (this.apartment < 84) this.apartment = this.apartment * 1 + 1;

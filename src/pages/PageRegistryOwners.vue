@@ -1,13 +1,13 @@
 <template>
   <header-data-owners></header-data-owners>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
+    <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header
       text="Реестр собственников"
       :style="{ color: 'darkgoldenrod' }"
     />
-    <button-back/>
+    <button-back />
     <block-information-about-house :info="getBuildingCharacteristics" />
     <owner-list-registry :list="getRegistry" />
   </div>

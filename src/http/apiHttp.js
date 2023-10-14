@@ -27,7 +27,7 @@ export const SELECT = "/select";
 export const TITLE = "/title";
 export const FULL_NAME = "/full_name";
 
-export const QUESTIONNAIRE = "/questionnaire";
+export const QUESTIONNAIRES = "/questionnaires";
 // ---------------- summa -------------------
 export const SUMMA = "/summa";
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";

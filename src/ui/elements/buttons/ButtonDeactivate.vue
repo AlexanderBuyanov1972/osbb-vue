@@ -25,6 +25,8 @@ export default {
         "share/deleteShareByOwnerIdAndOwnershipId",
       deleteRecordByOwnerIdAndOwnershipId:
         "record/deleteRecordByOwnerIdAndOwnershipId",
+      deleteAllQuestionnaireByOwnerIdAndOwnershipId:
+        "questionnaire/deleteAllQuestionnaireByOwnerIdAndOwnershipId",
     }),
     removeOwner(ownerId, ownershipId) {
       const payload = {
@@ -33,7 +35,11 @@ export default {
       };
       this.deleteShareByOwnerIdAndOwnershipId(payload).then(() => {
         this.deleteRecordByOwnerIdAndOwnershipId(payload).then(() => {
-          this.$router.push(PAGE_OWNERS_GET);
+          this.deleteAllQuestionnaireByOwnerIdAndOwnershipId(payload).then(
+            () => {
+              this.$router.push(PAGE_OWNERS_GET);
+            }
+          );
         });
       });
     },

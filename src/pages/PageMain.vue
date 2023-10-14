@@ -1,6 +1,12 @@
 <template>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
+    <vue-loader :isLoader="getIsLoadingRecord" />
+    <vue-loader :isLoader="getIsLoadingQuestionnaire" />
+    <vue-loader :isLoader="getIsLoadingRate" />
+    <header-messages
+      :messages="messages"
+      :style="{ width: '100%', display: 'flex', 'text-align': 'start' }"
+    />
     <div class="header">ОСББ "Свободы 51"</div>
     <div class="img">
       <img
@@ -9,17 +15,42 @@
       />
     </div>
     <div class="">
-      <button-create @click="sendToServerDataBase">FullDataBase</button-create>
-    </div>
-    <div class="">
-      <button-create @click="sendToServerQuestionnaire"
-        >FullQuestionnaire</button-create
+      <button-create @click="sendToServerDataBase"
+        >Создание базы данных собственник/помещение</button-create
       >
     </div>
     <div class="">
-      <button-create @click="sendToServerRates">FullRates</button-create>
+      <button-create @click="sendToServerQuestionnaire"
+        >Создание опроса</button-create
+      >
+    </div>
+    <div class="">
+      <button-create @click="sendToServerRates">Создание тарифов</button-create>
     </div>
   </div>
+  <dialog-window :show="showModalDB">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModalDB = false"
+      @successfuly="successfulyActionDB"
+    ></modal-action>
+  </dialog-window>
+
+  <dialog-window :show="showModalPolls">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModalPolls = false"
+      @successfuly="successfulyActionPolls"
+    ></modal-action>
+  </dialog-window>
+
+  <dialog-window :show="showModalRates">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModalRates = false"
+      @successfuly="successfulyActionRates"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import {
@@ -28,7 +59,7 @@ import {
   generateJsonRates,
 } from "@/pages/_functions/generate";
 import { generateSvobody51 } from "@/pages/_functions/generateRealDB";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -36,7 +67,21 @@ export default {
       generateJsonQuestionnaires,
       generateJsonRates,
       generateSvobody51,
+      showModalDB: false,
+      showModalPolls: false,
+      showModalRates: false,
+      messages: [],
     };
+  },
+  computed: {
+    ...mapGetters({
+      getMessagesRecord: "record/getMessages",
+      getIsLoadingRecord: "record/getIsLoading",
+      getMessagesQuestionnaire: "questionnaire/getMessages",
+      getIsLoadingQuestionnaire: "questionnaire/getIsLoading",
+      getMessagesRate: "rate/getMessages",
+      getIsLoadingRate: "rate/getIsLoading",
+    }),
   },
   methods: {
     ...mapActions({
@@ -45,14 +90,30 @@ export default {
       createAllRate: "rate/createAllRate",
     }),
     sendToServerDataBase() {
-      // this.createAllRecord(this.generateJsonEntries());
-      this.generateJsonRecords();
+      this.showModalDB = true;
     },
     sendToServerQuestionnaire() {
-      this.createAllQuestionnaire(this.generateJsonQuestionnaires());
+      this.showModalPolls = true;
     },
     sendToServerRates() {
-      this.createAllRate(this.generateJsonRates());
+      this.showModalRates = true;
+    },
+    successfulyActionDB() {
+      this.generateJsonRecords().then(() => {
+        this.messages = this.getMessagesRecord;
+      });
+    },
+    successfulyActionPolls() {
+      this.createAllQuestionnaire(this.generateJsonQuestionnaires()).then(
+        () => {
+          this.messages = this.getMessagesQuestionnaire;
+        }
+      );
+    },
+    successfulyActionRates() {
+      this.createAllRate(this.generateJsonRates()).then(() => {
+        this.messages = this.getMessagesRate;
+      });
     },
   },
 };

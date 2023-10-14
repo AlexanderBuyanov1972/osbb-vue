@@ -91,16 +91,18 @@ export const generateSvobody51 = async () => {
     let ownership = generateOwnership();
     let responseOwner = await createOwner(owner);
     let responseOwnership = await createOwnership(ownership);
-    let share = {
-      value: 1.0,
-      owner: responseOwner.data,
-      ownership: responseOwnership.data,
-    };
-    await createShare(share);
-    let record = {
-      owner: responseOwner.data,
-      ownership: responseOwnership.data,
-    };
-    await createRecord(record);
+    if (responseOwner.data !== null && responseOwnership.data !== null) {
+      await createShare({
+        value: 1.0,
+        owner: responseOwner.data,
+        ownership: responseOwnership.data,
+      });
+    }
+    if (responseOwner.data !== null && responseOwnership.data !== null) {
+      await createRecord({
+        owner: responseOwner.data,
+        ownership: responseOwnership.data,
+      });
+    }
   }
 };

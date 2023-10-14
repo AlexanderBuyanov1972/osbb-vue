@@ -11,7 +11,7 @@ import {
   COUNT_ROOMS,
   COUNT_APARTMENT,
   COUNT_NON_RESIDENTIAL_ROOM,
-  FULLNAME,
+  FULL_NAME,
   PERSONAL_ACCOUNT,
 } from "@/http/apiHttp";
 
@@ -123,7 +123,7 @@ export const getRoomByApartment = async (apartment) => {
 };
 export const getListApartmentsByFullName = async (fullName) => {
   const response = await axios.get(
-    API_BASE + OWNERSHIP + FULLNAME + "/" + fullName
+    API_BASE + OWNERSHIP + FULL_NAME + "/" + fullName
   );
   return response.data;
 };

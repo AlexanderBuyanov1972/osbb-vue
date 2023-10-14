@@ -3,7 +3,6 @@ import { createOwner } from "@/http/owner/owner";
 import { createOwnership } from "@/http/ownership/ownership";
 import { createShare } from "@/http/share";
 import { createRecord } from "@/http/record";
-import { createRate } from "@/http/payment/rate";
 
 export const generatePassport = () => {
   return {
@@ -139,22 +138,22 @@ export const generateJsonRecords = async () => {
       },
     };
 
-    let responseOwner = await createOwner(owner);
     let responseOwnership = await createOwnership(ownership);
-    // create share --------------------
-    let share = {
-      value: 1.0,
-      owner: responseOwner.data,
-      ownership: responseOwnership.data,
-    };
-    await createShare(share);
-    // create record ---------------------------
-    let record = {
-      owner: responseOwner.data,
-      ownership: responseOwnership.data,
-    };
-    await createRecord(record);
-
+    if (responseOwnership.data == undefined) return;
+    let responseOwner = await createOwner(owner);
+    if (responseOwner.data != undefined) {
+      // create share --------------------
+      await createShare({
+        value: 1.0,
+        owner: responseOwner.data,
+        ownership: responseOwnership.data,
+      });
+      // create record ---------------------------
+      await createRecord({
+        owner: responseOwner.data,
+        ownership: responseOwnership.data,
+      });
+    }
     if (currentApartment % countFloor == 0) {
       currentFloor++;
     }
