@@ -22,7 +22,7 @@ export default {
 
   color: darkgoldenrod;
   color: brown;
-  color: red;
+  color: crimson;
   color: blueviolet;
   color: teal;
 }

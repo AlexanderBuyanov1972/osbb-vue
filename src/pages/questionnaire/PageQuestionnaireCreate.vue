@@ -96,7 +96,7 @@ export default {
         });
       });
       this.createAllQuestionnaire(body).then(() => {
-        // this.fetchAllTitleOfQuestionnaire().then(()=> this.$router.push(PAGE_QUESTIONNAIRES_GET))
+       this.$router.push(PAGE_QUESTIONNAIRES_GET)
       });
     },
   },

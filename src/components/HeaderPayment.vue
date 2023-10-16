@@ -1,51 +1,47 @@
 <template>
   <div class="block">
     <button-bills @click="$router.push(PAGE_PAYMENTS_GET)"
-      >{{ PAYMENTS_GET }}
+      >Все проводки
     </button-bills>
-    <button-bills @click="$router.push(PAGE_DEBT_GET)"
+    <button-bills @click="$router.push(PAGE_BALANCE_ROOM)"
       >Текущий баланс по помещению
     </button-bills>
     <button-bills @click="$router.push(PAGE_PAYMENT_CREATE)"
-      >{{ PAYMENT_CREATE }}
+      >Создать проводку
     </button-bills>
-    <div class="total">Сумма на счёте ОСББ : {{ totalSumma }} грн</div>
+    <div class="total">Сумма на счёте ОСББ : {{ balance }} грн</div>
   </div>
 </template>
 <script>
 import {
   PAGE_PAYMENT_CREATE,
-  PAGE_DEBT_GET,
+  PAGE_BALANCE_ROOM,
   PAGE_PAYMENTS_GET,
 } from "@/router/apiRouter";
-import { PAYMENT_CREATE, PAYMENT_GET, PAYMENTS_GET } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "header-payment",
   data() {
     return {
       PAGE_PAYMENT_CREATE,
-      PAGE_DEBT_GET,
+      PAGE_BALANCE_ROOM,
       PAGE_PAYMENTS_GET,
-      PAYMENT_CREATE,
-      PAYMENT_GET,
-      PAYMENTS_GET,
-      totalSumma: 0,
+      balance: 0,
     };
   },
   methods: {
     ...mapActions({
-      fetchTotalSummaPayment: "payment/fetchTotalSummaPayment",
+      fetchBalance: "payment/fetchBalance",
     }),
   },
   mounted() {
-    this.fetchTotalSummaPayment().then(() => {
-      this.totalSumma = this.getTotalSummaPayment;
+    this.fetchBalance().then(() => {
+      this.balance = this.getBalance;
     });
   },
   computed: {
     ...mapGetters({
-      getTotalSummaPayment: "payment/getTotalSummaPayment",
+      getBalance: "payment/getBalance",
     }),
   },
 };
@@ -64,5 +60,6 @@ export default {
 }
 .total {
   color: crimson;
+  font-size: 20px;
 }
 </style>

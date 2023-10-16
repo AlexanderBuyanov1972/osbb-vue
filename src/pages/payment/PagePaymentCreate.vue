@@ -3,19 +3,10 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <div class="block">
-      <div class="title">Введите № помещения :</div>
-      <input-simple
-        class="input"
-        v-model="apartment"
-        :style="{ width: '65px' }"
-      />
-      <button-bills
-        :hidden="!this.checkApartment"
-        @click="getPersonalAccountByApartment"
-        >Получить лицевой счёт
-      </button-bills>
-    </div>
+    <block-search-apartment
+      nameButton="Получить лицевой счёт"
+      @apartment="(value) => action(value)"
+    />
     <div class="block_form">
       <block-edit-payment
         :paymentProps="payment"
@@ -44,7 +35,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      apartment: "1",
       payment: {},
       isValidPayment: false,
       showModal: false,
@@ -54,14 +44,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchPersonalAccountByApartment:
-        "ownership/fetchPersonalAccountByApartment",
+      fetchBillByApartment: "ownership/fetchBillByApartment",
       createPayment: "payment/createPayment",
     }),
-    getPersonalAccountByApartment() {
-      this.fetchPersonalAccountByApartment(this.apartment).then(() => {
-        this.payment.personalAccount = this.getPersonalAccount;
-      });
+    action(value) {
+      if (value === "0") {
+        this.payment.bill = "00001";
+      } else {
+        this.fetchBillByApartment(value).then(() => {
+          this.payment.bill = this.getBill;
+        });
+      }
     },
     sendToServer() {
       this.showModal = true;
@@ -74,13 +67,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getPersonalAccount: "ownership/getPersonalAccount",
+      getBill: "ownership/getBill",
       getIsLoading: "payment/getIsLoading",
       getMessages: "payment/getMessages",
     }),
-    checkApartment() {
-      return this.apartment > 0 && this.apartment < 85;
-    },
   },
 };
 </script>

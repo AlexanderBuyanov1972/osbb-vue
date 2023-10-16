@@ -57,10 +57,3 @@ export const INFO_ABOUT_APARTMENT = "Всё по квартире № ";
 
 export const GET_RESULT_POLL = "Получить результаты опроса";
 export const GET_POLLS_BY_TITLE = "Получить опросы по теме";
-
-// bills
-export const BLOCK_PAYMENT_BILLS = "Оплата счетов";
-export const PAYMENT_GET = "Получить платёжку";
-export const PAYMENT_CREATE = "Создать платёжку";
-export const PAYMENT_DELETE = "Удалить платёжку";
-export const PAYMENTS_GET = "Список платёжек";

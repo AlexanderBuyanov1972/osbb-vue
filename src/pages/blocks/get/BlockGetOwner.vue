@@ -30,6 +30,12 @@
         <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
       </div>
     </div>
+    <div class="info">
+      <div class="item">
+        <span>Дополнительная информация : </span
+        >{{ owner.additionalInformation }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -67,16 +73,17 @@ export default {
   color: blueviolet;
   margin: 15px 0px;
   border: 1px solid blueviolet;
+
   display: flex;
-  align-items: center;
-  justify-content: start;
+  align-items: start;
+  justify-content: space-between;
 }
 .img_button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-right: 20%;
+  align-self: center;
+
 }
 
 span {
@@ -85,5 +92,13 @@ span {
 .item {
   margin: 5px 0px;
   font-size: 20px;
+}
+.img_button,
+.spans,
+.info {
+  width: 33%;
+}
+.info{
+  
 }
 </style>

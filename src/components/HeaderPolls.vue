@@ -24,28 +24,10 @@
         @select="(value) => (title = value)"
       />
     </div>
-    <div class="main">
-      <div class="title">Введите № помещения :</div>
-      <button-simple
-        :style="{ 'border-color': 'teal', color: 'teal' }"
-        @click="minus"
-        >-</button-simple
-      >
-      <input-simple
-        class="input"
-        v-model="apartment"
-        :style="{ width: '65px' }"
-      />
-
-      <button-simple
-        :style="{ 'border-color': 'teal', color: 'teal' }"
-        @click="plus"
-        >+</button-simple
-      >
-      <button-create @click="goToPageQuestionnairesByTitleAndByApartment"
-        >{{ GET_POLLS_BY_TITLE_AND_BY_APARTMENT }}
-      </button-create>
-    </div>
+    <block-search-apartment
+      :nameButton="GET_POLLS_BY_TITLE_AND_BY_APARTMENT"
+      @apartment="(value) => action(value)"
+    />
   </div>
 </template>
 <script>
@@ -104,14 +86,14 @@ export default {
         this.$router.push(PAGE_QUESTIONNAIRES_GET + "/" + this.title);
       }
     },
-    goToPageQuestionnairesByTitleAndByApartment() {
+    action(value) {
       if (this.title == undefined || this.title == this.message) {
         this.setMessages([this.message]);
-      } else if (this.apartment == undefined || this.apartment <= 0) {
+      } else if (value == undefined || value <= 0) {
         this.setMessages(["Выберите номер квартиры"]);
       } else {
         this.$router.push(
-          PAGE_QUESTIONNAIRES_GET + "/" + this.title + "/" + this.apartment
+          PAGE_QUESTIONNAIRES_GET + "/" + this.title + "/" + value
         );
       }
     },
@@ -130,12 +112,6 @@ export default {
       deleteAllQuestionnaireByTitle:
         "questionnaire/deleteAllQuestionnaireByTitle",
     }),
-    plus() {
-      if (this.apartment < 84) this.apartment = this.apartment * 1 + 1;
-    },
-    minus() {
-      if (this.apartment > 1) this.apartment = this.apartment * 1 - 1;
-    },
   },
   computed: {
     ...mapGetters({

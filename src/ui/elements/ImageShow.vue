@@ -39,5 +39,8 @@ img {
   width: 15vw;
   height: 25vh;
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

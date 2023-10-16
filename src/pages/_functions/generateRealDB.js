@@ -52,12 +52,13 @@ export const generateOwner = () => {
     vehicle: generateVehicle(),
     placeWork: generatePlaceWork(),
     photo: generatePhoto(),
+    additionalInformation:"нет",
   };
 };
 
 export const generateOwnership = () => {
   return {
-    personalAccount: "6200190000",
+    bill: "6200190000",
     typeRoom: "APARTMENT",
     totalArea: 10.01,
     livingArea: 10.01,

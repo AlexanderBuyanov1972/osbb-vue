@@ -1,31 +1,27 @@
 <template>
   <div class="main">
-    <vue-loader :isLoader="getIsLoadingRecord" />
+    <vue-loader :isLoader="getIsLoadingOwnership" />
     <vue-loader :isLoader="getIsLoadingQuestionnaire" />
     <vue-loader :isLoader="getIsLoadingRate" />
     <header-messages
       :messages="messages"
       :style="{ width: '100%', display: 'flex', 'text-align': 'start' }"
     />
+    <div class="buttons">
+      <button-create @click="sendToServerDataBase"
+        >Создание базы данных собственник/помещение</button-create
+      >
+      <button-create @click="sendToServerQuestionnaire"
+        >Создание опроса</button-create
+      >
+      <button-create @click="sendToServerRates">Создание тарифов</button-create>
+    </div>
     <div class="header">ОСББ "Свободы 51"</div>
     <div class="img">
       <img
         src="https://myshtetl.org/dnepropetrovsk/images/dneprdzrzh_0004.JPG"
         alt="Not Found"
       />
-    </div>
-    <div class="">
-      <button-create @click="sendToServerDataBase"
-        >Создание базы данных собственник/помещение</button-create
-      >
-    </div>
-    <div class="">
-      <button-create @click="sendToServerQuestionnaire"
-        >Создание опроса</button-create
-      >
-    </div>
-    <div class="">
-      <button-create @click="sendToServerRates">Создание тарифов</button-create>
     </div>
   </div>
   <dialog-window :show="showModalDB">
@@ -75,8 +71,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getMessagesRecord: "record/getMessages",
-      getIsLoadingRecord: "record/getIsLoading",
+      getMessagesOwnership: "ownership/getMessages",
+      getIsLoadingOwnership: "ownership/getIsLoading",
       getMessagesQuestionnaire: "questionnaire/getMessages",
       getIsLoadingQuestionnaire: "questionnaire/getIsLoading",
       getMessagesRate: "rate/getMessages",
@@ -100,7 +96,7 @@ export default {
     },
     successfulyActionDB() {
       this.generateJsonRecords().then(() => {
-        this.messages = this.getMessagesRecord;
+        this.messages = this.getMessagesOwnership;
       });
     },
     successfulyActionPolls() {

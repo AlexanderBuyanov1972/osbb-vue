@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, PAYMENT, ALL, SUMMA, DEBT, DETAILS } from "@/http/apiHttp";
+import { API_BASE, PAYMENT, ALL, BALANCE, DEBT, DETAILS } from "@/http/apiHttp";
 
 // one ----------------------------------
 
@@ -8,12 +8,12 @@ export const createPayment = async (one) => {
   return response.data;
 };
 
-export const getPayment = async (id) => {
+export const getPaymentComing = async (id) => {
   const response = await axios.get(API_BASE + PAYMENT + "/" + id);
   return response.data;
 };
 
-export const deletePayment = async (id) => {
+export const deletePaymentComing = async (id) => {
   const response = await axios.delete(API_BASE + PAYMENT + "/" + id);
   return response.data;
 };
@@ -37,8 +37,14 @@ export const deleteAllPayment = async () => {
 
 // get total summa of osbb -----------------------
 
-export const getTotalSummaPayment = async () => {
-  const response = await axios.get(API_BASE + PAYMENT + ALL + SUMMA);
+export const getBalance = async () => {
+  const response = await axios.get(API_BASE + PAYMENT + BALANCE);
+  return response.data;
+};
+// get list debt by rooms after osbb -----------------------
+
+export const getBalanceHouse = async () => {
+  const response = await axios.get(API_BASE + PAYMENT  + BALANCE + ALL);
   return response.data;
 };
 // get debt by apartment ---------

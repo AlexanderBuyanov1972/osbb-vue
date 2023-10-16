@@ -54,7 +54,7 @@ export default {
 .blocks {
   border: 1px solid teal;
   background-color: white;
-  width: 350px;
+  width: 500px;
   position: relative;
   height: 30px;
 }

@@ -35,7 +35,7 @@
     <button-delete
       :style="currentButton == 5 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton5"
-      >{{ BLOCK_PAYMENT_BILLS }}
+      >Оплата счетов
     </button-delete>
   </div>
 </template>

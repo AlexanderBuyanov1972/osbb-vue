@@ -3,26 +3,15 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
+    <button-back/>
     <line-header
       :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${apartment}`"
       :style="{ color: 'darkgoldenrod' }"
     />
-    <div class="body">
-      <line-address :address="header.address" />
-      <div class="personal_account">
-        Лицевой счёт № <span>{{ header.personalAccount }}</span>
-      </div>
-      <div class="total_area">
-        Общая площадь помещения, на которую начисляется оплата:
-        <span> {{ header.totalArea }}</span>
-        м2.
-      </div>
-      <div class="current_date_time">
-        Текущее время:
-        <span> {{ header.currentDateTime }}</span>
-      </div>
+    <div class="body" v-if="flag">
+      <block-header-debt :header="header" />
       <vue-hr />
-      <debt-item :body="titles" />
+      <debt-item :body="titles" :style="{'color':'brown','font-size':'18px'}"/>
       <div class="list" v-for="one in body">
         <debt-item :body="one" />
       </div>
@@ -35,9 +24,10 @@ export default {
   data() {
     return {
       apartment: "",
+      flag: true,
       body: [],
       header: {
-        address:{}
+        address: {},
       },
       titles: {
         beginningPeriod: "Начальный период",
@@ -83,11 +73,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.block,
-.total_area,
-.personal_account,
-.current_date_time {
+.main{
   font-size: 20px;
-  color: blueviolet;
 }
 </style>

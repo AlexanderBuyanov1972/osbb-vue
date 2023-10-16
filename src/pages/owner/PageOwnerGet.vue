@@ -1,10 +1,10 @@
 <template>
   <header-data-owners></header-data-owners>
-  <vue-loader :isLoader="this.getIsLoading" />
+  <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="messages" />
-  <block-search-apartment
-    @messages="(value) => (messages = value)"
-    :owner="getOwner"
+  <block-search-full-name
+    nameButton="Получить список помещений"
+    @fullName="(value) => action(value)"
   />
   <line-header
     :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(getOwner)}`"
@@ -48,32 +48,39 @@ export default {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
       deleteOwner: "owner/deleteOwner",
+      getListApartmentsByFullName: "ownership/getListApartmentsByFullName",
     }),
+    action(value) {
+      this.getListApartmentsByFullName(value).then(() => {
+        this.messages = this.getOwnership;
+      });
+    },
     removeOwner() {
       this.deleteOwner(this.owner.id).then(() => {
         this.$router.push(PAGE_OWNERS_GET);
       });
     },
-  },
-  update() {
-    this.fetchOwner(this.$route.params.id).then(() => {
+    fill() {
       this.owner = this.getOwner;
       this.passport = this.getOwner.passport;
       this.placeWork = this.getOwner.placeWork;
       this.vehicle = this.getOwner.vehicle;
+    },
+  },
+  update() {
+    this.fetchOwner(this.$route.params.id).then(() => {
+      this.fill();
     });
   },
   mounted() {
     this.fetchOwner(this.$route.params.id).then(() => {
-      this.owner = this.getOwner;
-      this.passport = this.getOwner.passport;
-      this.placeWork = this.getOwner.placeWork;
-      this.vehicle = this.getOwner.vehicle;
+      this.fill();
     });
   },
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
+      getOwnership: "ownership/getOwnership",
       getIsLoading: "owner/getIsLoading",
     }),
   },

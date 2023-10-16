@@ -15,6 +15,7 @@ import SelectEdit from "@/ui/elements/selects/SelectEdit.vue";
 // other ---------------------------------------------------------
 import DialogWindow from "@/ui/elements/DialogWindow.vue";
 import ImageShow from "@/ui/elements/ImageShow.vue";
+import TextAreaSimple from "@/ui/elements/TextAreaSimple.vue";
 import InputSimple from "@/ui/elements/InputSimple.vue";
 import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
 import VueLoader from "@/ui/elements/VueLoader.vue";
@@ -29,11 +30,16 @@ import HeaderDataOwnerships from "@/components/HeaderDataOwnerships.vue";
 import LineAddress from "@/components/LineAddress.vue";
 import LineHeader from "@/components/LineHeader.vue";
 // --------------- pages blocks -------------------
+import BlockBodyDebt from "@/pages/payment/blocks/BlockBodyDebt.vue";
+import BlockHeaderDebt from "@/pages/payment/blocks/BlockHeaderDebt.vue";
 import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
 import BlockInformationQuestionnaire from "@/pages/blocks/BlockInformationQuestionnaire.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
+import BlockSearchFullNameApartment from "@/pages/blocks/BlockSearchFullNameApartment.vue";
+import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
 // --------------- items and lists -------------------
+import BalanceHouseItem from "@/itemsAndLists/BalanceHouseItem.vue";
 import DebtItem from "@/itemsAndLists/DebtItem.vue";
 import PaymentItem from "@/itemsAndLists/PaymentItem.vue";
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
@@ -60,18 +66,21 @@ import BlockGetAddress from "@/pages/blocks/get/BlockGetAddress.vue";
 import ModalAction from "@/modals/ModalAction";
 
 export default [
-  // ---- elements -----
-  DialogWindow,
-  ImageShow,
+  // buttons -----
   ButtonDeactivate,
   ButtonBills,
-  InputSimple,
   ButtonEdit,
   ButtonCreate,
   ButtonBack,
   ButtonDelete,
   ButtonSimple,
   ButtonReset,
+
+  // ---- elements -----
+  DialogWindow,
+  ImageShow,
+  InputSimple,
+  TextAreaSimple,
   SelectSimple,
   SelectTitle,
   SelectEdit,
@@ -81,6 +90,8 @@ export default [
   LineRadio,
 
   // ----------------
+  BlockBodyDebt,
+  BlockHeaderDebt,
   HeaderPayment,
   HeaderDataOwners,
   HeaderDataOwnerships,
@@ -91,8 +102,11 @@ export default [
   BlockErrorMessage,
   BlockInformationAboutHouse,
   BlockInformationQuestionnaire,
+  BlockSearchFullNameApartment,
   BlockSearchApartment,
+  BlockSearchFullName,
   // ---- items ---------
+  BalanceHouseItem,
   DebtItem,
   PaymentItem,
   OwnerItem,

@@ -5,7 +5,7 @@
     </div>
     <div class="spans">
       <div class="item">
-        <span>Лицевой счёт : </span>{{ ownership.personalAccount }}
+        <span>Лицевой счёт : </span>{{ ownership.bill }}
       </div>
       <div class="item">
         <span>Тип : </span>{{ showTypeRoom(ownership.typeRoom) }}

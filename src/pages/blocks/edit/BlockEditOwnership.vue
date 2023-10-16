@@ -4,13 +4,13 @@
     <div class="blocks">
       <div class="personalAccount">
         <block-error-message
-          :field="ownership.personalAccount"
+          :field="ownership.bill"
           messageFalse="Укажите лицевой счёт"
           messageTrue="Лицевой счёт"
           @valid="(value) => handlerPersonalAccount(value)"
         />
         <input-simple
-          v-model="ownership.personalAccount"
+          v-model="ownership.bill"
           placeholder="Лицевой счёт"
         />
       </div>

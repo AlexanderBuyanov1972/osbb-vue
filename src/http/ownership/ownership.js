@@ -12,7 +12,7 @@ import {
   COUNT_APARTMENT,
   COUNT_NON_RESIDENTIAL_ROOM,
   FULL_NAME,
-  PERSONAL_ACCOUNT,
+  BILL,
 } from "@/http/apiHttp";
 
 // ------------- one --------------------
@@ -108,9 +108,9 @@ export const getOwnershipByApartment = async (apartment) => {
   return response.data;
 };
 
-export const getPersonalAccountByApartment = async (apartment) => {
+export const getBillByApartment = async (apartment) => {
   const response = await axios.get(
-    API_BASE + OWNERSHIP + APARTMENT + PERSONAL_ACCOUNT + "/" + apartment
+    API_BASE + OWNERSHIP + APARTMENT + BILL + "/" + apartment
   );
   return response.data;
 };

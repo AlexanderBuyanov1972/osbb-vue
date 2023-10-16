@@ -77,3 +77,19 @@ export const arrayAnswer = [
   { id: 3, name: "Против", value: "AGAINST" },
   { id: 4, name: "Воздержался", value: "ABSTAINED" },
 ];
+// bills --------------------------------------
+export const arrayTypeBill = [
+  { id: 1, name: "Выбрать", value: "SELECT" },
+  { id: 2, name: "Приход", value: "COMING" },
+  { id: 3, name: "Расход", value: "CONSUMPTION" },
+
+];
+export const arrayDescription = [
+  { id: 1, name: "Выбрать", value: "SELECT" },
+  { id: 2, name: "Оплата услуг ОСББ", value: "Оплата услуг ОСББ" },
+  { id: 3, name: "Ремонт системы водоснабжения", value: "Ремонт системы водоснабжения" },
+  { id: 4, name: "Ремонт системы электроснабжения", value: "Ремонт системы электроснабжения" },
+  { id: 5, name: "Зарплата управляющему ОСББ", value: "Зарплата управляющему ОСББ" },
+  { id: 6, name: "Налоги", value: "Налоги" },
+
+];

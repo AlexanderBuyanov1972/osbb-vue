@@ -2,7 +2,7 @@
   <header-payment />
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="getMessages" />
-  <payment-item :payment="header" />
+  <payment-item :style="{'color':'blueviolet'}" :count="count" :payment="header" />
   <div class="list" v-for="(one, index) in list">
     <payment-item :count="index + 1" :payment="one" />
   </div>
@@ -13,8 +13,10 @@ export default {
   data() {
     return {
       list: [],
+      count: "№ ",
       header: {
-        personalAccount: "Лицевой счёт",
+        bill: "Лицевой счёт",
+        description: "Статья расхода",
         date: "Дата",
         summa: "Сумма, грн",
       },

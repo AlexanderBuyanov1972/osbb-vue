@@ -111,6 +111,16 @@
           :startName="showTypeBeneficiary(owner.beneficiary)"
         />
       </div>
+
+      <div class="additionalInformation">
+        <block-error-message
+          :field="owner.additionalInformation"
+          messageFalse="Укажите дополнительную информацию"
+          messageTrue="Дополнительная информация"
+          @valid="(value) => handlerAdditionalInformation(value)"
+        />
+        <text-area-simple v-model.trim="owner.additionalInformation" placeholder="Дополнительная информация" />
+      </div>
     </div>
   </div>
 </template>
@@ -148,6 +158,7 @@ export default {
       validEmail: false,
       validPhoneNumber: false,
       validBeneficiary: false,
+      validAdditionalInformation: false,
     };
   },
   methods: {
@@ -193,6 +204,10 @@ export default {
       this.validBeneficiary = value;
       this.emitOwner();
     },
+    handlerAdditionalInformation(value) {
+      this.validAdditionalInformation = value;
+      this.emitOwner();
+    },
   },
   computed: {
     isValidOwner() {
@@ -205,7 +220,8 @@ export default {
         this.validFamilyStatus &&
         this.validEmail &&
         this.validPhoneNumber &&
-        this.validBeneficiary
+        this.validBeneficiary &&
+        this.validAdditionalInformation
       );
     },
   },

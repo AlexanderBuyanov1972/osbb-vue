@@ -32,6 +32,9 @@ export const PAGE_QUESTIONNAIRES_GET = "/questionnaires/get";
 // payment ---------------------------------
 export const PAGE_PAYMENT_CREATE = "/payment/create";
 export const PAGE_PAYMENTS_GET = "/payments/get";
-export const PAGE_DEBT_GET = "/debt/get";
-export const PAGE_DEBT_DETAILS_GET = "/debt/details/get";
+export const PAGE_BALANCE_ROOM = "/balance/room";
+export const PAGE_BALANCE_ROOM_DETAILS = "/balance/room/details";
+export const PAGE_BALANCE_HOUSE = "/balance/house";      
+
+
 

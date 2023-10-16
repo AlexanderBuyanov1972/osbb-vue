@@ -9,12 +9,12 @@ import {
   getOwnershipByApartment,
   getRoomByApartment,
   getListApartmentsByFullName,
-  getPersonalAccountByApartment,
+  getBillByApartment,
 } from "@/http/ownership/ownership";
 
 export default {
   state: () => ({
-    personalAccount: "",
+    bill: "",
     ownership: {},
     ownerships: [],
     messages: [],
@@ -27,8 +27,8 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setPersonalAccount(state, value) {
-      state.personalAccount = value;
+    setBill(state, value) {
+      state.bill = value;
     },
     setOwnership(state, object) {
       state.ownership = object;
@@ -54,8 +54,8 @@ export default {
     getOwnership(state) {
       return state.ownership;
     },
-    getPersonalAccount(state) {
-      return state.personalAccount;
+    getBill(state) {
+      return state.bill;
     },
     getOwnerships(state) {
       return state.ownerships;
@@ -192,12 +192,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchPersonalAccountByApartment({ commit }, apartment) {
+    async fetchBillByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await getPersonalAccountByApartment(apartment);
+        const response = await getBillByApartment(apartment);
         if (response != undefined && response.data != undefined) {
-          commit("setPersonalAccount", response.data);
+          commit("setBill", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

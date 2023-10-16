@@ -9,6 +9,7 @@ import {
   arrayTypeColor,
   arrayTypeManufacturer,
   arrayTypeVehicle,
+  arrayTypeBill,
 } from "@/pages/_functions/arraysOfData";
 
 // ------------ show fields objects  arrays ---------------
@@ -84,6 +85,14 @@ export const showTypeRoom = (value) => {
 export const showTypeAnswer = (value) => {
   try {
     return arrayAnswer.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
+// bill -------------------------------------
+export const showTypeBill = (value) => {
+  try {
+    return arrayTypeBill.find((el) => el.value == value).name;
   } catch (error) {
     return "";
   }

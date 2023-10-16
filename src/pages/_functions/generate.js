@@ -37,7 +37,7 @@ export const generateVehicle = () => {
 export const generatePhoto = () => {
   return { name: "avatar", url: "@/photos/owners/avatar.png" };
 };
-export const generatePersonalAccount = (arg) => {
+export const generateBill = (arg) => {
   let substr = "6200190400";
   return substr.substring(0, substr.length - (arg + "").length) + arg;
 };
@@ -99,10 +99,11 @@ export const generateJsonRecords = async () => {
       vehicle: generateVehicle(),
       placeWork: generatePlaceWork(),
       photo: generatePhoto(),
+      additionalInformation:"нет",
     };
     // create ownership -------------------------
     let ownership = {
-      personalAccount: generatePersonalAccount(currentApartment),
+      bill: generateBill(currentApartment),
       typeRoom: faker.helpers.arrayElement([
         "APARTMENT",
         "NON_RESIDENTIAL_ROOM",

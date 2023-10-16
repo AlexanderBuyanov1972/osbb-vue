@@ -3,23 +3,23 @@ import {
   getPayment,
   deletePayment,
   getAllPayment,
-  getTotalSummaPayment,
+  getBalance,
+  getBalanceHouse,
   getDebtByApartment,
   getDetailsDebtByApartment,
 } from "@/http/payment/payment";
-
 export default {
   state: () => ({
     payment: {},
     payments: [],
-    totalSummaPayment: 0,
-    invoiceNotification: {},
+    balance: 0,
+    balanceHouse: [],
+    debt: {},
     debtDetailsHeader: {},
     debtDetailsBody: [],
     messages: [],
     isLoading: false,
   }),
-
   mutations: {
     setIsLoading(state, bool) {
       state.isLoading = bool;
@@ -33,11 +33,14 @@ export default {
     setPayments(state, array) {
       state.payments = array;
     },
-    setTotalSummaPayment(state, num) {
-      state.totalSummaPayment = num;
+    setBalanceHouse(state, array) {
+      state.balanceHouse = array;
     },
-    setInvoiceNotification(state, object) {
-      state.invoiceNotification = object;
+    setBalance(state, num) {
+      state.balance = num;
+    },
+    setDebt(state, object) {
+      state.debt = object;
     },
     setDebtDetailsHeader(state, object) {
       state.debtDetailsHeader = object;
@@ -59,11 +62,14 @@ export default {
     getPayments(state) {
       return state.payments;
     },
-    getTotalSummaPayment(state) {
-      return state.totalSummaPayment;
+    getBalance(state) {
+      return state.balance;
     },
-    getInvoiceNotification(state) {
-      return state.invoiceNotification;
+    getBalanceHouse(state) {
+      return state.balanceHouse;
+    },
+    getDebt(state) {
+      return state.debt;
     },
     getDebtDetailsHeader(state) {
       return state.debtDetailsHeader;
@@ -84,7 +90,7 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        commit("setMessages", [error.message]);Coming
       } finally {
         commit("setIsLoading", false);
       }
@@ -110,7 +116,7 @@ export default {
         commit("setIsLoading", true);
         const response = await deletePayment(id);
         commit("setMessages", response.messages);
-        commit("setPayment", {});
+        commit("setPayment", {});Coming
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -133,12 +139,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchTotalSummaPayment({ commit }) {
+    async fetchBalance({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getTotalSummaPayment();
+        const response = await getBalance();
         if (response != undefined && response.data != undefined) {
-          commit("setTotalSummaPayment", response.data);
+          commit("setBalance", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -154,7 +160,7 @@ export default {
         commit("setIsLoading", true);
         const response = await getDebtByApartment(apartment);
         if (response != undefined && response.data != undefined) {
-          commit("setInvoiceNotification", response.data);
+          commit("setDebt", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -172,6 +178,22 @@ export default {
         if (response != undefined && response.data != undefined) {
           commit("setDebtDetailsHeader", response.data[0]);
           commit("setDebtDetailsBody", response.data[1]);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchBalanceHouse({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getBalanceHouse();
+        if (response != undefined && response.data != undefined) {
+          commit("setBalanceHouse", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

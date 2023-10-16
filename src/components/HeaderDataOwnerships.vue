@@ -1,5 +1,5 @@
 <template>
-  <div class="block1">
+  <div class="block">
     <button-simple @click="$router.push(PAGE_OWNERSHIPS_GET)"
       >{{ OWNERSHIPS_GET }}
     </button-simple>
@@ -9,24 +9,14 @@
     <button-simple @click="$router.push(PAGE_ENTRY_CREATE)"
       >{{ ENTRY_CREATE }}
     </button-simple>
-    <button-simple
-      @click="this.$router.push(PAGE_ENTRY_UPDATE)"
-      >{{ ENTRY_UPDATE }}</button-simple
-    >
+    <button-simple @click="this.$router.push(PAGE_ENTRY_UPDATE)">{{
+      ENTRY_UPDATE
+    }}</button-simple>
   </div>
-  <div class="block2">
-    <div class="title">Введите № помещения :</div>
-    <button-simple @click="minus">-</button-simple>
-    <input-simple
-      class="input"
-      v-model="apartment"
-      :style="{ width: '65px' }"
-    />
-    <button-simple @click="plus">+</button-simple>
-    <button-simple :hidden="!this.checkApartment" @click="goToPageOwnershipRead"
-      >{{ GET }}
-    </button-simple>
-  </div>
+  <block-search-apartment
+    :nameButton="GET"
+    @apartment="(value) => action(value)"
+  />
 </template>
 <script>
 import {
@@ -34,7 +24,7 @@ import {
   PAGE_REGISTRY_OWNERSHIPS,
   PAGE_ENTRY_CREATE,
   PAGE_OWNERSHIP_GET,
-  PAGE_ENTRY_UPDATE
+  PAGE_ENTRY_UPDATE,
 } from "@/router/apiRouter";
 import {
   OWNERSHIPS_GET,
@@ -60,38 +50,23 @@ export default {
       PAGE_REGISTRY_OWNERSHIPS,
       PAGE_ENTRY_CREATE,
       PAGE_OWNERSHIP_GET,
-      PAGE_ENTRY_UPDATE
+      PAGE_ENTRY_UPDATE,
     };
   },
   methods: {
     ...mapActions({
       fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
     }),
-    goToPageOwnershipRead() {
-      this.fetchOwnershipByApartment(this.apartment).then(() => {
+    action(value) {
+      this.fetchOwnershipByApartment(value).then(() => {
         this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getOwnership.id);
       });
-    },
-    plus() {
-      if (this.apartment < 84) {
-        this.apartment = this.apartment * 1 + 1;
-        this.goToPageOwnershipRead();
-      }
-    },
-    minus() {
-      if (this.apartment > 1) {
-        this.apartment = this.apartment * 1 - 1;
-        this.goToPageOwnershipRead();
-      }
     },
   },
   computed: {
     ...mapGetters({
       getOwnership: "ownership/getOwnership",
     }),
-    checkApartment() {
-      return this.apartment > 0 && this.apartment < 85;
-    },
   },
 };
 </script>
@@ -102,24 +77,9 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.block1 {
+.block {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.block2 {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.title {
-  font-size: 17px;
-  color: blueviolet;
-  margin-right: 5px;
-}
-.input {
-  margin: 5px 5px 5px 0px;
-  border-color: blueviolet;
-  color: blueviolet;
 }
 </style>

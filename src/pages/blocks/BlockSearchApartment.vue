@@ -1,54 +1,50 @@
 <template>
-  <div class="main">
-    <div class="title">Введите Ф.И.О. :</div>
+  <div class="search">
+    <div class="title">Введите № помещения :</div>
+    <button-simple @click="minus">-</button-simple>
     <input-simple
       class="input"
-      v-model.trim="fullName"
-      :style="{ width: '300px' }"
+      v-model="apartment"
+      :style="{ width: '60px' }"
     />
-    <button-edit @click="getListApartment"
-      >Получить список помещений
-    </button-edit>
+    <button-simple @click="plus">+</button-simple>
+    <button-simple :hidden="!this.checkApartment" @click="clickButton"
+      >{{ nameButton }}
+    </button-simple>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
 export default {
   name: "block-search-apartment",
+  props: {
+    nameButton: String,
+  },
   data() {
     return {
-      fullName: "",
-      mapOwnerToLineFullNamesOwner,
+      apartment: "1",
     };
   },
-  props: {
-    owner: Object,
-  },
   methods: {
-    ...mapActions({
-      getListApartmentsByFullName: "ownership/getListApartmentsByFullName",
-    }),
-    getListApartment() {
-      if (this.fullName.length > 5)
-        this.getListApartmentsByFullName(this.fullName).then(() => {
-          this.$emit("messages", this.getOwnership);
-        });
+    plus() {
+      if (this.apartment < 84) {
+        this.apartment = this.apartment * 1 + 1;
+        this.clickButton();
+      }
     },
-    fillFullName() {
-      this.fullName = this.mapOwnerToLineFullNamesOwner(this.owner);
+    minus() {
+      if (this.apartment > 1) {
+        this.apartment = this.apartment * 1 - 1;
+        this.clickButton();
+      }
+    },
+    clickButton() {
+      this.$emit("apartment", this.apartment);
     },
   },
   computed: {
-    ...mapGetters({
-      getOwnership: "ownership/getOwnership",
-    }),
-  },
-  mounted() {
-    this.fillFullName();
-  },
-  updated() {
-    this.fillFullName();
+    checkApartment() {
+      return this.apartment > 0 && this.apartment < 85;
+    },
   },
 };
 </script>
@@ -59,19 +55,18 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main {
+.search {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  color: blueviolet;
 }
 .title {
   font-size: 17px;
-  color: darkgoldenrod;
   margin-right: 5px;
 }
 .input {
   margin: 5px 5px 5px 0px;
-  border-color: darkgoldenrod;
-  color: darkgoldenrod;
+  border-color: blueviolet;
 }
 </style>
