@@ -5,6 +5,7 @@ export const ALL = "/all";
 export const USER = "/user";
 export const ROLE = "/role";
 
+export const ALL_IN_ONE = "/all_in_one";
 export const PRINT = "/print";
 export const DETAILS = "/details";
 export const DEBT = "/debt";

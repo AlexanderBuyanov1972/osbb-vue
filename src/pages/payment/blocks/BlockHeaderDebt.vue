@@ -32,7 +32,7 @@ export default {
     },
     time() {
       const str = this.header.currentTime + "";
-      return str.substring(str.indexOf("T")+1, str.indexOf('.'));
+      return str.substring(str.indexOf("T") + 1, str.indexOf("."));
     },
   },
 };

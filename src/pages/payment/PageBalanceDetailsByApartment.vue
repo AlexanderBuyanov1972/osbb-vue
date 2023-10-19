@@ -3,7 +3,11 @@
   <div class="main">
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
-    <button-back/>
+    <button-back />
+    <button-bills v-if="flag" @click="showModal = true">Печать</button-bills>
+    <button-bills v-if="flag" @click="showModalAll = true"
+      >Печатать на все помещения</button-bills
+    >
     <line-header
       :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${apartment}`"
       :style="{ color: 'darkgoldenrod' }"
@@ -11,12 +15,29 @@
     <div class="body" v-if="flag">
       <block-header-debt :header="header" />
       <vue-hr />
-      <debt-item :body="titles" :style="{'color':'brown','font-size':'18px'}"/>
+      <debt-item
+        :body="titles"
+        :style="{ color: 'brown', 'font-size': '18px' }"
+      />
       <div class="list" v-for="one in body">
         <debt-item :body="one" />
       </div>
     </div>
   </div>
+  <dialog-window :show="showModal">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModal = false"
+      @successfuly="print"
+    ></modal-action>
+  </dialog-window>
+  <dialog-window :show="showModalAll">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModalAll = false"
+      @successfuly="printList"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
@@ -24,11 +45,11 @@ export default {
   data() {
     return {
       apartment: "",
+      showModal: false,
+      showModalAll: false,
       flag: true,
       body: [],
-      header: {
-        address: {},
-      },
+      header: {},
       titles: {
         beginningPeriod: "Начальный период",
         debtAtBeginningPeriod: `Долг на начало периода, грн`,
@@ -47,7 +68,16 @@ export default {
   methods: {
     ...mapActions({
       fetchDetailsDebtByApartment: "payment/fetchDetailsDebtByApartment",
+      printPdfDebtDetailsByApartment: "payment/printPdfDebtDetailsByApartment",
+      printPdfDebtDetailsAllApartment:
+        "payment/printPdfDebtDetailsAllApartment",
     }),
+    print() {
+      this.printPdfDebtDetailsByApartment(this.apartment);
+    },
+    printList() {
+      this.printPdfDebtDetailsAllApartment();
+    },
   },
   mounted() {
     this.apartment = this.$route.params.apartment;
@@ -73,7 +103,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main{
+.main {
   font-size: 20px;
 }
 </style>

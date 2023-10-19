@@ -9,6 +9,9 @@ import {
   getDetailsDebtByApartment,
   printPdfDebtByApartment,
   printPdfListDebtByApartment,
+  printAllToOnePdfDebtAllApartment,
+  printPdfDebtDetailsByApartment,
+  printPdfDebtDetailsAllApartment,
 } from "@/http/payment/payment";
 export default {
   state: () => ({
@@ -180,8 +183,8 @@ export default {
         commit("setIsLoading", true);
         const response = await getDetailsDebtByApartment(apartment);
         if (response != undefined && response.data != undefined) {
-          commit("setDebtDetailsHeader", response.data[0]);
-          commit("setDebtDetailsBody", response.data[1]);
+          commit("setDebtDetailsHeader", response.data.header);
+          commit("setDebtDetailsBody", response.data.list);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -212,11 +215,7 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await printPdfDebtByApartment(object);
-        if (response != undefined && response.data != undefined) {
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -227,11 +226,40 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await printPdfListDebtByApartment();
-        if (response != undefined && response.data != undefined) {
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printAllToOnePdfDebtAllApartment({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printAllToOnePdfDebtAllApartment();
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printPdfDebtDetailsByApartment({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printPdfDebtDetailsByApartment(apartment);
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printPdfDebtDetailsAllApartment({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printPdfDebtDetailsAllApartment();
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

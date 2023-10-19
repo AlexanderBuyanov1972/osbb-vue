@@ -140,6 +140,9 @@ export const getValueByName = (array, name) => {
 
 // получение строки адресса из объекта
 export const mapAddressToLineAddress = (address) => {
+  if (address == undefined || address == null) {
+    return "";
+  }
   return (
     address.zipCode +
     ",  " +

@@ -7,6 +7,9 @@
   <button-bills v-if="flag" @click="showModalAll = true"
     >Печатать на все помещения</button-bills
   >
+  <button-bills v-if="flag" @click="showModalAllInOne = true"
+    >Печатать на все помещения в один файл</button-bills
+  >
 
   <div class="buttons">
     <block-search-apartment
@@ -48,6 +51,13 @@
       @successfuly="printList"
     ></modal-action>
   </dialog-window>
+  <dialog-window :show="showModalAllInOne">
+    <modal-action
+      message="Вы действительно хотите выполнить это действие?"
+      @close="showModalAllInOne = false"
+      @successfuly="printListInOne"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import {
@@ -63,6 +73,7 @@ export default {
       flag: false,
       showModal: false,
       showModalAll: false,
+      showModalAllInOne: false,
       header: {
         address: {},
       },
@@ -77,6 +88,8 @@ export default {
       getDebtByApartment: "payment/fetchDebtByApartment",
       printDebtByApartment: "payment/printDebtByApartment",
       printListDebtByApartment: "payment/printListDebtByApartment",
+      printAllToOnePdfDebtAllApartment:
+        "payment/printAllToOnePdfDebtAllApartment",
     }),
     action(value) {
       if (this.checkApartment(value)) {
@@ -98,6 +111,9 @@ export default {
     },
     printList() {
       this.printListDebtByApartment();
+    },
+    printListInOne() {
+      this.printAllToOnePdfDebtAllApartment();
     },
   },
   computed: {
