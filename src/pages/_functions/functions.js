@@ -12,6 +12,8 @@ import {
   arrayTypeBill,
 } from "@/pages/_functions/arraysOfData";
 
+const countApartment = 10;
+
 // ------------ show fields objects  arrays ---------------
 // owner -------------------------
 
@@ -179,4 +181,16 @@ export const checkFilling = (field) => {
   return field == undefined || field == null || field == "" || field == 0
     ? ["item", "danger"]
     : ["item"];
+};
+
+export const roundDouble = (value) => {
+  return Math.round(100.0 * value) / 100.0;
+};
+
+export const checkApartment = (value) => {
+  return value >= 1 && value <= countApartment;
+};
+
+export const mapDate = (str) => {
+  return str.substring(0, str.indexOf(".")).replace("T", " ");
 };

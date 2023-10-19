@@ -6,22 +6,26 @@
       </div>
     </div>
     <div class="block_2" v-if="show">
-      <div class="item" v-for="one in array" :key="one" @click="select(one)">
+      <div class="item" v-for="one in titles" :key="one" @click="select(one)">
         {{ one }}
       </div>
     </div>
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
 export default {
   name: "select-title",
+  props: {
+    titles: {
+      Type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       show: false,
-      array: [],
       name: "",
-     };
+    };
   },
   methods: {
     select(str) {
@@ -29,23 +33,11 @@ export default {
       this.$emit("select", this.name);
       this.show = false;
     },
-    ...mapActions({
-      fetchAllTitleOfQuestionnaire:
-        "questionnaire/fetchAllTitleOfQuestionnaire",
-    }),
   },
 
-  computed: {
-    ...mapGetters({
-      getTitles: "questionnaire/getTitles",
-    }),
-  },
   mounted() {
-    this.fetchAllTitleOfQuestionnaire().then(() => {
-      this.array = this.getTitles;
-      this.name = this.array[0];
+      this.name = this.titles[0];
       this.$emit("select", this.name);
-    });
   },
 };
 </script>

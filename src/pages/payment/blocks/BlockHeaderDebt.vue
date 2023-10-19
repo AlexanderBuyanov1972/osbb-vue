@@ -10,8 +10,12 @@
       м2.
     </div>
     <div class="time">
+      Текущее дата:
+      <span> {{ date }}</span>
+    </div>
+    <div class="time">
       Текущее время:
-      <span> {{ header.currentTime }}</span>
+      <span> {{ time }}</span>
     </div>
   </div>
 </template>
@@ -20,6 +24,16 @@ export default {
   name: "block-header-debt",
   props: {
     header: Object,
+  },
+  computed: {
+    date() {
+      const str = this.header.currentTime + "";
+      return str.substring(0, str.indexOf("T"));
+    },
+    time() {
+      const str = this.header.currentTime + "";
+      return str.substring(str.indexOf("T")+1, str.indexOf('.'));
+    },
   },
 };
 </script>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, PAYMENT, ALL, BALANCE, DEBT, DETAILS } from "@/http/apiHttp";
+import { API_BASE, PAYMENT, ALL, BALANCE, DEBT, DETAILS, PRINT} from "@/http/apiHttp";
 
 // one ----------------------------------
 
@@ -44,7 +44,7 @@ export const getBalance = async () => {
 // get list debt by rooms after osbb -----------------------
 
 export const getBalanceHouse = async () => {
-  const response = await axios.get(API_BASE + PAYMENT  + BALANCE + ALL);
+  const response = await axios.get(API_BASE + PAYMENT + BALANCE + ALL);
   return response.data;
 };
 // get debt by apartment ---------
@@ -57,5 +57,15 @@ export const getDetailsDebtByApartment = async (apartment) => {
   const response = await axios.get(
     API_BASE + PAYMENT + DEBT + DETAILS + "/" + apartment
   );
+  return response.data;
+};
+// print debt by apartment ---------
+export const printPdfDebtByApartment = async (object) => {
+  const response = await axios.post(API_BASE + PAYMENT + DEBT + PRINT, object);
+  return response.data;
+};
+// print list of debts by apartments ---------
+export const printPdfListDebtByApartment = async () => {
+  const response = await axios.get(API_BASE + PAYMENT + DEBT + PRINT + ALL);
   return response.data;
 };

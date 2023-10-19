@@ -1,11 +1,9 @@
 <template>
-  <textarea 
+  <textarea
     type="text"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
-    rows="10"
-    cols="40"
-    ></textarea>
+  ></textarea>
 </template>
 
 <script>
@@ -19,7 +17,7 @@ export default {
 <style scoped>
 textarea {
   background-color: white;
-  height: 150px;
+  height: 100px;
   outline: none;
   border: 1px solid teal;
   width: 100%;

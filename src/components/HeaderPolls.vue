@@ -1,8 +1,5 @@
 <template>
   <div class="block1">
-    <button-create @click="goToPageQuestionnaires"
-      >{{ QUESTIONNAIRES_GET }}
-    </button-create>
     <button-create @click="goToPageQuestionnairesByTitle"
       >{{ GET_POLLS_BY_TITLE }}
     </button-create>
@@ -12,7 +9,7 @@
     <button-create @click="goToPageCreateQuestionnaire"
       >{{ QUESTIONNAIRE_CREATE }}
     </button-create>
-    <button-create @click="removeByTitle"
+    <button-create @click="showModal = true"
       >{{ QUESTIONNAIRE_DELETE_BY_TITLE }}
     </button-create>
   </div>
@@ -21,14 +18,22 @@
       <div class="title">Введите тему опроса :</div>
       <select-title
         :style="{ margin: '10px 10px 10px 0px' }"
+        :titles="getTitles"
         @select="(value) => (title = value)"
-      />
+         />
     </div>
     <block-search-apartment
       :nameButton="GET_POLLS_BY_TITLE_AND_BY_APARTMENT"
       @apartment="(value) => action(value)"
     />
   </div>
+  <dialog-window :show="showModal">
+    <modal-action
+      message="Вы действительно хотите удалить опросы по выбранной Вами теме?"
+      @close="showModal = false"
+      @successfuly="removeByTitle"
+    ></modal-action>
+  </dialog-window>
 </template>
 <script>
 import {
@@ -49,6 +54,7 @@ export default {
   name: "header-polls",
   data() {
     return {
+      showModal: false,
       title: "",
       apartment: "1",
       message: "Выберите тему опроса",
@@ -66,28 +72,25 @@ export default {
     };
   },
   methods: {
-    goToPageQuestionnaires() {
-      this.$router.push(PAGE_QUESTIONNAIRES_GET);
-    },
     goToPageCreateQuestionnaire() {
       this.$router.push(PAGE_QUESTIONNAIRE_CREATE);
     },
     goToPageResultQuestionnaire() {
-      if (this.title == undefined || this.title == this.message) {
+      if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
         this.$router.push(PAGE_QUESTIONNAIRE_RESULT + "/" + this.title);
       }
     },
     goToPageQuestionnairesByTitle() {
-      if (this.title == undefined || this.title == this.message) {
+      if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
         this.$router.push(PAGE_QUESTIONNAIRES_GET + "/" + this.title);
       }
     },
     action(value) {
-      if (this.title == undefined || this.title == this.message) {
+      if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else if (value == undefined || value <= 0) {
         this.setMessages(["Выберите номер квартиры"]);
@@ -98,25 +101,34 @@ export default {
       }
     },
     removeByTitle() {
-      if (this.title == undefined || this.title == this.message) {
+      if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
-        this.deleteAllQuestionnaireByTitle(this.title);
+        this.deleteAllQuestionnaireByTitle(this.title).then(() => {
+          this.fetchAllTitleOfQuestionnaire();
+        });
       }
     },
-
+    isValidTitle() {
+      return this.title == undefined || this.title == this.message;
+    },
     ...mapMutations({
       setMessages: "questionnaire/setMessages",
     }),
     ...mapActions({
       deleteAllQuestionnaireByTitle:
         "questionnaire/deleteAllQuestionnaireByTitle",
+      fetchAllTitleOfQuestionnaire:
+        "questionnaire/fetchAllTitleOfQuestionnaire",
     }),
   },
   computed: {
     ...mapGetters({
       getTitles: "questionnaire/getTitles",
     }),
+  },
+  mounted() {
+    this.fetchAllTitleOfQuestionnaire();
   },
 };
 </script>

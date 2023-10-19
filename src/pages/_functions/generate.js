@@ -66,7 +66,7 @@ export const generateJsonRates = () => {
 // generate Json ---------------
 export const generateJsonRecords = async () => {
   // общее количество квартир вдоме
-  const countApartment = 84;
+  const countApartment = 10;
   // общее количество квартир в подъезде
   const countEntrance = 12;
   // общее количество квартир на этаже
@@ -169,11 +169,11 @@ export const generateJsonRecords = async () => {
 export const generateJsonQuestionnaires = () => {
   const list = [];
   const title = "Вопрос о создании ОСББ";
-  const byWhom = "Горбунков Семён Дмитриевна";
+  const byWhom = "Горбунков Семён Семёнович";
   let questions = [
-    "Согласны ли вы утвердить состав инициативной группы",
-    "Согласны ли вы утвердить Иванова С.С. секретарём сборов",
-    "Есть ли жизнь на Марсе",
+    "Согласны ли Вы утвердить состав инициативной группы",
+    "Согласны ли Вы утвердить Иванова С.С. секретарём сборов",
+    "Согласны ли Вы платить взносы в ОСББ",
   ];
   questions.forEach((el) => {
     list.push({ title, byWhom, question: el });

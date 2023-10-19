@@ -8,20 +8,24 @@
       {{ payment.description }}
     </div>
     <div class="date">
-      {{ payment.date }}
+      {{ flagMap ? mapDate(payment.date) : payment.date }}
     </div>
     <div class="summa">{{ payment.summa }}</div>
   </div>
 </template>
 <script>
+import { mapDate } from "@/pages/_functions/functions";
 export default {
   name: "payment-item",
   props: {
     payment: Object,
     count: String,
+    flagMap: Boolean,
   },
   data() {
-    return {};
+    return {
+      mapDate,
+    };
   },
 };
 </script>

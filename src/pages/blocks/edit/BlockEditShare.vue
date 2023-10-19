@@ -8,7 +8,7 @@
         messageTrue="Доля в собственности (от 0 до 1, пять знаков после точки)"
         @valid="(value) => handlerShare(value)"
       />
-      <input-simple v-model.trim="share" placeholder="Доля в собственности (от 0 до 1, пять знаков после точки)" />
+      <input-simple v-model.number="share" placeholder="Доля в собственности (от 0 до 1, пять знаков после точки)" />
     </div>
   </div>
 </template>

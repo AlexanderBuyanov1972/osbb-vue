@@ -7,6 +7,8 @@ import {
   getBalanceHouse,
   getDebtByApartment,
   getDetailsDebtByApartment,
+  printPdfDebtByApartment,
+  printPdfListDebtByApartment,
 } from "@/http/payment/payment";
 export default {
   state: () => ({
@@ -90,7 +92,8 @@ export default {
           commit("setMessages", response.messages);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);Coming
+        commit("setMessages", [error.message]);
+        Coming;
       } finally {
         commit("setIsLoading", false);
       }
@@ -116,7 +119,8 @@ export default {
         commit("setIsLoading", true);
         const response = await deletePayment(id);
         commit("setMessages", response.messages);
-        commit("setPayment", {});Coming
+        commit("setPayment", {});
+        Coming;
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -194,6 +198,36 @@ export default {
         const response = await getBalanceHouse();
         if (response != undefined && response.data != undefined) {
           commit("setBalanceHouse", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printDebtByApartment({ commit }, object) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printPdfDebtByApartment(object);
+        if (response != undefined && response.data != undefined) {
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printListDebtByApartment({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printPdfListDebtByApartment();
+        if (response != undefined && response.data != undefined) {
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

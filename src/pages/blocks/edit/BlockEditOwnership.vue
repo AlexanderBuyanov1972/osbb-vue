@@ -9,10 +9,7 @@
           messageTrue="Лицевой счёт"
           @valid="(value) => handlerPersonalAccount(value)"
         />
-        <input-simple
-          v-model="ownership.bill"
-          placeholder="Лицевой счёт"
-        />
+        <input-simple v-model="ownership.bill" placeholder="Лицевой счёт" />
       </div>
       <div class="typeRoom">
         <block-error-message
@@ -58,7 +55,8 @@
           messageTrue="Документ о праве собственности."
           @valid="(value) => handlerDocumentConfirmsRightOwn(value)"
         />
-        <input-simple
+        <text-area-simple
+          :style="{ height: '60px' }"
           v-model="ownership.documentConfirmsRightOwn"
           placeholder="Документ о праве собственности."
         />

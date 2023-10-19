@@ -2,9 +2,14 @@
   <header-payment />
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="getMessages" />
-  <payment-item :style="{'color':'blueviolet'}" :count="count" :payment="header" />
+  <payment-item
+    :style="{ color: 'blueviolet' }"
+    :count="count"
+    :payment="header"
+    :flagMap="false"
+  />
   <div class="list" v-for="(one, index) in list">
-    <payment-item :count="index + 1" :payment="one" />
+    <payment-item :count="index + 1" :payment="one" :flagMap="true" />
   </div>
 </template>
 <script>

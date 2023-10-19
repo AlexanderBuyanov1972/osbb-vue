@@ -20,7 +20,7 @@
             {{
               index == 0
                 ? Object.keys(result(map, key, "BEHIND")).length
-                : result(map, key, "BEHIND")
+                : roundDouble(result(map, key, "BEHIND"))
             }}
           </div>
           <div class="item">
@@ -28,7 +28,7 @@
             {{
               index == 0
                 ? Object.keys(result(map, key, "AGAINST")).length
-                : result(map, key, "AGAINST")
+                : roundDouble(result(map, key, "AGAINST"))
             }}
           </div>
           <div class="item">
@@ -36,7 +36,7 @@
             {{
               index == 0
                 ? Object.keys(result(map, key, "ABSTAINED")).length
-                : result(map, key, "ABSTAINED")
+                : roundDouble(result(map, key, "ABSTAINED"))
             }}
           </div>
           <vue-hr />
@@ -52,12 +52,14 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { roundDouble } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
       list: [],
       countOwners: 0,
       summaTotalArea: 0.0,
+      roundDouble,
     };
   },
   methods: {
@@ -68,10 +70,6 @@ export default {
     result(map, key, answer) {
       return map[key][answer] == null ? 0 : map[key][answer];
     },
-    aroundString(value) {
-      let str = value + "";
-      return str.substring(str.indexOf("." + 2));
-    },
     compute(ind) {
       let itog = ind === 0 ? this.countOwners : this.summaTotalArea;
       return `Обработано ${((this.summa(ind) / itog) * 100).toFixed(
@@ -81,15 +79,6 @@ export default {
     summa(ind) {
       let question = Object.keys(this.list[0])[0];
       let result = 0;
-      //--------------------------------------
-      // const answers = ["BEHIND", "AGAINST", "ABSTAINED"];
-      // for (let answer in answers) {
-      //   let line = this.result(this.list[0], question, answer);
-      // result = ind === 0 ? (result + line) : (result + Object.keys(line).length);
-      // }
-      // return result;
-      //---------------------------------------
-
       if (ind === 0) {
         //list[0] - data question:answer:{fullName:number}
         result =
@@ -103,7 +92,7 @@ export default {
           this.result(this.list[1], question, "AGAINST") +
           this.result(this.list[1], question, "ABSTAINED");
       }
-      return result;
+      return roundDouble(result);
     },
   },
   computed: {

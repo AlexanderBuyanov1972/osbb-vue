@@ -11,11 +11,11 @@
   <div class="itog">
     Итоговый баланс дома по оплате услуг ОСББ составляет :
     <span :class="totalBalance > 0 ? ['active'] : []">
-      {{ Math.round(100.0 * totalBalance) / 100.0 }}
+      {{ roundDouble(totalBalance)}}
     </span>
     грн
   </div>
-  <!-- <balance-house-item :item="header" :count="count" /> -->
+  <vue-hr />
   <div class="item" v-for="(one, index) in list">
     <balance-house-item :item="one" :count="index + 1" />
   </div>
@@ -23,17 +23,13 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { roundDouble } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
       list: [],
       totalBalance: 0,
-      // count:"№ ",
-      // header: {
-      //   bill: "Лицевой свёт № ",
-      //   apartment: "пр.Свободы 51, квартира № ",
-      //   summa: "Задолженность/переплата",
-      // },
+      roundDouble,
     };
   },
   methods: {

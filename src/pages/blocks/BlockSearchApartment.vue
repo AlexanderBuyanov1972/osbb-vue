@@ -8,12 +8,13 @@
       :style="{ width: '60px' }"
     />
     <button-simple @click="plus">+</button-simple>
-    <button-simple :hidden="!this.checkApartment" @click="clickButton"
+    <button-simple :hidden="!this.checkApartment(this.apartment)" @click="clickButton"
       >{{ nameButton }}
     </button-simple>
   </div>
 </template>
 <script>
+import {checkApartment} from "@/pages/_functions/functions"
 export default {
   name: "block-search-apartment",
   props: {
@@ -22,28 +23,24 @@ export default {
   data() {
     return {
       apartment: "1",
+      checkApartment,
     };
   },
   methods: {
     plus() {
-      if (this.apartment < 84) {
+      if (this.checkApartment(this.apartment* 1 + 1)) {
         this.apartment = this.apartment * 1 + 1;
         this.clickButton();
       }
     },
     minus() {
-      if (this.apartment > 1) {
+      if (this.checkApartment(this.apartment * 1 - 1)) {
         this.apartment = this.apartment * 1 - 1;
         this.clickButton();
       }
     },
     clickButton() {
       this.$emit("apartment", this.apartment);
-    },
-  },
-  computed: {
-    checkApartment() {
-      return this.apartment > 0 && this.apartment < 85;
     },
   },
 };

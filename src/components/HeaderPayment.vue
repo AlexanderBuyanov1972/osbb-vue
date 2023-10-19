@@ -4,7 +4,7 @@
       >Все проводки
     </button-bills>
     <button-bills @click="$router.push(PAGE_BALANCE_ROOM)"
-      >Текущий баланс по помещению
+      >Текущие балансы
     </button-bills>
     <button-bills @click="$router.push(PAGE_PAYMENT_CREATE)"
       >Создать проводку
