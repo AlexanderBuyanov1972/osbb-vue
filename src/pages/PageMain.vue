@@ -17,12 +17,13 @@
       <button-create @click="sendToServerRates">Создание тарифов</button-create>
     </div>
     <div class="header">ОСББ "Свободы 51"</div>
-    <div class="img">
+    <!-- <div class="img">
       <img
         src="https://myshtetl.org/dnepropetrovsk/images/dneprdzrzh_0004.JPG"
         alt="Not Found"
       />
-    </div>
+    </div> -->
+    <photo-carousel :urls="urls" />
   </div>
   <dialog-window :show="showModalDB">
     <modal-action
@@ -67,6 +68,11 @@ export default {
       showModalPolls: false,
       showModalRates: false,
       messages: [],
+      urls: [
+        'https://myshtetl.org/dnepropetrovsk/images/dneprdzrzh_0004.JPG',
+        'https://myshtetl.org/dnepropetrovsk/images/dneprdzrzh_0004.JPG',
+        'https://myshtetl.org/dnepropetrovsk/images/dneprdzrzh_0004.JPG',
+      ],
     };
   },
   computed: {

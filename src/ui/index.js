@@ -13,6 +13,7 @@ import SelectTitle from "@/ui/elements/selects/SelectTitle.vue";
 import SelectSimple from "@/ui/elements/selects/SelectSimple.vue";
 import SelectEdit from "@/ui/elements/selects/SelectEdit.vue";
 // other ---------------------------------------------------------
+import PhotoCarousel from "@/ui/elements/PhotoCarousel.vue";
 import DialogWindow from "@/ui/elements/DialogWindow.vue";
 import ImageShow from "@/ui/elements/ImageShow.vue";
 import TextAreaSimple from "@/ui/elements/TextAreaSimple.vue";
@@ -77,6 +78,7 @@ export default [
   ButtonReset,
 
   // ---- elements -----
+  PhotoCarousel,
   DialogWindow,
   ImageShow,
   InputSimple,
