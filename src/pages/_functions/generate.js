@@ -66,7 +66,7 @@ export const generateJsonRates = () => {
 // generate Json ---------------
 export const generateJsonRecords = async () => {
   // общее количество квартир вдоме
-  const countApartment = 10;
+  const countApartment = 74;
   // общее количество квартир в подъезде
   const countEntrance = 12;
   // общее количество квартир на этаже
@@ -99,7 +99,7 @@ export const generateJsonRecords = async () => {
       vehicle: generateVehicle(),
       placeWork: generatePlaceWork(),
       photo: generatePhoto(),
-      additionalInformation:"нет",
+      additionalInformation: "нет",
     };
     // create ownership -------------------------
     let ownership = {

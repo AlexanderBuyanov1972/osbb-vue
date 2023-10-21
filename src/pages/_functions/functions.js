@@ -12,7 +12,7 @@ import {
   arrayTypeBill,
 } from "@/pages/_functions/arraysOfData";
 
-const countApartment = 10;
+const countApartment = 74;
 
 // ------------ show fields objects  arrays ---------------
 // owner -------------------------

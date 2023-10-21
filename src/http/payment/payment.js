@@ -70,6 +70,7 @@ export const getDetailsDebtByApartment = async (apartment) => {
 };
 
 // print ---------------------------------------------------
+// debt ------------------
 // печатать одну квитанцию по конкретному помещению за последний месяц
 export const printPdfDebtByApartment = async (object) => {
   const response = await axios.post(API_BASE + PAYMENT + DEBT + PRINT, object);
@@ -98,5 +99,12 @@ export const printPdfDebtDetailsByApartment = async (apartment) => {
 // печатать детализированную распечатку долга за всё время для всех квартир на разных файлах
 export const printPdfDebtDetailsAllApartment = async () => {
   const response = await axios.get(API_BASE + PAYMENT + DEBT + PRINT + DETAILS);
+  return response.data;
+};
+
+// balance
+// печатать debt balance
+export const printPdfBalanceHouse = async () => {
+  const response = await axios.get(API_BASE + PAYMENT + DEBT + PRINT + BALANCE);
   return response.data;
 };

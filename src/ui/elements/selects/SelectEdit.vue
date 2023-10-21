@@ -76,7 +76,7 @@ export default {
   border-top: none;
   position: absolute;
   background-color: white;
-  left: -0.25%;
+  left: -1px;
   top: 100%;
   z-index: 2;
   width: 100%;

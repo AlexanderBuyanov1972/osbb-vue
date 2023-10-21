@@ -19,11 +19,18 @@ export default {
   },
   props: {
     nameButton: Object,
+    fullNameProps: String,
   },
   methods: {
     clickButton() {
       if (this.fullName.length > 5) this.$emit("fullName", this.fullName);
     },
+  },
+  mounted() {
+    this.fullName = this.fullNameProps;
+  },
+  updated() {
+    this.fullName = this.fullNameProps;
   },
 };
 </script>

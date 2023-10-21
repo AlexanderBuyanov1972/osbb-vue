@@ -3,6 +3,7 @@
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="messages" />
   <block-search-full-name
+    :fullNameProps="mapOwnerToLineFullNamesOwner(getOwner)"
     nameButton="Получить список помещений"
     @fullName="(value) => action(value)"
   />

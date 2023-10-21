@@ -28,14 +28,17 @@ export default {
       }
       return value.length == 0 ? false : true;
     },
-  },
-  watch: {
-    field() {
+    emit() {
       this.$emit("valid", this.flag(this.field));
     },
   },
+  watch: {
+    field() {
+      this.emit();
+    },
+  },
   mounted() {
-    this.$emit("valid", this.flag(this.field));
+    this.emit();
   },
 };
 </script>

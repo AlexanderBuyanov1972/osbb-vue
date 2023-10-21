@@ -9,8 +9,11 @@
   <owner-item :style="{ color: 'brown' }" :owner="header" count="№" />
   <div v-for="(one, index) in owners" :key="one.id">
     <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)">
-      <owner-item :owner="one" :count="index + 1" 
-      :class="!one.active? ['active'] : []" />
+      <owner-item
+        :owner="one"
+        :count="index + 1"
+        :class="!one.active ? ['active'] : []"
+      />
     </div>
   </div>
 </template>
@@ -63,7 +66,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.active{
+.active {
   background-color: hotpink;
 }
 </style>

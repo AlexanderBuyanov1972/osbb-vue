@@ -12,6 +12,7 @@ import {
   printAllToOnePdfDebtAllApartment,
   printPdfDebtDetailsByApartment,
   printPdfDebtDetailsAllApartment,
+  printPdfBalanceHouse,
 } from "@/http/payment/payment";
 export default {
   state: () => ({
@@ -259,6 +260,17 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await printPdfDebtDetailsAllApartment();
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async printPdfBalanceHouse({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printPdfBalanceHouse();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);

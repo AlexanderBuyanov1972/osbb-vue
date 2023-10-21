@@ -13,60 +13,31 @@ export default {
     };
   },
   methods: {
-    minusIndex() {
-      if (this.currentIndex > 0) this.currentIndex -= 1;
+    next() {
+      const length = this.urls.length;
+      this.currentIndex == length - 1
+        ? (this.currentIndex = 0)
+        : this.currentIndex++;
     },
-    plusIndex() {
-      if (this.currentIndex < this.urls.length - 1) this.currentIndex += 1;
+  },
+  computed: {
+    itemImage() {
+      return require(`@/assets/Svobody51/${this.urls[this.currentIndex]}.jpg`);
     },
-    // itemImage(value) {
-    //   if (!value) return;
-    //   return require(`@/icons/${value}.png`);
-    // },
   },
 };
 </script>
 <template>
-  <div class="block">
-    <div
-      :class="this.currentIndex > 0 ? ['button'] : ['button', 'active']"
-      @click="minusIndex"
-    >
-      -
-    </div>
-    <div class="image">
-      <img :src="urls[currentIndex]" alt="Не найден" />
-    </div>
-    <div
-      :class="
-        this.currentIndex < this.urls.length - 1
-          ? ['button']
-          : ['button', 'active']
-      "
-      @click="plusIndex"
-    >
-      +
-    </div>
+  <div class="image" @click="next">
+    <img :src="itemImage" alt="Не найден" />
   </div>
 </template>
 <style scoped>
-.block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.button {
-  min-width: 5%;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  font-size: 50px;
-  font-weight: 700;
-  color: blueviolet;
-}
 .image {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 700px;
+  height: 800px;
   align-self: center;
 }
 .active {
