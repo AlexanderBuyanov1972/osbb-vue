@@ -5,7 +5,7 @@
   <button-back />
   <button-bills @click="showModal = true">Печатать баланс</button-bills>
   <line-header
-    text="Задолженость по оплате за услуги ОСББ по помещениям"
+    text="Задолженность по оплате за услуги ОСББ по помещениям"
     :style="{ color: 'darkgoldenrod' }"
   />
   <div class="time"><span>Текущая дата : </span>{{ currentDate }}</div>

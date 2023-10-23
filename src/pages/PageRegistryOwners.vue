@@ -15,7 +15,6 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import OwnerListRegistry from "@/itemsAndLists/OwnerListRegistry.vue";
-
 export default {
   components: {
     OwnerListRegistry,

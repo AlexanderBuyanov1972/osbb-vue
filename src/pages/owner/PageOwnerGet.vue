@@ -14,7 +14,7 @@
     :style="{ color: 'red', 'border-color': 'red' }"
     v-show="!owner.active"
     @click="removeOwner"
-    >Удалить из базы данных</button-delete
+    >Удалить собственника из базы данных</button-delete
   >
   <block-get-owner :owner="owner" />
   <div class="items">

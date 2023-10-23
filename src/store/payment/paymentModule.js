@@ -7,13 +7,15 @@ import {
   getBalanceHouse,
   getDebtByApartment,
   getDetailsDebtByApartment,
+} from "@/http/payment/payment";
+import {
   printPdfDebtByApartment,
   printPdfListDebtByApartment,
   printAllToOnePdfDebtAllApartment,
   printPdfDebtDetailsByApartment,
   printPdfDebtDetailsAllApartment,
   printPdfBalanceHouse,
-} from "@/http/payment/payment";
+} from "@/http/print";
 export default {
   state: () => ({
     payment: {},

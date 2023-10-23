@@ -3,9 +3,10 @@ import {
   updateAllQuestionnaire,
   getAllQuestionnaire,
   deleteAllQuestionnaireByTitle,
-  getResultQuestionnaire,
   deleteAllQuestionnaireByOwnerIdAndOwnershipId,
+  getResultQuestionnaire,
 } from "@/http/polls/questionnaire";
+import { printResultQuestionnaire } from "@/http/print";
 import {
   getAllQuestionnaireByTitleAndFullNameAndApartment,
   getAllQuestionnaireByTitleAndFullName,
@@ -254,6 +255,18 @@ export default {
         } else {
           commit("setMessages", response.messages);
         }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    // result print -------------------------
+    async printResultQuestionnaire({ commit }, title) {
+      try {
+        commit("setIsLoading", true);
+        const response = await printResultQuestionnaire(title);
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

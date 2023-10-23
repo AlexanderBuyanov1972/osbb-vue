@@ -4,95 +4,53 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <div class="blocks">
-      <div class="" v-for="(map, index) in list" :key="index">
-        <line-header
-          :text="
-            index == 0
-              ? 'Результаты опроса в голосах'
-              : 'Результаты опроса в квадратных метрах'
-          "
+      <div class="button">
+        <button-create @click="printResult">Печатать результат</button-create>
+      </div>
+      <div class="list">
+        <block-questionnaire-result
+          :map="mapVotedArea"
+          :processing="processingPercentageArea"
+          textHeader="Результаты опроса в метрах квадратных"
+          :textFooter="`Всего проголосовало :
+            ${areaVoted}
+            из ${summaArea} метров квадратных`"
         />
-        <line-header :style="{ color: 'brown' }" :text="compute(index)" />
-        <div class="block" v-for="key in Object.keys(map)" :key="key">
-          <div class="question">{{ key }}</div>
-          <div class="item">
-            За :
-            {{
-              index == 0
-                ? Object.keys(result(map, key, "BEHIND")).length
-                : roundDouble(result(map, key, "BEHIND"))
-            }}
-          </div>
-          <div class="item">
-            Против :
-            {{
-              index == 0
-                ? Object.keys(result(map, key, "AGAINST")).length
-                : roundDouble(result(map, key, "AGAINST"))
-            }}
-          </div>
-          <div class="item">
-            Воздержался :
-            {{
-              index == 0
-                ? Object.keys(result(map, key, "ABSTAINED")).length
-                : roundDouble(result(map, key, "ABSTAINED"))
-            }}
-          </div>
-          <vue-hr />
-          <div class="item">
-            Всего проголосовало :
-            {{ summa(index) }}
-            из {{ index == 1 ? summaTotalArea : countOwners }}
-          </div>
-        </div>
+        <block-questionnaire-result
+          :map="mapVotedOwner"
+          :processing="processingPercentageOwner"
+          textHeader="Результаты опроса в голосах"
+          :textFooter="`Всего проголосовало :
+            ${ownerVoted}
+            из ${countOwner} собственников`"
+        />
       </div>
     </div>
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { roundDouble } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
-      list: [],
-      countOwners: 0,
-      summaTotalArea: 0.0,
-      roundDouble,
+      processingPercentageArea: 0.0,
+      mapVotedArea: {},
+      areaVoted: 0.0,
+      summaArea: 0.0,
+      // owner -----------------
+      processingPercentageOwner: 0.0,
+      mapVotedOwner: {},
+      ownerVoted: 0,
+      countOwner: 0,
     };
   },
   methods: {
     ...mapActions({
+      printResultQuestionnaire: "questionnaire/printResultQuestionnaire",
       fetchResultQuestionnaire: "questionnaire/fetchResultQuestionnaire",
-      fetchBuildingCharacteristics: "registry/fetchBuildingCharacteristics",
     }),
-    result(map, key, answer) {
-      return map[key][answer] == null ? 0 : map[key][answer];
-    },
-    compute(ind) {
-      let itog = ind === 0 ? this.countOwners : this.summaTotalArea;
-      return `Обработано ${((this.summa(ind) / itog) * 100).toFixed(
-        2
-      )} % листов опроса`;
-    },
-    summa(ind) {
-      let question = Object.keys(this.list[0])[0];
-      let result = 0;
-      if (ind === 0) {
-        //list[0] - data question:answer:{fullName:number}
-        result =
-          Object.keys(this.result(this.list[0], question, "BEHIND")).length +
-          Object.keys(this.result(this.list[0], question, "AGAINST")).length +
-          Object.keys(this.result(this.list[0], question, "ABSTAINED")).length;
-      } else {
-        //list[1] - data question:answer:double
-        result =
-          this.result(this.list[1], question, "BEHIND") +
-          this.result(this.list[1], question, "AGAINST") +
-          this.result(this.list[1], question, "ABSTAINED");
-      }
-      return roundDouble(result);
+    printResult() {
+      this.printResultQuestionnaire(this.$route.params.title);
     },
   },
   computed: {
@@ -100,27 +58,31 @@ export default {
       getIsLoading: "questionnaire/getIsLoading",
       getMessages: "questionnaire/getMessages",
       getResult: "questionnaire/getResult",
-      getBuildingCharacteristics: "registry/getBuildingCharacteristics",
     }),
     check() {
       this.fetchResultQuestionnaire(this.$route.params.title).then(() => {
-        this.list = this.getResult;
+        // area ------------------
+        this.processingPercentageArea = this.getResult.processingPercentageArea;
+        this.mapVotedArea = this.getResult.mapVotedArea;
+        this.areaVoted = this.getResult.areaVoted;
+        this.summaArea = this.getResult.summaArea;
+        // owner -----------------
+        this.processingPercentageOwner =
+          this.getResult.processingPercentageOwner;
+        this.mapVotedOwner = this.getResult.mapVotedOwner;
+        this.ownerVoted = this.getResult.ownerVoted;
+        this.countOwner = this.getResult.countOwner;
       });
     },
   },
   mounted() {
     this.check;
-    this.fetchBuildingCharacteristics().then(() => {
-      this.countOwners = this.getBuildingCharacteristics.countOwners;
-      this.summaTotalArea = this.getBuildingCharacteristics.summaTotalArea;
-    });
   },
   updated() {
     this.check;
   },
 };
 </script>
-
 <style scoped>
 * {
   padding: 0;
@@ -128,6 +90,10 @@ export default {
   box-sizing: border-box;
 }
 .blocks {
+  display: flex;
+  flex-direction: column;
+}
+.list {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -145,7 +111,5 @@ export default {
   border: 1px solid teal;
   margin: 5px 0px;
   padding: 5px 20px;
-}
-.main {
 }
 </style>

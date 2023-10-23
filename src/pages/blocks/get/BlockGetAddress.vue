@@ -15,9 +15,7 @@
 export default {
   name: "block-get-address",
   props: {
-    address: {
-      Type: Object,
-    },
+    address: Object,
   },
 };
 </script>

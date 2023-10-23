@@ -100,7 +100,7 @@ export const showTypeBill = (value) => {
   }
 };
 
-// ------------ get Element of array by --------------------
+// get Element of array by --------------------
 
 export const getElementArrayByValue = (array, value) => {
   try {
@@ -118,7 +118,7 @@ export const getElementArrayByName = (array, name) => {
   }
 };
 
-// ------------------ get Name Element of array by Value -------
+// get Name Element of array by Value -------
 
 export const getNameByValue = (array, value) => {
   try {
@@ -128,7 +128,7 @@ export const getNameByValue = (array, value) => {
   }
 };
 
-// ------------------ get Value Element of array by Name -------
+// get Value Element of array by Name -------
 
 export const getValueByName = (array, name) => {
   try {

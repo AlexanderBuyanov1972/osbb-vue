@@ -1,20 +1,20 @@
 <template>
   <div class="block">
     <button-simple @click="$router.push(PAGE_OWNERSHIPS_GET)"
-      >{{ OWNERSHIPS_GET }}
+      >Список объектов недвижимости
     </button-simple>
     <button-simple @click="$router.push(PAGE_REGISTRY_OWNERSHIPS)"
-      >{{ REGISTRY_OWNERSHIPS }}
+      >Реестр объектов недвижимости
     </button-simple>
     <button-simple @click="$router.push(PAGE_ENTRY_CREATE)"
-      >{{ ENTRY_CREATE }}
+      >Создать запись
     </button-simple>
-    <button-simple @click="this.$router.push(PAGE_ENTRY_UPDATE)">{{
-      ENTRY_UPDATE
-    }}</button-simple>
+    <button-simple @click="this.$router.push(PAGE_ENTRY_UPDATE)"
+      >Редактировать запись</button-simple
+    >
   </div>
   <block-search-apartment
-    :nameButton="GET"
+    nameButton="Получить"
     @apartment="(value) => action(value)"
   />
 </template>
@@ -26,26 +26,12 @@ import {
   PAGE_OWNERSHIP_GET,
   PAGE_ENTRY_UPDATE,
 } from "@/router/apiRouter";
-import {
-  OWNERSHIPS_GET,
-  REGISTRY_OWNERSHIPS,
-  ENTRY_CREATE,
-  ENTRY_UPDATE,
-  GET,
-} from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "header-data-ownerships",
   data() {
     return {
       apartment: "1",
-      // buttons
-      OWNERSHIPS_GET,
-      REGISTRY_OWNERSHIPS,
-      ENTRY_CREATE,
-      ENTRY_UPDATE,
-      GET,
-      // pages
       PAGE_OWNERSHIPS_GET,
       PAGE_REGISTRY_OWNERSHIPS,
       PAGE_ENTRY_CREATE,

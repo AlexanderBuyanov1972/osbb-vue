@@ -86,21 +86,18 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">{{
-      SEND_TO_SERVER
-    }}</button-simple>
+    <button-simple @click="sendToServer" :hidden="!isValid">Сохранить</button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
       message="Вы действительно хотите обновить запись?"
       @close="showModal = false"
-      @successfuly="successfulyAction"
+      @successfuly="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
 import { PAGE_ENTRY_GET, PAGE_NOT_FOUND } from "@/router/apiRouter";
 export default {
   data() {
@@ -126,8 +123,6 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       isValidShare: false,
-      SEND_TO_SERVER,
-      GET,
       PAGE_ENTRY_GET,
       PAGE_NOT_FOUND,
     };
@@ -143,7 +138,7 @@ export default {
       updateRecord: "record/updateRecord",
       updateShare: "share/updateShare",
     }),
-    successfulyAction() {
+    successfullyAction() {
       this.updateShare(this.share);
       this.updateOwner(this.record.owner).then(() => {
         this.updateOwnership(this.record.ownership).then(() => {

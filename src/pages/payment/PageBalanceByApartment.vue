@@ -13,13 +13,13 @@
 
   <div class="buttons">
     <block-search-apartment
-      nameButton="Задолженость по помещению"
+      nameButton="Задолженность по помещению"
       @apartment="(value) => action(value)"
     />
     <button-bills
       @click="goToBalanceDetails"
       :style="{ color: 'blueviolet', 'border-color': 'blueviolet' }"
-      >Детали задолжености по помещению
+      >Детали задолженности по помещению
     </button-bills>
     <button-bills
       @click="$router.push(PAGE_BALANCE_HOUSE)"
@@ -28,7 +28,7 @@
     >
   </div>
   <line-header
-    text="Задолженость по оплате за услуги по управлению ОСББ"
+    text="Задолженность по оплате за услуги по управлению ОСББ"
     :style="{ color: 'darkgoldenrod' }"
   />
   <div class="body" v-if="flag">

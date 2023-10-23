@@ -1,16 +1,16 @@
 <template>
   <div class="block1">
     <button-create @click="goToPageQuestionnairesByTitle"
-      >{{ GET_POLLS_BY_TITLE }}
+      >Получить опросы по теме
     </button-create>
     <button-create @click="goToPageResultQuestionnaire"
-      >{{ GET_RESULT_POLL }}
+      >Получить результаты опроса
     </button-create>
     <button-create @click="goToPageCreateQuestionnaire"
-      >{{ QUESTIONNAIRE_CREATE }}
+      >Создать опросный лист
     </button-create>
     <button-create @click="showModal = true"
-      >{{ QUESTIONNAIRE_DELETE_BY_TITLE }}
+      >Удалить опросный лист по теме
     </button-create>
   </div>
   <div class="block2">
@@ -23,7 +23,7 @@
          />
     </div>
     <block-search-apartment
-      :nameButton="GET_POLLS_BY_TITLE_AND_BY_APARTMENT"
+      nameButton="Получить опросы по теме и № помещения"
       @apartment="(value) => action(value)"
     />
   </div>
@@ -36,14 +36,6 @@
   </dialog-window>
 </template>
 <script>
-import {
-  QUESTIONNAIRE_DELETE_BY_TITLE,
-  QUESTIONNAIRES_GET,
-  QUESTIONNAIRE_CREATE,
-  GET_RESULT_POLL,
-  GET_POLLS_BY_TITLE,
-  GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
-} from "@/ui/namesButton";
 import {
   PAGE_QUESTIONNAIRES_GET,
   PAGE_QUESTIONNAIRE_CREATE,
@@ -58,14 +50,6 @@ export default {
       title: "",
       apartment: "1",
       message: "Выберите тему опроса",
-      // buttons
-      QUESTIONNAIRE_DELETE_BY_TITLE,
-      QUESTIONNAIRES_GET,
-      QUESTIONNAIRE_CREATE,
-      GET_RESULT_POLL,
-      GET_POLLS_BY_TITLE,
-      GET_POLLS_BY_TITLE_AND_BY_APARTMENT,
-      // pages
       PAGE_QUESTIONNAIRES_GET,
       PAGE_QUESTIONNAIRE_CREATE,
       PAGE_QUESTIONNAIRE_RESULT,

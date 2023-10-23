@@ -17,7 +17,7 @@
       @click="
         this.$router.push(PAGE_OWNERSHIP_UPDATE + '/' + this.getOwnership.id)
       "
-      >{{ OWNERSHIP_UPDATE }}
+      >Обновить данные о помещении
     </button-edit>
     <button-simple
       @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.getOwnership.id)"
@@ -27,7 +27,6 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { ENTRY_GET, OWNERSHIP_UPDATE } from "@/ui/namesButton";
 import { PAGE_ENTRY_GET, PAGE_OWNERSHIP_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
@@ -37,8 +36,6 @@ export default {
           apartment: "",
         },
       },
-      ENTRY_GET,
-      OWNERSHIP_UPDATE,
       PAGE_ENTRY_GET,
       PAGE_OWNERSHIP_UPDATE,
     };

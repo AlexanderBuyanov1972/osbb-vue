@@ -51,12 +51,11 @@
         !(checkHidden)
       "
       @click="sendToServer"
-      >{{SEND_TO_SERVER}}</button-simple
+      >Сохранить</button-simple
     >
   </div>
 </template>
 <script>
-import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { PAGE_QUESTIONNAIRES_GET } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -65,7 +64,6 @@ export default {
       validTitle: false,
       validByWhom: false,
       validQuestion: false,
-      SEND_TO_SERVER,
       PAGE_QUESTIONNAIRES_GET,
       title: "",
       byWhom: "",

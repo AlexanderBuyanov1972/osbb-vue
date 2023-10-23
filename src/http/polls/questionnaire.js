@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE, QUESTIONNAIRES, RESULT } from "@/http/apiHttp";
+import { API_BASE, QUESTIONNAIRES, RESULT} from "@/http/apiHttp";
 
 // all ---------------------------------------------------
 

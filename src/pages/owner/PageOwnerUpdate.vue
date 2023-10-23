@@ -49,7 +49,7 @@
     <vue-hr />
     <button-back />
     <button-simple @click="sendToServer" :hidden="!isValid">{{
-      SEND_TO_SERVER
+      Сохранить
     }}</button-simple>
   </div>
   <dialog-window :show="showModal">
@@ -62,7 +62,6 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { PAGE_OWNER_GET } from "@/router/apiRouter";
 export default {
   data() {
@@ -78,7 +77,6 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       isValidPhoto: false,
-      SEND_TO_SERVER,
     };
   },
   methods: {

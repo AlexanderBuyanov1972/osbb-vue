@@ -31,7 +31,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalPolls = false"
-      @successfuly="successfulyActionPolls"
+      @successfuly="successfullyActionPolls"
     ></modal-action>
   </dialog-window>
 
@@ -39,7 +39,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalRates = false"
-      @successfuly="successfulyActionRates"
+      @successfuly="successfullyActionRates"
     ></modal-action>
   </dialog-window>
 </template>
@@ -95,14 +95,14 @@ export default {
         this.messages = this.getMessagesOwnership;
       });
     },
-    successfulyActionPolls() {
+    successfullyActionPolls() {
       this.createAllQuestionnaire(this.generateJsonQuestionnaires()).then(
         () => {
           this.messages = this.getMessagesQuestionnaire;
         }
       );
     },
-    successfulyActionRates() {
+    successfullyActionRates() {
       this.createAllRate(this.generateJsonRates()).then(() => {
         this.messages = this.getMessagesRate;
       });

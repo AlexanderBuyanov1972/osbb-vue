@@ -1,16 +1,10 @@
 <script>
-import { BACK } from "@/ui/namesButton";
 export default {
   name: "button-back",
-  data() {
-    return {
-      BACK,
-    };
-  },
 };
 </script>
 <template>
-  <button @click="$router.back()">{{ BACK }}</button>
+  <button @click="$router.back()">Назад</button>
 </template>
 
 <style scoped>

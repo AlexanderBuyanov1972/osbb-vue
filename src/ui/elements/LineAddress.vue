@@ -14,7 +14,6 @@ export default {
   },
   props: {
     address: Object,
-    color: String,
   },
 };
 </script>

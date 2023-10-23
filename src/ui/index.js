@@ -22,14 +22,14 @@ import CheckboxSimple from "@/ui/elements/CheckboxSimple.vue";
 import VueLoader from "@/ui/elements/VueLoader.vue";
 import VueHr from "@/ui/elements/VueHr.vue";
 import LineRadio from "@/ui/elements/LineRadio.vue";
-// --------------- components -------------------
-import HeaderMessages from "@/components/HeaderMessages.vue";
-import HeaderPayment from "@/components/HeaderPayment.vue";
-import HeaderPolls from "@/components/HeaderPolls.vue";
-import HeaderDataOwners from "@/components/HeaderDataOwners.vue";
-import HeaderDataOwnerships from "@/components/HeaderDataOwnerships.vue";
-import LineAddress from "@/components/LineAddress.vue";
-import LineHeader from "@/components/LineHeader.vue";
+import LineHeader from "@/ui/elements/LineHeader.vue";
+import LineAddress from "@/ui/elements/LineAddress.vue";
+// ------------------------ header --------------------------
+import HeaderMessages from "@/header/HeaderMessages.vue";
+import HeaderPayment from "@/header/HeaderPayment.vue";
+import HeaderPolls from "@/header/HeaderPolls.vue";
+import HeaderDataOwners from "@/header/HeaderDataOwners.vue";
+import HeaderDataOwnerships from "@/header/HeaderDataOwnerships.vue";
 // --------------- pages blocks -------------------
 import BlockBodyDebt from "@/pages/payment/blocks/BlockBodyDebt.vue";
 import BlockHeaderDebt from "@/pages/payment/blocks/BlockHeaderDebt.vue";
@@ -39,6 +39,7 @@ import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 import BlockSearchFullNameApartment from "@/pages/blocks/BlockSearchFullNameApartment.vue";
 import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
+import BlockQuestionnaireResult from "@/pages/blocks/BlockQuestionnaireResult.vue";
 // --------------- items and lists -------------------
 import BalanceHouseItem from "@/itemsAndLists/BalanceHouseItem.vue";
 import DebtItem from "@/itemsAndLists/DebtItem.vue";
@@ -107,6 +108,7 @@ export default [
   BlockSearchFullNameApartment,
   BlockSearchApartment,
   BlockSearchFullName,
+  BlockQuestionnaireResult,
   // ---- items ---------
   BalanceHouseItem,
   DebtItem,

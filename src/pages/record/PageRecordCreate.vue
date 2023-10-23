@@ -12,7 +12,7 @@
         :style="{ width: '70px' }"
       />
       <button-delete v-show="this.checkApartment" @click="fetchOwnership"
-        >{{ GET }}
+        >Получить
       </button-delete>
       <div class="title">Введите Ф.И.О. :</div>
       <input-simple
@@ -21,7 +21,7 @@
         :style="{ width: '350px' }"
       />
       <button-delete v-show="this.checkFullName" @click="fetchOwner"
-        >{{ GET }}
+        >Получить
       </button-delete>
     </div>
     <button-create @click="createTypeOwnership"
@@ -92,21 +92,18 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">{{
-      SEND_TO_SERVER
-    }}</button-simple>
+    <button-simple @click="sendToServer" :hidden="!isValid">Сохранить</button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
       message="Вы действительно хотите создать запись?"
       @close="showModal = false"
-      @successfuly="successfulyAction"
+      @successfuly="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { SEND_TO_SERVER, GET } from "@/ui/namesButton";
 import { PAGE_ENTRY_GET, PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
 import {
   generatePassport,
@@ -144,8 +141,6 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       isValidShare: false,
-      SEND_TO_SERVER,
-      GET,
       PAGE_ENTRY_GET,
       PAGE_OWNERSHIPS_GET,
     };
@@ -163,7 +158,7 @@ export default {
     sendToServer() {
       this.showModal = true;
     },
-    successfulyAction() {
+    successfullyAction() {
       // цепляем фото к собственнику
       this.record.owner.photo = generatePhoto();
       // создаём собственника в базе данных

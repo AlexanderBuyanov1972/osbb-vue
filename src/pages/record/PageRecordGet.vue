@@ -29,7 +29,7 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple :hidden="true" @click="start">reset</button-simple>
+    <button-simple :hidden="true" @click="start">Перезагрузка</button-simple>
   </div>
 </template>
 <script>

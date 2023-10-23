@@ -5,7 +5,7 @@
         currentButton == 1 ? { color: 'blue', 'border-color': 'blue' } : {}
       "
       @click="clickButton1"
-      >{{ MAIN }}</button-delete
+      >На главную</button-delete
     >
     <button-delete
       :style="
@@ -14,7 +14,7 @@
           : {}
       "
       @click="clickButton2"
-      >{{ BLOCK_OWNERSHIP }}
+      >Блок недвижимости
     </button-delete>
     <button-delete
       :style="
@@ -23,14 +23,14 @@
           : {}
       "
       @click="clickButton3"
-      >{{ BLOCK_OWNER }}
+      >Блок собственников
     </button-delete>
     <button-delete
       :style="
         currentButton == 4 ? { color: 'teal', 'border-color': 'teal' } : {}
       "
       @click="clickButton4"
-      >{{ BLOCK_QUESTIONNAIRE }}
+      >Блок опросов
     </button-delete>
     <button-delete
       :style="currentButton == 5 ? { color: 'red', 'border-color': 'red' } : {}"
@@ -47,21 +47,9 @@ import {
   PAGE_OWNERS_GET,
   PAGE_PAYMENTS_GET,
 } from "@/router/apiRouter";
-import {
-  BLOCK_PAYMENT_BILLS,
-  BLOCK_OWNER,
-  BLOCK_OWNERSHIP,
-  BLOCK_QUESTIONNAIRE,
-  MAIN,
-} from "@/ui/namesButton";
 export default {
   data() {
     return {
-      BLOCK_PAYMENT_BILLS,
-      BLOCK_OWNER,
-      BLOCK_OWNERSHIP,
-      BLOCK_QUESTIONNAIRE,
-      MAIN,
       PAGE_MAIN,
       PAGE_QUESTIONNAIRES_GET,
       PAGE_OWNERSHIPS_GET,

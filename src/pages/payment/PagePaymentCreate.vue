@@ -16,21 +16,20 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValidPayment">{{
-      SEND_TO_SERVER
+    <button-simple @click="showModal = true" :hidden="!isValidPayment">{{
+      Сохранить
     }}</button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
       message="Вы действительно хотите создать платёжное поручение?"
       @close="showModal = false"
-      @successfuly="successfulyAction"
+      @successfuly="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>
 <script>
 import { PAGE_PAYMENTS_GET } from "@/router/apiRouter";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -39,7 +38,6 @@ export default {
       isValidPayment: false,
       showModal: false,
       PAGE_PAYMENTS_GET,
-      SEND_TO_SERVER,
     };
   },
   methods: {
@@ -48,18 +46,11 @@ export default {
       createPayment: "payment/createPayment",
     }),
     action(value) {
-      if (value === "0") {
-        this.payment.bill = "00001";
-      } else {
-        this.fetchBillByApartment(value).then(() => {
-          this.payment.bill = this.getBill;
-        });
-      }
+      this.fetchBillByApartment(value).then(() => {
+        this.payment.bill = this.getBill;
+      });
     },
-    sendToServer() {
-      this.showModal = true;
-    },
-    successfulyAction() {
+    successfullyAction() {
       this.createPayment(this.payment).then(() => {
         this.$router.push(PAGE_PAYMENTS_GET);
       });

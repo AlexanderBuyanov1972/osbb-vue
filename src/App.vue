@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import HeaderBlocks from "@/components/HeaderBlocks.vue";
+import HeaderBlocks from "@/header/HeaderBlocks.vue";
 import VueHr from "./ui/elements/VueHr.vue";
 export default {
   components: {

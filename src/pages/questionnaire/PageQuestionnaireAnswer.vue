@@ -12,14 +12,13 @@
       </div>
     </div>
     <vue-hr />
-    <button-simple @click="sendToServer" :hidden="!checkValid">{{
-      SELECT
-    }}</button-simple>
+    <button-simple @click="sendToServer" :hidden="!checkValid">
+      Отправить
+    </button-simple>
   </div>
 </template>
 <script>
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
-import { SELECT } from "@/ui/namesButton";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
@@ -29,7 +28,6 @@ export default {
     return {
       list: [],
       info: {},
-      SELECT,
     };
   },
   methods: {

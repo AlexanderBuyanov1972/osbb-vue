@@ -23,20 +23,19 @@
     <vue-hr />
     <button-back />
     <button-simple @click="sendToServer" :hidden="!isValid">{{
-      SEND_TO_SERVER
+      Сохранить
     }}</button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
       message="Вы действительно хотите обновить помещение?"
       @close="showModal = false"
-      @successfuly="successfulyAction"
+      @successfuly="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { SEND_TO_SERVER } from "@/ui/namesButton";
 import { PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
 export default {
   data() {
@@ -46,7 +45,6 @@ export default {
       address: {},
       isValidOwnership: false,
       isValidAddress: false,
-      SEND_TO_SERVER,
       PAGE_OWNERSHIP_GET,
     };
   },
@@ -58,7 +56,7 @@ export default {
     sendToServer() {
       this.showModal = true;
     },
-    successfulyAction() {
+    successfullyAction() {
       this.updateOwnership(this.ownership).then(() => {
         this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getOwnership.id);
       });
