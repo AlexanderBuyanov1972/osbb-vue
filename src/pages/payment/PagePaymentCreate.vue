@@ -16,9 +16,9 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="showModal = true" :hidden="!isValidPayment">{{
+    <button-simple @click="showModal = true" :hidden="!isValidPayment">
       Сохранить
-    }}</button-simple>
+    </button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
