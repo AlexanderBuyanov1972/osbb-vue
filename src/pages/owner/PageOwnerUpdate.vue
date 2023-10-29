@@ -56,7 +56,7 @@
     <modal-action
       message="Вы действительно хотите обновить собственника?"
       @close="showModal = false"
-      @successfuly="successfulyAction"
+      @successfully="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>
@@ -87,7 +87,7 @@ export default {
     sendToServer() {
       this.showModal = true;
     },
-    successfulyAction() {
+    successfullyAction() {
       this.updateOwner(this.owner).then(() =>
         this.$router.push(PAGE_OWNER_GET + "/" + this.getOwner.id)
       );

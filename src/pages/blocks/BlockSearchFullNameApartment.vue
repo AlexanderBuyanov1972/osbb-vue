@@ -6,9 +6,9 @@
         v-model.trim="fullName"
         :style="{ width: '300px' }"
       />
-      <button-edit @click="getListApartment"
+      <button-simple @click="getListApartment"
         >Получить список помещений
-      </button-edit>
+      </button-simple>
     </div>
   </template>
   <script>

@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     runAction() {
-      this.$emit("successfuly");
+      this.$emit("successfully");
       this.close();
     },
     close() {

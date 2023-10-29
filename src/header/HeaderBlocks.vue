@@ -1,42 +1,25 @@
 <template>
   <div class="main">
-    <button-delete
-      :style="
-        currentButton == 1 ? { color: 'blue', 'border-color': 'blue' } : {}
-      "
+    <button-simple
+      :style="currentButton == 1 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton1"
-      >На главную</button-delete
+      >На главную</button-simple
     >
-    <button-delete
-      :style="
-        currentButton == 2
-          ? { color: 'blueviolet', 'border-color': 'blueviolet' }
-          : {}
-      "
+    <button-simple
+      :style="currentButton == 2 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton2"
       >Блок недвижимости
-    </button-delete>
-    <button-delete
-      :style="
-        currentButton == 3
-          ? { color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }
-          : {}
-      "
-      @click="clickButton3"
-      >Блок собственников
-    </button-delete>
-    <button-delete
-      :style="
-        currentButton == 4 ? { color: 'teal', 'border-color': 'teal' } : {}
-      "
+    </button-simple>
+     <button-simple
+      :style="currentButton == 4 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton4"
       >Блок опросов
-    </button-delete>
-    <button-delete
+    </button-simple>
+    <button-simple
       :style="currentButton == 5 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton5"
       >Оплата счетов
-    </button-delete>
+    </button-simple>
   </div>
 </template>
 <script>
@@ -55,7 +38,7 @@ export default {
       PAGE_OWNERSHIPS_GET,
       PAGE_OWNERS_GET,
       PAGE_PAYMENTS_GET,
-      currentButton: 0,
+      currentButton: 1,
     };
   },
 

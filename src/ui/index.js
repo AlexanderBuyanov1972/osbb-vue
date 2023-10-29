@@ -1,13 +1,8 @@
 // ui elements --------------------------------------------------
 // buttons ------------------------------------------------------
 import ButtonDeactivate from "@/ui/elements/buttons/ButtonDeactivate.vue";
-import ButtonBills from "@/ui/elements/buttons/ButtonBills.vue";
-import ButtonEdit from "@/ui/elements/buttons/ButtonEdit.vue";
-import ButtonCreate from "@/ui/elements/buttons/ButtonCreate.vue";
 import ButtonBack from "@/ui/elements/buttons/ButtonBack.vue";
-import ButtonDelete from "@/ui/elements/buttons/ButtonDelete.vue";
 import ButtonSimple from "@/ui/elements/buttons/ButtonSimple.vue";
-import ButtonReset from "@/ui/elements/buttons/ButtonReset.vue";
 // select ---------------------------------------------------------
 import SelectTitle from "@/ui/elements/selects/SelectTitle.vue";
 import SelectSimple from "@/ui/elements/selects/SelectSimple.vue";
@@ -28,7 +23,6 @@ import LineAddress from "@/ui/elements/LineAddress.vue";
 import HeaderMessages from "@/header/HeaderMessages.vue";
 import HeaderPayment from "@/header/HeaderPayment.vue";
 import HeaderPolls from "@/header/HeaderPolls.vue";
-import HeaderDataOwners from "@/header/HeaderDataOwners.vue";
 import HeaderDataOwnerships from "@/header/HeaderDataOwnerships.vue";
 // --------------- pages blocks -------------------
 import BlockBodyDebt from "@/pages/payment/blocks/BlockBodyDebt.vue";
@@ -70,13 +64,8 @@ import ModalAction from "@/modals/ModalAction";
 export default [
   // buttons -----
   ButtonDeactivate,
-  ButtonBills,
-  ButtonEdit,
-  ButtonCreate,
   ButtonBack,
-  ButtonDelete,
   ButtonSimple,
-  ButtonReset,
 
   // ---- elements -----
   PhotoCarousel,
@@ -96,7 +85,6 @@ export default [
   BlockBodyDebt,
   BlockHeaderDebt,
   HeaderPayment,
-  HeaderDataOwners,
   HeaderDataOwnerships,
   HeaderPolls,
   HeaderMessages,

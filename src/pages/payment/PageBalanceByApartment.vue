@@ -3,12 +3,12 @@
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="getMessages" />
   <button-back />
-  <button-bills v-if="flag" @click="showModal = true">Печать</button-bills>
-  <button-bills v-if="flag" @click="showModalAll = true"
-    >Печатать на все помещения</button-bills
+  <button-simple v-if="flag" @click="showModal = true">Печать</button-simple>
+  <button-simple v-if="flag" @click="showModalAll = true"
+    >Печатать на все помещения</button-simple
   >
-  <button-bills v-if="flag" @click="showModalAllInOne = true"
-    >Печатать на все помещения в один файл</button-bills
+  <button-simple v-if="flag" @click="showModalAllInOne = true"
+    >Печатать на все помещения в один файл</button-simple
   >
 
   <div class="buttons">
@@ -16,15 +16,15 @@
       nameButton="Задолженность по помещению"
       @apartment="(value) => action(value)"
     />
-    <button-bills
+    <button-simple
       @click="goToBalanceDetails"
       :style="{ color: 'blueviolet', 'border-color': 'blueviolet' }"
       >Детали задолженности по помещению
-    </button-bills>
-    <button-bills
+    </button-simple>
+    <button-simple
       @click="$router.push(PAGE_BALANCE_HOUSE)"
       :style="{ color: 'blueviolet', 'border-color': 'blueviolet' }"
-      >Получить баланс дома по каждому помещению</button-bills
+      >Получить баланс дома по каждому помещению</button-simple
     >
   </div>
   <line-header
@@ -41,21 +41,21 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModal = false"
-      @successfuly="print"
+      @successfully="print"
     ></modal-action>
   </dialog-window>
   <dialog-window :show="showModalAll">
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalAll = false"
-      @successfuly="printList"
+      @successfully="printList"
     ></modal-action>
   </dialog-window>
   <dialog-window :show="showModalAllInOne">
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalAllInOne = false"
-      @successfuly="printListInOne"
+      @successfully="printListInOne"
     ></modal-action>
   </dialog-window>
 </template>

@@ -30,7 +30,7 @@
     <modal-action
       message="Вы действительно хотите обновить помещение?"
       @close="showModal = false"
-      @successfuly="successfullyAction"
+      @successfully="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>

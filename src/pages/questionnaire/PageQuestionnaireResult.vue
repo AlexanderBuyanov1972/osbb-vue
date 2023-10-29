@@ -5,7 +5,7 @@
     <header-messages :messages="getMessages" />
     <div class="blocks">
       <div class="button">
-        <button-create @click="printResult">Печатать результат</button-create>
+        <button-simple @click="printResult">Печатать результат</button-simple>
       </div>
       <div class="list">
         <block-questionnaire-result

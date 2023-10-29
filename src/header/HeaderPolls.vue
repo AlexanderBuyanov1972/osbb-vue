@@ -1,17 +1,17 @@
 <template>
   <div class="block1">
-    <button-create @click="goToPageQuestionnairesByTitle"
+    <button-simple @click="goToPageQuestionnairesByTitle"
       >Получить опросы по теме
-    </button-create>
-    <button-create @click="goToPageResultQuestionnaire"
+    </button-simple>
+    <button-simple @click="goToPageResultQuestionnaire"
       >Получить результаты опроса
-    </button-create>
-    <button-create @click="goToPageCreateQuestionnaire"
+    </button-simple>
+    <button-simple @click="goToPageCreateQuestionnaire"
       >Создать опросный лист
-    </button-create>
-    <button-create @click="showModal = true"
+    </button-simple>
+    <button-simple @click="showModal = true"
       >Удалить опросный лист по теме
-    </button-create>
+    </button-simple>
   </div>
   <div class="block2">
     <div class="main">

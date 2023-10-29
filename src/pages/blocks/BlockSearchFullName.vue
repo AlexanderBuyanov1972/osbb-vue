@@ -6,7 +6,7 @@
       v-model.trim="fullName"
       :style="{ width: '300px' }"
     />
-    <button-edit @click="clickButton">{{ nameButton }} </button-edit>
+    <button-simple @click="clickButton">{{ nameButton }} </button-simple>
   </div>
 </template>
 <script>

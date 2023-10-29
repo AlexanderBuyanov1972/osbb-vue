@@ -4,9 +4,9 @@
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <button-back />
-    <button-bills v-if="flag" @click="showModal = true">Печать</button-bills>
-    <button-bills v-if="flag" @click="showModalAll = true"
-      >Печатать на все помещения</button-bills
+    <button-simple v-if="flag" @click="showModal = true">Печать</button-simple>
+    <button-simple v-if="flag" @click="showModalAll = true"
+      >Печатать на все помещения</button-simple
     >
     <line-header
       :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${apartment}`"
@@ -28,14 +28,14 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModal = false"
-      @successfuly="print"
+      @successfully="print"
     ></modal-action>
   </dialog-window>
   <dialog-window :show="showModalAll">
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalAll = false"
-      @successfuly="printList"
+      @successfully="printList"
     ></modal-action>
   </dialog-window>
 </template>

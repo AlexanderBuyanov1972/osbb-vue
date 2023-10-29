@@ -18,9 +18,9 @@
         v-model="fullName"
         :style="{ width: '350px' }"
       />
-      <button-delete :hidden="!this.checkInputs" @click="fetchRecord"
+      <button-simple :hidden="!this.checkInputs" @click="fetchRecord"
         >{{ GET }}
-      </button-delete>
+      </button-simple>
     </div>
     <div class="blocks">
       <div class="ownership_address">
@@ -92,7 +92,7 @@
     <modal-action
       message="Вы действительно хотите обновить запись?"
       @close="showModal = false"
-      @successfuly="successfullyAction"
+      @successfully="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>

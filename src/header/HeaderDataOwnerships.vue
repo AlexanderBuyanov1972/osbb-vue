@@ -6,6 +6,12 @@
     <button-simple @click="$router.push(PAGE_REGISTRY_OWNERSHIPS)"
       >Реестр объектов недвижимости
     </button-simple>
+    <button-simple @click="$router.push(PAGE_OWNERS_GET)"
+      >Список собственников
+    </button-simple>
+    <button-simple @click="$router.push(PAGE_REGISTRY_OWNERS)"
+      >Реестр собственников
+    </button-simple>
     <button-simple @click="$router.push(PAGE_ENTRY_CREATE)"
       >Создать запись
     </button-simple>
@@ -25,6 +31,8 @@ import {
   PAGE_ENTRY_CREATE,
   PAGE_OWNERSHIP_GET,
   PAGE_ENTRY_UPDATE,
+  PAGE_OWNERS_GET,
+  PAGE_REGISTRY_OWNERS,
 } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -37,6 +45,8 @@ export default {
       PAGE_ENTRY_CREATE,
       PAGE_OWNERSHIP_GET,
       PAGE_ENTRY_UPDATE,
+      PAGE_OWNERS_GET,
+      PAGE_REGISTRY_OWNERS,
     };
   },
   methods: {

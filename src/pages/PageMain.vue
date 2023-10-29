@@ -8,13 +8,13 @@
       :style="{ width: '100%', display: 'flex', 'text-align': 'start' }"
     />
     <div class="buttons">
-      <button-create @click="sendToServerDataBase"
-        >Создание базы данных собственник/помещение</button-create
+      <button-simple @click="sendToServerDataBase"
+        >Создание базы данных собственник/помещение</button-simple
       >
-      <button-create @click="sendToServerQuestionnaire"
-        >Создание опроса</button-create
+      <button-simple @click="sendToServerQuestionnaire"
+        >Создание опроса</button-simple
       >
-      <button-create @click="sendToServerRates">Создание тарифов</button-create>
+      <button-simple @click="sendToServerRates">Создание тарифов</button-simple>
     </div>
     <div class="header">ОСББ "Свободы 51"</div>
     <photo-carousel :urls="urls" />
@@ -23,7 +23,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalDB = false"
-      @successfuly="successfulyActionDB"
+      @successfully="successfulyActionDB"
     ></modal-action>
   </dialog-window>
 
@@ -31,7 +31,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalPolls = false"
-      @successfuly="successfullyActionPolls"
+      @successfully="successfullyActionPolls"
     ></modal-action>
   </dialog-window>
 
@@ -39,7 +39,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalRates = false"
-      @successfuly="successfullyActionRates"
+      @successfully="successfullyActionRates"
     ></modal-action>
   </dialog-window>
 </template>

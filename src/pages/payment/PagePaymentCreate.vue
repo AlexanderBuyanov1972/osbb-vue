@@ -24,7 +24,7 @@
     <modal-action
       message="Вы действительно хотите создать платёжное поручение?"
       @close="showModal = false"
-      @successfuly="successfullyAction"
+      @successfully="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>

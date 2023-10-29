@@ -11,23 +11,23 @@
         v-model="apartment"
         :style="{ width: '70px' }"
       />
-      <button-delete v-show="this.checkApartment" @click="fetchOwnership"
+      <button-simple v-show="this.checkApartment" @click="fetchOwnership"
         >Получить
-      </button-delete>
+      </button-simple>
       <div class="title">Введите Ф.И.О. :</div>
       <input-simple
         class="input"
         v-model="fullName"
         :style="{ width: '350px' }"
       />
-      <button-delete v-show="this.checkFullName" @click="fetchOwner"
+      <button-simple v-show="this.checkFullName" @click="fetchOwner"
         >Получить
-      </button-delete>
+      </button-simple>
     </div>
-    <button-create @click="createTypeOwnership"
-      >Типовое помещение</button-create
+    <button-simple @click="createTypeOwnership"
+      >Типовое помещение</button-simple
     >
-    <button-create @click="createTypeOwner">Типовой собственник</button-create>
+    <button-simple @click="createTypeOwner">Типовой собственник</button-simple>
     <div class="blocks">
       <div class="ownership_address">
         <div class="ownership">
@@ -98,7 +98,7 @@
     <modal-action
       message="Вы действительно хотите создать запись?"
       @close="showModal = false"
-      @successfuly="successfullyAction"
+      @successfully="successfullyAction"
     ></modal-action>
   </dialog-window>
 </template>

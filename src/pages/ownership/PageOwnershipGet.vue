@@ -13,12 +13,12 @@
     <vue-hr />
     <button-back />
 
-    <button-edit
+    <button-simple
       @click="
         this.$router.push(PAGE_OWNERSHIP_UPDATE + '/' + this.getOwnership.id)
       "
       >Обновить данные о помещении
-    </button-edit>
+    </button-simple>
     <button-simple
       @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.getOwnership.id)"
       >Смотреть все записи по помещению</button-simple

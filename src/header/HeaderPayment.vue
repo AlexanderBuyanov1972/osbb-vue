@@ -1,14 +1,14 @@
 <template>
   <div class="block">
-    <button-bills @click="$router.push(PAGE_PAYMENTS_GET)"
+    <button-simple @click="$router.push(PAGE_PAYMENTS_GET)"
       >Все проводки
-    </button-bills>
-    <button-bills @click="$router.push(PAGE_BALANCE_ROOM)"
+    </button-simple>
+    <button-simple @click="$router.push(PAGE_BALANCE_ROOM)"
       >Текущие балансы
-    </button-bills>
-    <button-bills @click="$router.push(PAGE_PAYMENT_CREATE)"
+    </button-simple>
+    <button-simple @click="$router.push(PAGE_PAYMENT_CREATE)"
       >Создать проводку
-    </button-bills>
+    </button-simple>
     <div class="total">Сумма на счёте ОСББ : {{ balance }} грн</div>
   </div>
 </template>

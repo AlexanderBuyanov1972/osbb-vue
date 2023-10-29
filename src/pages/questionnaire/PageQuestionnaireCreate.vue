@@ -42,9 +42,9 @@
     </div>
 
     <vue-hr />
-    <button-create @click="addQuestion">Добавить вопрос</button-create>
-    <button-delete @click="removeQuestion"
-      >Удалить последний вопрос</button-delete
+    <button-simple @click="addQuestion">Добавить вопрос</button-simple>
+    <button-simple @click="removeQuestion"
+      >Удалить последний вопрос</button-simple
     >
     <button-simple
       :hidden="

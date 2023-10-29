@@ -1,5 +1,5 @@
 <template>
-  <header-data-owners></header-data-owners>
+  <header-data-ownerships></header-data-ownerships>
   <vue-loader :isLoader="this.getIsLoading" />
   <header-messages :messages="getMessages" />
   <line-header

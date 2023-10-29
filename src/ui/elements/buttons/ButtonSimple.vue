@@ -15,11 +15,11 @@ button {
   font-weight: 600;
   letter-spacing: 1px;
   background-color: white;
-  /*  */
   text-transform: uppercase;
   border-radius: 0;
   cursor: pointer;
   color: blueviolet;
   border: 1px solid blueviolet;
+  border-radius: 10px;
 }
 </style>

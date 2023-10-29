@@ -3,7 +3,7 @@
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="getMessages" />
   <button-back />
-  <button-bills @click="showModal = true">Печатать баланс</button-bills>
+  <button-simple @click="showModal = true">Печатать баланс</button-simple>
   <line-header
     text="Задолженность по оплате за услуги ОСББ по помещениям"
     :style="{ color: 'darkgoldenrod' }"
@@ -26,7 +26,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModal = false"
-      @successfuly="printBalanceHouse"
+      @successfully="printBalanceHouse"
     ></modal-action>
   </dialog-window>
 </template>
