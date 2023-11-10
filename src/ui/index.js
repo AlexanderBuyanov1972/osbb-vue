@@ -1,4 +1,3 @@
-// ui elements --------------------------------------------------
 // buttons ------------------------------------------------------
 import ButtonDeactivate from "@/ui/elements/buttons/ButtonDeactivate.vue";
 import ButtonBack from "@/ui/elements/buttons/ButtonBack.vue";
@@ -20,6 +19,7 @@ import LineRadio from "@/ui/elements/LineRadio.vue";
 import LineHeader from "@/ui/elements/LineHeader.vue";
 import LineAddress from "@/ui/elements/LineAddress.vue";
 // ------------------------ header --------------------------
+import HeaderBlocks from "@/header/HeaderBlocks.vue";
 import HeaderMessages from "@/header/HeaderMessages.vue";
 import HeaderPayment from "@/header/HeaderPayment.vue";
 import HeaderPolls from "@/header/HeaderPolls.vue";
@@ -84,6 +84,7 @@ export default [
   // ----------------
   BlockBodyDebt,
   BlockHeaderDebt,
+  HeaderBlocks,
   HeaderPayment,
   HeaderDataOwnerships,
   HeaderPolls,

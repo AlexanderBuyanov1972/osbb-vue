@@ -1,4 +1,6 @@
 export const PAGE_MAIN = "/";
+export const PAGE_REGISTRATION = "/registration";
+export const PAGE_LOGIN = "/login";
 export const PAGE_NOT_FOUND = "/**";
 // --------- entry ----------------
 export const PAGE_ENTRY_CREATE = "/record/create";
@@ -34,7 +36,4 @@ export const PAGE_PAYMENT_CREATE = "/payment/create";
 export const PAGE_PAYMENTS_GET = "/payments/get";
 export const PAGE_BALANCE_ROOM = "/balance/room";
 export const PAGE_BALANCE_ROOM_DETAILS = "/balance/room/details";
-export const PAGE_BALANCE_HOUSE = "/balance/house";      
-
-
-
+export const PAGE_BALANCE_HOUSE = "/balance/house";

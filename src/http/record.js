@@ -1,60 +1,60 @@
-import axios from "axios";
-import { API_BASE, RECORD, ALL, OWNERSHIP, OWNER } from "@/http/apiHttp";
+import { authHttp } from "@/http/httpAxios";
+import { RECORD, ALL, OWNERSHIP } from "@/http/apiHttp";
 
 // ------------- one --------------------
 
 export const createRecord = async (one) => {
-  const response = await axios.post(API_BASE + RECORD, one);
+  const response = await authHttp.post(RECORD, one);
   return response.data;
 };
 
 export const updateRecord = async (one) => {
-  const response = await axios.put(API_BASE + RECORD, one);
+  const response = await authHttp.put(RECORD, one);
   return response.data;
 };
 
 export const getRecord = async (id) => {
-  const response = await axios.get(API_BASE + RECORD + "/" + id);
+  const response = await authHttp.get(RECORD + "/" + id);
   return response.data;
 };
 
 export const deleteRecord = async (id) => {
-  const response = await axios.delete(API_BASE + RECORD + "/" + id);
+  const response = await authHttp.delete(RECORD + "/" + id);
   return response.data;
 };
 
 // -------------- all ------------------
 
 export const createAllRecord = async (list) => {
-  const response = await axios.post(API_BASE + RECORD + ALL, list);
+  const response = await authHttp.post(RECORD + ALL, list);
   return response.data;
 };
 
 export const updateAllRecord = async (list) => {
-  const response = await axios.put(API_BASE + RECORD + ALL, list);
+  const response = await authHttp.put(RECORD + ALL, list);
   return response.data;
 };
 
 export const getAllRecord = async () => {
-  const response = await axios.get(API_BASE + RECORD + ALL);
+  const response = await authHttp.get(RECORD + ALL);
   return response.data;
 };
 
 export const deleteAllRecord = async () => {
-  const response = await axios.delete(API_BASE + RECORD + ALL);
+  const response = await authHttp.delete(RECORD + ALL);
   return response.data;
 };
 
 // other -------------------------
 
 export const getRoomsAndClientsByOwnershipId = async (id) => {
-  const response = await axios.get(API_BASE + RECORD + OWNERSHIP + "/" + id);
+  const response = await authHttp.get(RECORD + OWNERSHIP + "/" + id);
   return response.data;
 };
 
 export const getRecordByApartmentAndFullName = async (apartment, fullName) => {
-  const response = await axios.get(
-    API_BASE + RECORD + "/" + apartment + "/" + fullName
+  const response = await authHttp.get(
+    RECORD + "/" + apartment + "/" + fullName
   );
   return response.data;
 };
@@ -64,8 +64,8 @@ export const deleteRecordByOwnerIdAndOwnershipId = async (
   ownerId,
   ownershipId
 ) => {
-  const response = await axios.delete(
-    API_BASE + RECORD + "/" + ownerId + "/" + ownershipId
+  const response = await authHttp.delete(
+    RECORD + "/" + ownerId + "/" + ownershipId
   );
   return response.data;
 };

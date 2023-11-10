@@ -31,7 +31,7 @@
     <modal-action
       message="Вы действительно хотите удалить опросы по выбранной Вами теме?"
       @close="showModal = false"
-      @successfuly="removeByTitle"
+      @successfully="removeByTitle"
     ></modal-action>
   </dialog-window>
 </template>
@@ -94,7 +94,7 @@ export default {
       }
     },
     isValidTitle() {
-      return this.title == undefined || this.title == this.message;
+      return this.title === undefined || this.title === this.message;
     },
     ...mapMutations({
       setMessages: "questionnaire/setMessages",

@@ -10,7 +10,7 @@
       @click="clickButton2"
       >Блок недвижимости
     </button-simple>
-     <button-simple
+    <button-simple
       :style="currentButton == 4 ? { color: 'red', 'border-color': 'red' } : {}"
       @click="clickButton4"
       >Блок опросов
@@ -20,6 +20,18 @@
       @click="clickButton5"
       >Оплата счетов
     </button-simple>
+    <button-simple
+      :style="{ color: 'green', 'border-color': 'green' }"
+      @click="showModal = true"
+      >Logout
+    </button-simple>
+    <dialog-window :show="showModal">
+      <modal-action
+        message="Вы действительно хотите выйти из системы?"
+        @close="showModal = false"
+        @successfully="successfullyAction"
+      ></modal-action>
+    </dialog-window>
   </div>
 </template>
 <script>
@@ -29,7 +41,10 @@ import {
   PAGE_OWNERSHIPS_GET,
   PAGE_OWNERS_GET,
   PAGE_PAYMENTS_GET,
+  PAGE_LOGIN,
 } from "@/router/apiRouter";
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -38,7 +53,9 @@ export default {
       PAGE_OWNERSHIPS_GET,
       PAGE_OWNERS_GET,
       PAGE_PAYMENTS_GET,
+      PAGE_LOGIN,
       currentButton: 1,
+      showModal: false,
     };
   },
 
@@ -62,6 +79,12 @@ export default {
     clickButton5() {
       this.$router.push(PAGE_PAYMENTS_GET);
       this.currentButton = 5;
+    },
+    ...mapActions({
+      logout: "auth/logout",
+    }),
+    successfullyAction() {
+      this.logout().then(() => this.$router.push(PAGE_LOGIN));
     },
   },
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main" v-if="messages.length > 0">
     <div>Сообщения с сервера :</div>
     <div v-for="(one, index) in messages" :key="one.id">
       {{ index + 1 }}. {{ one }}

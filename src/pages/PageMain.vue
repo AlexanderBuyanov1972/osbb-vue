@@ -23,7 +23,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalDB = false"
-      @successfully="successfulyActionDB"
+      @successfully="successfullyActionDB"
     ></modal-action>
   </dialog-window>
 
@@ -90,7 +90,7 @@ export default {
     sendToServerRates() {
       this.showModalRates = true;
     },
-    successfulyActionDB() {
+    successfullyActionDB() {
       this.generateJsonRecords().then(() => {
         this.messages = this.getMessagesOwnership;
       });

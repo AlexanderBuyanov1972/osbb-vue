@@ -1,6 +1,8 @@
 // /
 import PageNotFound from "@/pages/PageNotFound.vue";
 import PageMain from "@/pages/PageMain.vue";
+import PageRegistration from "@/pages/PageRegistration.vue";
+import PageLogin from "@/pages/PageLogin.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
 // questionnaire
@@ -34,6 +36,8 @@ import {
   //
   PAGE_NOT_FOUND,
   PAGE_MAIN,
+  PAGE_REGISTRATION,
+  PAGE_LOGIN,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
   //questionnaire
@@ -65,6 +69,8 @@ import {
 const routes = [
   // /
   { path: PAGE_MAIN, component: PageMain },
+  { path: PAGE_REGISTRATION, component: PageRegistration },
+  { path: PAGE_LOGIN, component: PageLogin },
   { path: PAGE_NOT_FOUND, component: PageNotFound },
   { path: PAGE_REGISTRY_OWNERS, component: PageRegistryOwners },
   {

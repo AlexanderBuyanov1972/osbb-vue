@@ -1,8 +1,7 @@
 import { createStore } from "vuex";
 import passport from "@/store/owner/passportModule";
-import user from "@/store/authorization/userModule";
+import auth from "@/store/authModule";
 import address from "@/store/ownership/addressModule";
-import role from "@/store/authorization/roleModule";
 import owner from "@/store/owner/ownerModule";
 import ownership from "@/store/ownership/ownershipModule";
 import registry from "@/store/registryModule";
@@ -16,9 +15,8 @@ import rate from "@/store/payment/rateModule";
 export default createStore({
   modules: {
     passport,
-    user,
+    auth,
     address,
-    role,
     owner,
     ownership,
     registry,

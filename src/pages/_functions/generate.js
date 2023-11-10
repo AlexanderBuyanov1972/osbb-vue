@@ -41,7 +41,7 @@ export const generateBill = (arg) => {
   let substr = "6200190400";
   return substr.substring(0, substr.length - (arg + "").length) + arg;
 };
-
+// Генерация тарифов -------------------
 export const generateJsonRates = () => {
   let list = [];
   let value = 0;
@@ -63,9 +63,9 @@ export const generateJsonRates = () => {
   return list;
 };
 
-// generate Json ---------------
+// Генерация главного джейсона ---------------
 export const generateJsonRecords = async () => {
-  // общее количество квартир вдоме
+  // общее количество квартир в доме
   const countApartment = 74;
   // общее количество квартир в подъезде
   const countEntrance = 12;
@@ -165,11 +165,11 @@ export const generateJsonRecords = async () => {
     }
   }
 };
-
+// Генерация опроса -----------------------------
 export const generateJsonQuestionnaires = () => {
   const list = [];
   const title = "Вопрос о создании ОСББ";
-  const byWhom = "Горбунков Семён Семёнович";
+  const byWhom = "Пасько А.А.";
   let questions = [
     "Согласны ли Вы утвердить состав инициативной группы",
     "Согласны ли Вы утвердить Иванова С.С. секретарём сборов",

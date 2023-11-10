@@ -1,60 +1,58 @@
-import axios from "axios";
-import { API_BASE, OWNER, ALL, COUNT, FULLNAME } from "@/http/apiHttp";
+import { authHttp } from "@/http/httpAxios";
+import { OWNER, ALL, COUNT, FULL_NAME } from "@/http/apiHttp";
 
 // one
 
 export const createOwner = async (one) => {
-  const response = await axios.post(API_BASE + OWNER, one);
+  const response = await authHttp.post(OWNER, one);
   return response.data;
 };
 
 export const updateOwner = async (one) => {
-  const response = await axios.put(API_BASE + OWNER, one);
+  const response = await authHttp.put(OWNER, one);
   return response.data;
 };
 
 export const getOwner = async (id) => {
-  const response = await axios.get(API_BASE + OWNER + "/" + id);
+  const response = await authHttp.get(OWNER + "/" + id);
   return response.data;
 };
 
 export const deleteOwner = async (id) => {
-  const response = await axios.delete(API_BASE + OWNER + "/" + id);
+  const response = await authHttp.delete(OWNER + "/" + id);
   return response.data;
 };
 
 // all
 
 export const createAllOwner = async (list) => {
-  const response = await axios.post(API_BASE + OWNER + ALL, list);
+  const response = await authHttp.post(OWNER + ALL, list);
   return response.data;
 };
 
 export const updateAllOwner = async (list) => {
-  const response = await axios.put(API_BASE + OWNER + ALL, list);
+  const response = await authHttp.put(OWNER + ALL, list);
   return response.data;
 };
 export const getAllOwner = async () => {
-  const response = await axios.get(API_BASE + OWNER + ALL);
+  const response = await authHttp.get(OWNER + ALL);
   return response.data;
 };
 export const deleteAllOwner = async () => {
-  const response = await axios.delete(API_BASE + OWNER + ALL);
+  const response = await authHttp.delete(OWNER + ALL);
   return response.data;
 };
 
 // count
 
 export const countOwners = async () => {
-  const response = await axios.get(API_BASE + OWNER + COUNT);
+  const response = await authHttp.get(OWNER + COUNT);
   return response.data;
 };
 
 // list owners by full name
 
 export const getOwnerByFullName = async (fullName) => {
-  const response = await axios.get(
-    API_BASE + OWNER + FULLNAME + "/" + fullName
-  );
+  const response = await authHttp.get(OWNER + FULL_NAME + "/" + fullName);
   return response.data;
 };

@@ -1,23 +1,17 @@
-import axios from "axios";
-import {
-  API_BASE,
-  REGISTRY,
-  OWNER,
-  OWNERSHIP,
-  CHARACTERISTICS,
-} from "@/http/apiHttp";
+import { authHttp} from "@/http/httpAxios";
+import { REGISTRY, OWNER, OWNERSHIP, CHARACTERISTICS } from "@/http/apiHttp";
 
 export const getRegistryOwners = async () => {
-  const response = await axios.get(API_BASE + REGISTRY + OWNER);
+  const response = await authHttp.get(REGISTRY + OWNER);
   return response.data;
 };
 
 export const getRegistryOwnerships = async () => {
-  const response = await axios.get(API_BASE + REGISTRY + OWNERSHIP);
+  const response = await authHttp.get(REGISTRY + OWNERSHIP);
   return response.data;
 };
 
 export const getBuildingCharacteristics = async () => {
-  const response = await axios.get(API_BASE + REGISTRY + CHARACTERISTICS);
+  const response = await authHttp.get(REGISTRY + CHARACTERISTICS);
   return response.data;
 };
