@@ -1,5 +1,4 @@
 export const API_BASE = "http://localhost:9000";
-
 export const ALL_IN_ONE = "/all_in_one";
 export const PRINT = "/print";
 export const DETAILS = "/details";

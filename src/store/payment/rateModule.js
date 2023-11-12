@@ -7,7 +7,7 @@ import {
   updateAllRate,
   getAllRate,
   deleteAllRate,
-} from "@/http/payment/rate";
+} from "@/http/rate";
 export default {
   state: () => ({
     rate: {},
@@ -76,7 +76,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchRate({ commit }, id) {
+    async getRate({ commit }, id) {
       try {
         commit("setIsLoading", true);
         const response = await getRate(id);
@@ -136,13 +136,13 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchAllRate({ commit }, id) {
+    async getAllRate({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllRate(id);
+        const response = await getAllRate();
         if (response != undefined && response.data != undefined) {
           commit("setRates", response.data);
-          commit("setMessages", response.messages);
+          // commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
         }
@@ -157,6 +157,7 @@ export default {
         commit("setIsLoading", true);
         const response = await deleteAllRate(id);
         commit("setMessages", response.messages);
+        commit("setRates", []);
         commit("setRate", {});
       } catch (error) {
         commit("setMessages", [error.message]);

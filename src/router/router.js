@@ -29,6 +29,7 @@ import PagePaymentsGet from "@/pages/payment/PagePaymentsGet.vue";
 import PageBalanceByApartment from "@/pages/payment/PageBalanceByApartment.vue";
 import PageBalanceDetailsByApartment from "@/pages/payment/PageBalanceDetailsByApartment.vue";
 import PageBalanceHouse from "@/pages/payment/PageBalanceHouse.vue";
+import PageRates from "@/pages/payment/PageRates.vue";
 
 // ---------------------------------------------------------
 import { createRouter, createWebHistory } from "vue-router";
@@ -64,6 +65,7 @@ import {
   PAGE_BALANCE_ROOM,
   PAGE_BALANCE_ROOM_DETAILS,
   PAGE_BALANCE_HOUSE,
+  PAGE_RATES,
 } from "./apiRouter.js";
 
 const routes = [
@@ -153,6 +155,10 @@ const routes = [
   {
     path: PAGE_BALANCE_HOUSE,
     component: PageBalanceHouse,
+  },
+  {
+    path: PAGE_RATES,
+    component: PageRates,
   },
 ];
 const router = createRouter({

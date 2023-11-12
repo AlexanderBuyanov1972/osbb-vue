@@ -1,13 +1,14 @@
 <template>
   <div class="block">
+    <button-simple @click="$router.push(PAGE_RATES)">Тарифы </button-simple>
     <button-simple @click="$router.push(PAGE_PAYMENTS_GET)"
       >Все проводки
     </button-simple>
-    <button-simple @click="$router.push(PAGE_BALANCE_ROOM)"
-      >Текущие балансы
-    </button-simple>
     <button-simple @click="$router.push(PAGE_PAYMENT_CREATE)"
       >Создать проводку
+    </button-simple>
+    <button-simple @click="$router.push(PAGE_BALANCE_ROOM)"
+      >Текущие балансы
     </button-simple>
     <div class="total">Сумма на счёте ОСББ : {{ balance }} грн</div>
   </div>
@@ -17,6 +18,7 @@ import {
   PAGE_PAYMENT_CREATE,
   PAGE_BALANCE_ROOM,
   PAGE_PAYMENTS_GET,
+  PAGE_RATES,
 } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -26,6 +28,7 @@ export default {
       PAGE_PAYMENT_CREATE,
       PAGE_BALANCE_ROOM,
       PAGE_PAYMENTS_GET,
+      PAGE_RATES,
       balance: 0,
     };
   },

@@ -7,7 +7,7 @@ import {
   getBalanceHouse,
   getDebtByApartment,
   getDetailsDebtByApartment,
-} from "@/http/payment/payment";
+} from "@/http/payment";
 import {
   printPdfDebtByApartment,
   printPdfListDebtByApartment,

@@ -41,6 +41,7 @@ import PaymentItem from "@/itemsAndLists/PaymentItem.vue";
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
 import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
+import RateItem from "@/itemsAndLists/RateItem.vue";
 // --------------- pages blocks edit --------------------------------
 import BlockEditPayment from "@/pages/blocks/edit/BlockEditPayment.vue";
 import BlockEditPhoto from "@/pages/blocks/edit/BlockEditPhoto.vue";
@@ -105,6 +106,7 @@ export default [
   OwnerItem,
   OwnershipItem,
   QuestionnaireItem,
+  RateItem,
   // ---- update -----
   BlockEditPayment,
   BlockEditVehicle,

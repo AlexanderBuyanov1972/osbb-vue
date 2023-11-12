@@ -22,17 +22,17 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">{{
+    <button-simple @click="sendToServer" :hidden="!isValid">
       Сохранить
-    }}</button-simple>
+    </button-simple>
+    <dialog-window :show="showModal">
+      <modal-action
+        message="Вы действительно хотите обновить помещение?"
+        @close="showModal = false"
+        @successfully="successfullyAction"
+      ></modal-action>
+    </dialog-window>
   </div>
-  <dialog-window :show="showModal">
-    <modal-action
-      message="Вы действительно хотите обновить помещение?"
-      @close="showModal = false"
-      @successfully="successfullyAction"
-    ></modal-action>
-  </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";

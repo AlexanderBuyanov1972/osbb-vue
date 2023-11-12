@@ -37,3 +37,4 @@ export const PAGE_PAYMENTS_GET = "/payments/get";
 export const PAGE_BALANCE_ROOM = "/balance/room";
 export const PAGE_BALANCE_ROOM_DETAILS = "/balance/room/details";
 export const PAGE_BALANCE_HOUSE = "/balance/house";
+export const PAGE_RATES = "/rates";

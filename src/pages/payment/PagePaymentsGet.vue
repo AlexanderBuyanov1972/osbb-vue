@@ -8,7 +8,7 @@
     :payment="header"
     :flagMap="false"
   />
-  <div class="list" v-for="(one, index) in list">
+  <div class="list" v-for="(one, index) in list" :key="one.id">
     <payment-item :count="index + 1" :payment="one" :flagMap="true" />
   </div>
 </template>
