@@ -42,9 +42,6 @@ export default {
       this.$emit("apartment", this.apartment);
     },
   },
-  mounted() {
-    this.clickButton();
-  },
 };
 </script>
 

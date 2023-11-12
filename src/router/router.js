@@ -66,7 +66,7 @@ import {
   PAGE_BALANCE_ROOM_DETAILS,
   PAGE_BALANCE_HOUSE,
   PAGE_RATES,
-} from "./apiRouter.js";
+} from "@/router/apiRouter";
 
 const routes = [
   // /
