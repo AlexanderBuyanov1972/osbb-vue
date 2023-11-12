@@ -16,7 +16,7 @@
     @click="removeOwner"
     >Удалить собственника из базы данных</button-delete
   >
-  <block-get-owner :owner="owner" />
+  <block-get-owner :owner="owner" :style="{'height':'350px'}" :photoName="photo.name"/>
   <div class="items">
     <block-get-passport :passport="passport" />
     <block-get-place-work :placeWork="placeWork" />
@@ -24,8 +24,8 @@
   </div>
   <vue-hr />
   <button-back />
-  <button-edit @click="$router.push(PAGE_OWNER_UPDATE + '/' + owner.id)"
-    >Редактировать собственника</button-edit
+  <button-simple @click="$router.push(PAGE_OWNER_UPDATE + '/' + owner.id)"
+    >Редактировать собственника</button-simple
   >
 </template>
 <script>
@@ -40,6 +40,7 @@ export default {
       passport: {},
       placeWork: {},
       vehicle: {},
+      photo: {},
       messages: [],
       PAGE_OWNERS_GET,
       PAGE_OWNER_UPDATE,
@@ -66,6 +67,7 @@ export default {
       this.passport = this.getOwner.passport;
       this.placeWork = this.getOwner.placeWork;
       this.vehicle = this.getOwner.vehicle;
+      this.photo = this.getOwner.photo;
     },
   },
   update() {

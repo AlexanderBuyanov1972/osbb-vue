@@ -6,9 +6,8 @@
         :ownershipId="ownershipId"
         :share="owner.share"
       />
-      <image-show :photo="owner.photo" />
+      <image-show :photoName="photoName" />
     </div>
-
     <div class="spans">
       <div class="item"><span>Фамилия : </span>{{ owner.lastName || "" }}</div>
       <div class="item"><span>Имя : </span>{{ owner.firstName }}</div>
@@ -30,12 +29,12 @@
         <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
       </div>
     </div>
-    <div class="info">
+    <!-- <div class="info">
       <div class="item">
         <span>Дополнительная информация : </span
         >{{ owner.additionalInformation }}
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -51,6 +50,7 @@ export default {
   props: {
     owner: Object,
     ownershipId: Number,
+    photoName: String,
   },
   data() {
     return {
@@ -83,7 +83,6 @@ export default {
   flex-direction: column;
   align-items: center;
   align-self: center;
-
 }
 
 span {
@@ -94,11 +93,8 @@ span {
   font-size: 20px;
 }
 .img_button,
-.spans,
-.info {
+.spans{
   width: 33%;
 }
-.info{
-  
-}
+
 </style>

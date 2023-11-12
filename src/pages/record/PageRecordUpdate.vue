@@ -18,8 +18,11 @@
         v-model="fullName"
         :style="{ width: '350px' }"
       />
-      <button-simple :hidden="!this.checkInputs" @click="fetchRecord"
-        >{{ GET }}
+      <button-simple
+        :hidden="!this.checkInputs"
+        @click="fetchRecord"
+        :style="{ color: 'brown', 'border-color': 'brown' }"
+        >Получить
       </button-simple>
     </div>
     <div class="blocks">
@@ -86,7 +89,9 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">Сохранить</button-simple>
+    <button-simple @click="sendToServer" :hidden="!isValid"
+      >Сохранить</button-simple
+    >
   </div>
   <dialog-window :show="showModal">
     <modal-action

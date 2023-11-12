@@ -10,7 +10,7 @@
       />
       <input-simple
         v-model.trim="photo.name"
-        placeholder="Укажите перслнальное фото"
+        placeholder="Укажите персональное фото"
       />
     </div>
   </div>

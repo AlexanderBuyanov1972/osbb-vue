@@ -48,9 +48,9 @@
 
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">{{
+    <button-simple @click="showModal = true" :hidden="!isValid">
       Сохранить
-    }}</button-simple>
+    </button-simple>
   </div>
   <dialog-window :show="showModal">
     <modal-action
@@ -84,9 +84,6 @@ export default {
       updateOwner: "owner/updateOwner",
       fetchOwner: "owner/fetchOwner",
     }),
-    sendToServer() {
-      this.showModal = true;
-    },
     successfullyAction() {
       this.updateOwner(this.owner).then(() =>
         this.$router.push(PAGE_OWNER_GET + "/" + this.getOwner.id)

@@ -6,7 +6,7 @@
       v-model.trim="fullName"
       :style="{ width: '300px' }"
     />
-    <button-simple @click="clickButton">{{ nameButton }} </button-simple>
+    <button-simple @click="clickButton">Получить </button-simple>
   </div>
 </template>
 <script>
@@ -18,7 +18,6 @@ export default {
     };
   },
   props: {
-    nameButton: Object,
     fullNameProps: String,
   },
   methods: {

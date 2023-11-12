@@ -47,11 +47,9 @@ export const generateJsonRates = () => {
   let value = 0;
   let count = 1;
 
-  for (let j = 1; j <= 3; j++) {
-    if (j == 1) value = 3.0;
-    if (j == 2) value = 4.0;
-    if (j == 3) value = 5.0;
-    for (let i = 1; i <= 12; i++) {
+  for (let j = 3; j < 4; j++) {
+    if (j == 3) value = 4.4;
+    for (let i = 10; i <= 12; i++) {
       if (i <= 9) {
         list.push({ id: count, date: "202" + j + "-0" + i + "-01", value });
       } else {

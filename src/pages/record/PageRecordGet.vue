@@ -23,7 +23,7 @@
           @click="this.$router.push(PAGE_OWNER_GET + '/' + one.id)"
           :key="one.id"
         >
-          <block-get-owner :owner="one" :ownershipId="rooms[0].id" />
+          <block-get-owner :owner="one" :ownershipId="rooms[0].id" :photoName="one.photoName" />
         </div>
       </div>
     </div>

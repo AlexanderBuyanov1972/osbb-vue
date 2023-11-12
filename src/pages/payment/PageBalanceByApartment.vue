@@ -69,7 +69,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      apartment: "1",
+      apartment: "",
       flag: false,
       showModal: false,
       showModalAll: false,

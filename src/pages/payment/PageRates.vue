@@ -5,10 +5,10 @@
   <line-header text="Тарифы" :style="{ color: 'brown', 'font-size': '30px' }" />
   <div class="blockButtons">
     <!-- <button-simple @click="createAllRate">Создать тарифы </button-simple> -->
-    <!-- <button-simple @click="getAllRate">Получить тарифы </button-simple> -->
-    <!-- <button-simple @click="showModalDeleteAll = true"
+    <button-simple @click="getAllRate">Получить тарифы </button-simple>
+    <button-simple @click="showModalDeleteAll = true"
       >Удалить тарифы
-    </button-simple> -->
+    </button-simple>
   </div>
   <div class="main">
     <div v-if="getRates.length > 0" class="list">

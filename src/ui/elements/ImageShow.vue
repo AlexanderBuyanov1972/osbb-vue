@@ -7,20 +7,16 @@
 export default {
   name: "image-show",
   props: {
-    photo: Object,
+    photoName: String,
   },
   data() {
     return {};
   },
   computed: {
     getImage() {
+      console.log(this.photoName)
       try {
-        if (this.owner.photo) {
-          return require(`@/assets/owners/${this.owner.photo.name}.png`);
-        }
-        if (this.owner.photo.name) {
-          return require(`@/assets/owners/${this.owner.photo.name}.png`);
-        }
+        return require(`@/assets/owners/${this.photoName}.png`);
       } catch (error) {
         return require(`@/assets/owners/avatar.png`);
       }
@@ -36,8 +32,8 @@ export default {
   box-sizing: border-box;
 }
 img {
-  width: 15vw;
-  height: 25vh;
+  width: 17.5vw;
+  height: 35vh;
   padding: 10px;
   display: flex;
   align-items: center;

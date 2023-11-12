@@ -27,6 +27,7 @@ export default {
 .id {
   color: blueviolet;
   width: 3%;
+  padding-left: 10px;
 }
 .date {
   color: teal;
@@ -48,6 +49,8 @@ export default {
   padding: 10px 0 10px 0px;
   border: 1px solid blue;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
 }
 .update,
 .delete {
