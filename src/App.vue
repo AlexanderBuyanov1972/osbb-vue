@@ -63,6 +63,9 @@ export default {
 <style scoped>
 .app {
   margin: 0px 150px;
+  background-color: azure;
+  padding:  0px 25px 100px 25px;
+
 
   color: darkgoldenrod;
   color: brown;

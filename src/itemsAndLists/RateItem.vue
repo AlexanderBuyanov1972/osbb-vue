@@ -41,12 +41,12 @@ export default {
 .id,
 .date,
 .value {
-  font-size: 25px;
+  font-size: 20px;
   margin-right: 25px;
 }
 .main {
-  margin: 10px 0 10px 10px;
-  padding: 10px 0 10px 0px;
+  margin: 5px 0 5px 5px;
+  padding: 5px 0 5px 0px;
   border: 1px solid blue;
   border-radius: 20px;
   display: flex;
@@ -55,7 +55,7 @@ export default {
 .update,
 .delete {
   margin: 5px 10px 5px 10px;
-  font-size: 20px;
+  font-size: 17px;
   color: brown;
   width: 25%;
 }

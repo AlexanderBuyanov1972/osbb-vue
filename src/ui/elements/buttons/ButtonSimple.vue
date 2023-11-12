@@ -14,7 +14,7 @@ button {
   margin: 5px 5px 5px 0px;
   font-weight: 600;
   letter-spacing: 1px;
-  background-color: white;
+  background-color: mintcream;
   text-transform: uppercase;
   border-radius: 0;
   cursor: pointer;
