@@ -7,7 +7,7 @@
       :messages="messages"
       :style="{ width: '100%', display: 'flex', 'text-align': 'start' }"
     />
-    <div class="buttons">
+    <!-- <div class="buttons">
       <button-simple @click="sendToServerDataBase"
         >Создание базы данных собственник/помещение</button-simple
       >
@@ -15,7 +15,7 @@
         >Создание опроса</button-simple
       >
       <button-simple @click="sendToServerRates">Создание тарифов</button-simple>
-    </div>
+    </div> -->
     <div class="header">ОСББ "Свободы 51"</div>
     <photo-carousel :urls="urls" />
   </div>
@@ -134,5 +134,6 @@ export default {
   text-align: center;
   color: teal;
   font-size: 25px;
+  margin: 15px 0px;
 }
 </style>

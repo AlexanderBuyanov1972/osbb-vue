@@ -1,12 +1,10 @@
 <template>
   <div class="main">
     <div class="img">
-      <img :src="require(`@/assets/rooms/1_1.png`)" alt="Not Found" />
+      <img :src="image" alt="Not Found" />
     </div>
     <div class="spans">
-      <div class="item">
-        <span>Лицевой счёт : </span>{{ ownership.bill }}
-      </div>
+      <div class="item"><span>Лицевой счёт : </span>{{ ownership.bill }}</div>
       <div class="item">
         <span>Тип : </span>{{ showTypeRoom(ownership.typeRoom) }}
       </div>
@@ -44,7 +42,7 @@
         <span>Канализация : </span>{{ ownership.sewerage }}
       </div>
       <div class="item">
-        <span>Теплоснабжение : </span>{{ ownership.heatSupply }}
+        <span>Теплоснабжение : </span>{{ showHeatSupply(ownership.heatSupply) }}
       </div>
       <div class="item">
         <span>Тепловой счётчик : </span>{{ ownership.heatMeter }}
@@ -57,6 +55,7 @@ import {
   showLoggia,
   showTypeRoom,
   showNumberRooms,
+  showHeatSupply,
 } from "@/pages/_functions/functions";
 export default {
   name: "block-get-ownership",
@@ -68,7 +67,17 @@ export default {
       showLoggia,
       showTypeRoom,
       showNumberRooms,
+      showHeatSupply,
     };
+  },
+  computed: {
+    image() {
+      try {
+        return require(`@/assets/rooms/${this.ownership.address.apartment}.png`);
+      } catch (error) {
+        return require(`@/assets/rooms/1_1.png`);
+      }
+    },
   },
 };
 </script>

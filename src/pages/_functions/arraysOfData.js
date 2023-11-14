@@ -47,7 +47,7 @@ export const arrayTypeManufacturer = [
 ];
 // ownership ---------------------------------------
 export const arrayTypeRoom = [
-  { id: 1, name: "Выбрать", value: "SELECT" },
+  { id: 1, name: "Тип помещения", value: "SELECT" },
   { id: 2, name: "Квартира", value: "APARTMENT" },
   {
     id: 3,
@@ -70,6 +70,12 @@ export const arrayLoggia = [
   { id: 3, name: "Нет", value: false },
   { id: 4, name: "Балкон", value: "Балкон" },
 ];
+export const arrayHeatSupply = [
+  { id: 1, name: "Теплоснабжение", value: "SELECT" },
+  { id: 2, name: "Централизованное", value: "CENTER" },
+  { id: 3, name: "Автономное-газовое", value: "AUTO_GAZ" },
+  { id: 4, name: "Автономное-электрическое", value: "AUTO_ELECTRO" },
+];
 // polls --------------------------------------
 export const arrayAnswer = [
   { id: 1, name: "Выбрать", value: "SELECT" },
@@ -82,14 +88,24 @@ export const arrayTypeBill = [
   { id: 1, name: "Выбрать", value: "SELECT" },
   { id: 2, name: "Приход", value: "COMING" },
   { id: 3, name: "Расход", value: "CONSUMPTION" },
-
 ];
 export const arrayDescription = [
   { id: 1, name: "Выбрать", value: "SELECT" },
   { id: 2, name: "Оплата услуг ОСББ", value: "Оплата услуг ОСББ" },
-  { id: 3, name: "Ремонт системы водоснабжения", value: "Ремонт системы водоснабжения" },
-  { id: 4, name: "Ремонт системы электроснабжения", value: "Ремонт системы электроснабжения" },
-  { id: 5, name: "Зарплата управляющему ОСББ", value: "Зарплата управляющему ОСББ" },
+  {
+    id: 3,
+    name: "Ремонт системы водоснабжения",
+    value: "Ремонт системы водоснабжения",
+  },
+  {
+    id: 4,
+    name: "Ремонт системы электроснабжения",
+    value: "Ремонт системы электроснабжения",
+  },
+  {
+    id: 5,
+    name: "Зарплата управляющему ОСББ",
+    value: "Зарплата управляющему ОСББ",
+  },
   { id: 6, name: "Налоги", value: "Налоги" },
-
 ];

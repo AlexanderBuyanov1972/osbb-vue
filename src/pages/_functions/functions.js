@@ -10,6 +10,7 @@ import {
   arrayTypeManufacturer,
   arrayTypeVehicle,
   arrayTypeBill,
+  arrayHeatSupply,
 } from "@/pages/_functions/arraysOfData";
 
 const countApartment = 74;
@@ -79,6 +80,13 @@ export const showNumberRooms = (value) => {
 export const showTypeRoom = (value) => {
   try {
     return arrayTypeRoom.find((el) => el.value == value).name;
+  } catch (error) {
+    return "";
+  }
+};
+export const showHeatSupply = (value) => {
+  try {
+    return arrayHeatSupply.find((el) => el.value == value).name;
   } catch (error) {
     return "";
   }

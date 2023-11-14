@@ -1,5 +1,6 @@
 <template>
-  <div class="main">
+  :style="{'background-color':''}:{}"
+  <div :class=" ownership.entrance %2 ==0 ? ['main'] : ['main','entrance']">
     <div class="count">{{ count }}.</div>
     <div class="type_room">
       <span v-show="flag">Тип : </span>
@@ -9,9 +10,9 @@
       <span v-show="flag">Квартира № : </span>
       {{ ownership.apartment }}
     </div>
-    <div class="personal_area">
+    <div class="bill">
       <span v-show="flag">Лицевой счёт : </span>
-      {{ ownership.personalAccount }}
+      {{ ownership.bill }}
     </div>
 
     <div class="total_area">
@@ -19,18 +20,18 @@
       {{ ownership.totalArea }}
     </div>
 
-    <div class="number_rooms">
+    <div class="heatSupply">
       <span v-show="flag">Кол-во комнат : </span>
-      {{ ownership.numberRooms }}
+      {{ showHeatSupply(ownership.heatSupply) }}
     </div>
-    <div class="entrance">
+    <!-- <div class="entrance">
       <span v-show="flag">Подъезд : </span>
       {{ ownership.entrance }}
     </div>
     <div class="floor">
       <span v-show="flag">Этаж : </span>
       {{ ownership.floor }}
-    </div>
+    </div> -->
     <div class="loggia">
       <span v-show="flag">Балкон : </span>
       {{ showLoggia(ownership.loggia) }}
@@ -38,7 +39,11 @@
   </div>
 </template>
 <script>
-import { showTypeRoom, showLoggia } from "@/pages/_functions/functions";
+import {
+  showTypeRoom,
+  showLoggia,
+  showHeatSupply,
+} from "@/pages/_functions/functions";
 export default {
   name: "ownership-item",
   props: {
@@ -50,6 +55,7 @@ export default {
     return {
       showTypeRoom,
       showLoggia,
+      showHeatSupply,
     };
   },
 };
@@ -61,6 +67,9 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+.main:hover {
+  background: rgb(238, 234, 195);
+}
 .main {
   margin: 5px 0px;
   padding: 5px;
@@ -70,27 +79,31 @@ export default {
   display: flex;
   align-items: center;
   justify-content: start;
+  background-color: #e7f7f7;
+}
+.entrance {
+  background-color: #f2f7f7;
 }
 .count {
-  width: 5%;
+  width: 4%;
 }
 .type_room {
-  width: 25%;
+  width: 16%;
 }
 .apartment {
-  width: 15%;
-}
-.total_area,
-.personal_area {
-  width: 20%;
-}
-.loggia,
-.entrance,
-.floor {
-  width: 11%;
-}
-.number_rooms {
   width: 16%;
+}
+.bill {
+  width: 16%;
+}
+.total_area {
+  width: 16%;
+}
+.loggia {
+  width: 10%;
+}
+.heatSupply {
+  width: 22%;
 }
 .danger {
   background-color: honeydew;

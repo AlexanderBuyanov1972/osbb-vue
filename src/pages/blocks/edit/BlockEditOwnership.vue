@@ -154,9 +154,14 @@
           messageTrue="Теплоснабжение"
           @valid="(value) => handlerHeatSupply(value)"
         />
-        <input-simple
+        <!-- <input-simple
           v-model.trim="ownership.heatSupply"
           placeholder="Теплоснабжение"
+        /> -->
+        <select-edit
+          :array="arrayHeatSupply"
+          :startName="showHeatSupply(ownership.heatSupply)"
+          @select="(value) => (ownership.heatSupply = value)"
         />
       </div>
       <div class="heatMeter">
@@ -179,11 +184,13 @@ import {
   showTypeRoom,
   showNumberRooms,
   showLoggia,
+  showHeatSupply,
 } from "@/pages/_functions/functions";
 import {
   arrayTypeRoom,
   arrayLoggia,
   arrayNumberRooms,
+  arrayHeatSupply,
 } from "@/pages/_functions/arraysOfData";
 export default {
   name: "block-update-ownership",
@@ -210,9 +217,11 @@ export default {
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
+      arrayHeatSupply,
       showTypeRoom,
       showNumberRooms,
       showLoggia,
+      showHeatSupply,
     };
   },
   methods: {

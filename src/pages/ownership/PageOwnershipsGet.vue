@@ -24,10 +24,10 @@ export default {
     return {
       PAGE_OWNERSHIP_GET,
       header: {
-        typeRoom: "Тип помещения",
-        personalAccount: "Лицевой счёт",
+        typeRoom: "SELECT",
+        bill: "Лицевой счёт",
         totalArea: "Общая площадь, м2",
-        numberRooms: "Количество комнат",
+        heatSupply: "SELECT",
         entrance: "Подъезд",
         floor: "Этаж",
         apartment: "Квартира №",

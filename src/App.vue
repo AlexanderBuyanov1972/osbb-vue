@@ -72,6 +72,7 @@ export default {
   color: crimson;
   color: blueviolet;
   color: teal;
+  color: #f2f7f7;
 }
 </style>
 
