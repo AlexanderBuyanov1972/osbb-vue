@@ -152,7 +152,7 @@ export default {
       createOwner: "owner/createOwner",
       createOwnership: "ownership/createOwnership",
       createRecord: "record/createRecord",
-      fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
+      fetchOwnershipsByApartment: "ownership/fetchOwnershipsByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
     sendToServer() {
@@ -194,7 +194,7 @@ export default {
     },
 
     fetchOwnership() {
-      this.fetchOwnershipByApartment(this.apartment).then(() => {
+      this.fetchOwnershipsByApartment(this.apartment).then(() => {
         this.record.ownership = this.getOwnership;
       });
     },

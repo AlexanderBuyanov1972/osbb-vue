@@ -51,12 +51,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchOwnershipByApartment: "ownership/fetchOwnershipByApartment",
+      fetchOwnershipsByApartment: "ownership/fetchOwnershipsByApartment",
     }),
     action(value) {
-      this.fetchOwnershipByApartment(value).then(() => {
-        this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.getOwnership.id);
-      });
+      // this.fetchOwnershipsByApartment(value).then(() => {
+      //   this.$router.push(PAGE_OWNERSHIP_GET
+      //    + "/" + this.getOwnership.id
+      //    );
+      // });
+        this.$router.push(PAGE_OWNERSHIP_GET
+         + "/" + this.apartment
+         );
     },
   },
   computed: {

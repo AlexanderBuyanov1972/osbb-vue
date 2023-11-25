@@ -98,19 +98,20 @@ export const countNonResidentialRoom = async () => {
 };
 //--------------- apartment -----------------------
 
-export const getOwnershipByApartment = async (apartment) => {
+export const getOwnershipsByApartment = async (apartment) => {
   const response = await authHttp.get(OWNERSHIP + APARTMENT + "/" + apartment);
+  console.log("response : ", response);
   return response.data;
 };
 
-export const getBillByApartment = async (apartment) => {
+export const getBillsByApartment = async (apartment) => {
   const response = await authHttp.get(
     OWNERSHIP + APARTMENT + BILL + "/" + apartment
   );
   return response.data;
 };
 
-export const getRoomByApartment = async (apartment) => {
+export const getRoomsByApartment = async (apartment) => {
   const response = await authHttp.get(OWNERSHIP + ROOM + "/" + apartment);
   return response.data;
 };

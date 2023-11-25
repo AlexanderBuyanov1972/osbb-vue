@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getBill: "ownership/getBill",
+      getBills: "ownership/getBills",
       getIsLoading: "payment/getIsLoading",
       getMessages: "payment/getMessages",
     }),

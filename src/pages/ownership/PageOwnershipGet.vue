@@ -3,26 +3,29 @@
   <div class="main">
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
-    <line-header
-      :text="
-        'Объект недвижимости - квартира № ' + this.ownership.address.apartment
-      "
-    />
-    <line-address :address="this.ownership.address" />
-    <block-get-ownership :ownership="ownership" />
-    <vue-hr />
-    <button-back />
 
-    <button-simple
-      @click="
-        this.$router.push(PAGE_OWNERSHIP_UPDATE + '/' + this.getOwnership.id)
-      "
-      >Обновить данные о помещении
-    </button-simple>
-    <button-simple
-      @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.getOwnership.id)"
-      >Смотреть все записи по помещению</button-simple
-    >
+    <div class="block" v-for="ownership in ownerships" :key="ownership.id">
+      <line-header
+        :text="
+          'Объект недвижимости - квартира № ' + ownership.address.apartment
+        "
+      />
+      <line-address :address="ownership.address" />
+      <block-get-ownership :ownership="ownership" />
+      <vue-hr />
+      <button-back />
+
+      <button-simple
+        @click="
+          this.$router.push(PAGE_OWNERSHIP_UPDATE + '/' + ownership.id)
+        "
+        >Обновить данные о помещении
+      </button-simple>
+      <button-simple
+        @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.ownership.id)"
+        >Смотреть все записи по помещению</button-simple
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -31,18 +34,14 @@ import { PAGE_ENTRY_GET, PAGE_OWNERSHIP_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      ownership: {
-        address: {
-          apartment: "",
-        },
-      },
+      ownerships: [],
       PAGE_ENTRY_GET,
       PAGE_OWNERSHIP_UPDATE,
     };
   },
   methods: {
     ...mapActions({
-      fetchOwnership: "ownership/fetchOwnership",
+      fetchOwnershipsByApartment: "ownership/fetchOwnershipsByApartment",
     }),
   },
 
@@ -54,13 +53,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
+      getOwnerships: "ownership/getOwnerships",
       getMessages: "ownership/getMessages",
       getIsLoading: "ownership/getIsLoading",
     }),
     change() {
-      this.fetchOwnership(this.$route.params.id).then(() => {
-        this.ownership = this.getOwnership;
+      this.fetchOwnershipsByApartment(this.$route.params.apartment).then(() => {
+        this.ownerships = this.getOwnerships;
       });
     },
   },

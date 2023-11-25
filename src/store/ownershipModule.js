@@ -6,29 +6,28 @@ import {
   getAllOwnership,
   countRooms,
   createAllOwnership,
-  getOwnershipByApartment,
-  getRoomByApartment,
+  getOwnershipsByApartment,
+  getRoomsByApartment,
   getListApartmentsByFullName,
-  getBillByApartment,
+  getBillsByApartment,
 } from "@/http/ownership/ownership";
 
 export default {
   state: () => ({
-    bill: "",
+    bills: [],
     ownership: {},
     ownerships: [],
     messages: [],
     isLoading: false,
     countOwnerships: 0,
-    room: {},
   }),
 
   mutations: {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setBill(state, value) {
-      state.bill = value;
+    setBills(state, array) {
+      state.bills = array;
     },
     setOwnership(state, object) {
       state.ownership = object;
@@ -42,9 +41,6 @@ export default {
     setCountOwnerships(state, number) {
       state.countOwnerships = number;
     },
-    setRoom(state, object) {
-      state.room = object;
-    },
   },
 
   getters: {
@@ -54,7 +50,7 @@ export default {
     getOwnership(state) {
       return state.ownership;
     },
-    getBill(state) {
+    getBills(state) {
       return state.bill;
     },
     getOwnerships(state) {
@@ -65,9 +61,6 @@ export default {
     },
     getCountOwnerships(state) {
       return state.countOwnerships;
-    },
-    getRoom(state) {
-      return state.room;
     },
   },
 
@@ -176,12 +169,28 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchOwnershipByApartment({ commit }, apartment) {
+    async fetchOwnershipsByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await getOwnershipByApartment(apartment);
+        const response = await getOwnershipsByApartment(apartment);
         if (response != undefined && response.data != undefined) {
-          commit("setOwnership", response.data);
+          commit("setOwnerships", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message, ...response.messages]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchBillsByApartment({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getBillsByApartment(apartment);
+        if (response != undefined && response.data != undefined) {
+          commit("setBills", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -192,28 +201,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchBillByApartment({ commit }, apartment) {
+    async fetchRoomsByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await getBillByApartment(apartment);
+        const response = await getRoomsByApartment(apartment);
         if (response != undefined && response.data != undefined) {
-          commit("setBill", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async fetchRoomByApartment({ commit }, apartment) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getRoomByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
-          commit("setRoom", response.data);
+          commit("setOwnerships", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -229,7 +222,7 @@ export default {
         commit("setIsLoading", true);
         const response = await getListApartmentsByFullName(fullName);
         if (response != undefined && response.data != undefined) {
-          commit("setOwnership", response.data);
+          commit("setOwnerships", response.data);
           commit("setMessages", response.message);
         } else {
           commit("setMessages", response.messages);
