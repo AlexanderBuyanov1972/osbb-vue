@@ -5,6 +5,7 @@ import PageRegistration from "@/pages/PageRegistration.vue";
 import PageLogin from "@/pages/PageLogin.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
+import PageUsefulQueries from "@/pages/PageUsefulQueries.vue";
 // questionnaire
 import PageQuestionnaireCreate from "@/pages/questionnaire/PageQuestionnaireCreate.vue";
 import PageQuestionnaireGet from "@/pages/questionnaire/PageQuestionnaireGet.vue";
@@ -41,6 +42,7 @@ import {
   PAGE_LOGIN,
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
+  PAGE_USEFUL_QUERIES,
   //questionnaire
   PAGE_QUESTIONNAIRE_ANSWER,
   PAGE_QUESTIONNAIRE_CREATE,
@@ -156,9 +158,15 @@ const routes = [
     path: PAGE_BALANCE_HOUSE,
     component: PageBalanceHouse,
   },
+  // rates ------------------
   {
     path: PAGE_RATES,
     component: PageRates,
+  },
+  // query --------------------
+  {
+    path: PAGE_USEFUL_QUERIES,
+    component: PageUsefulQueries,
   },
 ];
 const router = createRouter({

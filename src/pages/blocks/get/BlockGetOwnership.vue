@@ -47,6 +47,9 @@
       <div class="item">
         <span>Тепловой счётчик : </span>{{ ownership.heatMeter }}
       </div>
+      <div class="item">
+      <span>Дополнительная информация : </span>{{ ownership.additionalInformation }}
+    </div>
     </div>
   </div>
 </template>

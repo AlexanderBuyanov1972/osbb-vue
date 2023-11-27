@@ -21,6 +21,11 @@
       >Оплата счетов
     </button-simple>
     <button-simple
+      :style="currentButton == 6 ? { color: 'red', 'border-color': 'red' } : {}"
+      @click="clickButton6"
+      >Полезные запросы
+    </button-simple>
+    <button-simple
       :style="{ color: 'green', 'border-color': 'green' }"
       @click="showModal = true"
       >Logout
@@ -42,6 +47,7 @@ import {
   PAGE_OWNERS_GET,
   PAGE_PAYMENTS_GET,
   PAGE_LOGIN,
+  PAGE_USEFUL_QUERIES,
 } from "@/router/apiRouter";
 import { mapActions } from "vuex";
 
@@ -54,6 +60,7 @@ export default {
       PAGE_OWNERS_GET,
       PAGE_PAYMENTS_GET,
       PAGE_LOGIN,
+      PAGE_USEFUL_QUERIES,
       currentButton: 1,
       showModal: false,
     };
@@ -79,6 +86,10 @@ export default {
     clickButton5() {
       this.$router.push(PAGE_PAYMENTS_GET);
       this.currentButton = 5;
+    },
+    clickButton6() {
+      this.$router.push(PAGE_USEFUL_QUERIES);
+      this.currentButton = 6;
     },
     ...mapActions({
       logout: "auth/logout",

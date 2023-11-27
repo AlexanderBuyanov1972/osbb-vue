@@ -2,6 +2,7 @@ export const PAGE_MAIN = "/";
 export const PAGE_REGISTRATION = "/registration";
 export const PAGE_LOGIN = "/login";
 export const PAGE_NOT_FOUND = "/**";
+export const PAGE_USEFUL_QUERIES = "/useful/queries";
 // --------- entry ----------------
 export const PAGE_ENTRY_CREATE = "/record/create";
 export const PAGE_ENTRY_UPDATE = "/record/update";

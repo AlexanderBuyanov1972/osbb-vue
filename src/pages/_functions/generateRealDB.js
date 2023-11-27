@@ -61,7 +61,7 @@ export const generateOwnership = () => {
     typeRoom: "APARTMENT",
     totalArea: 0.01,
     livingArea: 0.01,
-    documentConfirmsRightOwn: "нет",
+    documentConfirmsRightOwn: "СПВ ААА № 000000 от 00.00.0000",
     numberRooms: 1,
     loggia: false,
     gasSupply: "централизованное",
@@ -71,6 +71,7 @@ export const generateOwnership = () => {
     sewerage: "централизованная",
     heatSupply: "CENTER",
     heatMeter: "нет",
+    additionalInformation: "нет",
     address: {
       zipCode: "51931",
       country: "Украина",

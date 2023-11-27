@@ -10,6 +10,7 @@ import questionnaire from "@/store/questionnaireModule";
 import record from "@/store/recordModule";
 import payment from "@/store/paymentModule";
 import rate from "@/store/rateModule";
+import queries from "@/store/usefulQueriesModule";
 
 export default createStore({
   modules: {
@@ -24,5 +25,6 @@ export default createStore({
     record,
     payment,
     rate,
+    queries,
   },
 });

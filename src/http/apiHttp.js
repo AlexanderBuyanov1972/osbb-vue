@@ -19,12 +19,9 @@ export const ADDRESS = "/address";
 export const APARTMENT = "/apartment";
 export const PASSPORT = "/passport";
 export const PHOTO = "/photo";
-export const SHARE = "/share";
-
 export const SELECT = "/select";
 export const TITLE = "/title";
 export const FULL_NAME = "/full_name";
-
 export const QUESTIONNAIRES = "/questionnaires";
 export const RESULT = "/result";
 // ---------------- summa -------------------
@@ -53,3 +50,7 @@ export const ID = "/{id}";
 export const STREET = "/{street}";
 export const HOUSE = "/{house}";
 export const REGISTRATION_NUMBER = "/registration_number";
+// ------ queries -----------------------
+export const QUERIES = "/queries";
+export const HEAT_SUPPLY = "/heat_supply";
+

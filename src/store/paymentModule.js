@@ -15,7 +15,6 @@ import {
   printPdfDebtDetailsByApartment,
   printPdfDebtDetailsAllApartment,
   printPdfBalanceHouse,
-  printPdfNewBill,
 } from "@/http/print";
 export default {
   state: () => ({
@@ -281,17 +280,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printPdfNewBill({ commit }) {
-      try {
-        commit("setIsLoading", true);
-        const response = await printPdfNewBill();
-        commit("setMessages", response.messages);
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
+    
   },
   namespaced: true,
 };

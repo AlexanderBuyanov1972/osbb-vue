@@ -112,17 +112,18 @@ export const generateJsonRecords = async () => {
       ]),
       numberRooms: faker.number.int({ min: 1, max: 5 }),
       loggia: faker.helpers.arrayElement([true, false]),
-      gasSupply: "централизованное",
+      gasSupply: "Централизованное",
       gasMeter: "счётчик №",
-      waterSupply: "централизованное",
+      waterSupply: "Централизованное",
       waterMeter: "счётчик №",
-      sewerage: "централизованная",
+      sewerage: "Централизованная",
       heatSupply: faker.helpers.arrayElement([
         "CENTER",
         "AUTO_GAZ",
         "AUTO_ELECTRO",
       ]),
       heatMeter: "нет",
+      additionalInformation: "нет",
       // адресс
       address: {
         zipCode: "51931",

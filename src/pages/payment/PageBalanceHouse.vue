@@ -4,7 +4,6 @@
   <header-messages :messages="getMessages" />
   <button-back />
   <button-simple @click="showModal = true">Печатать баланс</button-simple>
-  <button-simple @click="showModalNew = true">Печатать новый расчётный счёт</button-simple>
   <line-header
     text="Задолженность по оплате за услуги ОСББ по помещениям"
     :style="{ color: 'darkgoldenrod' }"
@@ -30,13 +29,6 @@
       @successfully="printBalanceHouse"
     ></modal-action>
   </dialog-window>
-  <dialog-window :show="showModalNew">
-    <modal-action
-      message="Вы действительно хотите выполнить это действие?"
-      @close="showModalNew = false"
-      @successfully="printNewBill"
-    ></modal-action>
-  </dialog-window>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
@@ -48,14 +40,12 @@ export default {
       totalBalance: 0,
       roundDouble,
       showModal: false,
-      showModalNew: false,
     };
   },
   methods: {
     ...mapActions({
       fetchBalanceHouse: "payment/fetchBalanceHouse",
       printPdfBalanceHouse: "payment/printPdfBalanceHouse",
-      printPdfNewBill: "payment/printPdfNewBill",
     }),
     printBalanceHouse() {
       this.printPdfBalanceHouse();

@@ -154,10 +154,6 @@
           messageTrue="Теплоснабжение"
           @valid="(value) => handlerHeatSupply(value)"
         />
-        <!-- <input-simple
-          v-model.trim="ownership.heatSupply"
-          placeholder="Теплоснабжение"
-        /> -->
         <select-edit
           :array="arrayHeatSupply"
           :startName="showHeatSupply(ownership.heatSupply)"
@@ -176,6 +172,17 @@
           placeholder="Тепловой счётчик"
         />
       </div>
+      <div class="additionalInformation">
+        <block-error-message
+          :field="ownership.additionalInformation"
+          messageFalse="Укажите дополнительную информацию"
+          messageTrue="Дополнительная информация"
+          @valid="(value) => handlerAdditionalInformation(value)"
+        />
+        <text-area-simple v-model.trim="ownership.additionalInformation"
+         placeholder="Дополнительная информация" />
+      </div>
+
     </div>
   </div>
 </template>
@@ -192,6 +199,7 @@ import {
   arrayNumberRooms,
   arrayHeatSupply,
 } from "@/pages/_functions/arraysOfData";
+import { th } from "@faker-js/faker";
 export default {
   name: "block-update-ownership",
   props: {
@@ -214,6 +222,7 @@ export default {
       validHeatSupply: false,
       validHeatMeter: false,
       validPersonalAccount: false,
+      validAdditionalInformation: false,
       arrayTypeRoom,
       arrayLoggia,
       arrayNumberRooms,
@@ -285,6 +294,10 @@ export default {
       this.validHeatMeter = value;
       this.emitOwnership();
     },
+    handlerAdditionalInformation(value) {
+      this.validAdditionalInformation = value;
+      this.emitOwnership();
+    },
   },
   computed: {
     isValidOwnership() {
@@ -302,7 +315,8 @@ export default {
         this.validSewerage &&
         this.validHeatSupply &&
         this.validHeatMeter &&
-        this.validPersonalAccount
+        this.validPersonalAccount &&
+        this.validAdditionalInformation
       );
     },
   },

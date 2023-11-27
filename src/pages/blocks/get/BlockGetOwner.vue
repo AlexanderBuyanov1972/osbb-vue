@@ -29,14 +29,11 @@
         <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
       </div>
       <div class="item"><span>Доля : </span>{{ share }}</div>
-    </div>
-
-    <!-- <div class="info">
       <div class="item">
         <span>Дополнительная информация : </span
         >{{ owner.additionalInformation }}
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
