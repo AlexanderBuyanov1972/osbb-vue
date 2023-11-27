@@ -61,6 +61,7 @@ import BlockGetOwnership from "@/pages/blocks/get/BlockGetOwnership.vue";
 import BlockGetAddress from "@/pages/blocks/get/BlockGetAddress.vue";
 // modals -----------------------
 import ModalAction from "@/modals/ModalAction";
+import ModalSelectBillOwnership from "@/modals/ModalSelectBillOwnership";
 
 export default [
   // buttons -----
@@ -126,4 +127,5 @@ export default [
   BlockGetPassport,
   // modals -----------
   ModalAction,
+  ModalSelectBillOwnership,
 ];

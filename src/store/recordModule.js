@@ -5,8 +5,8 @@ import {
   deleteRecord,
   createAllRecord,
   getAllRecord,
-  getRoomsAndClientsByOwnershipId,
-  getRoomsAndClientsByOwnerId,
+  getAllRecordByOwnershipId,
+  getAllRecordByOwnerId,
   getRecordByApartmentAndFullName,
   deleteRecordByOwnerIdAndOwnershipId,
 } from "@/http/record";
@@ -49,6 +49,7 @@ export default {
   },
 
   actions: {
+    // one record -----------------------
     async createRecord({ commit }, object) {
       try {
         commit("setIsLoading", true);
@@ -109,22 +110,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async getAllRecord({ commit }) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getAllRecord();
-        if (response != undefined && response.data != undefined) {
-          commit("setRecords", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
+    // all records --------------------------
     async createAllRecord({ commit }, list) {
       try {
         commit("setIsLoading", true);
@@ -141,12 +127,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchRoomsAndClientsByOwnershipId({ commit }, id) {
+    async fetchAllRecord({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getRoomsAndClientsByOwnershipId(id);
+        const response = await getAllRecord();
         if (response != undefined && response.data != undefined) {
-          commit("setRecord", response.data);
+          commit("setRecords", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -157,12 +143,28 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchRoomsAndClientsByOwnerId({ commit }, id) {
+    async fetchAllRecordByOwnershipId({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getRoomsAndClientsByOwnerId(id);
+        const response = await getAllRecordByOwnershipId(id);
         if (response != undefined && response.data != undefined) {
-          commit("setRecord", response.data);
+          commit("setRecords", response.data);
+          commit("setMessages", response.messages);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchAllRecordByOwnerId({ commit }, id) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getAllRecordByOwnerId(id);
+        if (response != undefined && response.data != undefined) {
+          commit("setRecords", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);

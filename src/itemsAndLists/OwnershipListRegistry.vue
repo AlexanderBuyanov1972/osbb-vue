@@ -1,26 +1,38 @@
 <template>
-  <div class="list" v-for="(item, i) in list" :key="i">
+  <!-- лист листов record -->
+  <div class="list" v-for="(itemList, index) in list" :key="index">
+    <!--  один объект собственности -->
     <div
       class="item"
-      v-for="one in item.rooms"
-      :key="one.id"
-      @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)"
+      @click="
+        () =>
+          this.$router.push(PAGE_OWNERSHIP_GET + '/' + itemList[0].ownership.id)
+      "
     >
       <span>Квартира № </span
       >{{
-        one.apartment
+        itemList[0].ownership.address.apartment
       }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
         общая площадь :</span
       >
-      {{ one.totalArea }} м2
+      {{ itemList[0].ownership.totalArea }} м2
     </div>
-    <div v-for="(two, index) in item.clients" :key="index">
-      <div @click="() => this.$router.push(PAGE_OWNER_GET + '/' + two.id)">
-        <owner-item :owner="two" :count="index + 1" :flag="true" />
+
+    <!-- область листа собственников (может быть несколько собственников) -->
+    <div v-for="(item, index) in itemList" :key="index">
+      <div
+        @click="() => this.$router.push(PAGE_OWNER_GET + '/' + item.owner.id)"
+      >
+        <owner-item
+          :owner="item.owner"
+          :count="index + 1"
+          :flag="true"
+          :share="item.share"
+        />
         <button-deactivate
-          :ownerId="two.id"
-          :ownershipId="item.rooms[0].id"
-          :share="two.share"
+          :ownerId="item.owner.id"
+          :ownershipId="itemList[0].ownership.id"
+          :share="item.share"
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { authHttp } from "@/http/httpAxios";
-import { RECORD, ALL, OWNERSHIP } from "@/http/apiHttp";
+import { RECORD, ALL, OWNERSHIP, OWNER } from "@/http/apiHttp";
 
-// ------------- one --------------------
+// one record --------------------
 
 export const createRecord = async (one) => {
   const response = await authHttp.post(RECORD, one);
@@ -23,7 +23,7 @@ export const deleteRecord = async (id) => {
   return response.data;
 };
 
-// -------------- all ------------------
+// all records ------------------
 
 export const createAllRecord = async (list) => {
   const response = await authHttp.post(RECORD + ALL, list);
@@ -45,13 +45,18 @@ export const deleteAllRecord = async () => {
   return response.data;
 };
 
-// other -------------------------
-
-export const getRoomsAndClientsByOwnershipId = async (id) => {
+// other records -------------------------
+// getAllRecordByOwnershipId -------------
+export const getAllRecordByOwnershipId = async (id) => {
   const response = await authHttp.get(RECORD + OWNERSHIP + "/" + id);
   return response.data;
 };
-
+// getAllRecordByOwnerId -----------------
+export const getAllRecordByOwnerId = async (id) => {
+  const response = await authHttp.get(RECORD + OWNER + "/" + id);
+  return response.data;
+};
+// getRecordByApartmentAndFullName -------
 export const getRecordByApartmentAndFullName = async (apartment, fullName) => {
   const response = await authHttp.get(
     RECORD + "/" + apartment + "/" + fullName

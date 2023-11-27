@@ -16,7 +16,11 @@
     @click="removeOwner"
     >Удалить собственника из базы данных</button-delete
   >
-  <block-get-owner :owner="owner" :style="{'height':'350px'}" :photoName="photo.name"/>
+  <block-get-owner
+    :owner="owner"
+    :style="{ height: '350px' }"
+    :photoName="photo.name"
+  />
   <div class="items">
     <block-get-passport :passport="passport" />
     <block-get-place-work :placeWork="placeWork" />
@@ -50,11 +54,11 @@ export default {
     ...mapActions({
       fetchOwner: "owner/fetchOwner",
       deleteOwner: "owner/deleteOwner",
-      getListApartmentsByFullName: "ownership/getListApartmentsByFullName",
+      fetchAllApartmentByFullName: "ownership/fetchAllApartmentByFullName",
     }),
     action(value) {
-      this.getListApartmentsByFullName(value).then(() => {
-        this.messages = this.getOwnership;
+      this.fetchAllApartmentByFullName(value).then(() => {
+        this.messages = this.getOwnerships;
       });
     },
     removeOwner() {
@@ -83,7 +87,7 @@ export default {
   computed: {
     ...mapGetters({
       getOwner: "owner/getOwner",
-      getOwnership: "ownership/getOwnership",
+      getOwnerships: "ownership/getOwnerships",
       getIsLoading: "owner/getIsLoading",
     }),
   },

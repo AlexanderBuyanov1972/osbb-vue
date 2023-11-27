@@ -1,6 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
-  <vue-loader :isLoader="this.getIsLoading" />
+  <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="getMessages" />
   <line-header
     text="Список собственников"

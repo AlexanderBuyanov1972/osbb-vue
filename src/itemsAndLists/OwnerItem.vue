@@ -11,8 +11,8 @@
     <div class="email">
       <span v-show="flag">Email : </span>{{ owner.email }}
     </div>
-    <div class="share" v-show="owner.share != 0">
-      <span v-show="flag">Доля : </span>{{ owner.share }}
+    <div class="share" v-show="share != 0">
+      <span v-show="flag">Доля : </span>{{ share }}
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
   name: "owner-item",
   props: {
     owner: Object,
+    share: Number,
     count: Number,
     flag: Boolean,
   },

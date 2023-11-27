@@ -1,7 +1,6 @@
 import { authHttp } from "@/http/httpAxios";
 import {
   OWNERSHIP,
-  ROOM,
   ALL,
   APARTMENT,
   SUMMA_AREA_ROOMS,
@@ -14,7 +13,7 @@ import {
   BILL,
 } from "@/http/apiHttp";
 
-// ------------- one --------------------
+// one ownership --------------------
 
 export const createOwnership = async (one) => {
   const response = await authHttp.post(OWNERSHIP, one);
@@ -36,7 +35,7 @@ export const deleteOwnership = async (id) => {
   return response.data;
 };
 
-// -------------- all ------------------
+// all ownerships ------------------
 
 export const createAllOwnership = async (list) => {
   const response = await authHttp.post(OWNERSHIP + ALL, list);
@@ -96,26 +95,21 @@ export const countNonResidentialRoom = async () => {
   const response = await authHttp.get(OWNERSHIP + COUNT_NON_RESIDENTIAL_ROOM);
   return response.data;
 };
-//--------------- apartment -----------------------
+//--------------- apartment and fullname -----------------------
 
-export const getOwnershipsByApartment = async (apartment) => {
+export const getAllOwnershipByApartment = async (apartment) => {
   const response = await authHttp.get(OWNERSHIP + APARTMENT + "/" + apartment);
-  console.log("response : ", response);
   return response.data;
 };
 
-export const getBillsByApartment = async (apartment) => {
+export const getAllBillByApartment = async (apartment) => {
   const response = await authHttp.get(
     OWNERSHIP + APARTMENT + BILL + "/" + apartment
   );
   return response.data;
 };
 
-export const getRoomsByApartment = async (apartment) => {
-  const response = await authHttp.get(OWNERSHIP + ROOM + "/" + apartment);
-  return response.data;
-};
-export const getListApartmentsByFullName = async (fullName) => {
+export const getAllApartmentByFullName = async (fullName) => {
   const response = await authHttp.get(OWNERSHIP + FULL_NAME + "/" + fullName);
   return response.data;
 };

@@ -4,7 +4,7 @@
     <vue-loader :isLoader="this.getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Редактирование записи." />
-    <!-- search -------------->
+    <!------------- search -------------->
     <div class="search">
       <div class="title">Введите № помещения :</div>
       <input-simple
@@ -20,11 +20,12 @@
       />
       <button-simple
         :hidden="!this.checkInputs"
-        @click="fetchRecord"
+        @click="actionGetRecord"
         :style="{ color: 'brown', 'border-color': 'brown' }"
         >Получить
       </button-simple>
     </div>
+    <!--  -->
     <div class="blocks">
       <div class="ownership_address">
         <div class="ownership">
@@ -62,9 +63,9 @@
             </div>
             <div class="share">
               <block-update-share
-                @share="(data) => (share.value = data)"
+                @share="(data) => (record.share = data)"
                 @isValidShare="(value) => (isValidShare = value)"
-                :shareProps="share.value"
+                :shareProps="record.share"
               />
             </div>
           </div>
@@ -120,7 +121,6 @@ export default {
           vehicle: {},
         },
       },
-      share: { value: 0 },
       isValidOwnership: false,
       isValidAddress: false,
       isValidOwner: false,
@@ -136,15 +136,11 @@ export default {
     ...mapActions({
       fetchRecordByApartmentAndFullName:
         "record/fetchRecordByApartmentAndFullName",
-      fecthShareByApartmentAndFullName:
-        "share/fecthShareByApartmentAndFullName",
       updateOwner: "owner/updateOwner",
       updateOwnership: "ownership/updateOwnership",
       updateRecord: "record/updateRecord",
-      updateShare: "share/updateShare",
     }),
     successfullyAction() {
-      this.updateShare(this.share);
       this.updateOwner(this.record.owner).then(() => {
         this.updateOwnership(this.record.ownership).then(() => {
           this.updateRecord(this.record).then(() => {
@@ -156,19 +152,14 @@ export default {
     sendToServer() {
       this.showModal = true;
     },
-    fetchRecord() {
+    actionGetRecord() {
       this.fetchRecordByApartmentAndFullName({
         apartment: this.apartment,
         fullName: this.fullName,
       })
         .then(() => {
           this.record = this.getRecord;
-          this.fecthShareByApartmentAndFullName({
-            apartment: this.apartment,
-            fullName: this.fullName,
-          }).then(() => {
-            this.share = this.getShare;
-          });
+          this.share = this.record.share;
         })
         .catch((err) => {
           this.$router.push(PAGE_NOT_FOUND);
@@ -176,14 +167,13 @@ export default {
     },
   },
   update() {
-    this.fetchRecord();
+    this.actionGetRecord();
   },
   computed: {
     ...mapGetters({
       getIsLoading: "record/getIsLoading",
       getMessages: "record/getMessages",
       getRecord: "record/getRecord",
-      getShare: "share/getShare",
     }),
     isValid() {
       return (

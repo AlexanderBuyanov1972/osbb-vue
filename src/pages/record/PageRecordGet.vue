@@ -5,28 +5,27 @@
     <header-messages :messages="getMessages" />
     <line-header text="Просмотр записи о собственности." />
     <line-address :address="address" />
-    <div class="blocks">
-      <div class="rooms">
-        <div
-          class="room"
-          v-for="one in rooms"
-          @click="this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)"
-          :key="one.id"
-        >
-          <block-get-ownership :ownership="one" />
-        </div>
-      </div>
-      <div class="clients">
-        <div
-          v-for="one in clients"
-          class="client"
-          @click="this.$router.push(PAGE_OWNER_GET + '/' + one.id)"
-          :key="one.id"
-        >
-          <block-get-owner :owner="one" :ownershipId="rooms[0].id" :photoName="one.photoName" />
-        </div>
-      </div>
+    <div
+      class="ownership"
+      @click="this.$router.push(PAGE_OWNERSHIP_GET + '/' + ownership.id)"
+    >
+      <block-get-ownership :ownership="ownership" />
     </div>
+
+    <div
+      class="owner_list"
+      v-for="one in records"
+      :key="one.owner.id"
+      @click="this.$router.push(PAGE_OWNER_GET + '/' + one.owner.id)"
+    >
+      <block-get-owner
+        :owner="one.owner"
+        :ownershipId="ownership.id"
+        :photoName="one.owner.photo.name"
+        :share="one.share"
+      />
+    </div>
+
     <vue-hr />
     <button-back />
     <button-simple :hidden="true" @click="start">Перезагрузка</button-simple>
@@ -42,19 +41,17 @@ import {
 export default {
   data() {
     return {
+      records: [],
+      ownership: {},
+      address: {},
       PAGE_RECORD_UPDATE,
       PAGE_OWNER_GET,
       PAGE_OWNERSHIP_GET,
-      rooms: [],
-      clients: [],
-      address: {},
     };
   },
   methods: {
     ...mapActions({
-      fetchRoomsAndClientsByOwnershipId:
-        "record/fetchRoomsAndClientsByOwnershipId",
-      fetchAddress: "address/fetchAddress",
+      fetchAllRecordByOwnershipId: "record/fetchAllRecordByOwnershipId",
     }),
   },
   mounted() {
@@ -65,18 +62,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getRecord: "record/getRecord",
-      getAddress: "address/getAddress",
+      getRecords: "record/getRecords",
       getMessages: "record/getMessages",
-      getIsLoading: "ownership/getIsLoading",
+      getIsLoading: "record/getIsLoading",
     }),
     start() {
-      this.fetchAddress(this.$route.params.id).then(() => {
-        this.address = this.getAddress;
-      });
-      this.fetchRoomsAndClientsByOwnershipId(this.$route.params.id).then(() => {
-        this.rooms = this.getRecord.rooms;
-        this.clients = this.getRecord.clients;
+      this.fetchAllRecordByOwnershipId(this.$route.params.id).then(() => {
+        this.records = this.getRecords;
+        this.ownership = this.records[0].ownership;
+        this.address = this.ownership.address;
       });
     },
   },

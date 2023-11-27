@@ -1,5 +1,8 @@
 <template>
-  <button v-show="share === 0" @click="() => removeOwner(ownerId, ownershipId)">
+  <button
+    v-show="share === 0.0"
+    @click="() => removeOwner(ownerId, ownershipId)"
+  >
     Деактивировать
   </button>
 </template>
@@ -21,8 +24,6 @@ export default {
   },
   methods: {
     ...mapActions({
-      deleteShareByOwnerIdAndOwnershipId:
-        "share/deleteShareByOwnerIdAndOwnershipId",
       deleteRecordByOwnerIdAndOwnershipId:
         "record/deleteRecordByOwnerIdAndOwnershipId",
       deleteAllQuestionnaireByOwnerIdAndOwnershipId:
@@ -33,13 +34,9 @@ export default {
         ownerId,
         ownershipId,
       };
-      this.deleteShareByOwnerIdAndOwnershipId(payload).then(() => {
-        this.deleteRecordByOwnerIdAndOwnershipId(payload).then(() => {
-          this.deleteAllQuestionnaireByOwnerIdAndOwnershipId(payload).then(
-            () => {
-              this.$router.push(PAGE_OWNERS_GET);
-            }
-          );
+      this.deleteRecordByOwnerIdAndOwnershipId(payload).then(() => {
+        this.deleteAllQuestionnaireByOwnerIdAndOwnershipId(payload).then(() => {
+          this.$router.push(PAGE_OWNERS_GET);
         });
       });
     },

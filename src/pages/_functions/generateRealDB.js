@@ -1,6 +1,5 @@
 import { createOwnership } from "@/http/ownership/ownership";
 import { createOwner } from "@/http/owner/owner";
-import { createShare } from "@/http/share";
 import { createRecord } from "@/http/record";
 
 export const generatePassport = () => {
@@ -52,7 +51,7 @@ export const generateOwner = () => {
     vehicle: generateVehicle(),
     placeWork: generatePlaceWork(),
     photo: generatePhoto(),
-    additionalInformation:"нет",
+    additionalInformation: "нет",
   };
 };
 
@@ -60,8 +59,8 @@ export const generateOwnership = () => {
   return {
     bill: "6200190000",
     typeRoom: "APARTMENT",
-    totalArea: 10.01,
-    livingArea: 10.01,
+    totalArea: 0.01,
+    livingArea: 0.01,
     documentConfirmsRightOwn: "нет",
     numberRooms: 1,
     loggia: false,
@@ -70,7 +69,7 @@ export const generateOwnership = () => {
     waterSupply: "централизованное",
     waterMeter: "счётчик №",
     sewerage: "централизованная",
-    heatSupply: "централизованное",
+    heatSupply: "CENTER",
     heatMeter: "нет",
     address: {
       zipCode: "51931",
@@ -87,22 +86,17 @@ export const generateOwnership = () => {
 };
 
 export const generateSvobody51 = async () => {
-  for (let curAp = 1; curAp <= 84; curAp++) {
+  for (let curAp = 1; curAp <= 74; curAp++) {
     let owner = generateOwner();
     let ownership = generateOwnership();
     let responseOwner = await createOwner(owner);
     let responseOwnership = await createOwnership(ownership);
-    if (responseOwner.data !== null && responseOwnership.data !== null) {
-      await createShare({
-        value: 1.0,
-        owner: responseOwner.data,
-        ownership: responseOwnership.data,
-      });
-    }
+
     if (responseOwner.data !== null && responseOwnership.data !== null) {
       await createRecord({
         owner: responseOwner.data,
         ownership: responseOwnership.data,
+        share: 1.0,
       });
     }
   }

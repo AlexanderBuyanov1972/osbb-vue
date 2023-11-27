@@ -4,7 +4,7 @@
       <button-deactivate
         :ownerId="owner.id"
         :ownershipId="ownershipId"
-        :share="owner.share"
+        :share="share"
       />
       <image-show :photoName="photoName" />
     </div>
@@ -28,7 +28,9 @@
       <div class="item">
         <span>Льготы : </span>{{ showTypeBeneficiary(owner.beneficiary) }}
       </div>
+      <div class="item"><span>Доля : </span>{{ share }}</div>
     </div>
+
     <!-- <div class="info">
       <div class="item">
         <span>Дополнительная информация : </span
@@ -50,6 +52,7 @@ export default {
   props: {
     owner: Object,
     ownershipId: Number,
+    share: Number,
     photoName: String,
   },
   data() {
@@ -93,8 +96,7 @@ span {
   font-size: 20px;
 }
 .img_button,
-.spans{
+.spans {
   width: 33%;
 }
-
 </style>

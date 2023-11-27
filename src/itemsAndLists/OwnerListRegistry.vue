@@ -1,25 +1,31 @@
 <template>
-  <div class="list" v-for="(item, index) in list" :key="index">
+  <div class="list" v-for="(itemList, index) in list" :key="index">
+    <!--  -->
     <div
       class="item"
-      v-for="one in item.clients"
-      :key="one.id"
-      @click="() => this.$router.push(PAGE_OWNER_GET + '/' + one.id)"
+      v-for="item in itemList"
+      :key="item.owner.id"
+      @click="() => this.$router.push(PAGE_OWNER_GET + '/' + item.owner.id)"
     >
-      <span>Ф.И.О. : </span>{{ mapOwnerToLineFullNamesOwner(one) }}
+      <span>Ф.И.О. : </span>{{ mapOwnerToLineFullNamesOwner(item.owner) }}
       <span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Номер телефона :</span
       >
-      {{ one.phoneNumber }}
+      {{ item.owner.phoneNumber }}
     </div>
-
-    <div v-for="(two, index) in item.rooms" :key="two.id">
+    <!--  -->
+    <div
+      class=""
+      @click="
+        () =>
+          this.$router.push(PAGE_OWNERSHIP_GET + '/' + itemList[0].ownership.id)
+      "
+    >
       <ownership-item
         class="ownership"
-        :ownership="two"
+        :ownership="itemList[0].ownership"
         :count="index + 1"
-        @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + two.id)"
         :flag="true"
       />
     </div>

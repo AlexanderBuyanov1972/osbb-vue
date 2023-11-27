@@ -81,7 +81,7 @@ const routes = [
   },
   // ownership
   { path: PAGE_OWNERSHIPS_GET, component: PageOwnershipsGet },
-  { path: PAGE_OWNERSHIP_GET + "/:apartment", component: PageOwnershipGet },
+  { path: PAGE_OWNERSHIP_GET + "/:id", component: PageOwnershipGet },
   { path: PAGE_OWNERSHIP_UPDATE + "/:id", component: PageOwnershipUpdate },
   // owner
   { path: PAGE_OWNER_UPDATE + "/:id", component: PageOwnerUpdate },

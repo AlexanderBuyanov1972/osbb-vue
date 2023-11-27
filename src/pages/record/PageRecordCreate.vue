@@ -1,9 +1,10 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
+  <vue-loader :isLoader="getIsLoading" />
+  <header-messages :messages="getMessages" />
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Создание записи." />
+    <!-- search -------------->
     <div class="search">
       <div class="title">Введите № помещения :</div>
       <input-simple
@@ -11,7 +12,7 @@
         v-model="apartment"
         :style="{ width: '70px' }"
       />
-      <button-simple v-show="this.checkApartment" @click="fetchOwnership"
+      <button-simple v-show="this.checkApartment" @click="actionFetchOwnership"
         >Получить
       </button-simple>
       <div class="title">Введите Ф.И.О. :</div>
@@ -20,7 +21,7 @@
         v-model="fullName"
         :style="{ width: '350px' }"
       />
-      <button-simple v-show="this.checkFullName" @click="fetchOwner"
+      <button-simple v-show="this.checkFullName" @click="actionFetchOwner"
         >Получить
       </button-simple>
     </div>
@@ -65,9 +66,9 @@
             </div>
             <div class="share">
               <block-update-share
-                @share="(data) => (share.value = data)"
+                @share="(data) => (record.share = data)"
                 @isValidShare="(value) => (isValidShare = value)"
-                :shareProps="share.value"
+                :shareProps="record.share"
               />
             </div>
           </div>
@@ -92,7 +93,9 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid">Сохранить</button-simple>
+    <button-simple @click="sendToServer" :hidden="!isValid"
+      >Сохранить</button-simple
+    >
   </div>
   <dialog-window :show="showModal">
     <modal-action
@@ -110,7 +113,7 @@ import {
   generatePlaceWork,
   generatePhoto,
   generateVehicle,
-} from "../_functions/generate";
+} from "@/pages/_functions/generate";
 import {
   generateOwner,
   generateOwnership,
@@ -123,6 +126,7 @@ export default {
       apartment: "",
       fullName: "",
       record: {
+        share: 0.0,
         ownership: {
           address: {},
         },
@@ -130,9 +134,9 @@ export default {
           passport: generatePassport(),
           placeWork: generatePlaceWork(),
           vehicle: generateVehicle(),
+          photo: generatePhoto(),
         },
       },
-      share: {},
       showModal: false,
       isValidOwnership: false,
       isValidAddress: false,
@@ -148,41 +152,17 @@ export default {
   methods: {
     ...mapActions({
       fetchAddressStart: "address/fetchAddressStart",
-      createShare: "share/createShare",
-      createOwner: "owner/createOwner",
-      createOwnership: "ownership/createOwnership",
       createRecord: "record/createRecord",
-      fetchOwnershipsByApartment: "ownership/fetchOwnershipsByApartment",
+      fetchAllOwnershipByApartment: "ownership/fetchAllOwnershipByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
     }),
     sendToServer() {
       this.showModal = true;
     },
     successfullyAction() {
-      // цепляем фото к собственнику
-      this.record.owner.photo = generatePhoto();
-      // создаём собственника в базе данных
-      this.createOwner(this.record.owner).then(() => {
-        // цепляем собственника к записи
-        this.record.owner = this.getOwner;
-        // создаём помещение в базе данных
-        this.createOwnership(this.record.ownership).then(() => {
-          // цепляем помещение на запись
-          this.record.ownership = this.getOwnership;
-          // цепляем собственника на долю
-          this.share.owner = this.getOwner;
-          // цепляем помещение на долю
-          this.share.ownership = this.getOwnership;
-          //создаём долю в базе данных
-          this.createShare(this.share).then(() => {
-            // создаём запись в базе данных
-            this.createRecord(this.record).then(() => {
-              // переход на страницу просмотра записи
-              // this.$router.push(PAGE_ENTRY_GET + "/" + this.getOwnership.id);
-              this.$router.push(PAGE_OWNERSHIPS_GET);
-            });
-          });
-        });
+      this.createRecord(this.record).then(() => {
+        this.record = this.getRecord;
+        this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
       });
     },
     createTypeOwnership() {
@@ -190,15 +170,15 @@ export default {
     },
     createTypeOwner() {
       this.record.owner = this.generateOwner();
-      this.share.value = 1;
+      this.record.share = 1.0;
     },
 
-    fetchOwnership() {
-      this.fetchOwnershipsByApartment(this.apartment).then(() => {
-        this.record.ownership = this.getOwnership;
+    actionFetchOwnership() {
+      this.fetchAllOwnershipByApartment(this.apartment).then(() => {
+        this.record.ownership = this.getOwnerships[0];
       });
     },
-    fetchOwner() {
+    actionFetchOwner() {
       this.fetchOwnerByFullName(this.fullName).then(() => {
         this.record.owner = this.getOwner;
       });
@@ -212,9 +192,10 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "ownership/getIsLoading",
-      getMessages: "ownership/getMessages",
-      getOwnership: "ownership/getOwnership",
+      getIsLoading: "record/getIsLoading",
+      getMessages: "record/getMessages",
+      getRecord: "record/getRecord",
+      getOwnerships: "ownership/getOwnerships",
       getOwner: "owner/getOwner",
       getAddressStart: "address/getAddressStart",
     }),

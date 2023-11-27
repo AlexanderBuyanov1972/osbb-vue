@@ -1,6 +1,6 @@
 <template>
   :style="{'background-color':''}:{}"
-  <div :class=" ownership.entrance %2 ==0 ? ['main'] : ['main','entrance']">
+  <div class="main">
     <div class="count">{{ count }}.</div>
     <div class="type_room">
       <span v-show="flag">Тип : </span>
@@ -8,7 +8,7 @@
     </div>
     <div class="apartment">
       <span v-show="flag">Квартира № : </span>
-      {{ ownership.apartment }}
+      {{ address.apartment }}
     </div>
     <div class="bill">
       <span v-show="flag">Лицевой счёт : </span>
@@ -26,11 +26,11 @@
     </div>
     <!-- <div class="entrance">
       <span v-show="flag">Подъезд : </span>
-      {{ ownership.entrance }}
+      {{ address.entrance }}
     </div>
     <div class="floor">
       <span v-show="flag">Этаж : </span>
-      {{ ownership.floor }}
+      {{ address.floor }}
     </div> -->
     <div class="loggia">
       <span v-show="flag">Балкон : </span>
@@ -56,7 +56,11 @@ export default {
       showTypeRoom,
       showLoggia,
       showHeatSupply,
+      address: {},
     };
+  },
+  mounted() {
+    this.address = this.ownership.address;
   },
 };
 </script>

@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { createOwner } from "@/http/owner/owner";
 import { createOwnership } from "@/http/ownership/ownership";
-import { createShare } from "@/http/share";
 import { createRecord } from "@/http/record";
 
 export const generatePassport = () => {
@@ -13,7 +12,6 @@ export const generatePassport = () => {
     registrationNumberCardPayerTaxes: "нет",
   };
 };
-
 export const generatePlaceWork = () => {
   return {
     businessName: "нет",
@@ -23,7 +21,6 @@ export const generatePlaceWork = () => {
     addition: "нет",
   };
 };
-
 export const generateVehicle = () => {
   return {
     typeVehicle: "NO",
@@ -33,7 +30,6 @@ export const generateVehicle = () => {
     typeManufacturer: "NO",
   };
 };
-
 export const generatePhoto = () => {
   return { name: "avatar", url: "@/photos/owners/avatar.png" };
 };
@@ -121,7 +117,11 @@ export const generateJsonRecords = async () => {
       waterSupply: "централизованное",
       waterMeter: "счётчик №",
       sewerage: "централизованная",
-      heatSupply: "автономное",
+      heatSupply: faker.helpers.arrayElement([
+        "CENTER",
+        "AUTO_GAZ",
+        "AUTO_ELECTRO",
+      ]),
       heatMeter: "нет",
       // адресс
       address: {
@@ -141,16 +141,11 @@ export const generateJsonRecords = async () => {
     if (responseOwnership.data == undefined) return;
     let responseOwner = await createOwner(owner);
     if (responseOwner.data != undefined) {
-      // create share --------------------
-      await createShare({
-        value: 1.0,
-        owner: responseOwner.data,
-        ownership: responseOwnership.data,
-      });
       // create record ---------------------------
       await createRecord({
         owner: responseOwner.data,
         ownership: responseOwnership.data,
+        share: 1.0,
       });
     }
     if (currentApartment % countFloor == 0) {

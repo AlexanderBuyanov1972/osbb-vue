@@ -8,7 +8,6 @@ import registry from "@/store/registryModule";
 import photo from "@/store/owner/photoModule";
 import questionnaire from "@/store/questionnaireModule";
 import record from "@/store/recordModule";
-import share from "@/store/shareModule";
 import payment from "@/store/paymentModule";
 import rate from "@/store/rateModule";
 
@@ -23,7 +22,6 @@ export default createStore({
     photo,
     questionnaire,
     record,
-    share,
     payment,
     rate,
   },

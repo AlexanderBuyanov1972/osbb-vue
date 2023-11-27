@@ -1,11 +1,11 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
+    <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Список помещений" :style="{ color: 'blueviolet' }" />
     <ownership-item :style="{ color: 'brown' }" :ownership="header" count="№" />
-    <div v-for="(one, index) in getOwnerships" :key="one.id">
+    <div v-for="(one, index) in ownerships" :key="one.id">
       <div @click="() => this.$router.push(PAGE_OWNERSHIP_GET + '/' + one.id)">
         <ownership-item :ownership="one" :count="index + 1" />
       </div>
@@ -22,15 +22,19 @@ export default {
   },
   data() {
     return {
+      ownerships: [],
       PAGE_OWNERSHIP_GET,
       header: {
         typeRoom: "SELECT",
+        address: {
+          apartment: "Квартира №",
+          entrance: "Подъезд",
+          floor: "Этаж",
+        },
+
         bill: "Лицевой счёт",
         totalArea: "Общая площадь, м2",
         heatSupply: "SELECT",
-        entrance: "Подъезд",
-        floor: "Этаж",
-        apartment: "Квартира №",
         loggia: "Балкон",
       },
     };
@@ -45,11 +49,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchOwnerships: "ownership/getAllOwnership",
+      fetchAllOwnership: "ownership/fetchAllOwnership",
     }),
   },
   mounted() {
-    this.fetchOwnerships();
+    this.fetchAllOwnership().then(() => (this.ownerships = this.getOwnerships));
   },
 };
 </script>

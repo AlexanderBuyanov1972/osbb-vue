@@ -3,13 +3,12 @@ import {
   updateOwnership,
   getOwnership,
   deleteOwnership,
+  createAllOwnership,
   getAllOwnership,
   countRooms,
-  createAllOwnership,
-  getOwnershipsByApartment,
-  getRoomsByApartment,
-  getListApartmentsByFullName,
-  getBillsByApartment,
+  getAllApartmentByFullName,
+  getAllBillByApartment,
+  getAllOwnershipByApartment,
 } from "@/http/ownership/ownership";
 
 export default {
@@ -125,7 +124,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async getAllOwnership({ commit }) {
+    async fetchAllOwnership({ commit }) {
       try {
         commit("setIsLoading", true);
         const response = await getAllOwnership();
@@ -169,10 +168,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchOwnershipsByApartment({ commit }, apartment) {
+    async fetchAllOwnershipByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await getOwnershipsByApartment(apartment);
+        const response = await getAllOwnershipByApartment(apartment);
         if (response != undefined && response.data != undefined) {
           commit("setOwnerships", response.data);
           commit("setMessages", response.messages);
@@ -185,10 +184,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchBillsByApartment({ commit }, apartment) {
+    async fetchAllBillByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await getBillsByApartment(apartment);
+        const response = await getAllBillByApartment(apartment);
         if (response != undefined && response.data != undefined) {
           commit("setBills", response.data);
           commit("setMessages", response.messages);
@@ -201,26 +200,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchRoomsByApartment({ commit }, apartment) {
+    async fetchAllApartmentByFullName({ commit }, fullName) {
       try {
         commit("setIsLoading", true);
-        const response = await getRoomsByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
-          commit("setOwnerships", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async getListApartmentsByFullName({ commit }, fullName) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getListApartmentsByFullName(fullName);
+        const response = await getAllApartmentByFullName(fullName);
         if (response != undefined && response.data != undefined) {
           commit("setOwnerships", response.data);
           commit("setMessages", response.message);

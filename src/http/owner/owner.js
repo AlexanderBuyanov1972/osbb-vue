@@ -1,7 +1,7 @@
 import { authHttp } from "@/http/httpAxios";
 import { OWNER, ALL, COUNT, FULL_NAME } from "@/http/apiHttp";
 
-// one
+// one owner --------------------------
 
 export const createOwner = async (one) => {
   const response = await authHttp.post(OWNER, one);
@@ -23,7 +23,7 @@ export const deleteOwner = async (id) => {
   return response.data;
 };
 
-// all
+// all owners ---------------------------
 
 export const createAllOwner = async (list) => {
   const response = await authHttp.post(OWNER + ALL, list);
@@ -43,14 +43,14 @@ export const deleteAllOwner = async () => {
   return response.data;
 };
 
-// count
+// count owners --------------------------------
 
 export const countOwners = async () => {
   const response = await authHttp.get(OWNER + COUNT);
   return response.data;
 };
 
-// list owners by full name
+// owners by full name ----------------------------
 
 export const getOwnerByFullName = async (fullName) => {
   const response = await authHttp.get(OWNER + FULL_NAME + "/" + fullName);

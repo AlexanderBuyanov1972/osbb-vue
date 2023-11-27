@@ -1,24 +1,32 @@
 <template>
   <div class="block">
-    <!-- <div class="close" @click="close">&times;</div> -->
     <div class="column">
       <div class="content">{{ message }}</div>
+      <div class="item" v-for="one in ownerships" :key="one.id">
+        <span @click="id = one.id">Лицевой счёт № {{ one.bill }}</span>
+      </div>
       <div class="buttons">
-        <div class="button" @click="close">No</div>
-        <div class="button" @click="action">Yes</div>
+        <div class="button" @click="close">Закрыть</div>
+        <div class="button" @click="action">Выбрать</div>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "modal-action",
+  name: "modal-select-bill-ownership",
   props: {
     message: String,
+    ownerships: Array,
+  },
+  data() {
+    return {
+      id: 0,
+    };
   },
   methods: {
     action() {
-      this.$emit("successfully");
+      this.$emit("select", this.id);
       this.close();
     },
     close() {

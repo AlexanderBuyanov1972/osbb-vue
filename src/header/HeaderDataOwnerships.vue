@@ -23,6 +23,14 @@
     nameButton="Получить"
     @apartment="(value) => action(value)"
   />
+  <dialog-window :show="showModal">
+    <modal-select-bill-ownership
+      message="По данному номеру помещения числится несколько лицевых счетов. Выберите подходящий для вашего запроса."
+      :ownerships="ownerships"
+      @close="showModal = false"
+      @select="(id) => selectOwnershipId(id)"
+    ></modal-select-bill-ownership>
+  </dialog-window>
 </template>
 <script>
 import {
@@ -35,11 +43,16 @@ import {
   PAGE_REGISTRY_OWNERS,
 } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
+import ModalSelectBillOwnership from "@/modals/ModalSelectBillOwnership.vue";
 export default {
+  components: { ModalSelectBillOwnership },
   name: "header-data-ownerships",
   data() {
     return {
+      id: 0,
       apartment: "1",
+      ownerships: [],
+      showModal: false,
       PAGE_OWNERSHIPS_GET,
       PAGE_REGISTRY_OWNERSHIPS,
       PAGE_ENTRY_CREATE,
@@ -51,22 +64,27 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchOwnershipsByApartment: "ownership/fetchOwnershipsByApartment",
+      fetchAllOwnershipByApartment: "ownership/fetchAllOwnershipByApartment",
     }),
     action(value) {
-      // this.fetchOwnershipsByApartment(value).then(() => {
-      //   this.$router.push(PAGE_OWNERSHIP_GET
-      //    + "/" + this.getOwnership.id
-      //    );
-      // });
-        this.$router.push(PAGE_OWNERSHIP_GET
-         + "/" + this.apartment
-         );
+      this.apartment = value;
+      this.fetchAllOwnershipByApartment(this.apartment).then(() => {
+        this.ownerships = this.getOwnerships;
+        if (this.ownerships.length > 1) {
+          this.showModal = true;
+        } else {
+          this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.ownerships[0].id);
+        }
+      });
+    },
+    selectOwnershipId(id) {
+      this.showModal = false;
+      this.$router.push(PAGE_OWNERSHIP_GET + "/" + id);
     },
   },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
+      getOwnerships: "ownership/getOwnerships",
     }),
   },
 };
