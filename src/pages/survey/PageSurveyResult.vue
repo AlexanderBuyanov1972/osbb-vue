@@ -8,7 +8,7 @@
         <button-simple @click="printResult">Печатать результат</button-simple>
       </div>
       <div class="list">
-        <block-questionnaire-result
+        <block-survey-result
           :map="mapVotedArea"
           :processing="processingPercentageArea"
           textHeader="Результаты опроса в метрах квадратных"
@@ -16,7 +16,7 @@
             ${areaVoted}
             из ${summaArea} метров квадратных`"
         />
-        <block-questionnaire-result
+        <block-survey-result
           :map="mapVotedOwner"
           :processing="processingPercentageOwner"
           textHeader="Результаты опроса в голосах"
@@ -46,21 +46,21 @@ export default {
   },
   methods: {
     ...mapActions({
-      printResultQuestionnaire: "questionnaire/printResultQuestionnaire",
-      fetchResultQuestionnaire: "questionnaire/fetchResultQuestionnaire",
+      printResultSurvey: "survey/printResultSurvey",
+      fetchResultSurvey: "survey/fetchResultSurvey",
     }),
     printResult() {
-      this.printResultQuestionnaire(this.$route.params.title);
+      this.printResultSurvey(this.$route.params.title);
     },
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "questionnaire/getIsLoading",
-      getMessages: "questionnaire/getMessages",
-      getResult: "questionnaire/getResult",
+      getIsLoading: "survey/getIsLoading",
+      getMessages: "survey/getMessages",
+      getResult: "survey/getResult",
     }),
     check() {
-      this.fetchResultQuestionnaire(this.$route.params.title).then(() => {
+      this.fetchResultSurvey(this.$route.params.title).then(() => {
         // area ------------------
         this.processingPercentageArea = this.getResult.processingPercentageArea;
         this.mapVotedArea = this.getResult.mapVotedArea;

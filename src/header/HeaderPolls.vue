@@ -1,12 +1,12 @@
 <template>
   <div class="block1">
-    <button-simple @click="goToPageQuestionnairesByTitle"
+    <button-simple @click="goToPageSurveysByTitle"
       >Получить опросы по теме
     </button-simple>
-    <button-simple @click="goToPageResultQuestionnaire"
+    <button-simple @click="goToPageResultSurvey"
       >Получить результаты опроса
     </button-simple>
-    <button-simple @click="goToPageCreateQuestionnaire"
+    <button-simple @click="goToPageCreateSurvey"
       >Создать опросный лист
     </button-simple>
     <button-simple @click="showModal = true"
@@ -37,9 +37,9 @@
 </template>
 <script>
 import {
-  PAGE_QUESTIONNAIRES_GET,
-  PAGE_QUESTIONNAIRE_CREATE,
-  PAGE_QUESTIONNAIRE_RESULT,
+  PAGE_SURVEYS_GET,
+  PAGE_SURVEY_CREATE,
+  PAGE_SURVEY_RESULT,
 } from "@/router/apiRouter";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
@@ -50,27 +50,27 @@ export default {
       title: "",
       apartment: "1",
       message: "Выберите тему опроса",
-      PAGE_QUESTIONNAIRES_GET,
-      PAGE_QUESTIONNAIRE_CREATE,
-      PAGE_QUESTIONNAIRE_RESULT,
+      PAGE_SURVEYS_GET,
+      PAGE_SURVEY_CREATE,
+      PAGE_SURVEY_RESULT,
     };
   },
   methods: {
-    goToPageCreateQuestionnaire() {
-      this.$router.push(PAGE_QUESTIONNAIRE_CREATE);
+    goToPageCreateSurvey() {
+      this.$router.push(PAGE_SURVEY_CREATE);
     },
-    goToPageResultQuestionnaire() {
+    goToPageResultSurvey() {
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
-        this.$router.push(PAGE_QUESTIONNAIRE_RESULT + "/" + this.title);
+        this.$router.push(PAGE_SURVEY_RESULT + "/" + this.title);
       }
     },
-    goToPageQuestionnairesByTitle() {
+    goToPageSurveysByTitle() {
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
-        this.$router.push(PAGE_QUESTIONNAIRES_GET + "/" + this.title);
+        this.$router.push(PAGE_SURVEYS_GET + "/" + this.title);
       }
     },
     action(value) {
@@ -80,7 +80,7 @@ export default {
         this.setMessages(["Выберите номер квартиры"]);
       } else {
         this.$router.push(
-          PAGE_QUESTIONNAIRES_GET + "/" + this.title + "/" + value
+          PAGE_SURVEYS_GET + "/" + this.title + "/" + value
         );
       }
     },
@@ -88,8 +88,8 @@ export default {
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
-        this.deleteAllQuestionnaireByTitle(this.title).then(() => {
-          this.fetchAllTitleOfQuestionnaire();
+        this.deleteAllSurveyByTitle(this.title).then(() => {
+          this.fetchAllTitleSurvey();
         });
       }
     },
@@ -97,22 +97,22 @@ export default {
       return this.title === undefined || this.title === this.message;
     },
     ...mapMutations({
-      setMessages: "questionnaire/setMessages",
+      setMessages: "survey/setMessages",
     }),
     ...mapActions({
-      deleteAllQuestionnaireByTitle:
-        "questionnaire/deleteAllQuestionnaireByTitle",
-      fetchAllTitleOfQuestionnaire:
-        "questionnaire/fetchAllTitleOfQuestionnaire",
+      deleteAllSurveyByTitle:
+        "survey/deleteAllSurveyByTitle",
+      fetchAllTitleSurvey:
+        "survey/fetchAllTitleSurvey",
     }),
   },
   computed: {
     ...mapGetters({
-      getTitles: "questionnaire/getTitles",
+      getTitles: "survey/getTitles",
     }),
   },
   mounted() {
-    this.fetchAllTitleOfQuestionnaire();
+    this.fetchAllTitleSurvey();
   },
 };
 </script>

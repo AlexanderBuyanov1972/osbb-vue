@@ -1,4 +1,4 @@
-import { createOwnership } from "@/http/ownership/ownership";
+import { createOwnership } from "@/http/ownership";
 import { createOwner } from "@/http/owner/owner";
 import { createRecord } from "@/http/record";
 

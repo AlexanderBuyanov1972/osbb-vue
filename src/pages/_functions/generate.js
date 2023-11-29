@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { createOwner } from "@/http/owner/owner";
-import { createOwnership } from "@/http/ownership/ownership";
+import { createOwnership } from "@/http/ownership";
 import { createRecord } from "@/http/record";
 
 export const generatePassport = () => {
@@ -160,7 +160,7 @@ export const generateJsonRecords = async () => {
   }
 };
 // Генерация опроса -----------------------------
-export const generateJsonQuestionnaires = () => {
+export const generateJsonSurveys = () => {
   const list = [];
   const title = "Вопрос о создании ОСББ";
   const byWhom = "Пасько А.А.";

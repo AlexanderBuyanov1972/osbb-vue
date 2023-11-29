@@ -28,19 +28,19 @@ import HeaderDataOwnerships from "@/header/HeaderDataOwnerships.vue";
 import BlockBodyDebt from "@/pages/payment/blocks/BlockBodyDebt.vue";
 import BlockHeaderDebt from "@/pages/payment/blocks/BlockHeaderDebt.vue";
 import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
-import BlockInformationQuestionnaire from "@/pages/blocks/BlockInformationQuestionnaire.vue";
+import BlockInfoSurvey from "@/pages/blocks/BlockInfoSurvey.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 import BlockSearchFullNameApartment from "@/pages/blocks/BlockSearchFullNameApartment.vue";
 import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
-import BlockQuestionnaireResult from "@/pages/blocks/BlockQuestionnaireResult.vue";
+import BlockSurveyResult from "@/pages/blocks/BlockSurveyResult.vue";
 // --------------- items and lists -------------------
 import BalanceHouseItem from "@/itemsAndLists/BalanceHouseItem.vue";
 import DebtItem from "@/itemsAndLists/DebtItem.vue";
 import PaymentItem from "@/itemsAndLists/PaymentItem.vue";
 import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
 import OwnershipItem from "@/itemsAndLists/OwnershipItem.vue";
-import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
+import SurveyItem from "@/itemsAndLists/SurveyItem.vue";
 import RateItem from "@/itemsAndLists/RateItem.vue";
 // --------------- pages blocks edit --------------------------------
 import BlockEditPayment from "@/pages/blocks/edit/BlockEditPayment.vue";
@@ -95,18 +95,18 @@ export default [
   LineHeader,
   BlockErrorMessage,
   BlockInformationAboutHouse,
-  BlockInformationQuestionnaire,
+  BlockInfoSurvey,
   BlockSearchFullNameApartment,
   BlockSearchApartment,
   BlockSearchFullName,
-  BlockQuestionnaireResult,
+  BlockSurveyResult,
   // ---- items ---------
   BalanceHouseItem,
   DebtItem,
   PaymentItem,
   OwnerItem,
   OwnershipItem,
-  QuestionnaireItem,
+  SurveyItem,
   RateItem,
   // ---- update -----
   BlockEditPayment,

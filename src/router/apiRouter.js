@@ -24,14 +24,14 @@ export const PAGE_OWNERSHIPS_GET = "/ownerships/get";
 // ---------- registry -----------------
 export const PAGE_REGISTRY_OWNERS = "/registry/owners";
 export const PAGE_REGISTRY_OWNERSHIPS = "/registry/ownerships";
-// -------------- questionnaire -------------------------
-export const PAGE_QUESTIONNAIRE_UPDATE = "/questionnaire/update";
-export const PAGE_QUESTIONNAIRE_CREATE = "/questionnaire/create";
-export const PAGE_QUESTIONNAIRE_GET = "/questionnaire/get";
-export const PAGE_QUESTIONNAIRE_DELETE = "/questionnaire/delete";
-export const PAGE_QUESTIONNAIRE_ANSWER = "/questionnaire/answer";
-export const PAGE_QUESTIONNAIRE_RESULT = "/questionnaire/result";
-export const PAGE_QUESTIONNAIRES_GET = "/questionnaires/get";
+// -------------- survey -------------------------
+export const PAGE_SURVEY_UPDATE = "/survey/update";
+export const PAGE_SURVEY_CREATE = "/survey/create";
+export const PAGE_SURVEY_GET = "/survey/get";
+export const PAGE_SURVEY_DELETE = "/survey/delete";
+export const PAGE_SURVEY_ANSWER = "/survey/answer";
+export const PAGE_SURVEY_RESULT = "/survey/result";
+export const PAGE_SURVEYS_GET = "/survey/get/all";
 // payment ---------------------------------
 export const PAGE_PAYMENT_CREATE = "/payment/create";
 export const PAGE_PAYMENTS_GET = "/payments/get";

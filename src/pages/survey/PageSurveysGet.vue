@@ -4,29 +4,25 @@
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
-    <questionnaire-item :questionnaire="header" count="№" />
-    <div v-for="one in getQuestionnaires" :key="one.id">
+    <survey-item :survey="header" count="№" />
+    <div v-for="one in getSurveys" :key="one.id">
       <div
         @click="
           () =>
             this.$router.push(
-              PAGE_QUESTIONNAIRE_ANSWER + '/' + one.title + '/' + one.fullName + '/' + one.apartment
+              PAGE_SURVEY_ANSWER + '/' + one.title + '/' + one.fullName + '/' + one.apartment
             )
         "
       >
-        <questionnaire-item :questionnaire="one" />
+        <survey-item :survey="one" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import OwnerItem from "@/itemsAndLists/OwnerItem.vue";
-import { PAGE_QUESTIONNAIRE_ANSWER } from "@/router/apiRouter";
+import { PAGE_SURVEY_ANSWER } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: {
-    OwnerItem,
-  },
   data() {
     return {
       header: {
@@ -37,35 +33,35 @@ export default {
         apartment: "Квартира №",
         fullName: "Ф.И.О.",
       },
-      PAGE_QUESTIONNAIRE_ANSWER,
+      PAGE_SURVEY_ANSWER,
     };
   },
   methods: {
     ...mapActions({
-      fetchAllQuestionnaire: "questionnaire/fetchAllQuestionnaire",
-      fetchAllQuestionnaireByTitle:
-        "questionnaire/fetchAllQuestionnaireByTitle",
-      fetchAllQuestionnaireByTitleAndByApartment:
-        "questionnaire/fetchAllQuestionnaireByTitleAndByApartment",
+      fetchAllSurvey: "survey/fetchAllSurvey",
+      fetchAllSurveyByTitle:
+        "survey/fetchAllSurveyByTitle",
+      fetchAllSurveyByTitleAndByApartment:
+        "survey/fetchAllSurveyByTitleAndByApartment",
     }),
   },
   computed: {
     ...mapGetters({
-      getQuestionnaires: "questionnaire/getQuestionnaires",
-      getMessages: "questionnaire/getMessages",
-      getIsLoading: "questionnaire/getIsLoading",
+      getSurveys: "survey/getSurveys",
+      getMessages: "survey/getMessages",
+      getIsLoading: "survey/getIsLoading",
     }),
     changeParams() {
       let title = this.$route.params.title;
       let apartment = this.$route.params.apartment;
       if (title == undefined) {
-        this.fetchAllQuestionnaire();
+        this.fetchAllSurvey();
       }
       if (title != undefined && apartment == undefined) {
-        this.fetchAllQuestionnaireByTitle(title);
+        this.fetchAllSurveyByTitle(title);
       }
       if (title != undefined && apartment != undefined) {
-        this.fetchAllQuestionnaireByTitleAndByApartment({ title, apartment });
+        this.fetchAllSurveyByTitleAndByApartment({ title, apartment });
       }
     },
   },

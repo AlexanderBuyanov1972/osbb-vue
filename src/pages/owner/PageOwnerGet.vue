@@ -3,12 +3,12 @@
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="messages" />
   <block-search-full-name
-    :fullNameProps="mapOwnerToLineFullNamesOwner(getOwner)"
+    :fullNameProps="mapOwnerToFullName(getOwner)"
     nameButton="Получить список помещений"
     @fullName="(value) => action(value)"
   />
   <line-header
-    :text="`Собственник -  ${mapOwnerToLineFullNamesOwner(getOwner)}`"
+    :text="`Собственник -  ${mapOwnerToFullName(getOwner)}`"
   />
   <button-delete
     :style="{ color: 'red', 'border-color': 'red' }"
@@ -34,12 +34,12 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
+import { mapOwnerToFullName } from "@/pages/_functions/functions";
 import { PAGE_OWNERS_GET, PAGE_OWNER_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
-      mapOwnerToLineFullNamesOwner,
+      mapOwnerToFullName,
       owner: {},
       passport: {},
       placeWork: {},

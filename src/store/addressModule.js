@@ -4,7 +4,7 @@ import {
   getAddress,
   getAddressStart,
   deleteAddress,
-} from "@/http/ownership/address";
+} from "@/http/address";
 
 export default {
   state: () => ({

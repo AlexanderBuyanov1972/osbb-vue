@@ -13,13 +13,13 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
+import { mapOwnerToFullName } from "@/pages/_functions/functions";
 export default {
   name: "block-search-full-name-apartment",
   data() {
     return {
       fullName: "",
-      mapOwnerToLineFullNamesOwner,
+      mapOwnerToFullName,
     };
   },
   props: {
@@ -36,7 +36,7 @@ export default {
         });
     },
     fillFullName() {
-      this.fullName = this.mapOwnerToLineFullNamesOwner(this.owner);
+      this.fullName = this.mapOwnerToFullName(this.owner);
     },
   },
   computed: {

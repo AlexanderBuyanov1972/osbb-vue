@@ -91,7 +91,7 @@ export const showHeatSupply = (value) => {
     return "";
   }
 };
-// questionnaire -------------------------------------
+// survey -------------------------------------
 export const showTypeAnswer = (value) => {
   try {
     return arrayAnswer.find((el) => el.value == value).name;
@@ -172,7 +172,7 @@ export const mapAddressToLineAddress = (address) => {
   );
 };
 // получение строки ФИО из объекта
-export const mapOwnerToLineFullNamesOwner = (owner) => {
+export const mapOwnerToFullName = (owner) => {
   return owner.lastName + " " + owner.firstName + " " + owner.secondName;
 };
 

@@ -3,11 +3,10 @@
     <div class="column">
       <div class="content">{{ message }}</div>
       <div class="item" v-for="one in ownerships" :key="one.id">
-        <span @click="id = one.id">Лицевой счёт № {{ one.bill }}</span>
+        <span @click="() => action(one.id)">Лицевой счёт № {{ one.bill }}</span>
       </div>
       <div class="buttons">
         <div class="button" @click="close">Закрыть</div>
-        <div class="button" @click="action">Выбрать</div>
       </div>
     </div>
   </div>
@@ -19,14 +18,9 @@ export default {
     message: String,
     ownerships: Array,
   },
-  data() {
-    return {
-      id: 0,
-    };
-  },
   methods: {
-    action() {
-      this.$emit("select", this.id);
+    action(value) {
+      this.$emit("select", value);
       this.close();
     },
     close() {
@@ -38,8 +32,8 @@ export default {
 <style scoped>
 .block {
   padding: 1.3em;
-  height: 250px;
-  width: 30em;
+  height: 350px;
+  width: 700px;
   background-color: white;
 }
 .close {
@@ -61,9 +55,16 @@ export default {
 }
 .button {
   font-size: 30px;
+  color: red;
 }
 .column {
   display: flex;
   flex-direction: column;
+}
+.item {
+  color: blueviolet;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 25px;
 }
 </style>

@@ -42,8 +42,7 @@ export default {
   methods: {
     ...mapActions({
       fetchAllOwner: "owner/getAllOwner",
-      getListApartmentsByFullName: "ownership/getListApartmentsByFullName",
-    }),
+      }),
   },
   computed: {
     ...mapGetters({

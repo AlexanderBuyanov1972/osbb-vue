@@ -7,7 +7,7 @@
       :key="item.owner.id"
       @click="() => this.$router.push(PAGE_OWNER_GET + '/' + item.owner.id)"
     >
-      <span>Ф.И.О. : </span>{{ mapOwnerToLineFullNamesOwner(item.owner) }}
+      <span>Ф.И.О. : </span>{{ mapOwnerToFullName(item.owner) }}
       <span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Номер телефона :</span
@@ -33,13 +33,13 @@
 </template>
 <script>
 import { PAGE_OWNER_GET, PAGE_OWNERSHIP_GET } from "@/router/apiRouter";
-import { mapOwnerToLineFullNamesOwner } from "@/pages/_functions/functions";
+import { mapOwnerToFullName } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
       PAGE_OWNER_GET,
       PAGE_OWNERSHIP_GET,
-      mapOwnerToLineFullNamesOwner,
+      mapOwnerToFullName,
     };
   },
   props: {

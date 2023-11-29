@@ -22,7 +22,7 @@ export const PHOTO = "/photo";
 export const SELECT = "/select";
 export const TITLE = "/title";
 export const FULL_NAME = "/full_name";
-export const QUESTIONNAIRES = "/questionnaires";
+export const SURVEYS = "/surveys";
 export const RESULT = "/result";
 // ---------------- summa -------------------
 export const SUMMA = "/summa";

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <vue-loader :isLoader="getIsLoadingOwnership" />
-    <vue-loader :isLoader="getIsLoadingQuestionnaire" />
+    <vue-loader :isLoader="getIsLoadingSurvey" />
     <vue-loader :isLoader="getIsLoadingRate" />
     <header-messages
       :messages="messages"
@@ -14,7 +14,7 @@
       <button-simple @click="sendToServerDataBase"
         >Создание базы данных собственник/помещение</button-simple
       >
-      <button-simple @click="sendToServerQuestionnaire"
+      <button-simple @click="sendToServerSurvey"
         >Создание опроса</button-simple
       >
       <button-simple @click="sendToServerRates">Создание тарифов</button-simple>
@@ -47,7 +47,7 @@
 <script>
 import {
   generateJsonRecords,
-  generateJsonQuestionnaires,
+  generateJsonSurveys,
   generateJsonRates,
 } from "@/pages/_functions/generate";
 import { generateSvobody51 } from "@/pages/_functions/generateRealDB";
@@ -56,7 +56,7 @@ export default {
   data() {
     return {
       generateJsonRecords,
-      generateJsonQuestionnaires,
+      generateJsonSurveys,
       generateJsonRates,
       generateSvobody51,
       showModalDB: false,
@@ -70,8 +70,8 @@ export default {
     ...mapGetters({
       getMessagesOwnership: "ownership/getMessages",
       getIsLoadingOwnership: "ownership/getIsLoading",
-      getMessagesQuestionnaire: "questionnaire/getMessages",
-      getIsLoadingQuestionnaire: "questionnaire/getIsLoading",
+      getMessagesSurvey: "survey/getMessages",
+      getIsLoadingSurvey: "survey/getIsLoading",
       getMessagesRate: "rate/getMessages",
       getIsLoadingRate: "rate/getIsLoading",
     }),
@@ -79,13 +79,13 @@ export default {
   methods: {
     ...mapActions({
       createAllRecord: "record/createAllRecord",
-      createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
+      createAllSurvey: "survey/createAllSurvey",
       createAllRate: "rate/createAllRate",
     }),
     sendToServerDataBase() {
       this.showModalDB = true;
     },
-    sendToServerQuestionnaire() {
+    sendToServerSurvey() {
       this.showModalPolls = true;
     },
     sendToServerRates() {
@@ -97,9 +97,9 @@ export default {
       });
     },
     successfullyActionPolls() {
-      this.createAllQuestionnaire(this.generateJsonQuestionnaires()).then(
+      this.createAllSurvey(this.generateJsonSurveys()).then(
         () => {
-          this.messages = this.getMessagesQuestionnaire;
+          this.messages = this.getMessagesSurvey;
         }
       );
     },

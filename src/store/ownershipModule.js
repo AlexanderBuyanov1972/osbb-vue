@@ -9,7 +9,8 @@ import {
   getAllApartmentByFullName,
   getAllBillByApartment,
   getAllOwnershipByApartment,
-} from "@/http/ownership/ownership";
+  getOwnershipByBill,
+} from "@/http/ownership";
 
 export default {
   state: () => ({
@@ -172,7 +173,11 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllOwnershipByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
+        if (
+          response != undefined &&
+          response.data != undefined &&
+          response.data.length != 0
+        ) {
           commit("setOwnerships", response.data);
           commit("setMessages", response.messages);
         } else {
@@ -206,6 +211,22 @@ export default {
         const response = await getAllApartmentByFullName(fullName);
         if (response != undefined && response.data != undefined) {
           commit("setOwnerships", response.data);
+          commit("setMessages", response.message);
+        } else {
+          commit("setMessages", response.messages);
+        }
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchOwnershipByBill({ commit }, bill) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getOwnershipByBill(bill);
+        if (response != undefined && response.data != undefined) {
+          commit("setOwnership", response.data);
           commit("setMessages", response.message);
         } else {
           commit("setMessages", response.messages);

@@ -6,7 +6,7 @@ import owner from "@/store/owner/ownerModule";
 import ownership from "@/store/ownershipModule";
 import registry from "@/store/registryModule";
 import photo from "@/store/owner/photoModule";
-import questionnaire from "@/store/questionnaireModule";
+import survey from "@/store/surveyModule";
 import record from "@/store/recordModule";
 import payment from "@/store/paymentModule";
 import rate from "@/store/rateModule";
@@ -21,7 +21,7 @@ export default createStore({
     ownership,
     registry,
     photo,
-    questionnaire,
+    survey,
     record,
     payment,
     rate,

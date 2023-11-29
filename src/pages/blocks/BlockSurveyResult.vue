@@ -17,7 +17,7 @@
 <script>
 import { roundDouble } from "@/pages/_functions/functions";
 export default {
-  name: "block-questionnaire-result",
+  name: "block-survey-result",
   props: {
     map: Object,
     processing: Number,

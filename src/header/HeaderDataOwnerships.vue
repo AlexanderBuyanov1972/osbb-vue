@@ -25,7 +25,8 @@
   />
   <dialog-window :show="showModal">
     <modal-select-bill-ownership
-      message="По данному номеру помещения числится несколько лицевых счетов. Выберите подходящий для вашего запроса."
+      message="По данному номеру помещения числится несколько лицевых счетов. 
+      Выберите подходящий для вашего запроса."
       :ownerships="ownerships"
       @close="showModal = false"
       @select="(id) => selectOwnershipId(id)"

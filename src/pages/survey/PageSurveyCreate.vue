@@ -56,7 +56,7 @@
   </div>
 </template>
 <script>
-import { PAGE_QUESTIONNAIRES_GET } from "@/router/apiRouter";
+import { PAGE_SURVEYS_GET } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -64,7 +64,7 @@ export default {
       validTitle: false,
       validByWhom: false,
       validQuestion: false,
-      PAGE_QUESTIONNAIRES_GET,
+      PAGE_SURVEYS_GET,
       title: "",
       byWhom: "",
       selects: [],
@@ -72,9 +72,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      createAllQuestionnaire: "questionnaire/createAllQuestionnaire",
-      fetchAllTitleOfQuestionnaire:
-        "questionnaire/fetchAllTitleOfQuestionnaire",
+      createAllSurvey: "survey/createAllSurvey",
+      fetchAllTitleSurvey:
+        "survey/fetchAllTitleSurvey",
     }),
     addQuestion() {
       this.selects.push({});
@@ -93,15 +93,15 @@ export default {
           question: el.question,
         });
       });
-      this.createAllQuestionnaire(body).then(() => {
-       this.$router.push(PAGE_QUESTIONNAIRES_GET)
+      this.createAllSurvey(body).then(() => {
+       this.$router.push(PAGE_SURVEYS_GET)
       });
     },
   },
   computed: {
     ...mapGetters({
-      getMessages: "questionnaire/getMessages",
-      getIsLoading: "questionnaire/getIsLoading",
+      getMessages: "survey/getMessages",
+      getIsLoading: "survey/getIsLoading",
     }),
     checkHidden() {
       return this.validTitle && this.validByWhom && this.validQuestion && this.selects.length != 0;

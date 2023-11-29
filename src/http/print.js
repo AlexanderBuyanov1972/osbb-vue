@@ -1,6 +1,6 @@
 import { authHttp } from "@/http/httpAxios";
 import {
-  QUESTIONNAIRES,
+  SURVEYS,
   PAYMENT,
   RESULT,
   PRINT,
@@ -12,10 +12,10 @@ import {
   NEW_BILL,
 } from "@/http/apiHttp";
 
-// print questionnaire result --------------------------------
-export const printResultQuestionnaire = async (title) => {
+// print survey result --------------------------------
+export const printResultSurvey = async (title) => {
   const response = await authHttp.get(
-    PRINT + QUESTIONNAIRES + RESULT + "/" + title
+    PRINT + SURVEYS + RESULT + "/" + title
   );
   return response.data;
 };

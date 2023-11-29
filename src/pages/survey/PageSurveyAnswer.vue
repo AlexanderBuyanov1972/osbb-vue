@@ -4,7 +4,7 @@
     <vue-loader :isLoader="getIsLoading" />
     <header-messages :messages="getMessages" />
     <line-header :text="info.title" :style="{ color: 'brown' }" />
-    <block-information-questionnaire :info="info" />
+    <block-info-survey :info="info" />
     <div class="list" v-for="one in list" :key="one.id">
       <div class="item">
         <div class="question">{{ one.question }}</div>
@@ -18,12 +18,8 @@
   </div>
 </template>
 <script>
-import QuestionnaireItem from "@/itemsAndLists/QuestionnaireItem.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: {
-    QuestionnaireItem,
-  },
   data() {
     return {
       list: [],
@@ -32,19 +28,19 @@ export default {
   },
   methods: {
     ...mapActions({
-      updateAllQuestionnaire: "questionnaire/updateAllQuestionnaire",
-      fetchAllQuestionnaireByTitleAndFullNameAndApartment:
-        "questionnaire/fetchAllQuestionnaireByTitleAndFullNameAndApartment",
+      updateAllSurvey: "survey/updateAllSurvey",
+      fetchAllSurveyByTitleAndFullNameAndApartment:
+        "survey/fetchAllSurveyByTitleAndFullNameAndApartment",
     }),
     sendToServer() {
-      this.updateAllQuestionnaire(this.list).then(() => this.$router.back());
+      this.updateAllSurvey(this.list).then(() => this.$router.back());
     },
   },
   computed: {
     ...mapGetters({
-      getQuestionnaires: "questionnaire/getQuestionnaires",
-      getMessages: "questionnaire/getMessages",
-      getIsLoading: "questionnaire/getIsLoading",
+      getSurveys: "survey/getSurveys",
+      getMessages: "survey/getMessages",
+      getIsLoading: "survey/getIsLoading",
     }),
     checkValid() {
       let valid = 1;
@@ -64,8 +60,8 @@ export default {
       fullName: this.$route.params.fullName,
       apartment: this.$route.params.apartment,
     };
-    this.fetchAllQuestionnaireByTitleAndFullNameAndApartment(payload).then(() => {
-      this.list = this.getQuestionnaires;
+    this.fetchAllSurveyByTitleAndFullNameAndApartment(payload).then(() => {
+      this.list = this.getSurveys;
       this.info.dateDispatch = this.list[0].dateDispatch;
       this.info.byWhom = this.list[0].byWhom;
       this.info.fullName = this.list[0].fullName;

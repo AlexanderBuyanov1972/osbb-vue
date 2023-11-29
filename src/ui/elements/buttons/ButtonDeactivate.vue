@@ -26,8 +26,8 @@ export default {
     ...mapActions({
       deleteRecordByOwnerIdAndOwnershipId:
         "record/deleteRecordByOwnerIdAndOwnershipId",
-      deleteAllQuestionnaireByOwnerIdAndOwnershipId:
-        "questionnaire/deleteAllQuestionnaireByOwnerIdAndOwnershipId",
+      deleteAllSurveyByOwnerIdAndOwnershipId:
+        "survey/deleteAllSurveyByOwnerIdAndOwnershipId",
     }),
     removeOwner(ownerId, ownershipId) {
       const payload = {
@@ -35,7 +35,7 @@ export default {
         ownershipId,
       };
       this.deleteRecordByOwnerIdAndOwnershipId(payload).then(() => {
-        this.deleteAllQuestionnaireByOwnerIdAndOwnershipId(payload).then(() => {
+        this.deleteAllSurveyByOwnerIdAndOwnershipId(payload).then(() => {
           this.$router.push(PAGE_OWNERS_GET);
         });
       });

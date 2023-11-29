@@ -113,3 +113,7 @@ export const getAllApartmentByFullName = async (fullName) => {
   const response = await authHttp.get(OWNERSHIP + FULL_NAME + "/" + fullName);
   return response.data;
 };
+export const getOwnershipByBill = async (bill) => {
+  const response = await authHttp.get(OWNERSHIP + BILL + "/" + bill);
+  return response.data;
+};

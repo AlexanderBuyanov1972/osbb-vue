@@ -10,7 +10,7 @@
     <div class="owner">
       <span>Собственник квартиры № </span>{{ info.apartment }}
     </div>
-    <div class="fullname">
+    <div class="fullName">
       <span
         >Правлению ОСББ очень важно знать Ваше мнение по данному опросу
       </span>
@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-  name: "block-information-questionnaire",
+  name: "block-info-survey",
   props: {
     info: Object,
   },

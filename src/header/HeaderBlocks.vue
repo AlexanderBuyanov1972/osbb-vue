@@ -42,7 +42,7 @@
 <script>
 import {
   PAGE_MAIN,
-  PAGE_QUESTIONNAIRES_GET,
+  PAGE_SURVEYS_GET,
   PAGE_OWNERSHIPS_GET,
   PAGE_OWNERS_GET,
   PAGE_PAYMENTS_GET,
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       PAGE_MAIN,
-      PAGE_QUESTIONNAIRES_GET,
+      PAGE_SURVEYS_GET,
       PAGE_OWNERSHIPS_GET,
       PAGE_OWNERS_GET,
       PAGE_PAYMENTS_GET,
@@ -80,7 +80,7 @@ export default {
       this.currentButton = 3;
     },
     clickButton4() {
-      this.$router.push(PAGE_QUESTIONNAIRES_GET);
+      this.$router.push(PAGE_SURVEYS_GET);
       this.currentButton = 4;
     },
     clickButton5() {

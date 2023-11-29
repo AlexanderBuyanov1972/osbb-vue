@@ -2,8 +2,7 @@
   <div class="main">
     <div class="count"><span v-show="flag">№ : </span>{{ count }}.</div>
     <div class="name">
-      <span v-show="flag">Ф.И.О. : </span
-      >{{ mapOwnerToLineFullNamesOwner(owner) }}
+      <span v-show="flag">Ф.И.О. : </span>{{ mapOwnerToFullName(owner) }}
     </div>
     <div class="phone">
       <span v-show="flag">Номер телефона : </span>{{ owner.phoneNumber }}
@@ -18,7 +17,7 @@
 </template>
 <script>
 import {
-  mapOwnerToLineFullNamesOwner,
+  mapOwnerToFullName,
   showFamilyStatus,
   showGender,
 } from "@/pages/_functions/functions";
@@ -32,7 +31,7 @@ export default {
   },
   data() {
     return {
-      mapOwnerToLineFullNamesOwner,
+      mapOwnerToFullName,
       showFamilyStatus,
       showGender,
     };

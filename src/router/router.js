@@ -6,12 +6,12 @@ import PageLogin from "@/pages/PageLogin.vue";
 import PageRegistryOwners from "@/pages/PageRegistryOwners.vue";
 import PageRegistryOwnerships from "@/pages/PageRegistryOwnerships.vue";
 import PageUsefulQueries from "@/pages/PageUsefulQueries.vue";
-// questionnaire
-import PageQuestionnaireCreate from "@/pages/questionnaire/PageQuestionnaireCreate.vue";
-import PageQuestionnaireGet from "@/pages/questionnaire/PageQuestionnaireGet.vue";
-import PageQuestionnairesGet from "@/pages/questionnaire/PageQuestionnairesGet.vue";
-import PageQuestionnaireAnswer from "@/pages/questionnaire/PageQuestionnaireAnswer.vue";
-import PageQuestionnaireResult from "@/pages/questionnaire/PageQuestionnaireResult.vue";
+// survey
+import PageSurveyCreate from "@/pages/survey/PageSurveyCreate.vue";
+import PageSurveyGet from "@/pages/survey/PageSurveyGet.vue";
+import PageSurveysGet from "@/pages/survey/PageSurveysGet.vue";
+import PageSurveyAnswer from "@/pages/survey/PageSurveyAnswer.vue";
+import PageSurveyResult from "@/pages/survey/PageSurveyResult.vue";
 // owner
 import PageOwnerGet from "@/pages/owner/PageOwnerGet.vue";
 import PageOwnersGet from "@/pages/owner/PageOwnersGet.vue";
@@ -43,12 +43,12 @@ import {
   PAGE_REGISTRY_OWNERS,
   PAGE_REGISTRY_OWNERSHIPS,
   PAGE_USEFUL_QUERIES,
-  //questionnaire
-  PAGE_QUESTIONNAIRE_ANSWER,
-  PAGE_QUESTIONNAIRE_CREATE,
-  PAGE_QUESTIONNAIRES_GET,
-  PAGE_QUESTIONNAIRE_GET,
-  PAGE_QUESTIONNAIRE_RESULT,
+  //survey
+  PAGE_SURVEY_ANSWER,
+  PAGE_SURVEY_CREATE,
+  PAGE_SURVEYS_GET,
+  PAGE_SURVEY_GET,
+  PAGE_SURVEY_RESULT,
   // owner
   PAGE_OWNER_GET,
   PAGE_OWNERS_GET,
@@ -105,37 +105,36 @@ const routes = [
     path: PAGE_ENTRY_GET + "/:id",
     component: PageRecordGet,
   },
-  // questionnaire
-  { path: PAGE_QUESTIONNAIRES_GET, component: PageQuestionnairesGet },
-  {
-    path: PAGE_QUESTIONNAIRE_GET,
-    component: PageQuestionnaireGet + "/:id",
+  // survey ----------------------------------------------------
+ {
+    path: PAGE_SURVEY_GET,
+    component: PageSurveyGet + "/:id",
   },
   // слияние 3 в 1 --------------------
   {
-    path: PAGE_QUESTIONNAIRES_GET,
-    component: PageQuestionnairesGet,
+    path: PAGE_SURVEYS_GET,
+    component: PageSurveysGet,
   },
   {
-    path: PAGE_QUESTIONNAIRES_GET + "/:title",
-    component: PageQuestionnairesGet,
+    path: PAGE_SURVEYS_GET + "/:title",
+    component: PageSurveysGet,
   },
   {
-    path: PAGE_QUESTIONNAIRES_GET + "/:title/:apartment",
-    component: PageQuestionnairesGet,
+    path: PAGE_SURVEYS_GET + "/:title/:apartment",
+    component: PageSurveysGet,
   },
   // ----------------------------------------------------------
   {
-    path: PAGE_QUESTIONNAIRE_ANSWER + "/:title" + "/:fullName" + "/:apartment",
-    component: PageQuestionnaireAnswer,
+    path: PAGE_SURVEY_ANSWER + "/:title" + "/:fullName" + "/:apartment",
+    component: PageSurveyAnswer,
   },
   {
-    path: PAGE_QUESTIONNAIRE_RESULT + "/:title",
-    component: PageQuestionnaireResult,
+    path: PAGE_SURVEY_RESULT + "/:title",
+    component: PageSurveyResult,
   },
   {
-    path: PAGE_QUESTIONNAIRE_CREATE,
-    component: PageQuestionnaireCreate,
+    path: PAGE_SURVEY_CREATE,
+    component: PageSurveyCreate,
   },
   // payment ------------------------------------
   {

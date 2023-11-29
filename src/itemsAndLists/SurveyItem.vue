@@ -1,19 +1,19 @@
 <template>
   <div class="main">
     <div class="count">{{ count }}</div>
-    <div class="theme">{{ questionnaire.title }}</div>
-    <div class="date_dispatch">{{ questionnaire.dateDispatch }}</div>
-    <div class="date_receiving">{{ questionnaire.dateReceiving }}</div>
-    <div class="apartment">{{ questionnaire.apartment }}</div>
-    <div class="fio">{{ questionnaire.fullName }}</div>
-    <div class="by_whom">{{ questionnaire.byWhom }}</div>
+    <div class="theme">{{ survey.title }}</div>
+    <div class="date_dispatch">{{ survey.dateDispatch }}</div>
+    <div class="date_receiving">{{ survey.dateReceiving }}</div>
+    <div class="apartment">{{ survey.apartment }}</div>
+    <div class="fio">{{ survey.fullName }}</div>
+    <div class="by_whom">{{ survey.byWhom }}</div>
   </div>
 </template>
 <script>
 export default {
-  name: "questionnaire-item",
+  name: "survey-item",
   props: {
-    questionnaire: Object,
+    survey: Object,
     count: Number,
   },
 };

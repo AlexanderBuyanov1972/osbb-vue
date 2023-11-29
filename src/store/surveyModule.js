@@ -1,24 +1,22 @@
 import {
-  createAllQuestionnaire,
-  updateAllQuestionnaire,
-  getAllQuestionnaire,
-  deleteAllQuestionnaireByTitle,
-  deleteAllQuestionnaireByOwnerIdAndOwnershipId,
-  getResultQuestionnaire,
-} from "@/http/polls/questionnaire";
-import { printResultQuestionnaire } from "@/http/print";
-import {
-  getAllQuestionnaireByTitleAndFullNameAndApartment,
-  getAllQuestionnaireByTitleAndFullName,
-  getAllQuestionnaireByTitleAndByApartment,
-  getAllQuestionnaireByTitle,
-  getAllTitleOfQuestionnaire,
-} from "@/http/polls/selects";
+  createAllSurvey,
+  updateAllSurvey,
+  getAllSurvey,
+  deleteAllSurveyByTitle,
+  deleteAllSurveyByOwnerIdAndOwnershipId,
+  getResultSurvey,
+  getAllSurveyByTitleAndFullNameAndApartment,
+  getAllSurveyByTitleAndFullName,
+  getAllSurveyByTitleAndByApartment,
+  getAllSurveyByTitle,
+  getAllTitleSurvey,
+} from "@/http/survey";
+import { printResultSurvey } from "@/http/print";
 export default {
   state: () => ({
-    questionnaires: [],
+    surveys: [],
     messages: [],
-    message: "",
+    // message: "",
     titles: [],
     isLoading: false,
     result: {},
@@ -27,15 +25,15 @@ export default {
     setIsLoading(state, bool) {
       state.isLoading = bool;
     },
-    setQuestionnaires(state, array) {
-      state.questionnaires = array;
+    setSurveys(state, array) {
+      state.surveys = array;
     },
     setMessages(state, messages) {
       state.messages = messages;
     },
-    setMessage(state, message) {
-      state.message = message;
-    },
+    // setMessage(state, message) {
+    //   state.message = message;
+    // },
     setTitles(state, array) {
       state.titles = array;
     },
@@ -47,15 +45,15 @@ export default {
     getIsLoading(state) {
       return state.isLoading;
     },
-    getQuestionnaires(state) {
-      return state.questionnaires;
+    getSurveys(state) {
+      return state.surveys;
     },
     getMessages(state) {
       return state.messages;
     },
-    getMessage(state) {
-      return state.message;
-    },
+    // getMessage(state) {
+    //   return state.message;
+    // },
     getTitles(state) {
       return state.titles;
     },
@@ -65,12 +63,12 @@ export default {
   },
   actions: {
     // all -------------------------
-    async createAllQuestionnaire({ commit }, list) {
+    async createAllSurvey({ commit }, list) {
       try {
         commit("setIsLoading", true);
-        const response = await createAllQuestionnaire(list);
+        const response = await createAllSurvey(list);
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -81,12 +79,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async updateAllQuestionnaire({ commit }, object) {
+    async updateAllSurvey({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await updateAllQuestionnaire(object);
+        const response = await updateAllSurvey(object);
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -97,12 +95,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchAllQuestionnaire({ commit }) {
+    async fetchAllSurvey({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllQuestionnaire();
+        const response = await getAllSurvey();
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -113,12 +111,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async deleteAllQuestionnaireByTitle({ commit }, title) {
+    async deleteAllSurveyByTitle({ commit }, title) {
       try {
         commit("setIsLoading", true);
-        const response = await deleteAllQuestionnaireByTitle(title);
+        const response = await deleteAllSurveyByTitle(title);
         commit("setMessages", response.messages);
-        commit("setQuestionnaires", {});
+        commit("setSurveys", {});
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -126,15 +124,15 @@ export default {
       }
     },
     // title and full name ------------------------
-    async fetchAllQuestionnaireByTitleAndFullName({ commit }, payload) {
+    async fetchAllSurveyByTitleAndFullName({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllQuestionnaireByTitleAndFullName(
+        const response = await getAllSurveyByTitleAndFullName(
           payload.title,
           payload.fullName
         );
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -146,20 +144,20 @@ export default {
       }
     },
     // title, full name and apartment ------------
-    async fetchAllQuestionnaireByTitleAndFullNameAndApartment(
+    async fetchAllSurveyByTitleAndFullNameAndApartment(
       { commit },
       payload
     ) {
       try {
         commit("setIsLoading", true);
         const response =
-          await getAllQuestionnaireByTitleAndFullNameAndApartment(
+          await getAllSurveyByTitleAndFullNameAndApartment(
             payload.title,
             payload.fullName,
             payload.apartment
           );
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -171,12 +169,12 @@ export default {
       }
     },
     // title --------------------------------------
-    async fetchAllQuestionnaireByTitle({ commit }, title) {
+    async fetchAllSurveyByTitle({ commit }, title) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllQuestionnaireByTitle(title);
+        const response = await getAllSurveyByTitle(title);
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -188,15 +186,15 @@ export default {
       }
     },
     // title and apartment ------------------------
-    async fetchAllQuestionnaireByTitleAndByApartment({ commit }, payload) {
+    async fetchAllSurveyByTitleAndByApartment({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllQuestionnaireByTitleAndByApartment(
+        const response = await getAllSurveyByTitleAndByApartment(
           payload.title,
           payload.apartment
         );
         if (response != undefined && response.data != undefined) {
-          commit("setQuestionnaires", response.data);
+          commit("setSurveys", response.data);
           commit("setMessages", response.messages);
         } else {
           commit("setMessages", response.messages);
@@ -208,10 +206,10 @@ export default {
       }
     },
     // all titles ----------------------------------
-    async fetchAllTitleOfQuestionnaire({ commit }) {
+    async fetchAllTitleSurvey({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllTitleOfQuestionnaire();
+        const response = await getAllTitleSurvey();
         if (response != undefined && response.data != undefined) {
           commit("setTitles", ["Выберите тему опроса", ...response.data]);
           commit("setMessages", response.messages);
@@ -225,10 +223,10 @@ export default {
       }
     },
     // delete all by owner id and ownership id ------------
-    async deleteAllQuestionnaireByOwnerIdAndOwnershipId({ commit }, payload) {
+    async deleteAllSurveyByOwnerIdAndOwnershipId({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await deleteAllQuestionnaireByOwnerIdAndOwnershipId(
+        const response = await deleteAllSurveyByOwnerIdAndOwnershipId(
           payload.ownerId,
           payload.ownershipId
         );
@@ -245,10 +243,10 @@ export default {
       }
     },
     // result --------------------------------------
-    async fetchResultQuestionnaire({ commit }, title) {
+    async fetchResultSurvey({ commit }, title) {
       try {
         commit("setIsLoading", true);
-        const response = await getResultQuestionnaire(title);
+        const response = await getResultSurvey(title);
         if (response != undefined && response.data != undefined) {
           commit("setResult", response.data);
           commit("setMessages", response.messages);
@@ -262,10 +260,10 @@ export default {
       }
     },
     // result print -------------------------
-    async printResultQuestionnaire({ commit }, title) {
+    async printResultSurvey({ commit }, title) {
       try {
         commit("setIsLoading", true);
-        const response = await printResultQuestionnaire(title);
+        const response = await printResultSurvey(title);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
