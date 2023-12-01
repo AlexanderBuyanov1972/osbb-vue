@@ -65,7 +65,7 @@ import {
   PAGE_PAYMENT_CREATE,
   PAGE_PAYMENTS_GET,
   PAGE_BALANCE_ROOM,
-  PAGE_BALANCE_ROOM_DETAILS,
+  PAGE_BALANCE_BILL_DETAILS,
   PAGE_BALANCE_HOUSE,
   PAGE_RATES,
 } from "@/router/apiRouter";
@@ -150,7 +150,7 @@ const routes = [
     component: PageBalanceByApartment,
   },
   {
-    path: PAGE_BALANCE_ROOM_DETAILS + "/:apartment",
+    path: PAGE_BALANCE_BILL_DETAILS + "/:apartment",
     component: PageBalanceDetailsByApartment,
   },
   {

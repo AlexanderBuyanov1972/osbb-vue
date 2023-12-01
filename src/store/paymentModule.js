@@ -6,6 +6,7 @@ import {
   getBalance,
   getBalanceHouse,
   getDebtByApartment,
+  getDebtByBill,
   getDetailsDebtByApartment,
 } from "@/http/payment";
 import {
@@ -22,9 +23,7 @@ export default {
     payments: [],
     balance: 0,
     balanceHouse: [],
-    debt: {},
-    debtDetailsHeader: {},
-    debtDetailsBody: [],
+    debtsDetails: [],
     messages: [],
     isLoading: false,
   }),
@@ -47,14 +46,8 @@ export default {
     setBalance(state, num) {
       state.balance = num;
     },
-    setDebt(state, object) {
-      state.debt = object;
-    },
-    setDebtDetailsHeader(state, object) {
-      state.debtDetailsHeader = object;
-    },
-    setDebtDetailsBody(state, array) {
-      state.debtDetailsBody = array;
+    setDebtsDetails(state, array) {
+      state.debtsDetails = array;
     },
   },
   getters: {
@@ -76,14 +69,8 @@ export default {
     getBalanceHouse(state) {
       return state.balanceHouse;
     },
-    getDebt(state) {
-      return state.debt;
-    },
-    getDebtDetailsHeader(state) {
-      return state.debtDetailsHeader;
-    },
-    getDebtDetailsBody(state) {
-      return state.debtDetailsBody;
+    getDebtsDetails(state) {
+      return state.debtsDetails;
     },
   },
   actions: {
@@ -91,12 +78,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createPayment(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPayment", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
         Coming;
@@ -108,12 +92,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getPayment(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPayment", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -126,7 +107,6 @@ export default {
         const response = await deletePayment(id);
         commit("setMessages", response.messages);
         commit("setPayment", {});
-        Coming;
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -137,12 +117,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllPayment();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPayments", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -153,12 +130,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getBalance();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setBalance", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -169,12 +143,22 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getDebtByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
-          commit("setDebt", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        if (response != undefined && response.data != undefined)
+          commit("setDebtsDetails", response.data);
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchDebtByBill({ commit }, apartment) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getDebtByBill(apartment);
+        if (response != undefined && response.data != undefined)
+          commit("setDebtsDetails", response.data);
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -185,13 +169,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getDetailsDebtByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
-          commit("setDebtDetailsHeader", response.data.header);
-          commit("setDebtDetailsBody", response.data.list);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        if (response != undefined && response.data != undefined)
+          commit("setDebtsDetails", response.data);
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -202,12 +182,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getBalanceHouse();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setBalanceHouse", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -280,7 +257,6 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    
   },
   namespaced: true,
 };

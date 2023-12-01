@@ -14,11 +14,13 @@
   </div>
 </template>
 <script>
+import {checkFullName} from "@/pages/_functions/functions"
 export default {
   name: "block-search-full-name",
   data() {
     return {
       fullName: "",
+      checkFullName,
     };
   },
   props: {
@@ -27,7 +29,7 @@ export default {
   },
   methods: {
     clickButton() {
-      if (this.fullName.length > 5) this.$emit("fullName", this.fullName);
+      if (this.checkFullName(this.fullName)) this.$emit("fullName", this.fullName);
     },
   },
   mounted() {

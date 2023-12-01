@@ -1,27 +1,27 @@
 <template>
   <div class="main">
     <button-simple
-      :style="currentButton == 1 ? { color: 'red', 'border-color': 'red' } : {}"
+      :style="currentButton == 1 ? style : {}"
       @click="clickButton1"
       >На главную</button-simple
     >
     <button-simple
-      :style="currentButton == 2 ? { color: 'red', 'border-color': 'red' } : {}"
+      :style="currentButton == 2 ? style : {}"
       @click="clickButton2"
       >Блок недвижимости
     </button-simple>
     <button-simple
-      :style="currentButton == 4 ? { color: 'red', 'border-color': 'red' } : {}"
+      :style="currentButton == 4 ? style : {}"
       @click="clickButton4"
       >Блок опросов
     </button-simple>
     <button-simple
-      :style="currentButton == 5 ? { color: 'red', 'border-color': 'red' } : {}"
+      :style="currentButton == 5 ? style : {}"
       @click="clickButton5"
       >Оплата счетов
     </button-simple>
     <button-simple
-      :style="currentButton == 6 ? { color: 'red', 'border-color': 'red' } : {}"
+      :style="currentButton == 6 ? style : {}"
       @click="clickButton6"
       >Полезные запросы
     </button-simple>
@@ -54,6 +54,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      style: { color: "red", "border-color": "red" },
       PAGE_MAIN,
       PAGE_SURVEYS_GET,
       PAGE_OWNERSHIPS_GET,

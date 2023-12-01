@@ -30,6 +30,7 @@ import BlockHeaderDebt from "@/pages/payment/blocks/BlockHeaderDebt.vue";
 import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
 import BlockInfoSurvey from "@/pages/blocks/BlockInfoSurvey.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
+import BlockSearchApartmentPlusMinus from "@/pages/blocks/BlockSearchApartmentPlusMinus.vue";
 import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 import BlockSearchFullNameApartment from "@/pages/blocks/BlockSearchFullNameApartment.vue";
 import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
@@ -97,6 +98,7 @@ export default [
   BlockInformationAboutHouse,
   BlockInfoSurvey,
   BlockSearchFullNameApartment,
+  BlockSearchApartmentPlusMinus,
   BlockSearchApartment,
   BlockSearchFullName,
   BlockSurveyResult,

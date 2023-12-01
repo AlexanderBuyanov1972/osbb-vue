@@ -3,7 +3,7 @@
     <div class="column">
       <div class="content">{{ message }}</div>
       <div class="item" v-for="one in ownerships" :key="one.id">
-        <span @click="() => action(one.id)">Лицевой счёт № {{ one.bill }}</span>
+        <span @click="() => action(one)">Лицевой счёт № {{ one.bill }}</span>
       </div>
       <div class="buttons">
         <div class="button" @click="close">Закрыть</div>
@@ -19,8 +19,8 @@ export default {
     ownerships: Array,
   },
   methods: {
-    action(value) {
-      this.$emit("select", value);
+    action(ownership) {
+      this.$emit("select", ownership);
       this.close();
     },
     close() {

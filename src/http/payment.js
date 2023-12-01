@@ -1,5 +1,13 @@
 import { authHttp } from "@/http/httpAxios";
-import { PAYMENT, ALL, BALANCE, DEBT, DETAILS } from "@/http/apiHttp";
+import {
+  PAYMENT,
+  ALL,
+  BALANCE,
+  DEBT,
+  DETAILS,
+  BILL,
+  APARTMENT,
+} from "@/http/apiHttp";
 
 // one ----------------------------------
 
@@ -49,7 +57,14 @@ export const getBalanceHouse = async () => {
 };
 // get debt by apartment ---------
 export const getDebtByApartment = async (apartment) => {
-  const response = await authHttp.get(PAYMENT + DEBT + "/" + apartment);
+  const response = await authHttp.get(
+    PAYMENT + DEBT + APARTMENT + "/" + apartment
+  );
+  return response.data;
+};
+// get debt by bill ---------
+export const getDebtByBill = async (bill) => {
+  const response = await authHttp.get(PAYMENT + DEBT + BILL + "/" + bill);
   return response.data;
 };
 // get details debt by apartment ---------

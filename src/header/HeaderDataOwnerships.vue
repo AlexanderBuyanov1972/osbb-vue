@@ -19,9 +19,9 @@
       >Редактировать запись</button-simple
     >
   </div>
-  <block-search-apartment
+  <block-search-apartment-plus-minus
+    @apartment="action"
     nameButton="Получить"
-    @apartment="(value) => action(value)"
   />
   <dialog-window :show="showModal">
     <modal-select-bill-ownership
@@ -29,7 +29,7 @@
       Выберите подходящий для вашего запроса."
       :ownerships="ownerships"
       @close="showModal = false"
-      @select="(id) => selectOwnershipId(id)"
+      @select="selectOwnership"
     ></modal-select-bill-ownership>
   </dialog-window>
 </template>
@@ -45,12 +45,12 @@ import {
 } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 import ModalSelectBillOwnership from "@/modals/ModalSelectBillOwnership.vue";
+import BlockSearchApartmentPlusMinus from "@/pages/blocks/BlockSearchApartmentPlusMinus.vue";
 export default {
-  components: { ModalSelectBillOwnership },
+  components: { ModalSelectBillOwnership, BlockSearchApartmentPlusMinus },
   name: "header-data-ownerships",
   data() {
     return {
-      id: 0,
       apartment: "1",
       ownerships: [],
       showModal: false,
@@ -73,14 +73,18 @@ export default {
         this.ownerships = this.getOwnerships;
         if (this.ownerships.length > 1) {
           this.showModal = true;
-        } else {
+        }
+        if (this.ownerships.length == 1) {
           this.$router.push(PAGE_OWNERSHIP_GET + "/" + this.ownerships[0].id);
+        }
+        if (this.ownerships.length == 0) {
+          this.ownerships = [];
         }
       });
     },
-    selectOwnershipId(id) {
+    selectOwnership(ownership) {
       this.showModal = false;
-      this.$router.push(PAGE_OWNERSHIP_GET + "/" + id);
+      this.$router.push(PAGE_OWNERSHIP_GET + "/" + ownership.id);
     },
   },
   computed: {

@@ -6,6 +6,7 @@
     <line-header text="Создание записи." />
     <!-- search -------------->
     <div class="search">
+      <!-- apartment -->
       <div class="title">Введите № помещения :</div>
       <input-simple
         class="input"
@@ -15,6 +16,8 @@
       <button-simple v-show="this.checkApartment" @click="actionFetchOwnership"
         >Получить
       </button-simple>
+      <!-- end -->
+      <!-- fullname -->
       <div class="title">Введите Ф.И.О. :</div>
       <input-simple
         class="input"
@@ -24,7 +27,9 @@
       <button-simple v-show="this.checkFullName" @click="actionFetchOwner"
         >Получить
       </button-simple>
+      <!-- end -->
     </div>
+    <!-- search finish -->
     <button-simple @click="createTypeOwnership"
       >Типовое помещение</button-simple
     >

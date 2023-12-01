@@ -1,11 +1,14 @@
 <template>
   <header-payment />
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
-    <block-search-apartment
+    <vue-loader :isLoader="getIsLoadingPayment" />
+    <vue-loader :isLoader="getIsLoadingOwnership" />
+    <header-messages
+      :messages="[...getMessagesPayment, ...getMessagesOwnership]"
+    />
+    <block-search-apartment-plus-minus
       nameButton="Получить лицевой счёт"
-      @apartment="(value) => action(value)"
+      @apartment="actionApartment"
     />
     <div class="block_form">
       <block-edit-payment
@@ -24,8 +27,17 @@
     <modal-action
       message="Вы действительно хотите создать платёжное поручение?"
       @close="showModal = false"
-      @successfully="successfullyAction"
+      @successfully="actionPayment"
     ></modal-action>
+  </dialog-window>
+  <dialog-window :show="showModalBill">
+    <modal-select-bill-ownership
+      :message="`По помещению № ${apartment} числится ${ownerships.length} лицевых счетов. 
+      Выберите подходящий для вашего запроса.`"
+      :ownerships="ownerships"
+      @close="showModalBill = false"
+      @select="selectOwnership"
+    ></modal-select-bill-ownership>
   </dialog-window>
 </template>
 <script>
@@ -34,23 +46,39 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      apartment: 1,
       payment: {},
+      ownerships: [],
       isValidPayment: false,
       showModal: false,
       PAGE_PAYMENTS_GET,
+      showModalBill: false,
     };
   },
   methods: {
     ...mapActions({
-      fetchBillByApartment: "ownership/fetchBillByApartment",
+      fetchAllOwnershipByApartment: "ownership/fetchAllOwnershipByApartment",
       createPayment: "payment/createPayment",
     }),
-    action(value) {
-      this.fetchBillByApartment(value).then(() => {
-        this.payment.bill = this.getBill;
+    selectOwnership(ownership) {
+      this.payment.bill = ownership.bill;
+    },
+    actionApartment(apartment) {
+      this.apartment = apartment;
+      this.fetchAllOwnershipByApartment(this.apartment).then(() => {
+        this.ownerships = this.getOwnerships;
+        if (this.ownerships.length > 1) {
+          this.showModalBill = true;
+        }
+        if (this.ownerships.length == 1) {
+          this.payment.bill = this.ownerships[0].bill;
+        }
+        if (this.ownerships.length == 0) {
+          this.payment.bill = 0;
+        }
       });
     },
-    successfullyAction() {
+    actionPayment() {
       this.createPayment(this.payment).then(() => {
         this.$router.push(PAGE_PAYMENTS_GET);
       });
@@ -58,9 +86,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getBills: "ownership/getBills",
-      getIsLoading: "payment/getIsLoading",
-      getMessages: "payment/getMessages",
+      getIsLoadingPayment: "payment/getIsLoading",
+      getMessagesPayment: "payment/getMessages",
+      getOwnerships: "ownership/getOwnerships",
+      getIsLoadingOwnership: "ownership/getIsLoading",
+      getMessagesOwnership: "ownership/getMessages",
     }),
   },
 };

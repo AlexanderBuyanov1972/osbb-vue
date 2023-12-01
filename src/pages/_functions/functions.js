@@ -201,6 +201,9 @@ export const roundDouble = (value) => {
 export const checkApartment = (value) => {
   return value >= 1 && value <= countApartment;
 };
+export const checkFullName = (value) => {
+  return value.length > 8
+};
 
 export const mapDate = (str) => {
   return str.substring(0, str.indexOf(".")).replace("T", " ");

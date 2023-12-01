@@ -12,7 +12,7 @@
       :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${apartment}`"
       :style="{ color: 'darkgoldenrod' }"
     />
-    <div class="body" v-if="flag">
+    <div class="header" v-if="flag">
       <block-header-debt :header="header" />
       <vue-hr />
       <debt-item
@@ -50,6 +50,7 @@ export default {
       flag: true,
       body: [],
       header: {},
+      dd: [],
       titles: {
         beginningPeriod: "Начальный период",
         debtAtBeginningPeriod: `Долг на начало периода, грн`,
@@ -82,14 +83,23 @@ export default {
   mounted() {
     this.apartment = this.$route.params.apartment;
     this.fetchDetailsDebtByApartment(this.apartment).then(() => {
-      this.body = this.getDebtDetailsBody;
-      this.header = this.getDebtDetailsHeader;
+      this.dd = this.getDebtsDetails;
+      if(this.dd.length == 0){
+
+      }
+      if(this.dd.length == 1){
+
+      }
+      if(this.dd.length >1){
+        
+      }
+      // this.body = this.getDebtDetailsBody;
+      // this.header = this.getDebtDetailsHeader;
     });
   },
   computed: {
     ...mapGetters({
-      getDebtDetailsHeader: "payment/getDebtDetailsHeader",
-      getDebtDetailsBody: "payment/getDebtDetailsBody",
+      getDebtsDetails: "payment/getDebtsDetails",
       getIsLoading: "payment/getIsLoading",
       getMessages: "payment/getMessages",
     }),

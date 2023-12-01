@@ -51,7 +51,7 @@ export default {
       return state.ownership;
     },
     getBills(state) {
-      return state.bill;
+      return state.bills;
     },
     getOwnerships(state) {
       return state.ownerships;
@@ -69,12 +69,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createOwnership(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -85,12 +82,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await updateOwnership(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -101,12 +95,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getOwnership(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -129,12 +120,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllOwnership();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -157,12 +145,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createAllOwnership(list);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -173,18 +158,11 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllOwnershipByApartment(apartment);
-        if (
-          response != undefined &&
-          response.data != undefined &&
-          response.data.length != 0
-        ) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
-        commit("setMessages", [error.message, ...response.messages]);
+        commit("setMessages", [error.message]);
       } finally {
         commit("setIsLoading", false);
       }
@@ -193,12 +171,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllBillByApartment(apartment);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setBills", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -209,12 +184,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllApartmentByFullName(fullName);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-          commit("setMessages", response.message);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.message);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -225,12 +197,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getOwnershipByBill(bill);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-          commit("setMessages", response.message);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.message);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

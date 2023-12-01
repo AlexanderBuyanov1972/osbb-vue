@@ -22,7 +22,7 @@
         @select="(value) => (title = value)"
          />
     </div>
-    <block-search-apartment
+    <block-search-apartment-plus-minus
       nameButton="Получить опросы по теме и № помещения"
       @apartment="(value) => action(value)"
     />
