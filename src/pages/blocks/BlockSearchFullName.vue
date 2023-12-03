@@ -33,6 +33,9 @@ export default {
         this.$emit("fullName", this.fullName);
     },
   },
+  updated() {
+    this.fullName = this.fullNameProps;
+  },
   mounted() {
     this.fullName = this.fullNameProps;
   },

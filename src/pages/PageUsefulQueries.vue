@@ -3,11 +3,14 @@
   <header-messages :messages="getMessages" />
   <line-header text="Полезные запросы" :style="{ color: 'blueviolet' }" />
   <div class="main">
-    <button-simple @click="queryPdfNewBill"
+    <button-simple @click="queryNewBill"
       >Распечатать платёжные реквизиты ОСББ</button-simple
     >
     <button-simple @click="queryListHeatSupplyForApartment"
       >Наличие и типизация квартирного отопления в доме</button-simple
+    >
+    <button-simple @click="queryReport_2023_11"
+      >Отчёт о деятельности ОСББ за ноябрь 2023 года</button-simple
     >
   </div>
 </template>
@@ -21,7 +24,8 @@ export default {
     ...mapActions({
       queryListHeatSupplyForApartment:
         "queries/queryListHeatSupplyForApartment",
-        queryPdfNewBill: "queries/queryPdfNewBill",
+      queryNewBill: "queries/queryNewBill",
+      queryReport_2023_11: "queries/queryReport_2023_11",
     }),
   },
   computed: {
@@ -39,9 +43,9 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-.main{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 </style>

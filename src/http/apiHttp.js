@@ -24,7 +24,8 @@ export const TITLE = "/title";
 export const FULL_NAME = "/full_name";
 export const SURVEYS = "/surveys";
 export const RESULT = "/result";
-export const ID = "/ID";
+export const ID = "/id";
+export const REPORT = "/report";
 
 // ---------------- summa -------------------
 export const SUMMA = "/summa";

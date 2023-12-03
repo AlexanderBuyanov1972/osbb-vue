@@ -1,4 +1,7 @@
-import { queryListHeatSupplyForApartment } from "@/http/queries";
+import {
+  queryListHeatSupplyForApartment,
+  queryReport_2023_11,
+} from "@/http/queries";
 import { printNewBill } from "@/http/print";
 
 export default {
@@ -35,10 +38,21 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async queryPdfNewBill({ commit }) {
+    async queryNewBill({ commit }) {
       try {
         commit("setIsLoading", true);
         const response = await printNewBill();
+        commit("setMessages", response.messages);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async queryReport_2023_11({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await queryReport_2023_11();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);

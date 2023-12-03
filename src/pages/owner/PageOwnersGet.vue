@@ -42,7 +42,7 @@ export default {
   methods: {
     ...mapActions({
       fetchAllOwner: "owner/getAllOwner",
-      }),
+    }),
   },
   computed: {
     ...mapGetters({

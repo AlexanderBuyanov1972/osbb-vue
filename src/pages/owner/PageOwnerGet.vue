@@ -3,13 +3,11 @@
   <vue-loader :isLoader="getIsLoading" />
   <header-messages :messages="messages" />
   <block-search-full-name
-    :fullNameProps="mapOwnerToFullName(getOwner)"
+    :fullNameProps="getFullName"
     nameButton="Получить список помещений"
-    @fullName="(value) => action(value)"
+    @fullName="actionFullName"
   />
-  <line-header
-    :text="`Собственник -  ${mapOwnerToFullName(getOwner)}`"
-  />
+  <line-header :text="`Собственник -  ${getFullName}`" />
   <button-delete
     :style="{ color: 'red', 'border-color': 'red' }"
     v-show="!owner.active"
@@ -19,12 +17,12 @@
   <block-get-owner
     :owner="owner"
     :style="{ height: '350px' }"
-    :photoName="photo.name"
+    :photoName="owner.photo.name"
   />
   <div class="items">
-    <block-get-passport :passport="passport" />
-    <block-get-place-work :placeWork="placeWork" />
-    <block-get-vehicle :vehicle="vehicle" />
+    <block-get-passport :passport="owner.passport" />
+    <block-get-place-work :placeWork="owner.placeWork" />
+    <block-get-vehicle :vehicle="owner.vehicle" />
   </div>
   <vue-hr />
   <button-back />
@@ -40,11 +38,12 @@ export default {
   data() {
     return {
       mapOwnerToFullName,
-      owner: {},
-      passport: {},
-      placeWork: {},
-      vehicle: {},
-      photo: {},
+      owner: {
+        passport: {},
+        placeWork: {},
+        vehicle: {},
+        photo: {},
+      },
       messages: [],
       PAGE_OWNERS_GET,
       PAGE_OWNER_UPDATE,
@@ -56,8 +55,8 @@ export default {
       deleteOwner: "owner/deleteOwner",
       fetchAllApartmentByFullName: "ownership/fetchAllApartmentByFullName",
     }),
-    action(value) {
-      this.fetchAllApartmentByFullName(value).then(() => {
+    actionFullName(fullName) {
+      this.fetchAllApartmentByFullName(fullName).then(() => {
         this.messages = this.getOwnerships;
       });
     },
@@ -66,23 +65,17 @@ export default {
         this.$router.push(PAGE_OWNERS_GET);
       });
     },
-    fill() {
-      this.owner = this.getOwner;
-      this.passport = this.getOwner.passport;
-      this.placeWork = this.getOwner.placeWork;
-      this.vehicle = this.getOwner.vehicle;
-      this.photo = this.getOwner.photo;
+    start() {
+      this.fetchOwner(this.$route.params.id).then(() => {
+        this.owner = this.getOwner;
+      });
     },
   },
   update() {
-    this.fetchOwner(this.$route.params.id).then(() => {
-      this.fill();
-    });
+    this.start();
   },
   mounted() {
-    this.fetchOwner(this.$route.params.id).then(() => {
-      this.fill();
-    });
+    this.start();
   },
   computed: {
     ...mapGetters({
@@ -90,6 +83,9 @@ export default {
       getOwnerships: "ownership/getOwnerships",
       getIsLoading: "owner/getIsLoading",
     }),
+    getFullName() {
+      return this.mapOwnerToFullName(this.getOwner);
+    },
   },
 };
 </script>

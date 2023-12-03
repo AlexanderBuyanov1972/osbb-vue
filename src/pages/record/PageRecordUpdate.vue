@@ -204,10 +204,12 @@ export default {
     },
   },
   mounted() {
-    this.fetchRecord(this.$route.params.id).then(() => {
-      this.record = this.getRecord;
-      this.share = this.record.share;
-    });
+    if (this.$route.params.id != undefined) {
+      this.fetchRecord(this.$route.params.id).then(() => {
+        this.record = this.getRecord;
+        this.share = this.record.share;
+      });
+    }
   },
 };
 </script>
