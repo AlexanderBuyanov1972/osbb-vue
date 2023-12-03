@@ -14,51 +14,49 @@ import {
 
 // print survey result --------------------------------
 export const printResultSurvey = async (title) => {
-  const response = await authHttp.get(
-    PRINT + SURVEYS + RESULT + "/" + title
-  );
+  const response = await authHttp.get(PRINT + SURVEYS + RESULT + "/" + title);
   return response.data;
 };
 
 // print payment debt ------------------
 // печатать одну квитанцию по конкретному помещению за последний месяц
-export const printPdfDebtByApartment = async (object) => {
+export const printDebt = async (object) => {
   const response = await authHttp.post(PRINT + PAYMENT + DEBT, object);
   return response.data;
 };
 
 // печатать квитанции для всех помещений за послений месяц
-export const printPdfListDebtByApartment = async () => {
+export const printAllDebt = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + DEBT + ALL);
   return response.data;
 };
 // печатать квитанции для всех помещений за послений месяц в одном файле (для разноски по квартирам)
-export const printAllToOnePdfDebtAllApartment = async () => {
+export const printAllInOneDebt = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + DEBT + ALL_IN_ONE);
   return response.data;
 };
 // debt details --------------------
 // печатать одну детализированную распечатку долга по конкретной квартире за всё время
-export const printPdfDebtDetailsByApartment = async (apartment) => {
+export const printDebtDetailsById = async (id) => {
   const response = await authHttp.get(
-    PRINT + PAYMENT + DEBT + DETAILS + "/" + apartment
+    PRINT + PAYMENT + DEBT + DETAILS + "/" + id
   );
   return response.data;
 };
 // печатать детализированную распечатку долга за всё время для всех квартир на разных файлах
-export const printPdfDebtDetailsAllApartment = async () => {
+export const printAllDebtDetails = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + DEBT + DETAILS);
   return response.data;
 };
 
 // balance
 // печатать долговой баланс дома по помещениям
-export const printPdfBalanceHouse = async () => {
+export const printBalanceHouse = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + DEBT + BALANCE);
   return response.data;
 };
 // печатать объявление о новых реквизитах по оплате за услуги ОСББ
-export const printPdfNewBill = async () => {
+export const printNewBill = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + NEW_BILL);
   return response.data;
 };

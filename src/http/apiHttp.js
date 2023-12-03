@@ -24,6 +24,8 @@ export const TITLE = "/title";
 export const FULL_NAME = "/full_name";
 export const SURVEYS = "/surveys";
 export const RESULT = "/result";
+export const ID = "/ID";
+
 // ---------------- summa -------------------
 export const SUMMA = "/summa";
 export const SUMMA_AREA_ROOMS = "/summa_area_rooms";
@@ -46,11 +48,10 @@ export const LOGOUT = "/logout";
 export const REFRESH = "/refresh";
 export const CHECK = "/check";
 export const ALL = "/all";
-export const ID = "/{id}";
+export const PARAM_ID = "/{id}";
 export const STREET = "/{street}";
 export const HOUSE = "/{house}";
 export const REGISTRATION_NUMBER = "/registration_number";
 // ------ queries -----------------------
 export const QUERIES = "/queries";
 export const HEAT_SUPPLY = "/heat_supply";
-

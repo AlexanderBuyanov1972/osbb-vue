@@ -13,10 +13,20 @@
       @click="clickButton"
       >{{ nameButton }}
     </button-simple>
+    <dialog-window :show="showModal">
+      <modal-select-bill-ownership
+        message="По данному номеру помещения числится несколько лицевых счетов. 
+        Выберите подходящий для вашего запроса."
+        :array="mapIdAndBill[this.apartment]"
+        @close="showModal = false"
+        @select="selectId"
+      ></modal-select-bill-ownership>
+    </dialog-window>
   </div>
 </template>
 <script>
 import { checkApartment } from "@/pages/_functions/functions";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "block-search-apartment-plus-minus",
   props: {
@@ -26,9 +36,15 @@ export default {
     return {
       apartment: "1",
       checkApartment,
+      mapIdAndBill: {},
+      showModal: false,
     };
   },
   methods: {
+    ...mapActions({
+      fetchMapApartmentListIdAndBill:
+        "ownership/fetchMapApartmentListIdAndBill",
+    }),
     plus() {
       if (this.checkApartment(this.apartment * 1 + 1)) {
         this.apartment = this.apartment * 1 + 1;
@@ -42,8 +58,29 @@ export default {
       }
     },
     clickButton() {
-      this.$emit("apartment", this.apartment);
+      if (this.mapIdAndBill[this.apartment].length == 0) {
+      }
+      if (this.mapIdAndBill[this.apartment].length == 1) {
+        this.$emit("selectId", this.mapIdAndBill[this.apartment][0].id);
+      }
+      if (this.mapIdAndBill[this.apartment].length > 1) {
+        this.showModal = true;
+      }
     },
+    selectId(id) {
+      this.showModal = false;
+      this.$emit("selectId", id);
+    },
+  },
+  mounted() {
+    this.fetchMapApartmentListIdAndBill().then(() => {
+      this.mapIdAndBill = this.getMapIdAndBill;
+    });
+  },
+  computed: {
+    ...mapGetters({
+      getMapIdAndBill: "ownership/getMapIdAndBill",
+    }),
   },
 };
 </script>

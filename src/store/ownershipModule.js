@@ -10,10 +10,12 @@ import {
   getAllBillByApartment,
   getAllOwnershipByApartment,
   getOwnershipByBill,
+  getMapApartmentListIdAndBill,
 } from "@/http/ownership";
 
 export default {
   state: () => ({
+    mapIdAndBill: {},
     bills: [],
     ownership: {},
     ownerships: [],
@@ -41,6 +43,9 @@ export default {
     setCountOwnerships(state, number) {
       state.countOwnerships = number;
     },
+    setMapIdAndBill(state, object) {
+      state.mapIdAndBill = object;
+    },
   },
 
   getters: {
@@ -61,6 +66,9 @@ export default {
     },
     getCountOwnerships(state) {
       return state.countOwnerships;
+    },
+    getMapIdAndBill(state) {
+      return state.mapIdAndBill;
     },
   },
 
@@ -154,19 +162,6 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchAllOwnershipByApartment({ commit }, apartment) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getAllOwnershipByApartment(apartment);
-        if (response != undefined && response.data != undefined)
-          commit("setOwnerships", response.data);
-        commit("setMessages", response.messages);
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
     async fetchAllBillByApartment({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
@@ -199,6 +194,19 @@ export default {
         const response = await getOwnershipByBill(bill);
         if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
+        commit("setMessages", response.message);
+      } catch (error) {
+        commit("setMessages", [error.message]);
+      } finally {
+        commit("setIsLoading", false);
+      }
+    },
+    async fetchMapApartmentListIdAndBill({ commit }) {
+      try {
+        commit("setIsLoading", true);
+        const response = await getMapApartmentListIdAndBill();
+        if (response != undefined && response.data != undefined)
+          commit("setMapIdAndBill", response.data);
         commit("setMessages", response.message);
       } catch (error) {
         commit("setMessages", [error.message]);

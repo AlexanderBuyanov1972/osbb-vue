@@ -2,8 +2,8 @@
   <div class="block">
     <div class="column">
       <div class="content">{{ message }}</div>
-      <div class="item" v-for="one in ownerships" :key="one.id">
-        <span @click="() => action(one)">Лицевой счёт № {{ one.bill }}</span>
+      <div class="item" v-for="one in array" :key="one.id">
+        <span @click="() => action(one.id)">Лицевой счёт № {{ one.bill }}</span>
       </div>
       <div class="buttons">
         <div class="button" @click="close">Закрыть</div>
@@ -16,11 +16,11 @@ export default {
   name: "modal-select-bill-ownership",
   props: {
     message: String,
-    ownerships: Array,
+    array: Array,
   },
   methods: {
-    action(ownership) {
-      this.$emit("select", ownership);
+    action(id) {
+      this.$emit("select", id);
       this.close();
     },
     close() {

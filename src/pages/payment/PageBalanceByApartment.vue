@@ -14,10 +14,10 @@
   <div class="buttons">
     <block-search-apartment-plus-minus
       nameButton="Задолженность по помещению"
-      @apartment="action"
+      @selectId="actionId"
     />
     <button-simple
-      @click="$router.push(PAGE_BALANCE_BILL_DETAILS + '/' + this.apartment)"
+      @click="$router.push(PAGE_BALANCE_DEBT_DETAILS + '/' + id)"
       :style="{ color: 'blueviolet', 'border-color': 'blueviolet' }"
       >Детали задолженности по помещению
     </button-simple>
@@ -31,14 +31,14 @@
     text="Задолженность по оплате за услуги по управлению ОСББ"
     :style="{ color: 'darkgoldenrod' }"
   />
-  <div class="body" v-if="this.dd.length == 1">
+  <div class="body" v-if="this.body != undefined">
     <block-header-debt :header="header" />
     <vue-hr />
     <block-body-debt :body="body" />
     <vue-hr />
   </div>
   <line-header
-    v-if="this.dd.length == 0"
+    v-if="this.body == undefined"
     text="По данному лицевому счёту нет информации"
     :style="{ color: 'red' }"
   />
@@ -53,76 +53,57 @@
     <modal-action
       message="Вы действительно хотите распечатать на все помещения ?"
       @close="showModalAll = false"
-      @successfully="printListDebtByApartment"
+      @successfully="printListDebtById"
     ></modal-action>
   </dialog-window>
   <dialog-window :show="showModalAllInOne">
     <modal-action
       message="Вы действительно хотите распечатать на все помещения в один файл?"
       @close="showModalAllInOne = false"
-      @successfully="printAllToOnePdfDebtAllApartment"
+      @successfully="printAllInOneDebt"
     ></modal-action>
-  </dialog-window>
-  <dialog-window :show="showModalBill">
-    <modal-select-bill-ownership
-      message="По данному номеру помещения числится несколько лицевых счетов. 
-      Выберите подходящий для вашего запроса."
-      :ownerships="ownerships"
-      @close="showModalBill = false"
-      @select="selectOwnership"
-    ></modal-select-bill-ownership>
   </dialog-window>
 </template>
 <script>
 import {
-  PAGE_BALANCE_BILL_DETAILS,
+  PAGE_BALANCE_DEBT_DETAILS,
   PAGE_BALANCE_HOUSE,
 } from "@/router/apiRouter";
-import { checkApartment } from "@/pages/_functions/functions";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      dd: [],
-      apartment: "",
+      id: 1,
       showModal: false,
       showModalAll: false,
       showModalAllInOne: false,
-      showModalBill: false,
       header: {
         address: {},
       },
       body: {},
-      PAGE_BALANCE_BILL_DETAILS,
+      PAGE_BALANCE_DEBT_DETAILS,
       PAGE_BALANCE_HOUSE,
-      checkApartment,
     };
   },
   methods: {
     ...mapActions({
-      getDebtByApartment: "payment/fetchDebtByApartment",
-      getDebtByBill: "payment/fetchDebtByBill",
-      printDebtByApartment: "payment/printDebtByApartment",
-      printListDebtByApartment: "payment/printListDebtByApartment",
-      printAllToOnePdfDebtAllApartment:
-        "payment/printAllToOnePdfDebtAllApartment",
+      getDebtById: "payment/fetchDebtById",
+      printDebtById: "payment/printDebtById",
+      printListDebtById: "payment/printListDebtById",
+      printAllInOneDebt: "payment/printAllInOneDebt",
     }),
-    action(value) {
-      if (this.checkApartment(value)) {
-        this.apartment = value;
-        this.getDebtByApartment(value).then(() => {
-          this.dd = this.getDebtsDetails;
-          if (this.dd.length == 1) {
-            this.body = this.getDebtsDetails[0].body;
-            this.header = this.getDebtsDetails[0].header;
-          }
-          if (this.dd.length > 1) this.showModalBill = true;
+    actionId(id) {
+      this.id = id;
+      if (this.id > 0) {
+        this.getDebtById(this.id).then(() => {
+          this.body = this.getDebtDetails.body;
+          this.header = this.getDebtDetails.header;
         });
       }
     },
     selectOwnership(ownership) {
       this.showModal = false;
-      this.getDebtByBill(ownership.bill).then(() => {
+      this.getDebtById(ownership.id).then(() => {
         this.body = this.getDebtsDetails[0].body;
         this.header = this.getDebtsDetails[0].header;
       });
@@ -131,11 +112,14 @@ export default {
       this.printDebtByApartment(this.getDebt);
     },
   },
+  mounted() {
+    this.actionId(this.id);
+  },
   computed: {
     ...mapGetters({
       getIsLoading: "payment/getIsLoading",
       getMessages: "payment/getMessages",
-      getDebtsDetails: "payment/getDebtsDetails",
+      getDebtDetails: "payment/getDebtDetails",
     }),
   },
 };

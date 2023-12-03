@@ -24,7 +24,7 @@
   <vue-hr />
   <dialog-window :show="showModal">
     <modal-action
-      message="Вы действительно хотите выполнить это действие?"
+      message="Вы действительно хотите распечатать домовой баланс?"
       @close="showModal = false"
       @successfully="printBalanceHouse"
     ></modal-action>
@@ -45,14 +45,8 @@ export default {
   methods: {
     ...mapActions({
       fetchBalanceHouse: "payment/fetchBalanceHouse",
-      printPdfBalanceHouse: "payment/printPdfBalanceHouse",
+      printBalanceHouse: "payment/printBalanceHouse",
     }),
-    printBalanceHouse() {
-      this.printPdfBalanceHouse();
-    },
-    printNewBill() {
-      this.printPdfNewBill();
-    },
   },
   computed: {
     ...mapGetters({

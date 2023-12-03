@@ -117,3 +117,8 @@ export const getOwnershipByBill = async (bill) => {
   const response = await authHttp.get(OWNERSHIP + BILL + "/" + bill);
   return response.data;
 };
+
+export const getMapApartmentListIdAndBill = async () => {
+  const response = await authHttp.get(OWNERSHIP + APARTMENT + BILL);
+  return response.data;
+};

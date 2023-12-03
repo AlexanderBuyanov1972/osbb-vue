@@ -9,7 +9,7 @@
       >Печатать на все помещения</button-simple
     >
     <line-header
-      :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${apartment}`"
+      :text="`Детализация долга за услуги по управлению ОСББ по помещению № ${header.address.apartment}`"
       :style="{ color: 'darkgoldenrod' }"
     />
     <div class="header" v-if="flag">
@@ -19,7 +19,7 @@
         :body="titles"
         :style="{ color: 'brown', 'font-size': '18px' }"
       />
-      <div class="list" v-for="one in body">
+      <div class="list" v-for="(one, index) in body" :key="index">
         <debt-item :body="one" />
       </div>
     </div>
@@ -35,7 +35,7 @@
     <modal-action
       message="Вы действительно хотите выполнить это действие?"
       @close="showModalAll = false"
-      @successfully="printList"
+      @successfully="printAllDebtDetails"
     ></modal-action>
   </dialog-window>
 </template>
@@ -44,13 +44,15 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      apartment: "",
+      id: 0,
       showModal: false,
       showModalAll: false,
       flag: true,
       body: [],
-      header: {},
-      dd: [],
+      header: {
+        address: {},
+      },
+
       titles: {
         beginningPeriod: "Начальный период",
         debtAtBeginningPeriod: `Долг на начало периода, грн`,
@@ -68,38 +70,24 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchDetailsDebtByApartment: "payment/fetchDetailsDebtByApartment",
-      printPdfDebtDetailsByApartment: "payment/printPdfDebtDetailsByApartment",
-      printPdfDebtDetailsAllApartment:
-        "payment/printPdfDebtDetailsAllApartment",
+      fetchDetailsDebtById: "payment/fetchDetailsDebtById",
+      printDebtDetailsById: "payment/printDebtDetailsById",
+      printAllDebtDetails: "payment/printAllDebtDetails",
     }),
     print() {
-      this.printPdfDebtDetailsByApartment(this.apartment);
-    },
-    printList() {
-      this.printPdfDebtDetailsAllApartment();
+      this.printDebtDetailsById(this.id);
     },
   },
   mounted() {
-    this.apartment = this.$route.params.apartment;
-    this.fetchDetailsDebtByApartment(this.apartment).then(() => {
-      this.dd = this.getDebtsDetails;
-      if(this.dd.length == 0){
-
-      }
-      if(this.dd.length == 1){
-
-      }
-      if(this.dd.length >1){
-        
-      }
-      // this.body = this.getDebtDetailsBody;
-      // this.header = this.getDebtDetailsHeader;
+    this.id = this.$route.params.id;
+    this.fetchDetailsDebtById(this.id).then(() => {
+      this.body = this.getDebtDetails.list;
+      this.header = this.getDebtDetails.header;
     });
   },
   computed: {
     ...mapGetters({
-      getDebtsDetails: "payment/getDebtsDetails",
+      getDebtDetails: "payment/getDebtDetails",
       getIsLoading: "payment/getIsLoading",
       getMessages: "payment/getMessages",
     }),

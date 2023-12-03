@@ -17,21 +17,21 @@
       >Обновить данные о помещении
     </button-simple>
     <button-simple
-      @click="this.$router.push(PAGE_ENTRY_GET + '/' + this.ownership.id)"
+      @click="this.$router.push(PAGE_RECORD_GET + '/' + this.ownership.id)"
       >Смотреть все записи по помещению</button-simple
     >
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { PAGE_ENTRY_GET, PAGE_OWNERSHIP_UPDATE } from "@/router/apiRouter";
+import { PAGE_RECORD_GET, PAGE_OWNERSHIP_UPDATE } from "@/router/apiRouter";
 export default {
   data() {
     return {
       ownership: {
         address: {},
       },
-      PAGE_ENTRY_GET,
+      PAGE_RECORD_GET,
       PAGE_OWNERSHIP_UPDATE,
     };
   },

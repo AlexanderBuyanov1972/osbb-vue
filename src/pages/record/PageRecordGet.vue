@@ -12,18 +12,17 @@
       <block-get-ownership :ownership="ownership" />
     </div>
 
-    <div
-      class="owner_list"
-      v-for="one in records"
-      :key="one.owner.id"
-      @click="this.$router.push(PAGE_OWNER_GET + '/' + one.owner.id)"
-    >
+    <div class="owner_list" v-for="one in records" :key="one.owner.id">
       <block-get-owner
+        @click="this.$router.push(PAGE_OWNER_GET + '/' + one.owner.id)"
         :owner="one.owner"
         :ownershipId="ownership.id"
         :photoName="one.owner.photo.name"
         :share="one.share"
       />
+      <button-simple @click="$router.push(PAGE_RECORD_UPDATE + '/' + one.id)"
+        >Редактировать запись</button-simple
+      >
     </div>
 
     <vue-hr />

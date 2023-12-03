@@ -4,11 +4,16 @@
     <vue-loader :isLoader="getIsLoadingPayment" />
     <vue-loader :isLoader="getIsLoadingOwnership" />
     <header-messages
-      :messages="[...getMessagesPayment, ...getMessagesOwnership]"
+      :messages="
+        mergingTwoArraysAndRemovingIdenticalMessages(
+          getMessagesPayment,
+          getMessagesOwnership
+        )
+      "
     />
     <block-search-apartment-plus-minus
       nameButton="Получить лицевой счёт"
-      @apartment="actionApartment"
+      @selectId="actionId"
     />
     <div class="block_form">
       <block-edit-payment
@@ -30,52 +35,33 @@
       @successfully="actionPayment"
     ></modal-action>
   </dialog-window>
-  <dialog-window :show="showModalBill">
-    <modal-select-bill-ownership
-      :message="`По помещению № ${apartment} числится ${ownerships.length} лицевых счетов. 
-      Выберите подходящий для вашего запроса.`"
-      :ownerships="ownerships"
-      @close="showModalBill = false"
-      @select="selectOwnership"
-    ></modal-select-bill-ownership>
-  </dialog-window>
 </template>
 <script>
 import { PAGE_PAYMENTS_GET } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
+import { mergingTwoArraysAndRemovingIdenticalMessages } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
-      apartment: 1,
+      id: 0,
       payment: {},
-      ownerships: [],
+      ownership: {},
       isValidPayment: false,
       showModal: false,
       PAGE_PAYMENTS_GET,
-      showModalBill: false,
+      mergingTwoArraysAndRemovingIdenticalMessages,
     };
   },
   methods: {
     ...mapActions({
-      fetchAllOwnershipByApartment: "ownership/fetchAllOwnershipByApartment",
+      fetchOwnership: "ownership/fetchOwnership",
       createPayment: "payment/createPayment",
     }),
-    selectOwnership(ownership) {
-      this.payment.bill = ownership.bill;
-    },
-    actionApartment(apartment) {
-      this.apartment = apartment;
-      this.fetchAllOwnershipByApartment(this.apartment).then(() => {
-        this.ownerships = this.getOwnerships;
-        if (this.ownerships.length > 1) {
-          this.showModalBill = true;
-        }
-        if (this.ownerships.length == 1) {
-          this.payment.bill = this.ownerships[0].bill;
-        }
-        if (this.ownerships.length == 0) {
-          this.payment.bill = 0;
-        }
+    actionId(id) {
+      this.id = id;
+      this.fetchOwnership(this.id).then(() => {
+        this.ownership = this.getOwnership;
+        this.payment.bill = this.ownership.bill;
       });
     },
     actionPayment() {
@@ -88,7 +74,7 @@ export default {
     ...mapGetters({
       getIsLoadingPayment: "payment/getIsLoading",
       getMessagesPayment: "payment/getMessages",
-      getOwnerships: "ownership/getOwnerships",
+      getOwnership: "ownership/getOwnership",
       getIsLoadingOwnership: "ownership/getIsLoading",
       getMessagesOwnership: "ownership/getMessages",
     }),

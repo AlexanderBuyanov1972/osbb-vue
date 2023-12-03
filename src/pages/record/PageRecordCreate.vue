@@ -1,35 +1,19 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessages" />
+  <header-messages :messages="getMessagesRecord" />
   <div class="main">
-    <line-header text="Создание записи." />
-    <!-- search -------------->
+    <line-header text="Создание записи" />
     <div class="search">
-      <!-- apartment -->
-      <div class="title">Введите № помещения :</div>
-      <input-simple
-        class="input"
-        v-model="apartment"
-        :style="{ width: '70px' }"
+      <block-search-apartment-plus-minus
+        @selectId="actionId"
+        nameButton="Получить"
       />
-      <button-simple v-show="this.checkApartment" @click="actionFetchOwnership"
-        >Получить
-      </button-simple>
-      <!-- end -->
-      <!-- fullname -->
-      <div class="title">Введите Ф.И.О. :</div>
-      <input-simple
-        class="input"
-        v-model="fullName"
-        :style="{ width: '350px' }"
+      <block-search-full-name
+        nameButton="Получить"
+        @fullName="actionFullName"
       />
-      <button-simple v-show="this.checkFullName" @click="actionFetchOwner"
-        >Получить
-      </button-simple>
-      <!-- end -->
     </div>
-    <!-- search finish -->
     <button-simple @click="createTypeOwnership"
       >Типовое помещение</button-simple
     >
@@ -51,7 +35,6 @@
           />
         </div>
       </div>
-
       <div class="owner_other">
         <div class="owner_passport_share">
           <div class="owner">
@@ -67,6 +50,13 @@
                 @passport="(data) => (record.owner.passport = data)"
                 @isValidPassport="(value) => (isValidPassport = value)"
                 :passportProps="record.owner.passport"
+              />
+            </div>
+            <div class="photo">
+              <block-update-photo
+                @photo="(data) => (record.owner.photo = data)"
+                @isValidPhoto="(value) => (isValidPhoto = value)"
+                :photoProps="record.owner.photo"
               />
             </div>
             <div class="share">
@@ -98,7 +88,7 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid"
+    <button-simple @click="showModal = true" :hidden="!isValid"
       >Сохранить</button-simple
     >
   </div>
@@ -112,7 +102,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { PAGE_ENTRY_GET, PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
+import { PAGE_RECORD_GET, PAGE_OWNERSHIPS_GET } from "@/router/apiRouter";
 import {
   generatePassport,
   generatePlaceWork,
@@ -128,7 +118,7 @@ export default {
     return {
       generateOwner,
       generateOwnership,
-      apartment: "",
+      id: 0,
       fullName: "",
       record: {
         share: 0.0,
@@ -150,7 +140,8 @@ export default {
       isValidPlaceWork: false,
       isValidVehicle: false,
       isValidShare: false,
-      PAGE_ENTRY_GET,
+      isValidPhoto: false,
+      PAGE_RECORD_GET,
       PAGE_OWNERSHIPS_GET,
     };
   },
@@ -158,16 +149,21 @@ export default {
     ...mapActions({
       fetchAddressStart: "address/fetchAddressStart",
       createRecord: "record/createRecord",
-      fetchAllOwnershipByApartment: "ownership/fetchAllOwnershipByApartment",
       fetchOwnerByFullName: "owner/fetchOwnerByFullName",
+      fetchOwnership: "ownership/fetchOwnership",
     }),
-    sendToServer() {
-      this.showModal = true;
-    },
+
     successfullyAction() {
       this.createRecord(this.record).then(() => {
-        this.record = this.getRecord;
-        this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+        const temp = this.getRecord;
+        if (
+          this.temp != undefined &&
+          this.temp.owner != undefined &&
+          this.temp.ownership != undefined
+        ) {
+          this.record = temp;
+          this.$router.push(PAGE_RECORD_GET + "/" + this.record.ownership.id);
+        }
       });
     },
     createTypeOwnership() {
@@ -178,18 +174,20 @@ export default {
       this.record.share = 1.0;
     },
 
-    actionFetchOwnership() {
-      this.fetchAllOwnershipByApartment(this.apartment).then(() => {
-        this.record.ownership = this.getOwnerships[0];
+    actionId(id) {
+      this.id = id;
+      this.fetchOwnership(this.id).then(() => {
+        this.record.ownership = this.getOwnership;
       });
     },
-    actionFetchOwner() {
+
+    actionFullName(fullName) {
+      this.fullName = fullName;
       this.fetchOwnerByFullName(this.fullName).then(() => {
         this.record.owner = this.getOwner;
       });
     },
   },
-  update() {},
   mounted() {
     this.fetchAddressStart().then(() => {
       this.record.ownership.address = this.getAddressStart;
@@ -198,9 +196,10 @@ export default {
   computed: {
     ...mapGetters({
       getIsLoading: "record/getIsLoading",
-      getMessages: "record/getMessages",
+      getMessagesRecord: "record/getMessages",
+      getMessagesOwnership: "ownership/getMessages",
       getRecord: "record/getRecord",
-      getOwnerships: "ownership/getOwnerships",
+      getOwnership: "ownership/getOwnership",
       getOwner: "owner/getOwner",
       getAddressStart: "address/getAddressStart",
     }),
@@ -212,6 +211,7 @@ export default {
         this.isValidPassport &&
         this.isValidPlaceWork &&
         this.isValidVehicle &&
+        this.isValidPhoto &&
         this.isValidShare
       );
     },

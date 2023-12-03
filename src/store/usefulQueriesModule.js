@@ -1,5 +1,5 @@
 import { queryListHeatSupplyForApartment } from "@/http/queries";
-import { printPdfNewBill } from "@/http/print";
+import { printNewBill } from "@/http/print";
 
 export default {
   state: () => ({
@@ -38,7 +38,7 @@ export default {
     async queryPdfNewBill({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfNewBill();
+        const response = await printNewBill();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);

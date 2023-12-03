@@ -10,7 +10,13 @@
         @click="
           () =>
             this.$router.push(
-              PAGE_SURVEY_ANSWER + '/' + one.title + '/' + one.fullName + '/' + one.apartment
+              PAGE_SURVEY_ANSWER +
+                '/' +
+                one.title +
+                '/' +
+                one.fullName +
+                '/' +
+                one.apartment
             )
         "
       >
@@ -39,10 +45,8 @@ export default {
   methods: {
     ...mapActions({
       fetchAllSurvey: "survey/fetchAllSurvey",
-      fetchAllSurveyByTitle:
-        "survey/fetchAllSurveyByTitle",
-      fetchAllSurveyByTitleAndByApartment:
-        "survey/fetchAllSurveyByTitleAndByApartment",
+      fetchAllSurveyByTitle: "survey/fetchAllSurveyByTitle",
+      fetchAllSurveyByTitleAndById: "survey/fetchAllSurveyByTitleAndById",
     }),
   },
   computed: {
@@ -53,7 +57,7 @@ export default {
     }),
     changeParams() {
       let title = this.$route.params.title;
-      let apartment = this.$route.params.apartment;
+      let id = this.$route.params.id;
       if (title == undefined) {
         this.fetchAllSurvey();
       }
@@ -61,16 +65,16 @@ export default {
         this.fetchAllSurveyByTitle(title);
       }
       if (title != undefined && apartment != undefined) {
-        this.fetchAllSurveyByTitleAndByApartment({ title, apartment });
+        this.fetchAllSurveyByTitleAndById({ title, id });
       }
     },
   },
 
   updated() {
-    this.changeParams
+    this.changeParams;
   },
   mounted() {
-    this.changeParams
+    this.changeParams;
   },
 };
 </script>

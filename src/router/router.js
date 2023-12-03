@@ -58,14 +58,14 @@ import {
   PAGE_OWNERSHIPS_GET,
   PAGE_OWNERSHIP_UPDATE,
   // entry
-  PAGE_ENTRY_CREATE,
-  PAGE_ENTRY_UPDATE,
-  PAGE_ENTRY_GET,
+  PAGE_RECORD_CREATE,
+  PAGE_RECORD_UPDATE,
+  PAGE_RECORD_GET,
   // payment --------
   PAGE_PAYMENT_CREATE,
   PAGE_PAYMENTS_GET,
-  PAGE_BALANCE_ROOM,
-  PAGE_BALANCE_BILL_DETAILS,
+  PAGE_BALANCE_OWNERSHIP,
+  PAGE_BALANCE_DEBT_DETAILS,
   PAGE_BALANCE_HOUSE,
   PAGE_RATES,
 } from "@/router/apiRouter";
@@ -90,23 +90,24 @@ const routes = [
   { path: PAGE_OWNER_GET + "/:id", component: PageOwnerGet },
   { path: PAGE_OWNERS_GET, component: PageOwnersGet },
   //entry
-  { path: PAGE_ENTRY_CREATE, component: PageRecordCreate },
+  { path: PAGE_RECORD_CREATE, component: PageRecordCreate },
   // update
-  {
-    path: PAGE_ENTRY_UPDATE + "/:id",
-    component: PageRecordUpdate,
-  },
   // слияние 2 в 1 --------------------
   {
-    path: PAGE_ENTRY_UPDATE,
+    path: PAGE_RECORD_UPDATE + "/:id",
     component: PageRecordUpdate,
   },
   {
-    path: PAGE_ENTRY_GET + "/:id",
+    path: PAGE_RECORD_UPDATE,
+    component: PageRecordUpdate,
+  },
+  // get --------------------------------------------
+  {
+    path: PAGE_RECORD_GET + "/:id",
     component: PageRecordGet,
   },
   // survey ----------------------------------------------------
- {
+  {
     path: PAGE_SURVEY_GET,
     component: PageSurveyGet + "/:id",
   },
@@ -120,7 +121,7 @@ const routes = [
     component: PageSurveysGet,
   },
   {
-    path: PAGE_SURVEYS_GET + "/:title/:apartment",
+    path: PAGE_SURVEYS_GET + "/:title/:id",
     component: PageSurveysGet,
   },
   // ----------------------------------------------------------
@@ -146,11 +147,11 @@ const routes = [
     component: PagePaymentCreate,
   },
   {
-    path: PAGE_BALANCE_ROOM,
+    path: PAGE_BALANCE_OWNERSHIP,
     component: PageBalanceByApartment,
   },
   {
-    path: PAGE_BALANCE_BILL_DETAILS + "/:apartment",
+    path: PAGE_BALANCE_DEBT_DETAILS + "/:id",
     component: PageBalanceDetailsByApartment,
   },
   {

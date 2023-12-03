@@ -54,12 +54,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createRecord(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecord", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -70,12 +67,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await updateRecord(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecord", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -86,12 +80,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getRecord(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecord", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -115,12 +106,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await createAllRecord(list);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecords", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -131,12 +119,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllRecord();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecords", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -147,12 +132,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllRecordByOwnershipId(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecords", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -163,12 +145,9 @@ export default {
       try {
         commit("setIsLoading", true);
         const response = await getAllRecordByOwnerId(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecords", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -182,12 +161,9 @@ export default {
           payload.apartment,
           payload.fullName
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecord", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {
@@ -201,12 +177,9 @@ export default {
           payload.ownerId,
           payload.ownershipId
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRecord", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
       } finally {

@@ -179,11 +179,13 @@ export const mapOwnerToFullName = (owner) => {
 // слияние двух массивов и удаление одинаковых сообщений.
 
 export const mergingTwoArraysAndRemovingIdenticalMessages = (arr1, arr2) => {
-  let result = [...arr1];
-  arr2.forEach((el) => {
-    if (!result.includes(el)) result.unshift(el);
-  });
-  return result;
+  if (arr1 != undefined && arr2 != undefined) {
+    let result = [...arr1];
+    arr2.forEach((el) => {
+      if (!result.includes(el)) result.unshift(el);
+    });
+    return "";
+  }
 };
 
 // подсветка незаполненых полей
@@ -202,7 +204,7 @@ export const checkApartment = (value) => {
   return value >= 1 && value <= countApartment;
 };
 export const checkFullName = (value) => {
-  return value.length > 8
+  return value.length > 8;
 };
 
 export const mapDate = (str) => {

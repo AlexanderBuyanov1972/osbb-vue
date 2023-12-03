@@ -20,11 +20,11 @@
         :style="{ margin: '10px 10px 10px 0px' }"
         :titles="getTitles"
         @select="(value) => (title = value)"
-         />
+      />
     </div>
     <block-search-apartment-plus-minus
       nameButton="Получить опросы по теме и № помещения"
-      @apartment="(value) => action(value)"
+      @selectId="actionId"
     />
   </div>
   <dialog-window :show="showModal">
@@ -48,7 +48,6 @@ export default {
     return {
       showModal: false,
       title: "",
-      apartment: "1",
       message: "Выберите тему опроса",
       PAGE_SURVEYS_GET,
       PAGE_SURVEY_CREATE,
@@ -73,15 +72,13 @@ export default {
         this.$router.push(PAGE_SURVEYS_GET + "/" + this.title);
       }
     },
-    action(value) {
+    actionId(id) {
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
-      } else if (value == undefined || value <= 0) {
+      } else if (id == undefined || id <= 0) {
         this.setMessages(["Выберите номер квартиры"]);
       } else {
-        this.$router.push(
-          PAGE_SURVEYS_GET + "/" + this.title + "/" + value
-        );
+        this.$router.push(PAGE_SURVEYS_GET + "/" + this.title + "/" + id);
       }
     },
     removeByTitle() {
@@ -100,10 +97,8 @@ export default {
       setMessages: "survey/setMessages",
     }),
     ...mapActions({
-      deleteAllSurveyByTitle:
-        "survey/deleteAllSurveyByTitle",
-      fetchAllTitleSurvey:
-        "survey/fetchAllTitleSurvey",
+      deleteAllSurveyByTitle: "survey/deleteAllSurveyByTitle",
+      fetchAllTitleSurvey: "survey/fetchAllTitleSurvey",
     }),
   },
   computed: {

@@ -1,5 +1,14 @@
 import { authHttp } from "@/http/httpAxios";
-import { SURVEYS, RESULT, ALL, APARTMENT, SELECT, TITLE, FULL_NAME } from "@/http/apiHttp";
+import {
+  SURVEYS,
+  RESULT,
+  ALL,
+  APARTMENT,
+  SELECT,
+  TITLE,
+  FULL_NAME,
+  TITLE_ID,
+} from "@/http/apiHttp";
 
 // all ---------------------------------------------------
 
@@ -37,10 +46,7 @@ export const getResultSurvey = async (title) => {
 };
 
 // select *****************************
-export const getAllSurveyByTitleAndFullName = async (
-  title,
-  fullName
-) => {
+export const getAllSurveyByTitleAndFullName = async (title, fullName) => {
   const response = await authHttp.get(
     SELECT + TITLE + FULL_NAME + "/" + title + "/" + fullName
   );
@@ -67,12 +73,9 @@ export const getAllSurveyByTitleAndFullNameAndApartment = async (
   return response.data;
 };
 
-export const getAllSurveyByTitleAndByApartment = async (
-  title,
-  apartment
-) => {
+export const getAllSurveyByTitleAndById = async (title, id) => {
   const response = await authHttp.get(
-    SELECT + TITLE + APARTMENT + "/" + title + "/" + apartment
+    SELECT + TITLE_ID + "/" + title + "/" + id
   );
   return response.data;
 };
@@ -86,4 +89,3 @@ export const getAllTitleSurvey = async () => {
   const response = await authHttp.get(SELECT + TITLE + ALL);
   return response.data;
 };
-

@@ -7,7 +7,7 @@
     <button-simple @click="$router.push(PAGE_PAYMENT_CREATE)"
       >Создать проводку
     </button-simple>
-    <button-simple @click="$router.push(PAGE_BALANCE_ROOM)"
+    <button-simple @click="$router.push(PAGE_BALANCE_OWNERSHIP)"
       >Текущие балансы
     </button-simple>
     <div class="total">Сумма на счёте ОСББ : {{ balance }} грн</div>
@@ -16,7 +16,7 @@
 <script>
 import {
   PAGE_PAYMENT_CREATE,
-  PAGE_BALANCE_ROOM,
+  PAGE_BALANCE_OWNERSHIP,
   PAGE_PAYMENTS_GET,
   PAGE_RATES,
 } from "@/router/apiRouter";
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       PAGE_PAYMENT_CREATE,
-      PAGE_BALANCE_ROOM,
+      PAGE_BALANCE_OWNERSHIP,
       PAGE_PAYMENTS_GET,
       PAGE_RATES,
       balance: 0,

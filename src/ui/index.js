@@ -31,7 +31,6 @@ import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHous
 import BlockInfoSurvey from "@/pages/blocks/BlockInfoSurvey.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
 import BlockSearchApartmentPlusMinus from "@/pages/blocks/BlockSearchApartmentPlusMinus.vue";
-import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 import BlockSearchFullNameApartment from "@/pages/blocks/BlockSearchFullNameApartment.vue";
 import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
 import BlockSurveyResult from "@/pages/blocks/BlockSurveyResult.vue";
@@ -99,7 +98,6 @@ export default [
   BlockInfoSurvey,
   BlockSearchFullNameApartment,
   BlockSearchApartmentPlusMinus,
-  BlockSearchApartment,
   BlockSearchFullName,
   BlockSurveyResult,
   // ---- items ---------

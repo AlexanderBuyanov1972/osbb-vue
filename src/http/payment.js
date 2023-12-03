@@ -1,15 +1,7 @@
 import { authHttp } from "@/http/httpAxios";
-import {
-  PAYMENT,
-  ALL,
-  BALANCE,
-  DEBT,
-  DETAILS,
-  BILL,
-  APARTMENT,
-} from "@/http/apiHttp";
+import { PAYMENT, ALL, BALANCE, DEBT, DETAILS } from "@/http/apiHttp";
 
-// one ----------------------------------
+// PAYMENT ----------------------------------
 
 export const createPayment = async (one) => {
   const response = await authHttp.post(PAYMENT, one);
@@ -26,7 +18,7 @@ export const deletePaymentComing = async (id) => {
   return response.data;
 };
 
-// all ----------------------------------
+//PAYMENT + ALL ----------------------------------
 
 export const createAllPayment = async (list) => {
   const response = await authHttp.post(PAYMENT + ALL, list);
@@ -43,34 +35,24 @@ export const deleteAllPayment = async () => {
   return response.data;
 };
 
-// get total summa of osbb -----------------------
+//PAYMENT + BALANCE -----------------------
 
 export const getBalance = async () => {
   const response = await authHttp.get(PAYMENT + BALANCE);
   return response.data;
 };
-// get list debt by rooms after osbb -----------------------
 
 export const getBalanceHouse = async () => {
   const response = await authHttp.get(PAYMENT + BALANCE + ALL);
   return response.data;
 };
-// get debt by apartment ---------
-export const getDebtByApartment = async (apartment) => {
-  const response = await authHttp.get(
-    PAYMENT + DEBT + APARTMENT + "/" + apartment
-  );
+//PAYMENT + DEBT --------------------------------------------------
+export const getDebtById = async (id) => {
+  const response = await authHttp.get(PAYMENT + DEBT + "/" + id);
   return response.data;
 };
-// get debt by bill ---------
-export const getDebtByBill = async (bill) => {
-  const response = await authHttp.get(PAYMENT + DEBT + BILL + "/" + bill);
-  return response.data;
-};
-// get details debt by apartment ---------
-export const getDetailsDebtByApartment = async (apartment) => {
-  const response = await authHttp.get(
-    PAYMENT + DEBT + DETAILS + "/" + apartment
-  );
+
+export const getDetailsDebtById = async (id) => {
+  const response = await authHttp.get(PAYMENT + DEBT + DETAILS + "/" + id);
   return response.data;
 };

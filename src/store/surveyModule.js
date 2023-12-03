@@ -7,7 +7,7 @@ import {
   getResultSurvey,
   getAllSurveyByTitleAndFullNameAndApartment,
   getAllSurveyByTitleAndFullName,
-  getAllSurveyByTitleAndByApartment,
+  getAllSurveyByTitleAndById,
   getAllSurveyByTitle,
   getAllTitleSurvey,
 } from "@/http/survey";
@@ -16,7 +16,6 @@ export default {
   state: () => ({
     surveys: [],
     messages: [],
-    // message: "",
     titles: [],
     isLoading: false,
     result: {},
@@ -31,9 +30,6 @@ export default {
     setMessages(state, messages) {
       state.messages = messages;
     },
-    // setMessage(state, message) {
-    //   state.message = message;
-    // },
     setTitles(state, array) {
       state.titles = array;
     },
@@ -51,9 +47,6 @@ export default {
     getMessages(state) {
       return state.messages;
     },
-    // getMessage(state) {
-    //   return state.message;
-    // },
     getTitles(state) {
       return state.titles;
     },
@@ -144,18 +137,14 @@ export default {
       }
     },
     // title, full name and apartment ------------
-    async fetchAllSurveyByTitleAndFullNameAndApartment(
-      { commit },
-      payload
-    ) {
+    async fetchAllSurveyByTitleAndFullNameAndApartment({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response =
-          await getAllSurveyByTitleAndFullNameAndApartment(
-            payload.title,
-            payload.fullName,
-            payload.apartment
-          );
+        const response = await getAllSurveyByTitleAndFullNameAndApartment(
+          payload.title,
+          payload.fullName,
+          payload.apartment
+        );
         if (response != undefined && response.data != undefined) {
           commit("setSurveys", response.data);
           commit("setMessages", response.messages);
@@ -186,12 +175,12 @@ export default {
       }
     },
     // title and apartment ------------------------
-    async fetchAllSurveyByTitleAndByApartment({ commit }, payload) {
+    async fetchAllSurveyByTitleAndById({ commit }, payload) {
       try {
         commit("setIsLoading", true);
-        const response = await getAllSurveyByTitleAndByApartment(
+        const response = await getAllSurveyByTitleAndById(
           payload.title,
-          payload.apartment
+          payload.id
         );
         if (response != undefined && response.data != undefined) {
           commit("setSurveys", response.data);

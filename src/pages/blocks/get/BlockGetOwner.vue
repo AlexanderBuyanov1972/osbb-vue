@@ -41,6 +41,7 @@ import {
   showGender,
   showFamilyStatus,
   showTypeBeneficiary,
+  mapOwnerToFullName,
 } from "@/pages/_functions/functions";
 import ImageShow from "@/ui/elements/ImageShow.vue";
 export default {
@@ -57,6 +58,7 @@ export default {
       showGender,
       showFamilyStatus,
       showTypeBeneficiary,
+      mapOwnerToFullName,
     };
   },
 };

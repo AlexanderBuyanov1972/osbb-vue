@@ -61,6 +61,13 @@
                 :passportProps="record.owner.passport"
               />
             </div>
+            <div class="photo">
+              <block-update-photo
+                @photo="(data) => (record.owner.photo = data)"
+                @isValidPhoto="(value) => (isValidPhoto = value)"
+                :photoProps="record.owner.photo"
+              />
+            </div>
             <div class="share">
               <block-update-share
                 @share="(data) => (record.share = data)"
@@ -90,7 +97,7 @@
     </div>
     <vue-hr />
     <button-back />
-    <button-simple @click="sendToServer" :hidden="!isValid"
+    <button-simple @click="showModal = true" :hidden="!isValid"
       >Сохранить</button-simple
     >
   </div>
@@ -104,10 +111,13 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { PAGE_ENTRY_GET, PAGE_NOT_FOUND } from "@/router/apiRouter";
+import { PAGE_RECORD_GET, PAGE_NOT_FOUND } from "@/router/apiRouter";
+import { checkFullName, checkApartment } from "@/pages/_functions/functions";
 export default {
   data() {
     return {
+      checkFullName,
+      checkApartment,
       showModal: false,
       apartment: "",
       fullName: "",
@@ -119,6 +129,7 @@ export default {
           passport: {},
           placeWork: {},
           vehicle: {},
+          photo: {},
         },
       },
       isValidOwnership: false,
@@ -127,8 +138,9 @@ export default {
       isValidPassport: false,
       isValidPlaceWork: false,
       isValidVehicle: false,
+      isValidPhoto: false,
       isValidShare: false,
-      PAGE_ENTRY_GET,
+      PAGE_RECORD_GET,
       PAGE_NOT_FOUND,
     };
   },
@@ -139,18 +151,16 @@ export default {
       updateOwner: "owner/updateOwner",
       updateOwnership: "ownership/updateOwnership",
       updateRecord: "record/updateRecord",
+      fetchRecord: "record/fetchRecord",
     }),
     successfullyAction() {
       this.updateOwner(this.record.owner).then(() => {
         this.updateOwnership(this.record.ownership).then(() => {
           this.updateRecord(this.record).then(() => {
-            this.$router.push(PAGE_ENTRY_GET + "/" + this.record.ownership.id);
+            this.$router.push(PAGE_RECORD_GET + "/" + this.record.ownership.id);
           });
         });
       });
-    },
-    sendToServer() {
-      this.showModal = true;
     },
     actionGetRecord() {
       this.fetchRecordByApartmentAndFullName({
@@ -183,14 +193,21 @@ export default {
         this.isValidPassport &&
         this.isValidPlaceWork &&
         this.isValidVehicle &&
+        this.isValidPhoto &&
         this.isValidShare
       );
     },
     checkInputs() {
       return (
-        this.apartment > 0 && this.apartment < 85 && this.fullName.length > 3
+        this.checkApartment(this.apartment) && checkFullName(this.fullName)
       );
     },
+  },
+  mounted() {
+    this.fetchRecord(this.$route.params.id).then(() => {
+      this.record = this.getRecord;
+      this.share = this.record.share;
+    });
   },
 };
 </script>

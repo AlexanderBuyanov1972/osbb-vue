@@ -4,7 +4,7 @@
     <input-simple
       class="input"
       v-model.trim="fullName"
-      :style="{ width: '300px' }"
+      :style="{ width: '350px' }"
     />
     <button-simple
       :style="{ color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }"
@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import {checkFullName} from "@/pages/_functions/functions"
+import { checkFullName } from "@/pages/_functions/functions";
 export default {
   name: "block-search-full-name",
   data() {
@@ -29,13 +29,11 @@ export default {
   },
   methods: {
     clickButton() {
-      if (this.checkFullName(this.fullName)) this.$emit("fullName", this.fullName);
+      if (this.checkFullName(this.fullName))
+        this.$emit("fullName", this.fullName);
     },
   },
   mounted() {
-    this.fullName = this.fullNameProps;
-  },
-  updated() {
     this.fullName = this.fullNameProps;
   },
 };

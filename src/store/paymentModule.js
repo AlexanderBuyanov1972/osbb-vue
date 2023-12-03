@@ -5,17 +5,16 @@ import {
   getAllPayment,
   getBalance,
   getBalanceHouse,
-  getDebtByApartment,
-  getDebtByBill,
-  getDetailsDebtByApartment,
+  getDebtById,
+  getDetailsDebtById,
 } from "@/http/payment";
 import {
-  printPdfDebtByApartment,
-  printPdfListDebtByApartment,
-  printAllToOnePdfDebtAllApartment,
-  printPdfDebtDetailsByApartment,
-  printPdfDebtDetailsAllApartment,
-  printPdfBalanceHouse,
+  printDebt,
+  printAllDebt,
+  printAllInOneDebt,
+  printDebtDetailsById,
+  printAllDebtDetails,
+  printBalanceHouse,
 } from "@/http/print";
 export default {
   state: () => ({
@@ -23,7 +22,7 @@ export default {
     payments: [],
     balance: 0,
     balanceHouse: [],
-    debtsDetails: [],
+    debtDetails: {},
     messages: [],
     isLoading: false,
   }),
@@ -46,7 +45,7 @@ export default {
     setBalance(state, num) {
       state.balance = num;
     },
-    setDebtsDetails(state, array) {
+    setDebtDetails(state, array) {
       state.debtsDetails = array;
     },
   },
@@ -69,11 +68,12 @@ export default {
     getBalanceHouse(state) {
       return state.balanceHouse;
     },
-    getDebtsDetails(state) {
+    getDebtDetails(state) {
       return state.debtsDetails;
     },
   },
   actions: {
+    // один объект -------------------------------
     async createPayment({ commit }, object) {
       try {
         commit("setIsLoading", true);
@@ -113,6 +113,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // все объекты -------------------------------
     async fetchAllPayment({ commit }) {
       try {
         commit("setIsLoading", true);
@@ -126,6 +127,7 @@ export default {
         commit("setIsLoading", false);
       }
     },
+    // разные ------------------------------------
     async fetchBalance({ commit }) {
       try {
         commit("setIsLoading", true);
@@ -139,12 +141,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchDebtByApartment({ commit }, apartment) {
+    async fetchDebtById({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getDebtByApartment(apartment);
+        const response = await getDebtById(id);
         if (response != undefined && response.data != undefined)
-          commit("setDebtsDetails", response.data);
+          commit("setDebtDetails", response.data);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -152,25 +154,12 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async fetchDebtByBill({ commit }, apartment) {
+    async fetchDetailsDebtById({ commit }, id) {
       try {
         commit("setIsLoading", true);
-        const response = await getDebtByBill(apartment);
+        const response = await getDetailsDebtById(id);
         if (response != undefined && response.data != undefined)
-          commit("setDebtsDetails", response.data);
-        commit("setMessages", response.messages);
-      } catch (error) {
-        commit("setMessages", [error.message]);
-      } finally {
-        commit("setIsLoading", false);
-      }
-    },
-    async fetchDetailsDebtByApartment({ commit }, apartment) {
-      try {
-        commit("setIsLoading", true);
-        const response = await getDetailsDebtByApartment(apartment);
-        if (response != undefined && response.data != undefined)
-          commit("setDebtsDetails", response.data);
+          commit("setDebtDetails", response.data);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -191,10 +180,11 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printDebtByApartment({ commit }, object) {
+    // на печать -----------------------------------
+    async printDebt({ commit }, object) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfDebtByApartment(object);
+        const response = await printDebt(object);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -202,10 +192,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printListDebtByApartment({ commit }) {
+    async printAllDebt({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfListDebtByApartment();
+        const response = await printAllDebt();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -213,10 +203,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printAllToOnePdfDebtAllApartment({ commit }) {
+    async printAllInOneDebt({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await printAllToOnePdfDebtAllApartment();
+        const response = await printAllInOneDebt();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -224,10 +214,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printPdfDebtDetailsByApartment({ commit }, apartment) {
+    async printDebtDetailsById({ commit }, apartment) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfDebtDetailsByApartment(apartment);
+        const response = await printDebtDetailsById(apartment);
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -235,10 +225,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printPdfDebtDetailsAllApartment({ commit }) {
+    async printAllDebtDetails({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfDebtDetailsAllApartment();
+        const response = await printAllDebtDetails();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);
@@ -246,10 +236,10 @@ export default {
         commit("setIsLoading", false);
       }
     },
-    async printPdfBalanceHouse({ commit }) {
+    async printBalanceHouse({ commit }) {
       try {
         commit("setIsLoading", true);
-        const response = await printPdfBalanceHouse();
+        const response = await printBalanceHouse();
         commit("setMessages", response.messages);
       } catch (error) {
         commit("setMessages", [error.message]);

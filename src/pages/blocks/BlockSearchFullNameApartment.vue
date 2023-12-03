@@ -32,7 +32,7 @@ export default {
     getListApartment() {
       if (this.fullName.length > 5)
         this.fetchAllApartmentByFullName(this.fullName).then(() => {
-          this.$emit("messages", this.getOwnership);
+          this.$emit("messages", this.getOwnerships);
         });
     },
     fillFullName() {
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getOwnership: "ownership/getOwnership",
+      getOwnerships: "ownership/getOwnerships",
     }),
   },
   mounted() {
