@@ -3,6 +3,7 @@ import {
   getRegistryOwnerships,
   getBuildingCharacteristics,
 } from "@/http/registry";
+import store from "@/store/index";
 
 export default {
   state: () => ({
@@ -23,74 +24,61 @@ export default {
         house: "",
       },
     },
-    messages: [],
-    isLoading: false,
   }),
 
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
     setBuildingCharacteristics(state, object) {
       state.buildingCharacteristics = object;
     },
     setRegistry(state, object) {
       state.registry = object;
     },
-     setMessages(state, messages) {
-      state.messages = messages;
-    },
   },
 
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
     getBuildingCharacteristics(state) {
       return state.buildingCharacteristics;
     },
     getRegistry(state) {
       return state.registry;
     },
-    getMessages(state) {
-      return state.messages;
-    },
   },
 
   actions: {
     async fetchRegistryOwners({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getRegistryOwners();
         commit("setRegistry", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchRegistryOwnerships({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getRegistryOwnerships();
         commit("setRegistry", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchBuildingCharacteristics({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getBuildingCharacteristics();
-        commit("setBuildingCharacteristics", response);
+        commit("setBuildingCharacteristics", response.data);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

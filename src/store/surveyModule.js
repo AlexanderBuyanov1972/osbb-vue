@@ -12,23 +12,16 @@ import {
   getAllTitleSurvey,
 } from "@/http/survey";
 import { printResultSurvey } from "@/http/print";
+import store from "@/store/index";
 export default {
   state: () => ({
     surveys: [],
-    messages: [],
     titles: [],
-    isLoading: false,
     result: {},
   }),
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
     setSurveys(state, array) {
       state.surveys = array;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
     },
     setTitles(state, array) {
       state.titles = array;
@@ -38,14 +31,8 @@ export default {
     },
   },
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
     getSurveys(state) {
       return state.surveys;
-    },
-    getMessages(state) {
-      return state.messages;
     },
     getTitles(state) {
       return state.titles;
@@ -58,206 +45,177 @@ export default {
     // all -------------------------
     async createAllSurvey({ commit }, list) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createAllSurvey(list);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async updateAllSurvey({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updateAllSurvey(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchAllSurvey({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllSurvey();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deleteAllSurveyByTitle({ commit }, title) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteAllSurveyByTitle(title);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setSurveys", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // title and full name ------------------------
     async fetchAllSurveyByTitleAndFullName({ commit }, payload) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllSurveyByTitleAndFullName(
           payload.title,
           payload.fullName
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // title, full name and apartment ------------
     async fetchAllSurveyByTitleAndFullNameAndApartment({ commit }, payload) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllSurveyByTitleAndFullNameAndApartment(
           payload.title,
           payload.fullName,
           payload.apartment
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // title --------------------------------------
     async fetchAllSurveyByTitle({ commit }, title) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllSurveyByTitle(title);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // title and apartment ------------------------
     async fetchAllSurveyByTitleAndById({ commit }, payload) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllSurveyByTitleAndById(
           payload.title,
           payload.id
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setSurveys", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // all titles ----------------------------------
     async fetchAllTitleSurvey({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllTitleSurvey();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setTitles", ["Выберите тему опроса", ...response.data]);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // delete all by owner id and ownership id ------------
     async deleteAllSurveyByOwnerIdAndOwnershipId({ commit }, payload) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteAllSurveyByOwnerIdAndOwnershipId(
           payload.ownerId,
           payload.ownershipId
         );
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setTitles", ["Выберите тему опроса", ...response.data]);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // result --------------------------------------
     async fetchResultSurvey({ commit }, title) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getResultSurvey(title);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setResult", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        else commit("setResult", undefined);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // result print -------------------------
     async printResultSurvey({ commit }, title) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printResultSurvey(title);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

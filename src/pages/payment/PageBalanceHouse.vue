@@ -1,7 +1,5 @@
 <template>
   <header-payment />
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessages" />
   <button-back />
   <button-simple @click="showModal = true">Печатать баланс</button-simple>
   <line-header
@@ -50,8 +48,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "payment/getIsLoading",
-      getMessages: "payment/getMessages",
       getBalanceHouse: "payment/getBalanceHouse",
     }),
     currentDate() {

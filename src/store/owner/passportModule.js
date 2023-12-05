@@ -5,104 +5,76 @@ import {
   deletePassport,
 } from "@/http/owner/passport";
 
+import store from "@/store/index";
+
 export default {
   state: () => ({
-    passport: {
-      id: 0,
-      numberPassport: "",
-      numberEntry: "",
-      dateIssue: "",
-      issuingAuthority: "",
-      registrationNumberCardPayerTaxes: "",
-    },
-    messages: [],
-    isLoading: false,
+    passport: {},
   }),
 
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
     setPassport(state, object) {
       state.passport = object;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
     },
   },
 
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
     getPassport(state) {
       return state.passport;
-    },
-    getMessages(state) {
-      return state.messages;
     },
   },
 
   actions: {
     async createPassport({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createPassport(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPassport", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", error.message);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async updatePassport({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updatePassport(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPassport", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", error.message);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchPassport({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getPassport(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setPassport", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", error.message);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deletePassport({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deletePassport(id);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setPassport", {});
       } catch (error) {
-        commit("setMessages", error.message);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

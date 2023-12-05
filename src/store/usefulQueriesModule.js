@@ -3,61 +3,45 @@ import {
   queryReport_2023_11,
 } from "@/http/queries";
 import { printNewBill } from "@/http/print";
+import store from "@/store/index";
 
 export default {
-  state: () => ({
-    messages: [],
-    isLoading: false,
-  }),
-  mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
-    },
-  },
-  getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
-    getMessages(state) {
-      return state.messages;
-    },
-  },
+  state: () => ({}),
+  mutations: {},
+  getters: {},
 
   actions: {
     async queryListHeatSupplyForApartment({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await queryListHeatSupplyForApartment();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async queryNewBill({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printNewBill();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async queryReport_2023_11({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await queryReport_2023_11();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

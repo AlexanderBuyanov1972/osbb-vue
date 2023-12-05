@@ -1,10 +1,7 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Редактирование собственника." />
-
     <div class="blocks">
       <div class="owner">
         <block-update-owner
@@ -104,9 +101,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "owner/getIsLoading",
-      getMessages: "owner/getMessages",
-      getOwner: "owner/getOwner",
+        getOwner: "owner/getOwner",
     }),
     isValid() {
       return (

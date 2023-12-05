@@ -1,7 +1,5 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessagesRecord" />
   <div class="main">
     <line-header text="Создание записи" />
     <div class="search">
@@ -195,9 +193,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "record/getIsLoading",
-      getMessagesRecord: "record/getMessages",
-      getMessagesOwnership: "ownership/getMessages",
       getRecord: "record/getRecord",
       getOwnership: "ownership/getOwnership",
       getOwner: "owner/getOwner",

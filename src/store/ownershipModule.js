@@ -8,10 +8,11 @@ import {
   countRooms,
   getAllApartmentByFullName,
   getAllBillByApartment,
-  getAllOwnershipByApartment,
   getOwnershipByBill,
   getMapApartmentListIdAndBill,
 } from "@/http/ownership";
+
+import store from "@/store/index";
 
 export default {
   state: () => ({
@@ -19,15 +20,10 @@ export default {
     bills: [],
     ownership: {},
     ownerships: [],
-    messages: [],
-    isLoading: false,
     countOwnerships: 0,
   }),
 
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
     setBills(state, array) {
       state.bills = array;
     },
@@ -36,9 +32,6 @@ export default {
     },
     setOwnerships(state, object) {
       state.ownerships = object;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
     },
     setCountOwnerships(state, number) {
       state.countOwnerships = number;
@@ -49,9 +42,6 @@ export default {
   },
 
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
     getOwnership(state) {
       return state.ownership;
     },
@@ -60,9 +50,6 @@ export default {
     },
     getOwnerships(state) {
       return state.ownerships;
-    },
-    getMessages(state) {
-      return state.messages;
     },
     getCountOwnerships(state) {
       return state.countOwnerships;
@@ -75,143 +62,145 @@ export default {
   actions: {
     async createOwnership({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createOwnership(object);
         if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async updateOwnership({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updateOwnership(object);
         if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchOwnership({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getOwnership(id);
         if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deleteOwnership({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteOwnership(id);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setOwnership", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    //----------------------------------------------------------
     async fetchAllOwnership({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllOwnership();
         if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    //--------------------------------------------------------------------
     async fetchCountRooms({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await countRooms();
         commit("setCountOwnerships", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async createJsonForDB({ commit }, list) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createAllOwnership(list);
         if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchAllBillByApartment({ commit }, apartment) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllBillByApartment(apartment);
         if (response != undefined && response.data != undefined)
           commit("setBills", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchAllApartmentByFullName({ commit }, fullName) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllApartmentByFullName(fullName);
         if (response != undefined && response.data != undefined)
           commit("setOwnerships", response.data);
-        commit("setMessages", response.message);
+        store.state.message.messages = response.message;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchOwnershipByBill({ commit }, bill) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getOwnershipByBill(bill);
         if (response != undefined && response.data != undefined)
           commit("setOwnership", response.data);
-        commit("setMessages", response.message);
+        store.state.message.messages = response.message;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchMapApartmentListIdAndBill({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getMapApartmentListIdAndBill();
         if (response != undefined && response.data != undefined)
           commit("setMapIdAndBill", response.data);
-        commit("setMessages", response.message);
+        store.state.message.messages = response.message;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

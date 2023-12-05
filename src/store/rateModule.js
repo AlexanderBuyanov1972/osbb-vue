@@ -8,20 +8,13 @@ import {
   getAllRate,
   deleteAllRate,
 } from "@/http/rate";
+import store from "@/store/index";
 export default {
   state: () => ({
     rate: {},
     rates: [],
-    messages: [],
-    isLoading: false,
   }),
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
-    },
     setRate(state, object) {
       state.rate = object;
     },
@@ -30,12 +23,6 @@ export default {
     },
   },
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
-    getMessages(state) {
-      return state.messages;
-    },
     getRate(state) {
       return state.rate;
     },
@@ -46,123 +33,105 @@ export default {
   actions: {
     async createRate({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createRate(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRate", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async updateRate({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updateRate(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRate", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async getRate({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getRate(id);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRate", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deleteRate({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteRate(id);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setRate", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async createAllRate({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createAllRate(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRates", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async updateAllRate({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updateAllRate(object);
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRates", response.data);
-          commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async getAllRate({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllRate();
-        if (response != undefined && response.data != undefined) {
+        if (response != undefined && response.data != undefined)
           commit("setRates", response.data);
-          // commit("setMessages", response.messages);
-        } else {
-          commit("setMessages", response.messages);
-        }
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deleteAllRate({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteAllRate(id);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setRates", []);
         commit("setRate", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

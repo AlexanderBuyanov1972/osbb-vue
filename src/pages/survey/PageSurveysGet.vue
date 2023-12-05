@@ -1,9 +1,7 @@
 <template>
   <header-polls></header-polls>
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
-    <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
+   <line-header text="Список опросов" :style="{ color: 'blueviolet' }" />
     <survey-item :survey="header" count="№" />
     <div v-for="one in getSurveys" :key="one.id">
       <div
@@ -52,8 +50,6 @@ export default {
   computed: {
     ...mapGetters({
       getSurveys: "survey/getSurveys",
-      getMessages: "survey/getMessages",
-      getIsLoading: "survey/getIsLoading",
     }),
     changeParams() {
       let title = this.$route.params.title;
@@ -61,10 +57,10 @@ export default {
       if (title == undefined) {
         this.fetchAllSurvey();
       }
-      if (title != undefined && apartment == undefined) {
+      if (title != undefined && id == undefined) {
         this.fetchAllSurveyByTitle(title);
       }
-      if (title != undefined && apartment != undefined) {
+      if (title != undefined && id != undefined) {
         this.fetchAllSurveyByTitleAndById({ title, id });
       }
     },

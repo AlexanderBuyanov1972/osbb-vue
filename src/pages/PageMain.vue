@@ -1,22 +1,12 @@
 <template>
   <div class="main">
-    <vue-loader :isLoader="getIsLoadingOwnership" />
-    <vue-loader :isLoader="getIsLoadingSurvey" />
-    <vue-loader :isLoader="getIsLoadingRate" />
-    <header-messages
-      :messages="messages"
-      :style="{ width: '100%', display: 'flex', 'text-align': 'start' }"
-    />
-
     <div class="header">ОСББ "Свободы 51"</div>
     <photo-carousel :urls="urls" />
     <div class="buttons">
       <button-simple @click="sendToServerDataBase"
         >Создание базы данных собственник/помещение</button-simple
       >
-      <button-simple @click="sendToServerSurvey"
-        >Создание опроса</button-simple
-      >
+      <button-simple @click="sendToServerSurvey">Создание опроса</button-simple>
       <button-simple @click="sendToServerRates">Создание тарифов</button-simple>
     </div>
   </div>
@@ -62,19 +52,8 @@ export default {
       showModalDB: false,
       showModalPolls: false,
       showModalRates: false,
-      messages: [],
       urls: ["dndz1", "dndz2", "dndz3", "dndz4", "dndz5", "dndz6"],
     };
-  },
-  computed: {
-    ...mapGetters({
-      getMessagesOwnership: "ownership/getMessages",
-      getIsLoadingOwnership: "ownership/getIsLoading",
-      getMessagesSurvey: "survey/getMessages",
-      getIsLoadingSurvey: "survey/getIsLoading",
-      getMessagesRate: "rate/getMessages",
-      getIsLoadingRate: "rate/getIsLoading",
-    }),
   },
   methods: {
     ...mapActions({
@@ -92,21 +71,13 @@ export default {
       this.showModalRates = true;
     },
     successfullyActionDB() {
-      this.generateJsonRecords().then(() => {
-        this.messages = this.getMessagesOwnership;
-      });
+      this.generateJsonRecords();
     },
     successfullyActionPolls() {
-      this.createAllSurvey(this.generateJsonSurveys()).then(
-        () => {
-          this.messages = this.getMessagesSurvey;
-        }
-      );
+      this.createAllSurvey(this.generateJsonSurveys());
     },
     successfullyActionRates() {
-      this.createAllRate(this.generateJsonRates()).then(() => {
-        this.messages = this.getMessagesRate;
-      });
+      this.createAllRate(this.generateJsonRates());
     },
   },
 };

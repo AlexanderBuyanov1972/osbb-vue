@@ -1,7 +1,5 @@
 <template>
   <header-payment />
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessages" />
   <line-header text="Тарифы" :style="{ color: 'brown', 'font-size': '30px' }" />
   <div class="blockButtons">
     <!-- <button-simple @click="createAllRate">Создать тарифы </button-simple> -->
@@ -162,8 +160,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "rate/getIsLoading",
-      getMessages: "rate/getMessages",
       getRate: "rate/getRate",
       getRates: "rate/getRates",
     }),

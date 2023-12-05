@@ -1,8 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header
       text="Реестр собственников"
       :style="{ color: 'darkgoldenrod' }"
@@ -32,8 +30,6 @@ export default {
     ...mapGetters({
       getRegistry: "registry/getRegistry",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
-      getMessages: "registry/getMessages",
-      getIsLoading: "registry/getIsLoading",
     }),
   },
 };

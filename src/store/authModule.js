@@ -17,6 +17,7 @@ import {
   removeLink,
 } from "@/http/localStorage";
 import { PAGE_REGISTRATION } from "@/router/apiRouter";
+import store from "@/store/index";
 
 export default {
   state: () => ({
@@ -35,14 +36,9 @@ export default {
     isRegistration: false,
     isLogin: false,
     isAdmin: false,
-    messages: [],
-    isLoading: false,
   }),
 
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
     setIsRegistration(state, bool) {
       state.isRegistration = bool;
     },
@@ -55,15 +51,9 @@ export default {
     setUser(state, object) {
       state.user = object;
     },
-    setMessages(state, messages) {
-      state.messages = messages;
-    },
   },
 
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
     getIsRegistration(state) {
       return state.isRegistration;
     },
@@ -76,39 +66,36 @@ export default {
     getUser(state) {
       return state.user;
     },
-    getMessages(state) {
-      return state.messages;
-    },
   },
 
   actions: {
     async registration({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await registration(object);
         const data = response.data;
-        commit("setMessages", data.messages);
+        store.state.message.messages = data.messages;
         if (response.status === 200) {
           commit("setUser", data.data);
           commit("setIsRegistration", true);
           setLink(data.data.activationLink);
         }
       } catch (error) {
-        commit("setMessages", [
+        store.state.message.messages = [
           error.message,
           "Такой e-mail или username уже зарегистрирован в системе",
-        ]);
+        ];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async login({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await login(object);
         const data = response.data;
-        commit("setMessages", data.messages);
+        store.state.message.messages = data.messages;
         if (response.status === 200) {
           commit("setUser", data.data.userDto);
           commit("setIsLogin", true);
@@ -117,48 +104,48 @@ export default {
           }
           setAccessToken(data.data.accessToken);
           setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink)
+          setLink(data.data.userDto.activationLink);
         }
       } catch (error) {
-        alert("ERROR");
-        commit("setMessages", [
+        store.state.message.messages = [
+          error.message,
           "Ошибка авторизации",
           "Зарегистрируйтесь в системе",
-        ]);
+        ];
         $router.push(PAGE_REGISTRATION);
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async logout({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await logout();
         if (response.status === 200) {
           commit("setIsLogin", false);
           commit("setIsAdmin", false);
           removeAccessToken();
           removeRefreshToken();
-          commit("setMessages", [
+          store.state.message.messages = [
             ...response.data.messages,
             "Вы не авторизированы",
             "Для входа в систему пройдите авторизацию",
-          ]);
+          ];
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async check({ commit }, link) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await check(link);
         const data = response.data;
-        commit("setMessages", data.messages);
+        store.state.message.messages = data.messages;
         if (response.status === 200) {
           commit("setUser", data.data.userDto);
           commit("setIsLogin", true);
@@ -167,21 +154,21 @@ export default {
           }
           setAccessToken(data.data.accessToken);
           setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink)
+          setLink(data.data.userDto.activationLink);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async refresh({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await refresh();
         const data = response.data;
-        commit("setMessages", data.messages);
+        store.state.message.messages = data.messages;
         if (response.status === 200) {
           commit("setUser", data.data.userDto);
           commit("setIsLogin", true);
@@ -190,54 +177,49 @@ export default {
           }
           setAccessToken(data.data.accessToken);
           setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink)
+          setLink(data.data.userDto.activationLink);
         }
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async updateUser({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await updateUser(object);
         const data = response.data;
-        commit("setMessages", data.messages);
-        if (response.status === 200) {
-          commit("setUser", data.data);
-          commit("setMessages", data.messages);
-        }
+        if (response.status === 200) commit("setUser", data.data);
+        store.state.message.messages = data.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async getUser({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getUser(id);
         const data = response.data;
-        commit("setMessages", data.messages);
-        if (response.status === 200) {
-          commit("setUser", response.data);
-          commit("setMessages", data.messages);
-        }
+        if (response.status === 200)
+         commit("setUser", response.data);
+        store.state.message.messages = data.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
 
     async deleteUser({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deleteUser(id);
-        commit("setMessages", response.data.messages);
+        store.state.message.messages = response.data.messages;
         commit("setUser", {});
         commit("setIsRegistration", false);
         commit("setIsLogin", false);
@@ -246,9 +228,9 @@ export default {
         removeRefreshToken();
         removeLink();
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

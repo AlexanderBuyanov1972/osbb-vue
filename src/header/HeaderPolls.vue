@@ -31,7 +31,7 @@
     <modal-action
       message="Вы действительно хотите удалить опросы по выбранной Вами теме?"
       @close="showModal = false"
-      @successfully="removeByTitle"
+      @successfully="removeAllByTitle"
     ></modal-action>
   </dialog-window>
 </template>
@@ -48,7 +48,9 @@ export default {
     return {
       showModal: false,
       title: "",
-      message: "Выберите тему опроса",
+      id: 0,
+      message:
+        "Действие не может выполниться, потому что не выбрана тема опроса",
       PAGE_SURVEYS_GET,
       PAGE_SURVEY_CREATE,
       PAGE_SURVEY_RESULT,
@@ -73,20 +75,22 @@ export default {
       }
     },
     actionId(id) {
+      this.id = id;
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
-      } else if (id == undefined || id <= 0) {
+      } else if (this.id == undefined || this.id <= 0) {
         this.setMessages(["Выберите номер квартиры"]);
       } else {
-        this.$router.push(PAGE_SURVEYS_GET + "/" + this.title + "/" + id);
+        this.$router.push(PAGE_SURVEYS_GET + "/" + this.title + "/" + this.id);
       }
     },
-    removeByTitle() {
+    removeAllByTitle() {
       if (this.isValidTitle()) {
         this.setMessages([this.message]);
       } else {
         this.deleteAllSurveyByTitle(this.title).then(() => {
           this.fetchAllTitleSurvey();
+          this.$router.push(PAGE_SURVEYS_GET);
         });
       }
     },

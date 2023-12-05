@@ -1,6 +1,4 @@
 <template>
-  <vue-loader :isLoader="this.getIsLoading" />
-  <header-messages :messages="getMessages" />
   <div class="main">
     <div class="form">
       <line-header text="Регистрация" :style="{ color: 'blueviolet' }" />
@@ -71,11 +69,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      getIsLoading: "auth/getIsLoading",
-      getMessages: "auth/getMessages",
-    }),
-    isValid() {
+     isValid() {
       return this.validEmail && this.validUsername && this.validPassword;
     },
   },

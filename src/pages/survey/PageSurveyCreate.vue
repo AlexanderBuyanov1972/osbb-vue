@@ -1,8 +1,6 @@
 <template>
   <header-polls></header-polls>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header
       text="Создать опросный лист."
       :style="{ color: 'blueviolet' }"
@@ -46,11 +44,7 @@
     <button-simple @click="removeQuestion"
       >Удалить последний вопрос</button-simple
     >
-    <button-simple
-      :hidden="
-        !(checkHidden)
-      "
-      @click="sendToServer"
+    <button-simple :hidden="!checkHidden" @click="sendToServer"
       >Сохранить</button-simple
     >
   </div>
@@ -73,8 +67,7 @@ export default {
   methods: {
     ...mapActions({
       createAllSurvey: "survey/createAllSurvey",
-      fetchAllTitleSurvey:
-        "survey/fetchAllTitleSurvey",
+      fetchAllTitleSurvey: "survey/fetchAllTitleSurvey",
     }),
     addQuestion() {
       this.selects.push({});
@@ -94,17 +87,18 @@ export default {
         });
       });
       this.createAllSurvey(body).then(() => {
-       this.$router.push(PAGE_SURVEYS_GET)
+        this.$router.push(PAGE_SURVEYS_GET);
       });
     },
   },
   computed: {
-    ...mapGetters({
-      getMessages: "survey/getMessages",
-      getIsLoading: "survey/getIsLoading",
-    }),
     checkHidden() {
-      return this.validTitle && this.validByWhom && this.validQuestion && this.selects.length != 0;
+      return (
+        this.validTitle &&
+        this.validByWhom &&
+        this.validQuestion &&
+        this.selects.length != 0
+      );
     },
   },
 };

@@ -11,6 +11,7 @@ import record from "@/store/recordModule";
 import payment from "@/store/paymentModule";
 import rate from "@/store/rateModule";
 import queries from "@/store/usefulQueriesModule";
+import message from "@/store/messagesModule";
 
 export default createStore({
   modules: {
@@ -26,5 +27,6 @@ export default createStore({
     payment,
     rate,
     queries,
+    message,
   },
 });

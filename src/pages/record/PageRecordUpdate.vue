@@ -1,8 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Редактирование записи." />
     <!------------- search -------------->
     <div class="search">
@@ -181,8 +179,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "record/getIsLoading",
-      getMessages: "record/getMessages",
       getRecord: "record/getRecord",
     }),
     isValid() {

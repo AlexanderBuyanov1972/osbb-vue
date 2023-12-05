@@ -26,7 +26,8 @@
 </template>
 <script>
 import { checkApartment } from "@/pages/_functions/functions";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import store from "@/store/index";
 export default {
   name: "block-search-apartment-plus-minus",
   props: {
@@ -58,7 +59,9 @@ export default {
       }
     },
     clickButton() {
-      if (this.mapIdAndBill[this.apartment].length == 0) {
+      if (this.mapIdAndBill[this.apartment] == undefined) {
+        store.state.message.messages = [`Информация по квартире № ${this.apartment} отсутствует`];
+        return;
       }
       if (this.mapIdAndBill[this.apartment].length == 1) {
         this.$emit("selectId", this.mapIdAndBill[this.apartment][0].id);

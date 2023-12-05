@@ -1,8 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Реестр недвижимости" :style="{ color: 'blueviolet' }" />
     <button-back />
     <block-information-about-house :info="getBuildingCharacteristics" />
@@ -31,8 +29,6 @@ export default {
     ...mapGetters({
       getRegistry: "registry/getRegistry",
       getBuildingCharacteristics: "registry/getBuildingCharacteristics",
-      getMessages: "registry/getMessages",
-      getIsLoading: "registry/getIsLoading",
     }),
   },
 };

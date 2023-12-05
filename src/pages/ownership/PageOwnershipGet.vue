@@ -1,9 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
-
     <line-header
       :text="'Объект недвижимости - квартира № ' + ownership.address.apartment"
     />
@@ -50,8 +47,6 @@ export default {
   computed: {
     ...mapGetters({
       getOwnership: "ownership/getOwnership",
-      getMessages: "ownership/getMessages",
-      getIsLoading: "ownership/getIsLoading",
     }),
     change() {
       this.fetchOwnership(this.$route.params.id).then(() => {

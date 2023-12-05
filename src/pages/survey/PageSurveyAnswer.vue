@@ -1,8 +1,6 @@
 <template>
   <header-polls></header-polls>
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header :text="info.title" :style="{ color: 'brown' }" />
     <block-info-survey :info="info" />
     <div class="list" v-for="one in list" :key="one.id">
@@ -39,8 +37,6 @@ export default {
   computed: {
     ...mapGetters({
       getSurveys: "survey/getSurveys",
-      getMessages: "survey/getMessages",
-      getIsLoading: "survey/getIsLoading",
     }),
     checkValid() {
       let valid = 1;

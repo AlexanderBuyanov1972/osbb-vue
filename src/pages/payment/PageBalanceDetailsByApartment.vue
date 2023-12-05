@@ -1,8 +1,6 @@
 <template>
   <header-payment />
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
     <button-back />
     <button-simple v-if="flag" @click="showModal = true">Печать</button-simple>
     <button-simple v-if="flag" @click="showModalAll = true"
@@ -88,8 +86,6 @@ export default {
   computed: {
     ...mapGetters({
       getDebtDetails: "payment/getDebtDetails",
-      getIsLoading: "payment/getIsLoading",
-      getMessages: "payment/getMessages",
     }),
   },
 };

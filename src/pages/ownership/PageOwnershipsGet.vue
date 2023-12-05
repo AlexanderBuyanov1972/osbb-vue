@@ -1,8 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Список помещений" :style="{ color: 'blueviolet' }" />
     <ownership-item :style="{ color: 'brown' }" :ownership="header" count="№" />
     <div v-for="(one, index) in ownerships" :key="one.id">
@@ -43,9 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       getOwnerships: "ownership/getOwnerships",
-      getMessages: "ownership/getMessages",
-      getIsLoading: "ownership/getIsLoading",
-    }),
+     }),
   },
   methods: {
     ...mapActions({

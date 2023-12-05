@@ -1,7 +1,5 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessages" />
   <line-header
     text="Список собственников"
     :style="{ color: 'darkgoldenrod' }"
@@ -47,8 +45,6 @@ export default {
   computed: {
     ...mapGetters({
       getOwners: "owner/getOwners",
-      getMessages: "owner/getMessages",
-      getIsLoading: "owner/getIsLoading",
     }),
   },
   mounted() {

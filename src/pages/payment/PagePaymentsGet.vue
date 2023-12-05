@@ -1,7 +1,5 @@
 <template>
   <header-payment />
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="getMessages" />
   <payment-item
     :style="{ color: 'blueviolet' }"
     :count="count"
@@ -35,8 +33,6 @@ export default {
   computed: {
     ...mapGetters({
       getPayments: "payment/getPayments",
-      getIsLoading: "payment/getIsLoading",
-      getMessages: "payment/getMessages",
     }),
   },
   mounted() {

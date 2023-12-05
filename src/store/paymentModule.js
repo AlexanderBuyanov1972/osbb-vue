@@ -16,6 +16,9 @@ import {
   printAllDebtDetails,
   printBalanceHouse,
 } from "@/http/print";
+
+import store from "@/store/index";
+
 export default {
   state: () => ({
     payment: {},
@@ -23,16 +26,8 @@ export default {
     balance: 0,
     balanceHouse: [],
     debtDetails: {},
-    messages: [],
-    isLoading: false,
   }),
   mutations: {
-    setIsLoading(state, bool) {
-      state.isLoading = bool;
-    },
-    setMessages(state, messages) {
-      state.messages = messages;
-    },
     setPayment(state, object) {
       state.payment = object;
     },
@@ -50,12 +45,6 @@ export default {
     },
   },
   getters: {
-    getIsLoading(state) {
-      return state.isLoading;
-    },
-    getMessages(state) {
-      return state.messages;
-    },
     getPayment(state) {
       return state.payment;
     },
@@ -76,175 +65,183 @@ export default {
     // один объект -------------------------------
     async createPayment({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await createPayment(object);
         if (response != undefined && response.data != undefined)
           commit("setPayment", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
         Coming;
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async fetchPayment({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getPayment(id);
         if (response != undefined && response.data != undefined)
           commit("setPayment", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     async deletePayment({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await deletePayment(id);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
         commit("setPayment", {});
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // все объекты -------------------------------
     async fetchAllPayment({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getAllPayment();
         if (response != undefined && response.data != undefined)
           commit("setPayments", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
     // разные ------------------------------------
     async fetchBalance({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getBalance();
         if (response != undefined && response.data != undefined)
           commit("setBalance", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // получить долг по id помещения -----------------
     async fetchDebtById({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getDebtById(id);
         if (response != undefined && response.data != undefined)
           commit("setDebtDetails", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // получить детализированный долг по id помещения ---
     async fetchDetailsDebtById({ commit }, id) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getDetailsDebtById(id);
         if (response != undefined && response.data != undefined)
           commit("setDebtDetails", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // получить баланс дома -------------------
     async fetchBalanceHouse({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await getBalanceHouse();
         if (response != undefined && response.data != undefined)
           commit("setBalanceHouse", response.data);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
-    // на печать -----------------------------------
+    // на печать квитанцию
     async printDebt({ commit }, object) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printDebt(object);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // печатать всем квитанции о долге на разные pdf файлы
     async printAllDebt({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printAllDebt();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // печатать всем квитанции о долге на один pdf файл
     async printAllInOneDebt({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printAllInOneDebt();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // печатать детализированный долг по id помещения
     async printDebtDetailsById({ commit }, apartment) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printDebtDetailsById(apartment);
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // печатать на все помещения детализированный долг на разные файлы
     async printAllDebtDetails({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printAllDebtDetails();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
+    // печатать домовой баланс
     async printBalanceHouse({ commit }) {
       try {
-        commit("setIsLoading", true);
+        store.state.message.isLoading = true;
         const response = await printBalanceHouse();
-        commit("setMessages", response.messages);
+        store.state.message.messages = response.messages;
       } catch (error) {
-        commit("setMessages", [error.message]);
+        store.state.message.messages = [error.message];
       } finally {
-        commit("setIsLoading", false);
+        store.state.message.isLoading = false;
       }
     },
   },

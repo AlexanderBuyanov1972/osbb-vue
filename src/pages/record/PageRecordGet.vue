@@ -1,8 +1,6 @@
 <template>
   <header-data-ownerships></header-data-ownerships>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
     <line-header text="Просмотр записи о собственности." />
     <line-address :address="address" />
     <div
@@ -62,8 +60,6 @@ export default {
   computed: {
     ...mapGetters({
       getRecords: "record/getRecords",
-      getMessages: "record/getMessages",
-      getIsLoading: "record/getIsLoading",
     }),
     start() {
       this.fetchAllRecordByOwnershipId(this.$route.params.id).then(() => {

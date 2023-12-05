@@ -7,7 +7,7 @@ import {
   SELECT,
   TITLE,
   FULL_NAME,
-  TITLE_ID,
+  ID,
 } from "@/http/apiHttp";
 
 // all ---------------------------------------------------
@@ -75,7 +75,7 @@ export const getAllSurveyByTitleAndFullNameAndApartment = async (
 
 export const getAllSurveyByTitleAndById = async (title, id) => {
   const response = await authHttp.get(
-    SELECT + TITLE_ID + "/" + title + "/" + id
+    SELECT + TITLE + ID + "/" + title + "/" + id
   );
   return response.data;
 };

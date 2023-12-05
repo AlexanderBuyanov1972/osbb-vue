@@ -1,16 +1,6 @@
 <template>
   <header-payment />
   <div class="main">
-    <vue-loader :isLoader="getIsLoadingPayment" />
-    <vue-loader :isLoader="getIsLoadingOwnership" />
-    <header-messages
-      :messages="
-        mergingTwoArraysAndRemovingIdenticalMessages(
-          getMessagesPayment,
-          getMessagesOwnership
-        )
-      "
-    />
     <block-search-apartment-plus-minus
       nameButton="Получить лицевой счёт"
       @selectId="actionId"
@@ -72,11 +62,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoadingPayment: "payment/getIsLoading",
-      getMessagesPayment: "payment/getMessages",
       getOwnership: "ownership/getOwnership",
-      getIsLoadingOwnership: "ownership/getIsLoading",
-      getMessagesOwnership: "ownership/getMessages",
     }),
   },
 };

@@ -1,7 +1,5 @@
 <template>
   <header-data-owners></header-data-owners>
-  <vue-loader :isLoader="getIsLoading" />
-  <header-messages :messages="messages" />
   <block-search-full-name
     :fullNameProps="getFullName"
     nameButton="Получить список помещений"
@@ -34,6 +32,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { mapOwnerToFullName } from "@/pages/_functions/functions";
 import { PAGE_OWNERS_GET, PAGE_OWNER_UPDATE } from "@/router/apiRouter";
+import store from "@/store/index";
 export default {
   data() {
     return {
@@ -44,7 +43,6 @@ export default {
         vehicle: {},
         photo: {},
       },
-      messages: [],
       PAGE_OWNERS_GET,
       PAGE_OWNER_UPDATE,
     };
@@ -57,7 +55,7 @@ export default {
     }),
     actionFullName(fullName) {
       this.fetchAllApartmentByFullName(fullName).then(() => {
-        this.messages = this.getOwnerships;
+        store.state.message.messages = this.getOwnerships;
       });
     },
     removeOwner() {
@@ -81,7 +79,6 @@ export default {
     ...mapGetters({
       getOwner: "owner/getOwner",
       getOwnerships: "ownership/getOwnerships",
-      getIsLoading: "owner/getIsLoading",
     }),
     getFullName() {
       return this.mapOwnerToFullName(this.getOwner);

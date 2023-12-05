@@ -1,13 +1,13 @@
 <template>
   <header-polls></header-polls>
   <div class="main">
-    <vue-loader :isLoader="this.getIsLoading" />
-    <header-messages :messages="getMessages" />
-    <div class="blocks">
+      <div class="blocks">
       <div class="button">
-        <button-simple @click="printResult">Печатать результат</button-simple>
+        <button-simple v-if="getResult != undefined" @click="printResult"
+          >Печатать результат</button-simple
+        >
       </div>
-      <div class="list">
+      <div class="list" v-if="getResult != undefined">
         <block-survey-result
           :map="mapVotedArea"
           :processing="processingPercentageArea"
@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import { PAGE_SURVEYS_GET, PAGE_SURVEY_RESULT } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -42,6 +43,8 @@ export default {
       mapVotedOwner: {},
       ownerVoted: 0,
       countOwner: 0,
+      PAGE_SURVEYS_GET,
+      PAGE_SURVEY_RESULT,
     };
   },
   methods: {
@@ -55,23 +58,24 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getIsLoading: "survey/getIsLoading",
-      getMessages: "survey/getMessages",
       getResult: "survey/getResult",
     }),
     check() {
       this.fetchResultSurvey(this.$route.params.title).then(() => {
-        // area ------------------
-        this.processingPercentageArea = this.getResult.processingPercentageArea;
-        this.mapVotedArea = this.getResult.mapVotedArea;
-        this.areaVoted = this.getResult.areaVoted;
-        this.summaArea = this.getResult.summaArea;
-        // owner -----------------
-        this.processingPercentageOwner =
-          this.getResult.processingPercentageOwner;
-        this.mapVotedOwner = this.getResult.mapVotedOwner;
-        this.ownerVoted = this.getResult.ownerVoted;
-        this.countOwner = this.getResult.countOwner;
+        if (this.getResult != undefined) {
+          // area ------------------
+          this.processingPercentageArea =
+            this.getResult.processingPercentageArea;
+          this.mapVotedArea = this.getResult.mapVotedArea;
+          this.areaVoted = this.getResult.areaVoted;
+          this.summaArea = this.getResult.summaArea;
+          // owner -----------------
+          this.processingPercentageOwner =
+            this.getResult.processingPercentageOwner;
+          this.mapVotedOwner = this.getResult.mapVotedOwner;
+          this.ownerVoted = this.getResult.ownerVoted;
+          this.countOwner = this.getResult.countOwner;
+        }
       });
     },
   },
