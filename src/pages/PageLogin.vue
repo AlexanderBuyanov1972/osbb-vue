@@ -26,7 +26,7 @@
 </template>
 <script>
 import { PAGE_MAIN, PAGE_REGISTRATION } from "@/router/apiRouter";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {

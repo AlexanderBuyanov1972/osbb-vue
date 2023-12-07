@@ -40,7 +40,7 @@
 </template>
 <script>
 export default {
-  name: "block-information-about-house",
+  name: "block-info-house",
   props: {
     info: Object,
   },

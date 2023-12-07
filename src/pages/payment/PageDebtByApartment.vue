@@ -10,7 +10,7 @@
   >
 
   <div class="buttons">
-    <block-search-apartment-plus-minus
+    <block-search-apartment
       nameButton="Задолженность по помещению"
       @selectId="actionId"
     />
@@ -94,17 +94,10 @@ export default {
       this.id = id;
       if (this.id > 0) {
         this.getDebtById(this.id).then(() => {
-          this.body = this.getDebtDetails.body;
+          this.body = this.getDebtDetails.list[0];
           this.header = this.getDebtDetails.header;
         });
       }
-    },
-    selectOwnership(ownership) {
-      this.showModal = false;
-      this.getDebtById(ownership.id).then(() => {
-        this.body = this.getDebtsDetails[0].body;
-        this.header = this.getDebtsDetails[0].header;
-      });
     },
     printOne() {
       this.printDebtByApartment(this.getDebt);

@@ -3,19 +3,27 @@
   <div class="main">
     <line-header text="Создание записи" />
     <div class="search">
-      <block-search-apartment-plus-minus
+      <block-search-apartment
         @selectId="actionId"
         nameButton="Получить"
+        :style="{ color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }"
       />
       <block-search-full-name
         nameButton="Получить"
         @fullName="actionFullName"
+        :style="{ color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }"
       />
     </div>
-    <button-simple @click="createTypeOwnership"
+    <button-simple
+      @click="createTypeOwnership"
+      :style="{ color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }"
       >Типовое помещение</button-simple
     >
-    <button-simple @click="createTypeOwner">Типовой собственник</button-simple>
+    <button-simple
+      @click="createTypeOwner"
+      :style="{ color: 'darkgoldenrod', 'border-color': 'darkgoldenrod' }"
+      >Типовой собственник</button-simple
+    >
     <div class="blocks">
       <div class="ownership_address">
         <div class="ownership">

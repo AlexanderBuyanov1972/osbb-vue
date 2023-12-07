@@ -3,7 +3,7 @@
   <div class="main">
     <line-header text="Реестр недвижимости" :style="{ color: 'blueviolet' }" />
     <button-back />
-    <block-information-about-house :info="getBuildingCharacteristics" />
+    <block-info-house :info="getBuildingCharacteristics" />
     <ownership-list-registry :list="getRegistry" />
   </div>
 </template>

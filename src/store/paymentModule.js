@@ -14,7 +14,6 @@ import {
   printAllInOneDebt,
   printDebtDetailsById,
   printAllDebtDetails,
-  printBalanceHouse,
 } from "@/http/print";
 
 import store from "@/store/index";
@@ -225,18 +224,6 @@ export default {
       try {
         store.state.message.isLoading = true;
         const response = await printAllDebtDetails();
-        store.state.message.messages = response.messages;
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-    // печатать домовой баланс
-    async printBalanceHouse({ commit }) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await printBalanceHouse();
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];

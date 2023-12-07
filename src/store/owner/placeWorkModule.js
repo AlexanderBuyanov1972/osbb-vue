@@ -1,23 +1,43 @@
 import {
-  queryNewBill,
-  queryListHeatSupplyForApartment,
-  queryReport_2023_11,
-  queryListApartmentBillFullNamePhoneNumber,
-  queryBalanceHouse,
-} from "@/http/queries";
-
+  createPlaceWork,
+  updatePlaceWork,
+  getPlaceWork,
+  deletePlaceWork,
+  getAllPlaceWork,
+} from "@/http/owner/placeWork";
 import store from "@/store/index";
 
 export default {
-  state: () => ({}),
-  mutations: {},
-  getters: {},
+  state: () => ({
+    placeWork: {},
+    placeWorks: [],
+  }),
+
+  mutations: {
+    setPlaceWork(state, object) {
+      state.placeWork = object;
+    },
+    setPlaceWorks(state, array) {
+      state.placeWorks = array;
+    },
+  },
+
+  getters: {
+    getPlaceWork(state) {
+      return state.placeWork;
+    },
+    getPlaceWorks(state) {
+      return state.placeWorks;
+    },
+  },
 
   actions: {
-    async queryListHeatSupplyForApartment({ commit }) {
+    async createPlaceWork({ commit }, object) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryListHeatSupplyForApartment();
+        const response = await createPlaceWork(object);
+        if (response != undefined && response.data != undefined)
+          commit("setPlaceWork", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -25,10 +45,12 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryNewBill({ commit }) {
+    async updatePlaceWork({ commit }, object) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryNewBill();
+        const response = await updatePlaceWork(object);
+        if (response != undefined && response.data != undefined)
+          commit("setPlaceWork", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -36,10 +58,12 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryReport_2023_11({ commit }) {
+    async fetchPlaceWork({ commit }, id) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryReport_2023_11();
+        const response = await getPlaceWork(id);
+        if (response != undefined && response.data != undefined)
+          commit("setPlaceWork", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -47,21 +71,24 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryListApartmentBillFullNamePhoneNumber({ commit }) {
+    async deletePlaceWork({ commit }, id) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryListApartmentBillFullNamePhoneNumber();
+        const response = await deletePlaceWork(id);
         store.state.message.messages = response.messages;
+        commit("setPlaceWork", {});
       } catch (error) {
         store.state.message.messages = [error.message];
       } finally {
         store.state.message.isLoading = false;
       }
     },
-    async queryBalanceHouse({ commit }) {
+    async getAllPlaceWork({ commit }) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryBalanceHouse();
+        const response = await getAllPlaceWork();
+        if (response != undefined && response.data != undefined)
+          commit("setPlaceWorks", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];

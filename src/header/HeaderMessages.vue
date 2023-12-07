@@ -1,8 +1,8 @@
 <template>
   <div class="main" v-if="messages.length > 0">
-    <div>Сообщения с сервера :</div>
+    <div class="header">СООБЩЕНИЯ ОТ СЕРВЕРА :</div>
     <div v-for="(one, index) in messages" :key="one.id">
-      {{ index + 1 }}. {{ one }}
+      <span> {{ index + 1 }}. {{ one }}</span>
     </div>
   </div>
 </template>
@@ -34,5 +34,12 @@ export default {
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
+}
+span {
+  color: red;
+  font-size: 23px;
+}
+.header{
+  margin-bottom: 10px;
 }
 </style>

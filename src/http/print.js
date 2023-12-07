@@ -9,7 +9,6 @@ import {
   ALL_IN_ONE,
   ALL,
   BALANCE,
-  NEW_BILL,
 } from "@/http/apiHttp";
 
 // print survey result --------------------------------
@@ -46,17 +45,5 @@ export const printDebtDetailsById = async (id) => {
 // печатать детализированную распечатку долга за всё время для всех квартир на разных файлах
 export const printAllDebtDetails = async () => {
   const response = await authHttp.get(PRINT + PAYMENT + DEBT + DETAILS);
-  return response.data;
-};
-
-// balance
-// печатать долговой баланс дома по помещениям
-export const printBalanceHouse = async () => {
-  const response = await authHttp.get(PRINT + PAYMENT + DEBT + BALANCE);
-  return response.data;
-};
-// печатать объявление о новых реквизитах по оплате за услуги ОСББ
-export const printNewBill = async () => {
-  const response = await authHttp.get(PRINT + PAYMENT + NEW_BILL);
   return response.data;
 };

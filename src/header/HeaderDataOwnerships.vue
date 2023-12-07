@@ -19,10 +19,11 @@
       >Редактировать запись</button-simple
     >
   </div>
-  <block-search-apartment-plus-minus
+  <block-search-apartment
     @selectId="actionId"
     nameButton="Получить"
   />
+  <vue-hr/>
 </template>
 <script>
 import {
@@ -35,9 +36,9 @@ import {
   PAGE_REGISTRY_OWNERS,
 } from "@/router/apiRouter";
 import ModalSelectBillOwnership from "@/modals/ModalSelectBillOwnership.vue";
-import BlockSearchApartmentPlusMinus from "@/pages/blocks/BlockSearchApartmentPlusMinus.vue";
+import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 export default {
-  components: { ModalSelectBillOwnership, BlockSearchApartmentPlusMinus },
+  components: { ModalSelectBillOwnership, BlockSearchApartment },
   name: "header-data-ownerships",
   data() {
     return {

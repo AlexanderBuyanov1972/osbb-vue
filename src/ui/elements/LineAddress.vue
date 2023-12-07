@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    {{ this.mapAddressToLineAddress(address) }}
+    {{ mapAddressToLineAddress(address) }}
   </div>
 </template>
 <script>

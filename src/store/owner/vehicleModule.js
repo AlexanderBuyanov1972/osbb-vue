@@ -1,23 +1,43 @@
 import {
-  queryNewBill,
-  queryListHeatSupplyForApartment,
-  queryReport_2023_11,
-  queryListApartmentBillFullNamePhoneNumber,
-  queryBalanceHouse,
-} from "@/http/queries";
-
+  createVehicle,
+  updateVehicle,
+  getVehicle,
+  deleteVehicle,
+  getAllVehicle,
+} from "@/http/owner/vehicle";
 import store from "@/store/index";
 
 export default {
-  state: () => ({}),
-  mutations: {},
-  getters: {},
+  state: () => ({
+    vehicle: {},
+    vehicles: [],
+  }),
+
+  mutations: {
+    setVehicle(state, object) {
+      state.vehicle = object;
+    },
+    setVehicles(state, array) {
+      state.vehicles = array;
+    },
+  },
+
+  getters: {
+    getVehicle(state) {
+      return state.vehicle;
+    },
+    getVehicles(state) {
+      return state.vehicles;
+    },
+  },
 
   actions: {
-    async queryListHeatSupplyForApartment({ commit }) {
+    async createVehicle({ commit }, object) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryListHeatSupplyForApartment();
+        const response = await createVehicle(object);
+        if (response != undefined && response.data != undefined)
+          commit("setVehicle", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -25,10 +45,13 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryNewBill({ commit }) {
+
+    async updateVehicle({ commit }, object) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryNewBill();
+        const response = await updateVehicle(object);
+        if (response != undefined && response.data != undefined)
+          commit("setVehicle", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -36,10 +59,12 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryReport_2023_11({ commit }) {
+    async fetchVehicle({ commit }, id) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryReport_2023_11();
+        const response = await getVehicle(id);
+        if (response != undefined && response.data != undefined)
+          commit("setVehicle", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];
@@ -47,21 +72,24 @@ export default {
         store.state.message.isLoading = false;
       }
     },
-    async queryListApartmentBillFullNamePhoneNumber({ commit }) {
+    async deleteVehicle({ commit }, id) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryListApartmentBillFullNamePhoneNumber();
+        const response = await deleteVehicle(id);
         store.state.message.messages = response.messages;
+        commit("setVehicle", {});
       } catch (error) {
         store.state.message.messages = [error.message];
       } finally {
         store.state.message.isLoading = false;
       }
     },
-    async queryBalanceHouse({ commit }) {
+    async getAllVehicle({ commit }) {
       try {
         store.state.message.isLoading = true;
-        const response = await queryBalanceHouse();
+        const response = await getAllVehicle();
+        if (response != undefined && response.data != undefined)
+          commit("setVehicles", response.data);
         store.state.message.messages = response.messages;
       } catch (error) {
         store.state.message.messages = [error.message];

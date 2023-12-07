@@ -1,7 +1,7 @@
 <template>
   <header-payment />
   <div class="main">
-    <block-search-apartment-plus-minus
+    <block-search-apartment
       nameButton="Получить лицевой счёт"
       @selectId="actionId"
     />

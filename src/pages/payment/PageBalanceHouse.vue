@@ -24,7 +24,7 @@
     <modal-action
       message="Вы действительно хотите распечатать домовой баланс?"
       @close="showModal = false"
-      @successfully="printBalanceHouse"
+      @successfully="queryBalanceHouse"
     ></modal-action>
   </dialog-window>
 </template>
@@ -43,7 +43,7 @@ export default {
   methods: {
     ...mapActions({
       fetchBalanceHouse: "payment/fetchBalanceHouse",
-      printBalanceHouse: "payment/printBalanceHouse",
+      queryBalanceHouse: "payment/queryBalanceHouse",
     }),
   },
   computed: {

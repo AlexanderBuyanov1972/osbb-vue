@@ -29,7 +29,7 @@ import { checkApartment } from "@/pages/_functions/functions";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import store from "@/store/index";
 export default {
-  name: "block-search-apartment-plus-minus",
+  name: "block-search-apartment",
   props: {
     nameButton: String,
   },

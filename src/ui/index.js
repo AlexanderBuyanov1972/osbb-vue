@@ -27,10 +27,10 @@ import HeaderDataOwnerships from "@/header/HeaderDataOwnerships.vue";
 // --------------- pages blocks -------------------
 import BlockBodyDebt from "@/pages/payment/blocks/BlockBodyDebt.vue";
 import BlockHeaderDebt from "@/pages/payment/blocks/BlockHeaderDebt.vue";
-import BlockInformationAboutHouse from "@/pages/blocks/BlockInformationAboutHouse.vue";
+import BlockInfoHouse from "@/pages/blocks/BlockInfoHouse.vue";
 import BlockInfoSurvey from "@/pages/blocks/BlockInfoSurvey.vue";
 import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
-import BlockSearchApartmentPlusMinus from "@/pages/blocks/BlockSearchApartmentPlusMinus.vue";
+import BlockSearchApartment from "@/pages/blocks/BlockSearchApartment.vue";
 import BlockSearchFullName from "@/pages/blocks/BlockSearchFullName.vue";
 import BlockSurveyResult from "@/pages/blocks/BlockSurveyResult.vue";
 // --------------- items and lists -------------------
@@ -93,9 +93,9 @@ export default [
   LineAddress,
   LineHeader,
   BlockErrorMessage,
-  BlockInformationAboutHouse,
+  BlockInfoHouse,
   BlockInfoSurvey,
-  BlockSearchApartmentPlusMinus,
+  BlockSearchApartment,
   BlockSearchFullName,
   BlockSurveyResult,
   // ---- items ---------

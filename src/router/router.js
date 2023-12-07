@@ -27,7 +27,7 @@ import PageRecordGet from "@/pages/record/PageRecordGet.vue";
 // payment -----------------------
 import PagePaymentCreate from "@/pages/payment/PagePaymentCreate.vue";
 import PagePaymentsGet from "@/pages/payment/PagePaymentsGet.vue";
-import PageBalanceByApartment from "@/pages/payment/PageBalanceByApartment.vue";
+import PageDebtByApartment from "@/pages/payment/PageDebtByApartment.vue";
 import PageBalanceDetailsByApartment from "@/pages/payment/PageBalanceDetailsByApartment.vue";
 import PageBalanceHouse from "@/pages/payment/PageBalanceHouse.vue";
 import PageRates from "@/pages/payment/PageRates.vue";
@@ -148,7 +148,7 @@ const routes = [
   },
   {
     path: PAGE_BALANCE_OWNERSHIP,
-    component: PageBalanceByApartment,
+    component: PageDebtByApartment,
   },
   {
     path: PAGE_BALANCE_DEBT_DETAILS + "/:id",

@@ -6,7 +6,7 @@
       :style="{ color: 'darkgoldenrod' }"
     />
     <button-back />
-    <block-information-about-house :info="getBuildingCharacteristics" />
+    <block-info-house :info="getBuildingCharacteristics" />
     <owner-list-registry :list="getRegistry" />
   </div>
 </template>

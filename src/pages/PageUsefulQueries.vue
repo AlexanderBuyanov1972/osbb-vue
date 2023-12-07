@@ -10,6 +10,12 @@
     <button-simple @click="queryReport_2023_11"
       >Отчёт о деятельности ОСББ за ноябрь 2023 года</button-simple
     >
+    <button-simple @click="queryListApartmentBillFullNamePhoneNumber"
+      >Список жильцов дома</button-simple
+    >
+    <button-simple @click="queryBalanceHouse"
+      >Задолженность по оплате за услуги ОСББ по помещениям</button-simple
+    >
   </div>
 </template>
 <script>
@@ -24,6 +30,9 @@ export default {
         "queries/queryListHeatSupplyForApartment",
       queryNewBill: "queries/queryNewBill",
       queryReport_2023_11: "queries/queryReport_2023_11",
+      queryListApartmentBillFullNamePhoneNumber:
+        "queries/queryListApartmentBillFullNamePhoneNumber",
+      queryBalanceHouse: "queries/queryBalanceHouse",
     }),
   },
 };
