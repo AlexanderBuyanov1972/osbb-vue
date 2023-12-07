@@ -43,7 +43,7 @@ export default {
   methods: {
     ...mapActions({
       fetchBalanceHouse: "payment/fetchBalanceHouse",
-      queryBalanceHouse: "payment/queryBalanceHouse",
+      queryBalanceHouse: "queries/queryBalanceHouse",
     }),
   },
   computed: {
