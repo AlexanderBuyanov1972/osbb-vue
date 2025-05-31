@@ -40,7 +40,12 @@
 <script>
 import { PAGE_LOGIN } from "@/router/apiRouter";
 import { mapActions, mapGetters } from "vuex";
+import LineHeader from "@/ui/elements/LineHeader.vue";
+import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
+import InputSimple from "@/ui/elements/InputSimple.vue";
+import ButtonSimple from "@/ui/elements/buttons/ButtonSimple.vue";
 export default {
+  components: {ButtonSimple, InputSimple, BlockErrorMessage, LineHeader},
   data() {
     return {
       email: "",
@@ -61,7 +66,7 @@ export default {
         email: this.email,
         username: this.username,
         password: this.password,
-        role: "ADMIN",
+        roles: ["ADMIN"],
       };
       this.registration(object).then(() => {
         this.$router.push(PAGE_LOGIN);

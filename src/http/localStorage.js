@@ -1,6 +1,8 @@
 export const ACCESS_TOKEN = "accessToken";
 export const REFRESH_TOKEN = "refreshToken";
-export const LINK = "id";
+export const LINK = "LINK";
+export const ID = "ID";
+
 
 export const setAccessToken = (value) => {
   localStorage.setItem(ACCESS_TOKEN, value);
@@ -12,6 +14,10 @@ export const setRefreshToken = (value) => {
 
 export const setLink = (value) => {
   localStorage.setItem(LINK, value);
+};
+
+export const setID = (value) => {
+  localStorage.setItem(ID, value);
 };
 
 export const getAccessToken = () => {

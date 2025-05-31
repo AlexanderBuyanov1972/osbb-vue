@@ -1,241 +1,239 @@
 import {
-  registration,
-  login,
-  logout,
-  refresh,
-  check,
-  updateUser,
-  getUser,
-  deleteUser,
+    registration,
+    login,
+    logout,
+    refresh,
+    check,
+    updateUser,
+    getUser,
+    deleteUser,
 } from "@/http/auth";
 import {
-  setAccessToken,
-  setRefreshToken,
-  setLink,
-  removeAccessToken,
-  removeRefreshToken,
-  removeLink,
+    setAccessToken,
+    setRefreshToken,
+    setLink,
+    setID,
+    removeAccessToken,
+    removeRefreshToken,
+    removeLink,
 } from "@/http/localStorage";
-import { PAGE_REGISTRATION } from "@/router/apiRouter";
+import {PAGE_REGISTRATION} from "@/router/apiRouter";
 import store from "@/store/index";
 
 export default {
-  state: () => ({
-    user: {
-      id: 0,
-      username: "",
-      password: "",
-      email: "",
-      activationLink: "",
-      activated: "",
-      enabled: false,
-      createdAt: "",
-      updatedAt: "",
-      role: "",
-    },
-    isRegistration: false,
-    isLogin: false,
-    isAdmin: false,
-  }),
+    state: () => ({
+        user: {
+            id: 0,
+            username: "",
+            email: "",
+            activationLink: "",
+            activated: "",
+            roles: [],
+        },
+        isRegistration: false,
+        isLogin: false,
+        isAdmin: false,
+    }),
 
-  mutations: {
-    setIsRegistration(state, bool) {
-      state.isRegistration = bool;
-    },
-    setIsLogin(state, bool) {
-      state.isLogin = bool;
-    },
-    setIsAdmin(state, bool) {
-      state.isAdmin = bool;
-    },
-    setUser(state, object) {
-      state.user = object;
-    },
-  },
-
-  getters: {
-    getIsRegistration(state) {
-      return state.isRegistration;
-    },
-    getIsLogin(state) {
-      return state.isLogin;
-    },
-    getIsAdmin(state) {
-      return state.isAdmin;
-    },
-    getUser(state) {
-      return state.user;
-    },
-  },
-
-  actions: {
-    async registration({ commit }, object) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await registration(object);
-        const data = response.data;
-        store.state.message.messages = data.messages;
-        if (response.status === 200) {
-          commit("setUser", data.data);
-          commit("setIsRegistration", true);
-          setLink(data.data.activationLink);
-        }
-      } catch (error) {
-        store.state.message.messages = [
-          error.message,
-          "Такой e-mail или username уже зарегистрирован в системе",
-        ];
-      } finally {
-        store.state.message.isLoading = false;
-      }
+    mutations: {
+        setIsRegistration(state, bool) {
+            state.isRegistration = bool;
+        },
+        setIsLogin(state, bool) {
+            state.isLogin = bool;
+        },
+        setIsAdmin(state, bool) {
+            state.isAdmin = bool;
+        },
+        setUser(state, object) {
+            state.user = object;
+        },
     },
 
-    async login({ commit }, object) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await login(object);
-        const data = response.data;
-        store.state.message.messages = data.messages;
-        if (response.status === 200) {
-          commit("setUser", data.data.userDto);
-          commit("setIsLogin", true);
-          if (data.data.userDto.role === "ADMIN") {
-            commit("setIsAdmin", true);
-          }
-          setAccessToken(data.data.accessToken);
-          setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink);
-        }
-      } catch (error) {
-        store.state.message.messages = [
-          error.message,
-          "Ошибка авторизации",
-          "Зарегистрируйтесь в системе",
-        ];
-        $router.push(PAGE_REGISTRATION);
-      } finally {
-        store.state.message.isLoading = false;
-      }
+    getters: {
+        getIsRegistration(state) {
+            return state.isRegistration;
+        },
+        getIsLogin(state) {
+            return state.isLogin;
+        },
+        getIsAdmin(state) {
+            return state.isAdmin;
+        },
+        getUser(state) {
+            return state.user;
+        },
     },
 
-    async logout({ commit }) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await logout();
-        if (response.status === 200) {
-          commit("setIsLogin", false);
-          commit("setIsAdmin", false);
-          removeAccessToken();
-          removeRefreshToken();
-          store.state.message.messages = [
-            ...response.data.messages,
-            "Вы не авторизированы",
-            "Для входа в систему пройдите авторизацию",
-          ];
-        }
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
+    actions: {
+        async registration({commit}, object) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await registration(object);
+                const data = response.data;
+                console.log(data)
+                store.state.message.messages = data.messages;
+                if (response.status === 200) {
+                    commit("setUser", data.data);
+                    commit("setIsRegistration", true);
+                    setID(data.data.id);
+                    setLink(data.data.activationLink);
+                    if (data.data.roles[0] === "ADMIN") {
+                        commit("setIsAdmin", true);
+                    }
+                }
+            } catch (error) {
+                store.state.message.messages = [
+                    error.message,
+                    "Такой e-mail или username уже зарегистрирован в системе",
+                ];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async login({commit}, object) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await login(object);
+                const data = response.data;
+                store.state.message.messages = data.messages;
+                if (response.status === 200) {
+                    commit("setIsLogin", true);
+                    console.log(response.data)
+                    setAccessToken(data.data.accessToken);
+                    setRefreshToken(data.data.refreshToken);
+                }
+            } catch (error) {
+                store.state.message.messages = [
+                    error.message,
+                    "Ошибка авторизации",
+                    "Зарегистрируйтесь в системе",
+                ];
+                $router.push(PAGE_REGISTRATION);
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async logout({commit}) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await logout();
+                if (response.status === 200) {
+                    commit("setIsLogin", false);
+                    commit("setIsAdmin", false);
+                    removeAccessToken();
+                    removeRefreshToken();
+                    store.state.message.messages = [
+                        ...response.data.messages,
+                        "Вы не авторизированы",
+                        "Для входа в систему пройдите авторизацию",
+                    ];
+                }
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async check({commit}, link) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await check(link);
+                const data = response.data;
+                store.state.message.messages = data.messages;
+                if (response.status === 200) {
+                    commit("setUser", data.data.userDto);
+                    commit("setIsLogin", true);
+                    if (data.data.userDto.role === "ADMIN") {
+                        commit("setIsAdmin", true);
+                    }
+                    setAccessToken(data.data.accessToken);
+                    setRefreshToken(data.data.refreshToken);
+                    setLink(data.data.userDto.activationLink);
+                }
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async refresh({commit}) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await refresh();
+                const data = response.data;
+                store.state.message.messages = data.messages;
+                if (response.status === 200) {
+                    commit("setUser", data.data.userDto);
+                    commit("setIsLogin", true);
+                    if (data.data.userDto.role === "ADMIN") {
+                        commit("setIsAdmin", true);
+                    }
+                    setAccessToken(data.data.accessToken);
+                    setRefreshToken(data.data.refreshToken);
+                    setLink(data.data.userDto.activationLink);
+                }
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async updateUser({commit}, object) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await updateUser(object);
+                const data = response.data;
+                if (response.status === 200) commit("setUser", data.data);
+                store.state.message.messages = data.messages;
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async getUser({commit}, id) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await getUser(id);
+                const data = response.data;
+                if (response.status === 200)
+                    commit("setUser", response.data);
+                store.state.message.messages = data.messages;
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
+
+        async deleteUser({commit}, id) {
+            try {
+                store.state.message.isLoading = true;
+                const response = await deleteUser(id);
+                store.state.message.messages = response.data.messages;
+                commit("setUser", {});
+                commit("setIsRegistration", false);
+                commit("setIsLogin", false);
+                commit("setIsAdmin", false);
+                removeAccessToken();
+                removeRefreshToken();
+                removeLink();
+            } catch (error) {
+                store.state.message.messages = [error.message];
+            } finally {
+                store.state.message.isLoading = false;
+            }
+        },
     },
 
-    async check({ commit }, link) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await check(link);
-        const data = response.data;
-        store.state.message.messages = data.messages;
-        if (response.status === 200) {
-          commit("setUser", data.data.userDto);
-          commit("setIsLogin", true);
-          if (data.data.userDto.role === "ADMIN") {
-            commit("setIsAdmin", true);
-          }
-          setAccessToken(data.data.accessToken);
-          setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink);
-        }
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-
-    async refresh({ commit }) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await refresh();
-        const data = response.data;
-        store.state.message.messages = data.messages;
-        if (response.status === 200) {
-          commit("setUser", data.data.userDto);
-          commit("setIsLogin", true);
-          if (data.data.userDto.role === "ADMIN") {
-            commit("setIsAdmin", true);
-          }
-          setAccessToken(data.data.accessToken);
-          setRefreshToken(data.data.refreshToken);
-          setLink(data.data.userDto.activationLink);
-        }
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-
-    async updateUser({ commit }, object) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await updateUser(object);
-        const data = response.data;
-        if (response.status === 200) commit("setUser", data.data);
-        store.state.message.messages = data.messages;
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-
-    async getUser({ commit }, id) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await getUser(id);
-        const data = response.data;
-        if (response.status === 200)
-         commit("setUser", response.data);
-        store.state.message.messages = data.messages;
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-
-    async deleteUser({ commit }, id) {
-      try {
-        store.state.message.isLoading = true;
-        const response = await deleteUser(id);
-        store.state.message.messages = response.data.messages;
-        commit("setUser", {});
-        commit("setIsRegistration", false);
-        commit("setIsLogin", false);
-        commit("setIsAdmin", false);
-        removeAccessToken();
-        removeRefreshToken();
-        removeLink();
-      } catch (error) {
-        store.state.message.messages = [error.message];
-      } finally {
-        store.state.message.isLoading = false;
-      }
-    },
-  },
-
-  namespaced: true,
+    namespaced: true,
 };
 
 // response data -----> logout ---------------------------------

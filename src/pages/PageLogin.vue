@@ -2,14 +2,14 @@
   <div class="main">
     <div class="form">
       <line-header text="Логин" :style="{ color: 'blueviolet' }" />
-      <div class="email">
+      <div class="username">
         <block-error-message
-          :field="email"
-          messageFalse="Укажите e-mail"
-          messageTrue="E-mail"
-          @valid="(value) => (validEmail = value)"
+          :field="username"
+          messageFalse="Укажите username"
+          messageTrue="Username"
+          @valid="(value) => (validUsername = value)"
         />
-        <input-simple v-focus v-model.trim="email" placeholder="E-mail" />
+        <input-simple v-focus v-model.trim="username" placeholder="Username" />
       </div>
       <div class="password">
         <block-error-message
@@ -27,14 +27,19 @@
 <script>
 import { PAGE_MAIN, PAGE_REGISTRATION } from "@/router/apiRouter";
 import { mapActions } from "vuex";
+import LineHeader from "@/ui/elements/LineHeader.vue";
+import BlockErrorMessage from "@/pages/blocks/BlockErrorMessage.vue";
+import InputSimple from "@/ui/elements/InputSimple.vue";
+import ButtonSimple from "@/ui/elements/buttons/ButtonSimple.vue";
 export default {
+  components: {ButtonSimple, InputSimple, BlockErrorMessage, LineHeader},
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
       PAGE_MAIN,
       PAGE_REGISTRATION,
-      validEmail: false,
+      validUsername: false,
       validPassword: false,
     };
   },
@@ -43,14 +48,14 @@ export default {
       login: "auth/login",
     }),
     send() {
-      this.login({ email: this.email, password: this.password })
+      this.login({ username: this.username, password: this.password })
         .then(() => this.$router.push(PAGE_MAIN))
         .catch(() => this.$router.push(PAGE_REGISTRATION));
     },
   },
   computed: {
       isValid() {
-      return this.validEmail && this.validPassword;
+      return this.validUsername && this.validPassword;
     },
   },
 };
